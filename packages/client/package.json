@@ -12,8 +12,6 @@
     "test": "jest ./ --passWithNoTests"
   },
   "dependencies": {
-    "@mui/material": "5.11.7",
-    "@mui/styled-engine-sc": "5.11.0",
     "dotenv": "16.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
