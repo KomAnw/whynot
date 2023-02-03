@@ -1,10 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
-import Layout from 'src/hoc/Layout';
-import PrivateRoute from 'src/hoc/PrivateRoute';
-import { SignIn, SignUp, Welcome } from 'src/pages';
-import { paths } from './constants';
-
-const { login, registration } = paths;
+import { TestComponent } from 'components/TestComponent/TestComponent';
 
 function App() {
   return (
@@ -25,6 +19,8 @@ function App() {
       </Routes>
     </>
   );
+  );
 }
 
+export default App;
 export default App;

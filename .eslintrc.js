@@ -4,11 +4,17 @@ module.exports = {
     es2020: true,
     node: true,
     jest: true,
+    jest: true,
   },
+  ignorePatterns: ['/dist'],
   ignorePatterns: ['/dist'],
   extends: [
     'airbnb',
+    'airbnb',
     'eslint:recommended',
+    'plugin:import/recommended',
+    'plugin:react/recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:import/recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -19,7 +25,9 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 11,
     sourceType: 'module',
+    sourceType: 'module',
   },
+  plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
   plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
   rules: {
     'import/extensions': 0,
@@ -143,7 +151,6 @@ module.exports = {
     'no-restricted-syntax': 0,
     'no-prototype-builtins': 0,
     'no-continue': 0,
-    'no-restricted-exports': 0,
 
     'prettier/prettier': [
       1,
@@ -156,7 +163,9 @@ module.exports = {
         arrowParens: 'avoid',
         endOfLine: 'auto',
         bracketSameLine: true,
+        width: 50,
       },
     ],
   },
+};
 };

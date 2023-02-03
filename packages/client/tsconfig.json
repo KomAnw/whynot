@@ -1,11 +1,6 @@
 {
   "compilerOptions": {
     "noImplicitAny": true,
-    "alwaysStrict": true, // involves adding the line "use strict" to every compiled file.
-    "strictPropertyInitialization": true,
-    "strictFunctionTypes": true,
-    "noImplicitThis": true,
-    "strictBindCallApply": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
@@ -14,7 +9,7 @@
     "declaration": false,
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "dom", "dom.iterable", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "dom", "dom.iterable","DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -30,12 +25,12 @@
     "baseUrl": ".",
     "paths": {
       "src/*": ["src/*"],
-      "components/*": ["src/components/*"],
-      "pages/*": ["src/pages/*"]
+      "components/*": ["src/components/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client"],
   },
   "include": ["src"],
+  "exclude": ["node_modules"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
