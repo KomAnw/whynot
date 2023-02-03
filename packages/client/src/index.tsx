@@ -1,11 +1,11 @@
-import App from './components/App/App'
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { Normalize } from 'styled-normalize'
-import { GlobalStyles } from './GlobalStyles'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { Normalize } from 'styled-normalize';
+import { GlobalStyles } from './GlobalStyles';
+import App from './components/App/App';
 
-const rootElement = document.getElementById('root')
-const root = createRoot(rootElement as HTMLElement)
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement as HTMLElement);
 
 root.render(
   <StrictMode>
@@ -13,4 +13,4 @@ root.render(
     <GlobalStyles />
     <App />
   </StrictMode>
-)
+);
