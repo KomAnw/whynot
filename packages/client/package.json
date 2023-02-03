@@ -12,6 +12,8 @@
     "test": "jest ./ --passWithNoTests"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@mui/material": "5.11.7",
     "@mui/styled-engine-sc": "5.11.0",
     "dotenv": "16.0.2",
@@ -37,8 +39,8 @@
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint": "8.23.0",
-    "eslint-config-prettier": "8.5.0",
     "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.5.0",
     "eslint-plugin-import": "2.25.4",
     "jest": "28",
     "jest-environment-jsdom": "29.0.1",
