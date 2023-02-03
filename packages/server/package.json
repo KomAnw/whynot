@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
-    "test": "jest ."
+    "test": "jest . --passWithNoTests"
   },
   "dependencies": {
     "cors": "^2.8.5",
