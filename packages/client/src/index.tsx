@@ -5,9 +5,8 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Normalize } from 'styled-normalize';
 import App from './components/App/App';
-import { GlobalStyles } from './GlobalStyles';
 import App from './components/App/App';
-import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
+import { GlobalStyles } from './GlobalStyles';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement as HTMLElement);
