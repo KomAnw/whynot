@@ -1,6 +1,11 @@
 {
   "compilerOptions": {
     "noImplicitAny": true,
+    "alwaysStrict": true, // involves adding the line "use strict" to every compiled file.
+    "strictPropertyInitialization": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "strictBindCallApply": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
