@@ -9,7 +9,7 @@
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
     "format": "prettier --write src",
-    "test": "jest ./"
+    "test": "jest ./ --passWithNoTests"
   },
   "dependencies": {
     "@mui/material": "5.11.7",
