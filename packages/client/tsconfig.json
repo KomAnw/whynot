@@ -14,7 +14,7 @@
     "declaration": false,
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "dom", "dom.iterable","DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "dom", "dom.iterable", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -32,7 +32,7 @@
       "src/*": ["src/*"],
       "components/*": ["src/components/*"]
     },
-    "types": ["vite/client"],
+    "types": ["vite/client"]
   },
   "include": ["src"],
   "exclude": ["node_modules"],
