@@ -1,8 +1,15 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "outDir": "dist",
+    "declaration": false,
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["DOM", "dom", "dom.iterable","DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -19,8 +26,10 @@
     "paths": {
       "src/*": ["src/*"],
       "components/*": ["src/components/*"]
-    }
+    },
+    "types": ["vite/client"],
   },
   "include": ["src"],
+  "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
