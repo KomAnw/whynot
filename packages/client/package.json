@@ -11,6 +11,8 @@
     "test": "jest ./"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
     "@mui/material": "5.11.7",
     "@mui/styled-engine-sc": "5.11.0",
     "dotenv": "16.0.2",
