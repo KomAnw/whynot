@@ -151,6 +151,7 @@ module.exports = {
     'no-restricted-syntax': 0,
     'no-prototype-builtins': 0,
     'no-continue': 0,
+    'no-restricted-exports': 0,
 
     'prettier/prettier': [
       1,
