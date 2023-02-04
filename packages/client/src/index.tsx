@@ -7,6 +7,8 @@ import { Normalize } from 'styled-normalize';
 import App from './components/App/App';
 import App from './components/App/App';
 import { GlobalStyles } from './GlobalStyles';
+import { BrowserRouter } from 'react-router-dom';
+import App from './components/App/App';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement as HTMLElement);
@@ -15,12 +17,8 @@ root.render(
   <StrictMode>
     <Normalize />
     <GlobalStyles />
-    <Provider store={store}>
-      <BrowserRouter>
-        <ThemeWrapper>
-          <App />
-        </ThemeWrapper>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );

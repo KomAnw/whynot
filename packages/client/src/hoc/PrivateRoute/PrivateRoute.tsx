@@ -6,7 +6,6 @@ const { login } = paths;
 const PrivateRoute = () => {
   // TODO useAuth hook *const auth = useAuth();*
   const auth = false;
-
   return auth ? <Outlet /> : <Navigate to={login} />;
 };
 
