@@ -7,7 +7,7 @@ function App() {
       <TestComponent />
       <TextField1 />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
