@@ -155,7 +155,6 @@ module.exports = {
         arrowParens: 'avoid',
         endOfLine: 'auto',
         bracketSameLine: true,
-        width: 50,
       },
     ],
   },
