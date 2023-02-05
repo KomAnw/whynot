@@ -108,7 +108,6 @@ const StyledButton = styled.button<ButtonProps>`
   line-height: '24px';
   border: medium none;
   cursor: pointer;
-  margin: 0.5em;
   transition: 0.5s;
   &:hover,
   &:focus,
