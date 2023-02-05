@@ -12,3 +12,29 @@ export const breakpoints = {
   laptopL: '1799px',
   desktop: '2599px',
 } as const;
+
+export const themes = {
+  default: {
+    name: 'default',
+    colors: {
+      text: 'white',
+      background: 'black',
+    },
+    fonts: {
+      first: '1',
+      second: '2',
+    },
+  },
+  // TODO название для примера (нужно поменять)
+  other: {
+    name: 'other',
+    colors: {
+      text: 'black',
+      background: 'white',
+    },
+    fonts: {
+      first: '1',
+      second: '2',
+    },
+  },
+} as const;
