@@ -21,9 +21,10 @@ function App() {
         <Route path={login} element={<SignIn />} />
         <Route path={registration} element={<SignUp />} />
 
-        {/* Приватные */}
-        <Route path="/" element={<PrivateRoute />}>
-          <Route index element={<div>main game page</div>} />
+          {/* Приватные */}
+          <Route path="game" element={<PrivateRoute />}>
+            <Route index element={<div>main game page</div>} />
+          </Route>
         </Route>
       </Routes>
       <TestComponent />
