@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react';
 type InputProps = {
   name: string;
   type: string;
+  placeholder: string;
   isValid?: boolean;
   value?: string;
-  placeholder?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   width?: string;
   backgroundColor?: string;
@@ -23,7 +23,7 @@ type LabelStyledProps = Pick<InputProps, 'labelTextColor'>;
 
 type InputStyledProps = Pick<InputProps, 'width' | 'backgroundColor' | 'color'>;
 
-export const Input = (props: InputProps) => {
+const Input = (props: InputProps) => {
   const [state, setState] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
@@ -96,3 +96,5 @@ const InputStyled = styled.input<InputStyledProps>`
   max-width: 100%;
   outline: none;
 `;
+
+export default Input;
