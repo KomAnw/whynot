@@ -1,5 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 import { Normalize } from 'styled-normalize';
 import { GlobalStyles } from './GlobalStyles';
 import App from './components/App/App';
@@ -11,6 +12,8 @@ root.render(
   <StrictMode>
     <Normalize />
     <GlobalStyles />
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </StrictMode>
 );
