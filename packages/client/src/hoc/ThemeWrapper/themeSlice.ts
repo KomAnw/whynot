@@ -9,7 +9,9 @@ export const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    changeTheme: state => (state = state.name === 'default' ? other : defaultTheme),
+    changeTheme: state => {
+      return state.name === 'default' ? other : defaultTheme;
+    },
   },
 });
 
