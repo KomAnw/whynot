@@ -16,12 +16,12 @@ const Container = styled('div')`
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.core.background.primary};
 `;
 
 const Text = styled('p')`
   margin: 0 auto;
   padding-top: 100px;
   width: max-content;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${({ theme }) => theme.colors.core.text.primary};
 `;
