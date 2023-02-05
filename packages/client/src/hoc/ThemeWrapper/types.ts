@@ -7,8 +7,35 @@ export type ThemeWrapperProps = {
 export type Theme = {
   name: string;
   colors: {
-    text: string;
-    background: string;
+    core: {
+      background: {
+        primary: string;
+        secondary: string;
+      };
+      text: {
+        primary: string;
+        secondary: string;
+        error: string;
+      };
+      link: {
+        link: string;
+        linkHover: string;
+      };
+    };
+    control: {
+      input: {
+        primary: string;
+        secondary: string;
+      };
+      toggle: {
+        primary: string;
+        secondary: string;
+      };
+      button: {
+        primary: string;
+        secondary: string;
+      };
+    };
   };
   fonts: {
     first: string;
