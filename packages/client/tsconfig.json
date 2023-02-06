@@ -30,7 +30,8 @@
     "baseUrl": ".",
     "paths": {
       "src/*": ["src/*"],
-      "components/*": ["src/components/*"]
+      "components/*": ["src/components/*"],
+      "pages/*": ["src/pages/*"]
     },
     "types": ["vite/client"]
   },
