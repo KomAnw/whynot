@@ -1,7 +1,7 @@
 export const paths = {
   welcome: '/',
-  login: '/login',
-  registration: '/registration',
+  login: 'login',
+  registration: 'registration',
   page500: '/500',
 } as const;
 
@@ -56,7 +56,7 @@ export const themes = {
       },
     },
     fonts: {
-      main: 'Handjet',
+      first: '1',
     },
   },
   other: {
@@ -100,7 +100,7 @@ export const themes = {
       },
     },
     fonts: {
-      main: 'Handjet',
+      first: '1',
     },
   },
 } as const;
