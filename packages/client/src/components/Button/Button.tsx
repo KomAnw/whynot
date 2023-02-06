@@ -1,16 +1,5 @@
-import { ReactNode } from 'react';
 import styled from 'styled-components';
-
-type ButtonProps = {
-  type?: 'submit' | 'reset' | 'button';
-  variant: 'primary' | 'secondary';
-  theme?: any;
-  children: ReactNode | string;
-  onSubmit: () => void;
-  onClick: () => void;
-};
-
-type ButtonComponent = ButtonProps & HTMLButtonElement;
+import { ButtonComponent, ButtonProps } from './types';
 
 export const Button = ({ type, theme, variant = 'primary', children, onSubmit, onClick }: ButtonComponent) => {
   return (
