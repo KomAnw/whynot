@@ -1,7 +1,7 @@
 export const paths = {
   welcome: '/',
-  login: 'login',
-  registration: 'registration',
+  login: '/login',
+  registration: '/registration',
 } as const;
 
 export const breakpoints = {
@@ -49,7 +49,6 @@ export const themes = {
     },
     fonts: {
       first: '1',
-      second: '2',
     },
   },
   // TODO название для примера (нужно поменять)
@@ -88,7 +87,6 @@ export const themes = {
     },
     fonts: {
       first: '1',
-      second: '2',
     },
   },
 } as const;
