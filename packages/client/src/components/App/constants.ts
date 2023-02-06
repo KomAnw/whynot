@@ -55,7 +55,7 @@ export const themes = {
       },
     },
     fonts: {
-      main: 'Handjet',
+      first: '1',
     },
   },
   other: {
@@ -99,7 +99,7 @@ export const themes = {
       },
     },
     fonts: {
-      main: 'Handjet',
+      first: '1',
     },
   },
 } as const;
