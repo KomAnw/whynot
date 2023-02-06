@@ -39,6 +39,5 @@ export type Theme = {
   };
   fonts: {
     first: string;
-    second: string;
   };
 };
