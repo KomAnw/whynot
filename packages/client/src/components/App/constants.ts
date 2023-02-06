@@ -1,7 +1,7 @@
 export const paths = {
   welcome: '/',
-  login: '/login',
-  registration: '/registration',
+  login: 'login',
+  registration: 'registration',
   page500: '/500',
 } as const;
 
@@ -50,7 +50,6 @@ export const themes = {
     },
     fonts: {
       first: '1',
-      second: '2',
     },
   },
   // TODO название для примера (нужно поменять)
@@ -89,7 +88,6 @@ export const themes = {
     },
     fonts: {
       first: '1',
-      second: '2',
     },
   },
 } as const;
