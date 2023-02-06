@@ -1,7 +1,7 @@
 export const paths = {
   welcome: '/',
-  login: 'login',
-  registration: 'registration',
+  login: '/login',
+  registration: '/registration',
   page500: '/500',
 } as const;
 
