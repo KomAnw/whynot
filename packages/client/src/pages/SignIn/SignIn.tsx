@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import Login from 'components/Forms/Login';
+import { breakpoints } from 'components/App/constants';
+import { Label } from 'src/design/Label';
+
+const { mobileM } = breakpoints;
 
 const SignIn = () => {
   return (
@@ -33,13 +37,8 @@ const LoginComponent = styled.div`
   border-radius: 20px;
   color: #000;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
-`;
-
-const Label = styled.label`
-  margin: 14px;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 40px;
-  line-height: 45px;
-  color: ${({ theme }) => theme.colors.core.text.primary};
+  @media (max-width: ${mobileM}) {
+    width: 354px;
+    height: 372px;
+  }
 `;
