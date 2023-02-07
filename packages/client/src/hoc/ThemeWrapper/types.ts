@@ -11,11 +11,14 @@ export type Theme = {
       background: {
         primary: string;
         secondary: string;
+        tertiary: string;
       };
       text: {
         primary: string;
         secondary: string;
         error: string;
+        tertiary: string;
+        quaternary: string;
       };
       link: {
         link: string;
@@ -24,20 +27,24 @@ export type Theme = {
     };
     control: {
       input: {
-        primary: string;
-        secondary: string;
+        background: string;
+        label: string;
+        placeHolder: string;
       };
       toggle: {
-        primary: string;
-        secondary: string;
+        control: string;
+        backgroundPrimary: string;
+        backgroundSecondary: string;
       };
       button: {
         primary: string;
+        primaryHover: string;
         secondary: string;
+        secondaryHover: string;
       };
     };
   };
   fonts: {
-    first: string;
+    main: string;
   };
 };
