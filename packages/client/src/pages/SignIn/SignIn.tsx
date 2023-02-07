@@ -32,6 +32,7 @@ const LoginComponent = styled.div`
   box-shadow: 0 0 6px ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
   color: #000;
+  background-color: ${({ theme }) => theme.colors.core.background.primary};
 `;
 
 const Label = styled.label`
