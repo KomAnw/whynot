@@ -1,14 +1,12 @@
 import styled from "styled-components";
+import Login from "components/Forms/Login";
 
 const SignIn = () => {
   return (
     <Wrapper>
       <LoginComponent>
         <Label>Login</Label>
-        <input/>
-        <input/>
-        <button>Signin</button>
-
+        <Login />
       </LoginComponent>
     </Wrapper>
   );
@@ -43,4 +41,11 @@ const Label = styled.label`
   font-size: 40px;
   line-height: 45px;
   color: ${({ theme }) => theme.colors.core.text.primary};
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
 `;
