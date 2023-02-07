@@ -45,6 +45,6 @@ export type Theme = {
     };
   };
   fonts: {
-    first: string;
+    main: string;
   };
 };
