@@ -1,4 +1,5 @@
 import Switch from 'src/components/Switch';
+import { H1 } from 'src/design/H1';
 import styled from 'styled-components';
 
 const Welcome = () => {
@@ -19,7 +20,7 @@ const Container = styled('div')`
   background: ${({ theme }) => theme.colors.core.background.primary};
 `;
 
-const Text = styled('p')`
+const Text = styled(H1)`
   margin: 0 auto;
   padding-top: 100px;
   width: max-content;

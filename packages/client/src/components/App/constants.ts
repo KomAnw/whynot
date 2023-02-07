@@ -19,74 +19,87 @@ export const themes = {
     colors: {
       core: {
         background: {
-          primary: 'white',
-          secondary: 'blue',
+          primary: '#D9D9D9',
+          secondary: '#5BCDC9',
+          tertiary: '#F2CE0D',
         },
         text: {
-          primary: 'black',
-          secondary: 'green',
-          error: 'red',
+          primary: '#6C5BC3',
+          secondary: '#FFFFFF',
+          error: '#FF0000',
+          tertiary: '#6B687D',
+          quaternary: '#000000',
         },
         link: {
-          link: 'blue',
-          linkHover: '#03a9f4',
+          link: '#6457B8',
+          linkHover: '#6457b8b3',
         },
       },
       control: {
         input: {
-          primary: 'black',
-          secondary: 'green',
+          background: '#ABCDCE',
+          label: '#6C5BC3',
+          placeHolder: '#6B687D',
         },
         toggle: {
-          primary: 'black',
-          secondary: 'green',
+          control: '#FFFFFF',
+          backgroundPrimary: '#6BD35A',
+          backgroundSecondary: '#F2CE0D',
         },
         button: {
-          primary: 'black',
-          secondary: 'green',
+          primary: '#6C5BC3',
+          primaryHover: 'rgba(108, 91, 195, 0.8)',
+          secondary: '#6BD35A',
+          secondaryHover: 'rgba(107, 211, 90, 0.8)',
         },
       },
     },
     fonts: {
-      first: '1',
+      main: 'Handjet',
     },
   },
-  // TODO название для примера (нужно поменять)
   other: {
     name: 'other',
     colors: {
       core: {
         background: {
-          primary: 'black',
-          secondary: 'grey',
+          primary: '#D9D9D9',
+          secondary: '#5BCDC9',
+          tertiary: '#F2CE0D',
         },
         text: {
-          primary: 'white',
-          secondary: 'purple',
-          error: 'red',
+          primary: '#6C5BC3',
+          secondary: '#FFFFFF',
+          error: '#FF0000',
+          tertiary: '#6B687D',
+          quaternary: '#000000',
         },
         link: {
-          link: 'blue',
-          linkHover: '#03a9f4',
+          link: '#6457B8',
+          linkHover: '#6457b8b3',
         },
       },
       control: {
         input: {
-          primary: 'white',
-          secondary: 'yellow',
+          background: '#ABCDCE',
+          label: '#6C5BC3',
+          placeHolder: '#6B687D',
         },
         toggle: {
-          primary: 'white',
-          secondary: 'yellow',
+          control: '#FFFFFF',
+          backgroundPrimary: '#6BD35A',
+          backgroundSecondary: '#F2CE0D',
         },
         button: {
-          primary: 'white',
-          secondary: 'yellow',
+          primary: '#6C5BC3',
+          primaryHover: 'rgba(108, 91, 195, 0.8)',
+          secondary: '#6BD35A',
+          secondaryHover: 'rgba(107, 211, 90, 0.8)',
         },
       },
     },
     fonts: {
-      first: '1',
+      main: 'Handjet',
     },
   },
 } as const;

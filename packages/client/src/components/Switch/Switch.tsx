@@ -7,74 +7,51 @@ const Switch = () => {
   const themeHandler = () => dispatch(changeTheme());
 
   return (
-    <Toggle>
-      <Input type="checkbox" onChange={themeHandler} />
-      <Label />
-    </Toggle>
+    <Container>
+      <Input type="checkbox" id="switch" />
+      <Label htmlFor="switch" onClick={themeHandler} />
+    </Container>
   );
 };
 
-const Toggle = styled('label')`
-  position: relative;
-  display: block;
+export default Switch;
+
+const Container = styled('div')`
   width: max-content;
-  margin: 0 auto;
-  padding-top: 40px;
 `;
 
-const Label = styled('div')`
+const Label = styled('label')`
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 86px;
+  height: 46px;
+  background: ${({ theme }) => theme.colors.control.toggle.backgroundSecondary};
+  display: block;
+  border-radius: 20px;
   position: relative;
-  display: flex;
-  align-items: center;
-  &::before {
-    content: '';
-    width: 84px;
-    height: 42px;
-    background: #ef5350;
-    position: relative;
-    display: inline-block;
-    box-shadow: inset 0 0.1em 0.03em rgb(0 0 0 / 20%), inset 0 0.1em 0.3em rgb(0 0 0 / 30%),
-      0 0 2em rgb(255 255 255 / 60%), inset 0 0 #66bb6a;
-    transition: 0.2s ease-in;
-  }
-
-  &::after {
+  &:after {
     content: '';
     position: absolute;
+    top: 5px;
+    left: 5px;
     width: 36px;
     height: 36px;
-    left: 3px;
-    top: 3px;
-    z-index: 2;
-    background: #fefefe;
-    box-shadow: 0 2px 5px #0002;
-    transition: 0.2s ease-in;
+    background: ${({ theme }) => theme.colors.control.toggle.control};
+    border-radius: 20px;
+    transition: 0.3s;
+  }
+  &:active:after {
+    width: 55px;
   }
 `;
 
 const Input = styled('input')`
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-  opacity: 0;
-
-  &:hover + ${Label}::after {
-    box-shadow: 0 2px 15px 0 #0002, 0 3px 8px 0 #0001;
-  }
-
-  &:checked + ${Label} {
-    &::before {
-      box-shadow: inset 0 0.1em 0.03em rgb(0 0 0 / 20%), inset 0 0.1em 0.3em rgb(0 0 0 / 30%),
-        0 0 2em rgb(255 255 255 / 60%), inset 84px 0 #66bb6a;
-    }
-    &::after {
-      transform: translatex(42px);
+  display: none;
+  :checked + ${Label} {
+    background: ${({ theme }) => theme.colors.control.toggle.backgroundPrimary};
+    &:after {
+      left: calc(100% - 5px);
+      transform: translateX(-100%);
     }
   }
 `;
-
-export default Switch;
