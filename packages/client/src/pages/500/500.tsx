@@ -1,13 +1,15 @@
 import styled from 'styled-components';
 import { paths } from '../../components/App/constants';
+import { H1 } from '../../design/H1';
+import { H3 } from '../../design/H3';
 
 const { welcome } = paths;
 
 const Page500 = () => {
   return (
     <Container>
-      <h2>500</h2>
-      <h4>Ошибка сервера</h4>
+      <H1>500</H1>
+      <H3>Ошибка сервера</H3>
       <a href={welcome}>Вернутся на главную страницу</a>
     </Container>
   );
@@ -23,12 +25,3 @@ const Container = styled.div`
 `;
 
 export default Page500;
-
-/*
- * Заготовка страницы 500 без стилей и нужных компонентов
- * Необходимы компоненты: H2, H4 и Link
- *  <H2>500</H2>
- *  <H4>Ошибка сервера</H4>
- *  <Link to={welcome}>Вернутся на главную страницу</Link>
- * Вверху реализована минимальная стилизация
- */
