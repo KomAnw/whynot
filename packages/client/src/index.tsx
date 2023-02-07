@@ -6,7 +6,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { Normalize } from 'styled-normalize';
 import App from './components/App/App';
 import { GlobalStyles } from './GlobalStyles';
-import App from './components/App/App';
 import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
 
 const rootElement = document.getElementById('root');
