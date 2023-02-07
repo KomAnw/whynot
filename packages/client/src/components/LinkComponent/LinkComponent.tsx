@@ -1,22 +1,22 @@
 import styled, {css} from 'styled-components';
 import { LinkText } from 'src/design/LinkText';
-import { LinkProps } from 'components/LinkComponent/type';
+import { LinkProps, LinkStyleProps } from 'components/LinkComponent/type';
 import { Link } from 'react-router-dom';
 
-const LinkComponent = (props: LinkProps) => {
+const LinkComponent = ({linkToValue, linkToText, style}: LinkProps) => {
   return (
-    <LinkContainer {...props}>
-      <Link to={props.linkToValue}>{props.linkToText}</Link>
+    <LinkContainer {...style}>
+      <Link to={linkToValue}>{linkToText}</Link>
     </LinkContainer>
   );
 };
 
 export default LinkComponent;
 
-const LinkContainer = styled(LinkText)`
+const LinkContainer = styled(LinkText)<LinkStyleProps>`
   cursor: pointer;
-  ${props => props.fontSizeText && css`font-size: ${props => props.fontSizeText};`}
-  ${props => props.lineHeightText && css`line-height: ${props => props.lineHeightText};`}
+  ${props => props.fontSizeText && css`font-size: ${(props:LinkStyleProps)  => props.fontSizeText};`}
+  ${props => props.lineHeightText && css`line-height: ${(props:LinkStyleProps) => props.lineHeightText};`}
   &:hover {
     opacity: 0.8;
   }
