@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { InputProps } from 'components/Input/type';
 
 export const Input = ({ type, name, label, errorMessage, onChange, placeholder, value }: InputProps) => {
-  const [iternalValue, setIternalValue] = useState('');
+  const [internalValue, setInternalValue] = useState(value);
 
-  const handler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setIternalValue(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInternalValue(e.target.value);
   };
 
   return (
@@ -15,9 +15,9 @@ export const Input = ({ type, name, label, errorMessage, onChange, placeholder, 
       <InputStyled
         name={name}
         type={type}
-        value={value || iternalValue}
+        value={internalValue}
         placeholder={placeholder}
-        onChange={onChange || handler}
+        onChange={onChange || handleChange}
       />
       {errorMessage && <ValidationStyled>{errorMessage}</ValidationStyled>}
     </InputContainer>
