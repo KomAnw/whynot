@@ -5,6 +5,10 @@ const SignIn = () => {
     <Wrapper>
       <LoginComponent>
         <Label>Login</Label>
+        <input/>
+        <input/>
+        <button>Signin</button>
+
       </LoginComponent>
     </Wrapper>
   );
