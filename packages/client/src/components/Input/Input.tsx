@@ -19,7 +19,7 @@ export const Input = (props: InputProps) => {
         placeholder={props.placeholder}
         onChange={props.onChange ? props.onChange : handler}
       />
-      <ValidationStyled>{props.errorMessage ? props.errorMessage : 'asdad'}</ValidationStyled>
+      <ValidationStyled>{props.errorMessage ? props.errorMessage : ''}</ValidationStyled>
     </InputContainer>
   );
 };
