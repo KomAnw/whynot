@@ -2,24 +2,24 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 import { InputProps } from 'components/Input/type';
 
-export const Input = (props: InputProps) => {
-  const [value, setValue] = useState('');
+export const Input = ({ type, name, label, errorMessage, onChange, placeholder, value }: InputProps) => {
+  const [iternalValue, setIternalValue] = useState('');
 
   const handler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    setIternalValue(e.target.value);
   };
 
   return (
     <InputContainer>
-      <LabelStyled>{props.label} </LabelStyled>
+      <LabelStyled>{label} </LabelStyled>
       <InputStyled
-        name={props.name}
-        type={props.type}
-        value={props.value ? props.value : value}
-        placeholder={props.placeholder}
-        onChange={props.onChange ? props.onChange : handler}
+        name={name}
+        type={type}
+        value={value || iternalValue}
+        placeholder={placeholder}
+        onChange={onChange || handler}
       />
-      <ValidationStyled>{props.errorMessage ? props.errorMessage : ''}</ValidationStyled>
+      {errorMessage && <ValidationStyled>{errorMessage}</ValidationStyled>}
     </InputContainer>
   );
 };
