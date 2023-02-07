@@ -6,7 +6,7 @@ export const Input = ({ type, name, label, errorMessage, onChange, placeholder, 
   const [internalValue, setInternalValue] = useState(value);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInternalValue(e.target.value);
+    onChange ? onChange(e) : setInternalValue(e.target.value);
   };
 
   return (
@@ -17,7 +17,7 @@ export const Input = ({ type, name, label, errorMessage, onChange, placeholder, 
         type={type}
         value={internalValue}
         placeholder={placeholder}
-        onChange={onChange || handleChange}
+        onChange={handleChange}
       />
       {errorMessage && <ValidationStyled>{errorMessage}</ValidationStyled>}
     </InputContainer>
