@@ -10,7 +10,7 @@ export const Input = (props: InputProps) => {
   };
 
   return (
-    <DivStyled>
+    <InputContainer>
       <LabelStyled>{props.label} </LabelStyled>
       <InputStyled
         name={props.name}
@@ -19,33 +19,37 @@ export const Input = (props: InputProps) => {
         placeholder={props.placeholder}
         onChange={props.onChange ? props.onChange : handler}
       />
-      <ValidationStyled>{props.isValid ? '' : props.validationText}</ValidationStyled>
-    </DivStyled>
+      <ValidationStyled>{props.errorMessage ? props.errorMessage : 'asdad'}</ValidationStyled>
+    </InputContainer>
   );
 };
 
-const DivStyled = styled.div`
+const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   width: fit-content;
   margin: 0 0 5px 0;
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-style: normal;
 `;
 
 const ValidationStyled = styled.p`
-  margin: 0 0 5px 10px;
-  font-size: 10pt;
+  margin: 0;
+  font-size: 20px;
   height: 15px;
   display: block;
   align-items: flex-start;
+  color: ${({ theme }) => theme.colors.core.text.error};
 `;
 
 const LabelStyled = styled.label`
-  margin: 0 0 1px 5px;
-  font-size: 10pt;
-  height: 15px;
+  line-height: 22px;
   display: block;
   align-items: flex-start;
+  font-weight: 700;
+  font-size: 20px;
+  color: ${({ theme }) => theme.colors.control.input.label};
 `;
 
 const InputStyled = styled.input`
@@ -55,4 +59,10 @@ const InputStyled = styled.input`
   border-radius: 5px;
   width: 100%;
   outline: none;
+  height: 48px;
+  background-color: ${({ theme }) => theme.colors.control.input.background};
+  border: none;
+  color: ${({ theme }) => theme.colors.control.input.placeHolder};
+  font-weight: 400;
+  font-size: 24px;
 `;

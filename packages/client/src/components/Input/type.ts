@@ -7,6 +7,5 @@ export type InputProps = {
   placeholder?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  isValid?: boolean;
-  validationText?: string;
+  errorMessage?: string;
 };
