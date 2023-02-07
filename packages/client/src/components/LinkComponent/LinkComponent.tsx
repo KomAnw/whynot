@@ -15,6 +15,7 @@ export default LinkComponent;
 
 const LinkContainer = styled(LinkText)<LinkStyleProps>`
   cursor: pointer;
+  text-decoration: none;
   ${props => props.fontSizeText && css`font-size: ${(props:LinkStyleProps)  => props.fontSizeText};`}
   ${props => props.lineHeightText && css`line-height: ${(props:LinkStyleProps) => props.lineHeightText};`}
   &:hover {
