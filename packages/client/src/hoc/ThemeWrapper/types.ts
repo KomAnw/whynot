@@ -37,10 +37,16 @@ export type Theme = {
         backgroundSecondary: string;
       };
       button: {
-        primary: string;
-        primaryHover: string;
-        secondary: string;
-        secondaryHover: string;
+        primary: {
+          color: string;
+          background: string;
+          hoverBackground: string;
+        };
+        secondary: {
+          color: string;
+          background: string;
+          hoverBackground: string;
+        };
       };
     };
   };
