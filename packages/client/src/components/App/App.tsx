@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           {/* Общие */}
-          <Route path={welcome} element={<Welcome />} />
+          <Route index element={<Welcome />} />
           <Route path={login} element={<SignIn />} />
           <Route path={registration} element={<SignUp />} />
           <Route path={page500} element={<Page500 />} />
