@@ -11,7 +11,7 @@ export const Input = ({ type, name, label, errorMessage, onChange, placeholder, 
 
   return (
     <InputContainer>
-      <LabelStyled>{label} </LabelStyled>
+      <LabelStyled>{label}</LabelStyled>
       <InputStyled
         name={name}
         type={type}
