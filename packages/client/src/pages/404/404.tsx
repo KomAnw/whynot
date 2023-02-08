@@ -6,14 +6,16 @@ import img from '../../../public/gomer404.png';
 const { mobileM } = breakpoints;
 
 const Page404 = () => {
-  return <Container>
-    <PageStyle>
-      <TextH1>Что то пошло не так, не переживай</TextH1>
-      <ImgDiv/>
-      <TextH2>404</TextH2>
-      <TextH4>в меню</TextH4>
-    </PageStyle>
-  </Container>;
+  return (
+    <Container>
+      <PageStyle>
+        <TextH1>Что то пошло не так, не переживай</TextH1>
+        <ImgDiv />
+        <TextH2>404</TextH2>
+        <TextH4>в меню</TextH4>
+      </PageStyle>
+    </Container>
+  );
 };
 
 export default Page404;
@@ -42,28 +44,28 @@ const PageStyle = styled.div`
   grid-template-columns: auto auto;
   grid-template-rows: auto auto auto;
   grid-column-gap: 26px;
-  grid-template-areas: 
-    "h1 h1"
-    "img h2"
-    "h4 h4";
+  grid-template-areas:
+    'h1 h1'
+    'img h2'
+    'h4 h4';
   @media (max-width: ${mobileM}) {
     width: 354px;
     height: 636px;
     grid-template-columns: auto;
     grid-template-rows: auto auto auto auto;
-    grid-column-gap: 0px;
+    grid-column-gap: 0;
     grid-row-gap: 6px;
-    grid-template-areas: 
-    "h1"
-    "img"
-    "h2"
-    "h4";
+    grid-template-areas:
+      'h1'
+      'img'
+      'h2'
+      'h4';
   }
 `;
 
 const TextH1 = styled(H1)`
   margin: 24px 0 75px 0;
-  padding: 0px;
+  padding: 0;
   width: 282px;
   display: grid;
   text-align: center;
@@ -77,7 +79,7 @@ const TextH1 = styled(H1)`
 
 const ImgDiv = styled.div`
   margin: 0 0 0 12px;
-  padding: 0px;
+  padding: 0;
   height: 342px;
   width: 300px;
   display: grid;
@@ -90,7 +92,7 @@ const ImgDiv = styled.div`
 
 const TextH2 = styled(H1)`
   margin: 0 14px 0 0;
-  padding: 0px;
+  padding: 0;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -107,7 +109,7 @@ const TextH2 = styled(H1)`
 
 const TextH4 = styled(H1)`
   margin: 107px 0 48px 0;
-  padding: 0px;
+  padding: 0;
   display: grid;
   grid-area: h4;
   font-size: 30px;
