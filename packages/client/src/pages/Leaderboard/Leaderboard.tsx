@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { breakpoints } from 'components/App/constants';
 import { Label } from 'src/design/Label';
+import LeaderboardRow from "components/LeaderboardRow";
 
 const { mobileM } = breakpoints;
 
@@ -9,6 +10,7 @@ const Leaderboard = () => {
     <Wrapper>
       <LeaderboardComponent>
         <LeaderboardLabel>Leaderboard</LeaderboardLabel>
+        <LeaderboardRow />
       </LeaderboardComponent>
     </Wrapper>
   );
@@ -19,7 +21,6 @@ export default Leaderboard;
 const Wrapper = styled.div`
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -36,10 +37,11 @@ const LeaderboardComponent = styled.div`
   background-color: ${({ theme }) => theme.colors.core.background.primary};
   @media (max-width: ${mobileM}) {
     width: 354px;
-    height: 372px;
+    height: 636px;
   }
 `;
 
 const LeaderboardLabel = styled(Label)`
-  height: 48px;
+  display: flex;
+  font-size: 48px;
 `;
