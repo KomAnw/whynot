@@ -1,5 +1,4 @@
 root = true
-
 [*.{js,ts}]
 indent_style = space
 indent_size = 2
