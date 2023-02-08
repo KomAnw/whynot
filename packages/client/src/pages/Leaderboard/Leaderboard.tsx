@@ -13,9 +13,7 @@ const Leaderboard = () => {
         <LeaderboardLabel>Leaderboard</LeaderboardLabel>
         <Column>
           {leaderboardConsts.map(({ rank, nickname, score, isMine }) => (
-            <div key={rank}>
-              <LeaderboardRow rank={rank} nickname={nickname} score={score} isMine={isMine} />
-            </div>
+            <LeaderboardRow key={rank} rank={rank} nickname={nickname} score={score} isMine={isMine} />
           ))}
         </Column>
         <Link>
@@ -33,7 +31,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: ${({ theme }) => theme.fonts.main};
+  // font-family: ${({ theme }) => theme.fonts.main};
 `;
 
 const LeaderboardComponent = styled.div`
@@ -56,9 +54,11 @@ const LeaderboardLabel = styled(Label)`
   font-size: 48px;
 `;
 
-const Column = styled.div`
+const Column = styled.ul`
   width: 100%;
   height: 100%;
+  padding: 0;
+  margin: 0;
 `;
 
 const Link = styled(Label).attrs({ as: 'div' })`

@@ -19,7 +19,6 @@ const Row = styled.li<RowProps>`
   background-color: ${({ theme, isMine }) =>
     isMine ? theme.colors.core.background.tertiary : theme.colors.core.background.secondary};
   border-radius: 10px;
-  width: 100%;
   height: 48px;
   font-style: normal;
   font-weight: 700;
