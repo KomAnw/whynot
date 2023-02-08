@@ -1,34 +1,33 @@
 import styled from 'styled-components';
-import { Link as LinkReact} from 'react-router-dom';
-import { Typography } from 'src/design/Typography';
-import React from 'react';
+import { Link as ReactLink } from 'react-router-dom';
 import { sizeType, propsLink, propsLinkStyle } from 'components/Link/type';
 
-function creatStyleProps (variant: sizeType):propsLinkStyle  {
-  switch(variant) {
+function creatStyleProps(variant: sizeType): propsLinkStyle {
+  switch (variant) {
     case 'small':
-      return {fontSize: '20px', lineHeight: '27px'}
+      return { fontSize: '20px', lineHeight: '27px' };
     case 'regular':
-      return {fontSize: '40px', lineHeight: '47px'}
+      return { fontSize: '40px', lineHeight: '47px' };
     case 'large':
-      return {fontSize: '50px', lineHeight: '57px'}
+      return { fontSize: '50px', lineHeight: '57px' };
     default:
-      return {fontSize: '20px', lineHeight: '27px'};
+      return { fontSize: '20px', lineHeight: '27px' };
   }
 }
 
-const Link = ({children, url, variant}: propsLink) => {
+function Link({ children, url, variant }: propsLink) {
   const styleProps = creatStyleProps(variant);
 
   return (
-    <LinkStyle to={url} {...styleProps}>{children}</LinkStyle>
+    <StyledLink {...styleProps} to={url}>
+      {children}
+    </StyledLink>
   );
-};
+}
 
 export default Link;
 
-const LinkStyle = styled(Typography).attrs({ as: LinkReact })<propsLinkStyle
-  & React.ForwardRefExoticComponent<React.AnchorHTMLAttributes<HTMLAnchorElement>>>`
+const StyledLink = styled(ReactLink)<propsLinkStyle>`
   cursor: pointer;
   text-decoration: none;
   &:hover {
@@ -36,4 +35,6 @@ const LinkStyle = styled(Typography).attrs({ as: LinkReact })<propsLinkStyle
   }
   font-size: ${props => props.fontSize};
   line-height: ${props => props.lineHeight};
+  font-family: ${({ theme }) => theme.fonts.main};
+  color: ${({ theme }) => theme.colors.core.text.primary};
 `;

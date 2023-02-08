@@ -8,7 +8,7 @@ const Welcome = () => {
     <Container>
       <Text>Welcome</Text>
       <Switch />
-      <Link url='/game' variant='large'>перейти в игру</Link>
+      <Link url='/game' variant='small'>перейти в игру</Link>
     </Container>
   );
 };
