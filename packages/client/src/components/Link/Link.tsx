@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link as ReactLink } from 'react-router-dom';
 import { propsLink, propsLinkStyle } from 'components/Link/type';
 
@@ -10,9 +10,8 @@ const styleProps = {
 };
 
 function Link({ children, url, variant = 'size20' }: propsLink) {
-
   return (
-    <StyledLink {...styleProps[variant]} to={url}>
+    <StyledLink variant={variant} to={url}>
       {children}
     </StyledLink>
   );
@@ -26,8 +25,15 @@ const StyledLink = styled(ReactLink)<propsLinkStyle>`
   &:hover {
     opacity: 0.8;
   }
-  font-size: ${props => props.fontSize};
-  line-height: ${props => props.lineHeight};
-  font-family: ${({ theme }) => theme.fonts.main};
-  color: ${({ theme }) => theme.colors.core.text.primary};
+
+  ${({ theme, variant }) => {
+    const { fontSize, lineHeight } = styleProps[variant];
+
+    return css`
+      font-size: ${fontSize};
+      line-height: ${lineHeight};
+      font-family: ${theme.fonts.main};
+      color: ${theme.colors.core.text.primary};
+    `;
+  }}
 `;
