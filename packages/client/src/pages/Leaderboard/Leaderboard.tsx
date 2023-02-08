@@ -31,7 +31,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  // font-family: ${({ theme }) => theme.fonts.main};
 `;
 
 const LeaderboardComponent = styled.div`
