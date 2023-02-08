@@ -1,25 +1,18 @@
 import styled from 'styled-components';
 import { Link as ReactLink } from 'react-router-dom';
-import { sizeType, propsLink, propsLinkStyle } from 'components/Link/type';
+import { propsLink, propsLinkStyle } from 'components/Link/type';
 
-function creatStyleProps(variant: sizeType): propsLinkStyle {
-  switch (variant) {
-    case 'small':
-      return { fontSize: '20px', lineHeight: '27px' };
-    case 'regular':
-      return { fontSize: '40px', lineHeight: '47px' };
-    case 'large':
-      return { fontSize: '50px', lineHeight: '57px' };
-    default:
-      return { fontSize: '20px', lineHeight: '27px' };
-  }
-}
+const styleProps = {
+  size20: { fontSize: '20px', lineHeight: '22px' },
+  size24: { fontSize: '24px', lineHeight: '27px' },
+  size30: { fontSize: '30px', lineHeight: '34px' },
+  size40: { fontSize: '40px', lineHeight: '45px' },
+};
 
-function Link({ children, url, variant }: propsLink) {
-  const styleProps = creatStyleProps(variant);
+function Link({ children, url, variant = 'size20' }: propsLink) {
 
   return (
-    <StyledLink {...styleProps} to={url}>
+    <StyledLink {...styleProps[variant]} to={url}>
       {children}
     </StyledLink>
   );
