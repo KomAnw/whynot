@@ -1,32 +1,57 @@
 import styled from 'styled-components';
-import { ListText } from 'src/design/ListText';
+import { Typography } from 'src/design/Typography';
+import { LeaderboardRowProps, RowProps } from 'components/LeaderboardRow/type';
 
-export const LeaderboardRow = () => {
+export const LeaderboardRow = ({ rank, nickname, score, isMine }: LeaderboardRowProps) => {
   return (
-    <Row>
-      <ol>
-        <Item>
-          <>NickName</>
-       </Item>
-      </ol>
+    <Row isMine={isMine}>
+      <Item>
+        <Rank>{rank}</Rank>
+        <Nickname>{nickname}</Nickname>
+        <Score>{score}</Score>
+      </Item>
     </Row>
   );
 };
 
-
-const Row = styled.div`
-  display: flex;
-  align-items: center;
-
-  justify-content: space-between;
-  background-color: ${({ theme }) => theme.colors.core.background.secondary};
+const Row = styled.li<RowProps>`
+  display: block;
+  background-color: ${({ theme, isMine }) =>
+    isMine ? theme.colors.core.background.tertiary : theme.colors.core.background.secondary};
   border-radius: 10px;
   width: 100%;
   height: 48px;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 34px;
+  margin: 6px;
 `;
 
-const Item = styled(ListText)`
-  flex-direction: row;
+const Item = styled(Typography).attrs({ as: 'div' })`
+  display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 10px;
+  will-change: transform;
+  transition: all 0.3s ease-in;
+`;
+
+const Rank = styled.div`
+  margin-left: 54px;
+  :after {
+    content: '. ';
+  }
+`;
+
+const Nickname = styled.div`
+  flex: 1;
+  margin-left: 24px;
+`;
+
+const Score = styled.div`
+  align-items: flex-end;
+  text-align: right;
+  flex: 1;
+  margin-right: 27px;
 `;
