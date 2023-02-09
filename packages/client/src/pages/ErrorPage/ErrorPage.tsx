@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from 'components/Link';
 import { breakpoints, paths } from '../../components/App/constants';
 import { H3 } from '../../design/H3';
 
@@ -15,10 +16,10 @@ const ErrorPage = () => {
           не переживай
         </H3>
         <Wrapper>
-          <ImageHomer src="/gomer500.png" alt="Angry Gomer" />
+          <ImageHomer src="/gomer500.svg" alt="Angry Gomer" />
           <BigText>500</BigText>
         </Wrapper>
-        <Link href={welcome}>
+        <Link url={welcome} variant="size30">
           <H3>в меню</H3>
         </Link>
       </Container>
@@ -78,14 +79,6 @@ const ImageHomer = styled.img`
   width: 300px;
   height: 278px;
   margin-left: 12px;
-`;
-
-const Link = styled.a`
-  padding: 50px 0 10px 0;
-
-  @media (max-width: ${mobileM}) {
-    padding: 0 0 10px 0;
-  }
 `;
 
 export default ErrorPage;
