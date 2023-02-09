@@ -4,7 +4,7 @@ import PrivateRoute from 'src/hoc/PrivateRoute';
 import { SignIn, SignUp, Welcome, Leaderboard } from 'src/pages';
 import { paths } from './constants';
 
-const { login, registration, leaderboard } = paths;
+const { login, registration, leaderboard, game } = paths;
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           <Route path="*" element={<div>404</div>} />
 
           {/* Приватные */}
-          <Route path="/game" element={<PrivateRoute />}>
+          <Route path={game} element={<PrivateRoute />}>
             <Route index element={<div>main game page</div>} />
           </Route>
         </Route>
