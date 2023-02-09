@@ -2,6 +2,7 @@ export const paths = {
   welcome: '/',
   login: '/login',
   registration: '/registration',
+  game: '/game',
 } as const;
 
 export const breakpoints = {
