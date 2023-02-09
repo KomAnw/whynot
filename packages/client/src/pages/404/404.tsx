@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { H1 } from 'src/design/H1';
 import { breakpoints } from 'components/App/constants';
 import img from '../../../public/gomer404.png';
+import  Link from 'src/components/Link'
 
 const { mobileM } = breakpoints;
 
@@ -12,7 +13,9 @@ const Page404 = () => {
         <TextH1>Что то пошло не так, не переживай</TextH1>
         <ImgDiv />
         <TextH2>404</TextH2>
-        <TextH4>в меню</TextH4>
+        <TextH4>
+          <Link url='/' variant='size30'>в меню</Link>
+        </TextH4>
       </PageStyle>
     </Container>
   );
@@ -114,6 +117,7 @@ const TextH4 = styled(H1)`
   grid-area: h4;
   font-size: 30px;
   line-height: 34px;
+  text-decoration: underline;
   color: ${({ theme }) => theme.colors.core.text.primary};
   @media (max-width: ${mobileM}) {
     margin: 6px 0 16px 0;
