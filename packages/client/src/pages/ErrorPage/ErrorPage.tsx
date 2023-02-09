@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import Link from 'components/Link';
-import { breakpoints, paths } from '../../components/App/constants';
-import { H3 } from '../../design/H3';
+import { breakpoints, paths } from 'components/App/constants';
+import { Label } from 'src/design/Label';
+import { H3 } from 'src/design/H3';
+import gomer from 'src/assets/images/gomer500.svg';
 
 const { welcome } = paths;
 const { mobileM } = breakpoints;
@@ -10,13 +12,10 @@ const ErrorPage = () => {
   return (
     <Page>
       <Container>
-        <H3>
-          Что то пошло не так,
-          <br />
-          не переживай
-        </H3>
+        <TitleText>Что то пошло не так,</TitleText>
+        <TitleText>не переживай</TitleText>
         <Wrapper>
-          <ImageHomer src="/gomer500.svg" alt="Angry Gomer" />
+          <ImageHomer src={gomer} alt="Angry Gomer" />
           <BigText>500</BigText>
         </Wrapper>
         <Link url={welcome} variant="size30">
@@ -41,6 +40,7 @@ const Container = styled.div`
   align-items: center;
   width: 620px;
   border-radius: 20px;
+  padding-top: 20px;
   background: ${({ theme }) => theme.colors.core.background.primary};
 
   @media (max-width: ${mobileM}) {
@@ -53,6 +53,7 @@ const Wrapper = styled.div`
   justify-content: space-around;
   align-items: center;
   height: 300px;
+  margin-top: 40px;
   border-radius: 20px;
   background: ${({ theme }) => theme.colors.core.background.primary};
 
@@ -62,11 +63,14 @@ const Wrapper = styled.div`
   }
 `;
 
-const BigText = styled.div`
+const TitleText = styled(H3).attrs({ as: 'h3' })`
+  line-height: 40px;
+  margin: 10px 0 0 0;
+  color: ${({ theme }) => theme.colors.core.text.primary};
+`;
+
+const BigText = styled(Label).attrs({ as: 'div' })`
   font-size: 224px;
-  font-family: ${({ theme }) => theme.fonts.main};
-  font-weight: 700;
-  color: ${({ theme }) => theme.colors.core.link.link};
 
   @media (max-width: ${mobileM}) {
     font-size: 100px;
