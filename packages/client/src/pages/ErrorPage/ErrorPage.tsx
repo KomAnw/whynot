@@ -5,7 +5,7 @@ import { H3 } from '../../design/H3';
 const { welcome } = paths;
 const { mobileM } = breakpoints;
 
-const Page500 = () => {
+const ErrorPage = () => {
   return (
     <Page>
       <Container>
@@ -88,4 +88,4 @@ const Link = styled.a`
   }
 `;
 
-export default Page500;
+export default ErrorPage;
