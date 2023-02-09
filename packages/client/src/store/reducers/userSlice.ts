@@ -34,7 +34,11 @@ const initialState: IUserState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setUser(state, action) {
+      state.user = action.payload;
+    },
+  },
   extraReducers: {
     [singIn.fulfilled.type]: state => {
       state.isLoading = false;

@@ -4,10 +4,10 @@ import { useAuth } from 'src/hooks/useAuth';
 
 const { login } = paths;
 
-const PrivateRoute = async () => {
-  const { user } = await useAuth();
+const PrivateRoute = () => {
+  const { isAuth } = useAuth();
 
-  return user ? <Outlet /> : <Navigate to={login} />;
+  return isAuth ? <Outlet /> : <Navigate to={login} replace={true} />;
 };
 
 export default PrivateRoute;

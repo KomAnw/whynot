@@ -12,11 +12,8 @@ export const getUser = createAsyncThunk('auth/user', async (_, { rejectWithValue
 
 export const singIn = createAsyncThunk('auth/signin', async (data: ISignInData, { rejectWithValue, dispatch }) => {
   try {
-    const result = await api.post('auth/signin', { json: data });
-
-    if (result) {
-      await dispatch(getUser());
-    }
+    await api.post('auth/signin', { json: data });
+    await dispatch(getUser());
   } catch (error: unknown) {
     return error instanceof Error ? rejectWithValue(error.message) : rejectWithValue('Something went wrong');
   }
