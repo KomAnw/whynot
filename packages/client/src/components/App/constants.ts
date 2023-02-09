@@ -2,14 +2,26 @@ export const paths = {
   welcome: '/',
   login: '/login',
   registration: '/registration',
+  page500: '/500',
+  page404: '/404',
   game: '/game',
+  play: '/game/on',
+  end: '/game/over',
+  forum: '/forum',
+  newThread: '/forum/new',
+  thread: '/forum/thread/:id',
+  editThread: '/forum/thread/:id/edit',
+  leaderboard: '/leaderboard',
+  profile: '/profile',
+  profileUpdateData: '/profile/update',
+  profileUpdateAvatar: '/profile/avatar',
 } as const;
 
 export const breakpoints = {
   mobileS: '319px',
   mobileM: '767px',
   tablet: '1023px',
-  laptop: '1439px',
+  laptop: '1439px', 
   laptopL: '1799px',
   desktop: '2599px',
 } as const;
