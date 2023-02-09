@@ -2,6 +2,7 @@ export const paths = {
   welcome: '/',
   login: '/login',
   registration: '/registration',
+  game: '/game',
 } as const;
 
 export const breakpoints = {
@@ -47,10 +48,16 @@ export const themes = {
           backgroundSecondary: '#F2CE0D',
         },
         button: {
-          primary: '#6C5BC3',
-          primaryHover: 'rgba(108, 91, 195, 0.8)',
-          secondary: '#6BD35A',
-          secondaryHover: 'rgba(107, 211, 90, 0.8)',
+          primary: {
+            color: '#FFFFFF',
+            background: '#6C5BC3',
+            hoverBackground: 'rgba(108, 91, 195, 0.8)',
+          },
+          secondary: {
+            color: '#FFFFFF',
+            background: '#6BD35A',
+            hoverBackground: 'rgba(107, 211, 90, 0.8)',
+          },
         },
       },
     },
@@ -91,10 +98,16 @@ export const themes = {
           backgroundSecondary: '#F2CE0D',
         },
         button: {
-          primary: '#6C5BC3',
-          primaryHover: 'rgba(108, 91, 195, 0.8)',
-          secondary: '#6BD35A',
-          secondaryHover: 'rgba(107, 211, 90, 0.8)',
+          primary: {
+            color: '#FFFFFF',
+            background: '#6C5BC3',
+            hoverBackground: 'rgba(108, 91, 195, 0.8)',
+          },
+          secondary: {
+            color: '#FFFFFF',
+            background: '#6BD35A',
+            hoverBackground: 'rgba(107, 211, 90, 0.8)',
+          },
         },
       },
     },
