@@ -14,5 +14,5 @@ export default Layout;
 const BackgroundContainer = styled('div')`
   height: 100vh;
   width: 100vw;
-  background-image: url('../../../public/background.jpg');
+  background-image: url('../../../public/background.png');
 `;
