@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import themeReducer from 'src/hoc/ThemeWrapper/themeSlice';
-import userReducer from 'src/store/reducers/userSlice';
+import { authApi } from 'src/api/authAPI';
 
 const store = configureStore({
   reducer: {
     theme: themeReducer,
-    user: userReducer,
+    [authApi.reducerPath]: authApi.reducer,
   },
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware),
 });
 
 export default store;

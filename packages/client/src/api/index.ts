@@ -1,7 +1,7 @@
-import ky from 'ky';
+import { FetchBaseQueryArgs } from '@reduxjs/toolkit/dist/query/fetchBaseQuery';
 
-export const api = ky.create({
-  prefixUrl: 'https://ya-praktikum.tech/api/v2',
+export const apiSettings: FetchBaseQueryArgs = {
+  baseUrl: 'https://ya-praktikum.tech/api/v2',
   credentials: 'include',
   timeout: 5000,
-});
+};
