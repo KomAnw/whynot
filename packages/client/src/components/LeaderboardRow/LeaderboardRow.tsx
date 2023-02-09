@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Typography } from 'src/design/Typography';
+import { Label } from 'src/design/Label';
 import { LeaderboardRowProps, RowProps } from 'components/LeaderboardRow/type';
 
 export const LeaderboardRow = ({ rank, nickname, score, isMine }: LeaderboardRowProps) => {
@@ -14,14 +15,13 @@ export const LeaderboardRow = ({ rank, nickname, score, isMine }: LeaderboardRow
   );
 };
 
-const Row = styled.li<RowProps>`
+const Row = styled(Label)<RowProps>`
   display: block;
   background-color: ${({ theme, isMine }) =>
     isMine ? theme.colors.core.background.tertiary : theme.colors.core.background.secondary};
+  color: ${({ theme }) => theme.colors.core.text.quaternary};
   border-radius: 10px;
   height: 48px;
-  font-style: normal;
-  font-weight: 700;
   font-size: 30px;
   line-height: 34px;
   margin: 6px;

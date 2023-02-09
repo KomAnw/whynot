@@ -62,7 +62,4 @@ const Column = styled.ul`
 
 const Link = styled(Label).attrs({ as: 'div' })`
   margin-bottom: 12px;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 34px;
 `;

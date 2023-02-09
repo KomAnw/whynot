@@ -5,6 +5,4 @@ export type LeaderboardRowProps = {
   isMine?: boolean;
 };
 
-export type RowProps = {
-  isMine?: boolean;
-};
+export type RowProps = Pick<LeaderboardRowProps, 'isMine'>;
