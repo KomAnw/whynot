@@ -6,11 +6,10 @@ const ROOT_AUTH_URL = 'auth';
 
 export const AUTH_ENDPOINTS = {
   user: `${ROOT_AUTH_URL}/user`,
-  singIn: `${ROOT_AUTH_URL}/singIn`,
-  singUp: `${ROOT_AUTH_URL}/singUp`,
+  singIn: `${ROOT_AUTH_URL}/signin`,
+  singUp: `${ROOT_AUTH_URL}/signup`,
   logout: `${ROOT_AUTH_URL}/logout`,
 };
-
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
