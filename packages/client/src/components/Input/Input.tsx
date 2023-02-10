@@ -24,7 +24,6 @@ const InputContainer = styled.div`
 
 const ValidationText = styled(Label)`
   margin: 0 auto;
-  font-size: 1em;
   height: 15px;
   display: block;
   align-items: flex-start;
