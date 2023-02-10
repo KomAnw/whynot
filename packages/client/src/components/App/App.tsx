@@ -32,7 +32,7 @@ function App() {
           <Route path={registration} element={<SignUp />} />
           <Route path={page500} element={<div>500</div>} />
           <Route path="*" element={<div>404</div>} />
- 
+
           {/* Приватные */}
           <Route path={game} element={<PrivateRoute />}>
             <Route index element={<div>Страница начала игры</div>} />
