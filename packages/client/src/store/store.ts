@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { authApi } from 'src/api/auth/auth';
 import themeReducer from 'src/hoc/ThemeWrapper/themeSlice';
-import { authApi } from 'src/api/authAPI';
 
 const store = configureStore({
   reducer: {
