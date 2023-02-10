@@ -1,12 +1,10 @@
-export type ID = string | number;
-
 export type TSignInData = {
   login: string;
   password: string;
 };
 
 export type TUser = {
-  id: ID;
+  id: string | number;
   first_name: string;
   second_name: string;
   login: string;
