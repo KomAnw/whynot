@@ -1,13 +1,17 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import { useGetUserQuery } from 'src/api/auth/auth';
 import { paths } from 'src/components/App/constants';
 
 const { login } = paths;
 
 const PrivateRoute = () => {
-  // TODO useAuth hook *const auth = useAuth();*
-  const auth = true;
+  const { isLoading, data } = useGetUserQuery();
 
-  return auth ? <Outlet /> : <Navigate to={login} />;
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return data ? <Outlet /> : <Navigate to={login} replace={true} />;
 };
 
 export default PrivateRoute;
