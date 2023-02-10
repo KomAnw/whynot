@@ -9,7 +9,7 @@ import { paths } from './constants';
 const {
   login,
   registration,
-  page500,
+  errorPage,
   game,
   play,
   end,
@@ -32,7 +32,7 @@ function App() {
           <Route index element={<Welcome />} />
           <Route path={login} element={<SignIn />} />
           <Route path={registration} element={<SignUp />} />
-          <Route path={page500} element={<ErrorPage />} />
+          <Route path={errorPage} element={<ErrorPage />} />
           <Route path="*" element={<NotFoundPage />} />
 
           {/* Приватные */}
