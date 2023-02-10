@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { H1 } from 'src/design/H1';
 import { breakpoints } from 'components/App/constants';
-import img from 'src/assets/images/gomer404.png';
-import Link from 'src/components/Link';
+import { Link } from 'components/Link';
+import img from 'assets/images/gomer404.png';
 
 const { mobileM } = breakpoints;
 
-const Page404 = () => {
+const NotFoundPage = () => {
   return (
     <Container>
       <PageStyle>
@@ -14,7 +14,7 @@ const Page404 = () => {
         <ImgDiv />
         <TextH2>404</TextH2>
         <TextH4>
-          <Link url="/" variant="size30">
+          <Link to="/" variant="size30">
             в меню
           </Link>
         </TextH4>
@@ -23,7 +23,7 @@ const Page404 = () => {
   );
 };
 
-export default Page404;
+export default NotFoundPage;
 
 const Container = styled.div`
   margin: 0;
