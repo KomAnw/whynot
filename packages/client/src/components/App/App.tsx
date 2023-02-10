@@ -1,10 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
-import { SignIn, SignUp, Welcome, Leaderboard } from 'src/pages';
+import { SignIn, SignUp, Welcome, Leaderboard, ErrorPage, Page404 } from 'src/pages';
 import { paths } from './constants';
 
-const { login, registration, leaderboard, game } = paths;
+const { login, registration, game, leaderboard, page500 } = paths;
 
 function App() {
   return (
@@ -16,7 +16,8 @@ function App() {
           <Route path={login} element={<SignIn />} />
           <Route path={registration} element={<SignUp />} />
           <Route path={leaderboard} element={<Leaderboard />} />
-          <Route path="*" element={<div>404</div>} />
+          <Route path={page500} element={<ErrorPage />} />
+          <Route path="*" element={<Page404 />} />
 
           {/* Приватные */}
           <Route path={game} element={<PrivateRoute />}>

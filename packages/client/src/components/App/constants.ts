@@ -4,6 +4,7 @@ export const paths = {
   registration: '/registration',
   leaderboard: '/leaderboard',
   game: '/game',
+  page500: '/500',
 } as const;
 
 export const breakpoints = {
