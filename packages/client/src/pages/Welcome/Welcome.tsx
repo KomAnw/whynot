@@ -1,12 +1,16 @@
 import Switch from 'src/components/Switch';
 import { H1 } from 'src/design/H1';
 import styled from 'styled-components';
+import Link from 'components/Link';
 
 const Welcome = () => {
   return (
     <Container>
       <Text>Welcome</Text>
       <Switch />
+      <Link url="/game" variant="size30">
+        перейти в игру
+      </Link>
     </Container>
   );
 };

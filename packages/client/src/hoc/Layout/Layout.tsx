@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import backgroundImg from '../../assets/images/background.png'
+import backgroundImg from '../../assets/images/background.png';
 
 const Layout = () => {
   return (
