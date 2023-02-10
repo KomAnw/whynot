@@ -32,12 +32,12 @@ function App() {
           <Route index element={<Welcome />} />
           <Route path={login} element={<SignIn />} />
           <Route path={registration} element={<SignUp />} />
-          <Route path={page500} element={<div>500</div>} />
-          <Route path="*" element={<div>404</div>} />
+          <Route path={page500} element={<ErrorPage />} />
+          <Route path="*" element={<NotFoundPage />} />
 
           {/* Приватные */}
           <Route path={game} element={<PrivateRoute />}>
-            <Route index element={<div>Страница начала игры</div>} />
+            <Route index element={<Game />} />
             <Route path={play} element={<div>Страница игры(canvas)</div>} />
             <Route path={end} element={<div>Страница конца игры</div>} />
           </Route>
