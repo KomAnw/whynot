@@ -38,6 +38,7 @@ export const themes = {
       },
       control: {
         input: {
+          color: '#000000',
           background: '#ABCDCE',
           label: '#6C5BC3',
           placeHolder: '#6B687D',
@@ -88,9 +89,10 @@ export const themes = {
       },
       control: {
         input: {
+          color: '#6C5BC3',
           background: '#ABCDCE',
           label: '#6C5BC3',
-          placeHolder: '#6B687D',
+          placeHolder: '#FFFFFF',
         },
         toggle: {
           control: '#FFFFFF',

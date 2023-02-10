@@ -9,15 +9,13 @@ const styleProps = {
   size40: { fontSize: '40px', lineHeight: '45px' },
 };
 
-function Link({ children, url, variant = 'size20' }: propsLink) {
+export function Link({ children, to, variant = 'size20' }: propsLink) {
   return (
-    <StyledLink variant={variant} to={url}>
+    <StyledLink variant={variant} to={to}>
       {children}
     </StyledLink>
   );
 }
-
-export default Link;
 
 const StyledLink = styled(ReactLink)<propsLinkStyle>`
   cursor: pointer;
@@ -27,7 +25,7 @@ const StyledLink = styled(ReactLink)<propsLinkStyle>`
   }
 
   ${({ theme, variant }) => {
-    const { fontSize, lineHeight } = styleProps[variant];
+    const { fontSize, lineHeight } = styleProps[variant!];
 
     return css`
       font-size: ${fontSize};

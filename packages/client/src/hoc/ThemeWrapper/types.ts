@@ -27,6 +27,7 @@ export type Theme = {
     };
     control: {
       input: {
+        color: string;
         background: string;
         label: string;
         placeHolder: string;
