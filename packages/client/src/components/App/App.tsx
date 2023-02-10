@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
+import { Game } from 'src/pages/Game';
 import { SignIn, SignUp, Welcome, ErrorPage } from 'src/pages';
 import NotFoundPage from 'pages/404';
 import { paths } from './constants';
@@ -21,7 +22,7 @@ function App() {
 
           {/* Приватные */}
           <Route path={game} element={<PrivateRoute />}>
-            <Route index element={<div>main game page</div>} />
+            <Route index element={<Game />} />
           </Route>
         </Route>
       </Routes>
