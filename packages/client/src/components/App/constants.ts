@@ -3,6 +3,9 @@ export const paths = {
   login: '/login',
   registration: '/registration',
   game: '/game',
+  profile: '/profile',
+  profileEditData: '/profile-edit-data',
+  profileEditPassword: '/profile-edit-password'
 } as const;
 
 export const breakpoints = {

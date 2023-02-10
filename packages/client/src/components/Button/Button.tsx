@@ -23,9 +23,7 @@ const StyledButton = styled.button<ButtonProps>`
   color: ${({ theme, variant }) => theme.colors.control.button[variant].color};
   background: ${({ theme, variant }) => theme.colors.control.button[variant].background};
   font-family: ${({ theme }) => theme.fonts.main};
-  &:hover,
-  &:focus,
-  &:active {
-    background: ${({ theme, variant }) => theme.colors.control.button[variant].hoverBackground};
+  &:hover{
+    opacity: 0.8;
   }
 `;
