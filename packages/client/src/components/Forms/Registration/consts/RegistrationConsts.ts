@@ -85,6 +85,7 @@ export const registrationFields = [
     validationRules: {
       required: 'Required field',
       validate: {
+        spaces: (v: string) => noSpaces(v),
         hasCapitalLetters: (v: string) => hasCapitalLetters(v),
         hasNumber: (v: string) => hasNumber(v),
         hasSpecialCharacter: (v: string) => hasSpecialCharacter(v),

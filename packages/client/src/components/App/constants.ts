@@ -2,8 +2,19 @@ export const paths = {
   welcome: '/',
   login: '/login',
   registration: '/registration',
+  errorPage: '/errorPage',
+  notFound: '/notFound',
   game: '/game',
-  page500: '/500',
+  play: '/game/on',
+  end: '/game/over',
+  forum: '/forum',
+  newThread: '/forum/new',
+  thread: '/forum/thread/:id',
+  editThread: '/forum/thread/:id/edit',
+  leaderboard: '/leaderboard',
+  profile: '/profile',
+  profileUpdateData: '/profile/update',
+  profileUpdateAvatar: '/profile/avatar',
 } as const;
 
 export const breakpoints = {
