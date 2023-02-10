@@ -3,6 +3,7 @@ export const paths = {
   login: '/login',
   registration: '/registration',
   leaderboard: '/leaderboard',
+  menu: '/menu',
   game: '/game',
   page500: '/500',
 } as const;

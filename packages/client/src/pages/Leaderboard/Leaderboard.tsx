@@ -3,8 +3,11 @@ import { breakpoints } from 'components/App/constants';
 import { Label } from 'src/design/Label';
 import LeaderboardRow from 'components/LeaderboardRow';
 import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
+import { paths } from 'components/App/constants';
+import Link from 'components/Link';
 
 const { mobileM } = breakpoints;
+const { menu } = paths;
 
 const Leaderboard = () => {
   return (
@@ -16,8 +19,8 @@ const Leaderboard = () => {
             <LeaderboardRow key={rank} rank={rank} nickname={nickname} score={score} isMine={isMine} />
           ))}
         </Column>
-        <Link>
-          <a>Back to menu</a>
+        <Link variant="size30" url={menu}>
+          Back to menu
         </Link>
       </LeaderboardComponent>
     </Wrapper>
@@ -39,7 +42,7 @@ const LeaderboardComponent = styled.div`
   align-items: center;
   width: 600px;
   height: 720px;
-  padding: 0 47px 0 47px;
+  padding: 12px 47px 12px 47px;
   box-shadow: 0 0 6px ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
@@ -58,8 +61,4 @@ const Column = styled.ul`
   height: 100%;
   padding: 0;
   margin: 0;
-`;
-
-const Link = styled(Label).attrs({ as: 'div' })`
-  margin-bottom: 12px;
 `;
