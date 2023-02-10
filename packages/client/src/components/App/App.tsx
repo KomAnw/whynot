@@ -1,10 +1,11 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
-import { SignIn, SignUp, Welcome } from 'src/pages';
+import { SignIn, SignUp, Welcome, ErrorPage } from 'src/pages';
+import NotFoundPage from 'pages/404';
 import { paths } from './constants';
 
-const { login, registration, game } = paths;
+const { login, registration, game, page500 } = paths;
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           <Route index element={<Welcome />} />
           <Route path={login} element={<SignIn />} />
           <Route path={registration} element={<SignUp />} />
-          <Route path="*" element={<div>404</div>} />
+          <Route path={page500} element={<ErrorPage />} />
+          <Route path="*" element={<NotFoundPage />} />
 
           {/* Приватные */}
           <Route path={game} element={<PrivateRoute />}>

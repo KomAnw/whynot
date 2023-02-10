@@ -3,6 +3,7 @@ export const paths = {
   login: '/login',
   registration: '/registration',
   game: '/game',
+  page500: '/500',
 } as const;
 
 export const breakpoints = {
