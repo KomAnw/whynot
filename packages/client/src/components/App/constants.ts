@@ -4,18 +4,24 @@ export const paths = {
   registration: '/registration',
   errorPage: '/errorPage',
   notFound: '/notFound',
-  game: '/game',
-  play: '/game/on',
-  end: '/game/over',
-  forum: '/forum',
-  menu: '/menu',
-  newThread: '/forum/new',
-  thread: '/forum/thread/:id',
-  editThread: '/forum/thread/:id/edit',
   leaderboard: '/leaderboard',
-  profile: '/profile',
-  profileUpdateData: '/profile/update',
-  profileUpdateAvatar: '/profile/avatar',
+  game: {
+    index: '/game',
+    loose: 'loose',
+    win: 'win',
+  },
+  forum: {
+    index: 'forum/posts',
+    newForum: 'new',
+    id: ':postId',
+    edit: 'edit',
+  },
+  menu: '/menu',
+  profile: {
+    index: '/profile',
+    update: 'update',
+    avatar: 'avatar',
+  },
 } as const;
 
 export const breakpoints = {

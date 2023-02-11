@@ -48,5 +48,7 @@ const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<
   background-color: ${({ theme }) => theme.colors.control.input.background};
   border: none;
   color: ${({ theme }) => theme.colors.control.input.color};
-  ::placeholder: ${({ theme }) => theme.colors.control.input.placeHolder};
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.control.input.placeHolder};
+  }
 `;
