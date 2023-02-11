@@ -9,7 +9,6 @@ import { ProfileRoutes } from 'src/pages/Profile';
 import Menu from 'src/pages/Menu';
 import { ForumRoutes } from 'src/pages/Forum';
 
-// eslint-disable-file
 const { login, registration, errorPage, game, forum, leaderboard, profile, menu } = paths;
 
 function App() {
