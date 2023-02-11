@@ -7,7 +7,7 @@ export const paths = {
   leaderboard: '/leaderboard',
   game: {
     index: '/game',
-    loose: 'lose',
+    lose: 'lose',
     win: 'win',
   },
   forum: {
