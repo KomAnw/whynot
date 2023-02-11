@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
 import { Game } from 'src/pages/Game';
-import { SignIn, SignUp, Welcome, Leaderboard, ErrorPage } from 'src/pages';
+import { SignIn, SignUp, Welcome, Leaderboard, ErrorPage, GameMenu } from 'src/pages';
 import NotFoundPage from 'pages/404';
 import { paths } from './constants';
 
@@ -18,6 +18,7 @@ const {
   thread,
   editThread,
   leaderboard,
+  tutorial,
   profile,
   profileUpdateData,
   profileUpdateAvatar,
@@ -37,7 +38,7 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
 
           {/* Приватные */}
-          <Route path={game} element={<PrivateRoute />}>
+          <Route path={game} element={<GameMenu />}>
             <Route index element={<Game />} />
             <Route path={play} element={<div>Страница игры(canvas)</div>} />
             <Route path={end} element={<div>Страница конца игры</div>} />
@@ -51,6 +52,9 @@ function App() {
           </Route>
           <Route path={leaderboard} element={<PrivateRoute />}>
             <Route index element={<Leaderboard />} />
+          </Route>
+          <Route path={tutorial} element={<PrivateRoute />}>
+            <Route index element={<div>tutorial</div>} />
           </Route>
           <Route path={profile} element={<PrivateRoute />}>
             <Route index element={<div>Страница профиля пользователя</div>} />

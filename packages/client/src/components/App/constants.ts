@@ -12,6 +12,7 @@ export const paths = {
   newThread: '/forum/new',
   thread: '/forum/thread/:id',
   editThread: '/forum/thread/:id/edit',
+  tutorial: '/tutorial',
   leaderboard: '/leaderboard',
   profile: '/profile',
   profileUpdateData: '/profile/update',
