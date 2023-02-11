@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { H1 } from 'src/design/H1';
-import { Link } from 'src/components/Link'
+import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { profileDateFields } from './consts/ProfileDataConsts';
 
@@ -45,7 +45,7 @@ const ProfileData = () => {
         <Button variant="primary" type="submit">
           СОХРАНИТЬ
         </Button>
-        <Link to={profile} variant="size30">
+        <Link to={profile.index} variant="size30">
           Назад
         </Link>
       </FormFooter>
@@ -57,7 +57,7 @@ export default ProfileData;
 
 const H1Style = styled(H1)`
   margin: 0;
-`
+`;
 
 const FormHeader = styled(`div`)`
   height: 45px;

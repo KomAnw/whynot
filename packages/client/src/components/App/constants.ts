@@ -19,7 +19,8 @@ export const paths = {
   menu: '/menu',
   profile: {
     index: '/profile',
-    update: 'update',
+    updateData: 'update/data',
+    updatePassword: 'update/password',
     avatar: 'avatar',
   },
 } as const;
