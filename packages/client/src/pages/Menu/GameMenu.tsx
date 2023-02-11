@@ -17,7 +17,7 @@ const GameMenu = () => {
             </Link>
           </ListItem>
           <ListItem>
-            <Link to={profile} variant="size40">
+            <Link to={profile.index} variant="size40">
               Профиль
             </Link>
           </ListItem>
@@ -27,7 +27,7 @@ const GameMenu = () => {
             </Link>
           </ListItem>
           <ListItem>
-            <Link to={forum} variant="size40">
+            <Link to={forum.index} variant="size40">
               Форум
             </Link>
           </ListItem>

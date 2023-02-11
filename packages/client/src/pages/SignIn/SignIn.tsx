@@ -16,7 +16,7 @@ const SignInPage = () => {
     try {
       const response = await login(data);
 
-      response && navigate(game);
+      response && navigate(game.index);
     } catch (error) {
       console.log(error);
     }
