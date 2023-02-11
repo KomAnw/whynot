@@ -63,6 +63,7 @@ const InnerContainer = styled('div')`
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.core.background.primary};
   padding: 24px 90px;
+  border-radius: 20px;
 
   @media (max-width: ${breakpoints.mobileM}) {
     padding: 12px 14px;
