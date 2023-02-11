@@ -15,7 +15,7 @@ export const LeaderboardRow = ({ rank, nickname, score, isMine }: LeaderboardRow
   );
 };
 
-const Row = styled(Label)<RowProps>`
+const Row = styled(Label).attrs({ as: 'div' })<RowProps>`
   display: block;
   background-color: ${({ theme, isMine }) =>
     isMine ? theme.colors.core.background.tertiary : theme.colors.core.background.secondary};
@@ -39,7 +39,7 @@ const Item = styled(Typography).attrs({ as: 'div' })`
 const Rank = styled.div`
   margin-left: 54px;
   :after {
-    content: '. ';
+    content: '.';
   }
 `;
 

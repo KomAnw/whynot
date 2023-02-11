@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { breakpoints } from 'components/App/constants';
-import { Label } from 'src/design/Label';
+import { H1 } from 'src/design/H1';
 import LeaderboardRow from 'components/LeaderboardRow';
 import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
 import { paths } from 'components/App/constants';
-import Link from 'components/Link';
+import {Link} from "components/Link";
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
@@ -13,13 +13,13 @@ const Leaderboard = () => {
   return (
     <Wrapper>
       <LeaderboardComponent>
-        <LeaderboardLabel>Leaderboard</LeaderboardLabel>
+        <LeaderboardH1>Leaderboard</LeaderboardH1>
         <Column>
           {leaderboardConsts.map(({ rank, nickname, score, isMine }) => (
             <LeaderboardRow key={rank} rank={rank} nickname={nickname} score={score} isMine={isMine} />
           ))}
         </Column>
-        <Link variant="size30" url={menu}>
+        <Link variant="size30" to={menu}>
           Back to menu
         </Link>
       </LeaderboardComponent>
@@ -52,8 +52,9 @@ const LeaderboardComponent = styled.div`
   }
 `;
 
-const LeaderboardLabel = styled(Label)`
+const LeaderboardH1 = styled(H1)`
   font-size: 48px;
+  line-height: 54px;
 `;
 
 const Column = styled.ul`

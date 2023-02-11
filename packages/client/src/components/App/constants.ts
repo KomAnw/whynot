@@ -2,10 +2,20 @@ export const paths = {
   welcome: '/',
   login: '/login',
   registration: '/registration',
-  leaderboard: '/leaderboard',
-  menu: '/menu',
+  errorPage: '/errorPage',
+  notFound: '/notFound',
   game: '/game',
-  page500: '/500',
+  play: '/game/on',
+  end: '/game/over',
+  forum: '/forum',
+  menu: '/menu',
+  newThread: '/forum/new',
+  thread: '/forum/thread/:id',
+  editThread: '/forum/thread/:id/edit',
+  leaderboard: '/leaderboard',
+  profile: '/profile',
+  profileUpdateData: '/profile/update',
+  profileUpdateAvatar: '/profile/avatar',
 } as const;
 
 export const breakpoints = {
@@ -41,6 +51,7 @@ export const themes = {
       },
       control: {
         input: {
+          color: '#000000',
           background: '#ABCDCE',
           label: '#6C5BC3',
           placeHolder: '#6B687D',
@@ -91,9 +102,10 @@ export const themes = {
       },
       control: {
         input: {
+          color: '#6C5BC3',
           background: '#ABCDCE',
           label: '#6C5BC3',
-          placeHolder: '#6B687D',
+          placeHolder: '#FFFFFF',
         },
         toggle: {
           control: '#FFFFFF',

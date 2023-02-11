@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import Link from 'components/Link';
 import { breakpoints, paths } from 'components/App/constants';
 import { Label } from 'src/design/Label';
 import { H3 } from 'src/design/H3';
-import gomer from 'src/assets/images/gomer500.svg';
+import { Link } from 'components/Link';
+import gomer from 'assets/images/gomer500.svg';
 
 const { welcome } = paths;
 const { mobileM } = breakpoints;
@@ -18,7 +18,7 @@ const ErrorPage = () => {
           <ImageHomer src={gomer} alt="Angry Gomer" />
           <BigText>500</BigText>
         </Wrapper>
-        <Link url={welcome} variant="size30">
+        <Link to={welcome} variant="size30">
           <H3>в меню</H3>
         </Link>
       </Container>
