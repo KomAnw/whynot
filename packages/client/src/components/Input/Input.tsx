@@ -51,11 +51,13 @@ const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<
   background-color: ${({ theme }) => theme.colors.control.input.background};
   border: none;
   color: ${({ theme }) => theme.colors.control.input.color};
-  ::placeholder {
+
+  &::placeholder {
     color: ${({ theme }) => theme.colors.control.input.placeHolder};
     font-size: 20px;
     font-weight: 500;
   }
+
   @media (max-width: ${mobileM}) {
     padding-left: 12px;
   }

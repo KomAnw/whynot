@@ -1,26 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
-import { Game } from 'src/pages/Game';
-import { SignIn, SignUp, Welcome, ErrorPage, Profile, ProfileUpdateData, Page404, ProfileUpdatePassword} from 'src/pages';
+import { SignIn, SignUp, Welcome, Leaderboard, ErrorPage, Page404 } from 'src/pages';
 import { paths } from './constants';
+import { gameRoutes } from 'src/pages/Game';
+import { profileRoutes } from 'src/pages/Profile';
+import { forumRoutes } from 'src/pages/Forum';
+import Menu from 'src/pages/Menu';
 
-const {
-  login,
-  registration,
-  errorPage,
-  game,
-  play,
-  end,
-  forum,
-  newThread,
-  thread,
-  editThread,
-  leaderboard,
-  profile,
-  profileUpdateData,
-  profileUpdatePassword,
-} = paths;
+const { login, registration, errorPage, game, forum, leaderboard, profile, menu } = paths;
 
 function App() {
   return (
@@ -35,25 +23,12 @@ function App() {
           <Route path="*" element={<Page404 />} />
 
           {/* Приватные */}
-          <Route path={game} element={<PrivateRoute />}>
-            <Route index element={<Game />} />
-            <Route path={play} element={<div>Страница игры(canvas)</div>} />
-            <Route path={end} element={<div>Страница конца игры</div>} />
-          </Route>
-          <Route path={forum} element={<PrivateRoute />}>
-            <Route index element={<div>Страница со списком всех тем</div>} />
-            <Route path={newThread} element={<div>Страница создания новой темы</div>} />
-            <Route path={thread} element={<div>Страница с обсуждениями темы1</div>}>
-              <Route path={editThread} element={<div>Страница изменения темы</div>} />
-            </Route>
-          </Route>
-          <Route path={leaderboard} element={<PrivateRoute />}>
-            <Route index element={<div>Лидербоард</div>} />
-          </Route>
-          <Route path={profile} element={<PrivateRoute />}>
-            <Route index element={<Profile/>}/>
-            <Route path={profileUpdateData} element={<ProfileUpdateData/>} />
-            <Route path={profileUpdatePassword} element={<ProfileUpdatePassword/>} />
+          <Route element={<PrivateRoute />}>
+            <Route path={menu} element={<Menu />} />
+            <Route path={leaderboard} element={<Leaderboard />} />
+            <Route path={game.index}>{gameRoutes}</Route>
+            <Route path={profile.index}>{profileRoutes}</Route>
+            <Route path={forum.index}>{forumRoutes}</Route>
           </Route>
         </Route>
       </Routes>

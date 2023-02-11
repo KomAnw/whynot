@@ -10,7 +10,8 @@ import { CenterDivContainer } from 'src/design/CenterDivContainer';
 import { MiniDivForm } from 'src/design/MiniDivForm';
 
 const { mobileM } = breakpoints;
-const { game, profileUpdateData, profileUpdatePassword } = paths;
+const { menu } = paths;
+const { updateData, updatePassword } = paths.profile;
 
 const Profile = () => {
   return (
@@ -45,17 +46,17 @@ const Profile = () => {
           </DataRow>
         </Data>
         <TextH3>
-          <Link to={profileUpdateData} variant="size24">
+          <Link to={updateData} variant="size24">
             Редактировать данные
           </Link>
         </TextH3>
         <TextH3>
-          <Link to={profileUpdatePassword} variant="size24">
+          <Link to={updatePassword} variant="size24">
             Изменить пароль
           </Link>
         </TextH3>
         <TextH4>
-          <Link to={game} variant="size20">
+          <Link to={menu} variant="size20">
             Назад в меню
           </Link>
         </TextH4>

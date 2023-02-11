@@ -6,3 +6,4 @@ export { default as Profile } from './Profile';
 export { default as ProfileUpdateData } from './ProfileUpdateData';
 export { default as ProfileUpdatePassword } from './ProfileUpdatePassword';
 export { default as Welcome } from './Welcome';
+export { default as Leaderboard } from './Leaderboard';
