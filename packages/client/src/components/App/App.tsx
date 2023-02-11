@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
 import { Game } from 'src/pages/Game';
-import { SignIn, SignUp, Welcome, ErrorPage } from 'src/pages';
+import { SignIn, SignUp, Welcome, Leaderboard, ErrorPage } from 'src/pages';
 import NotFoundPage from 'pages/404';
 import { paths } from './constants';
 
@@ -32,6 +32,7 @@ function App() {
           <Route index element={<Welcome />} />
           <Route path={login} element={<SignIn />} />
           <Route path={registration} element={<SignUp />} />
+          <Route path={leaderboard} element={<Leaderboard />} />
           <Route path={errorPage} element={<ErrorPage />} />
           <Route path="*" element={<NotFoundPage />} />
 
@@ -49,7 +50,7 @@ function App() {
             </Route>
           </Route>
           <Route path={leaderboard} element={<PrivateRoute />}>
-            <Route index element={<div>Лидербоард</div>} />
+            <Route index element={<Leaderboard />} />
           </Route>
           <Route path={profile} element={<PrivateRoute />}>
             <Route index element={<div>Страница профиля пользователя</div>} />

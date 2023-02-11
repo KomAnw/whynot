@@ -8,6 +8,7 @@ export const paths = {
   play: '/game/on',
   end: '/game/over',
   forum: '/forum',
+  menu: '/menu',
   newThread: '/forum/new',
   thread: '/forum/thread/:id',
   editThread: '/forum/thread/:id/edit',
