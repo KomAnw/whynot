@@ -1,10 +1,9 @@
 import { ThemeProvider } from 'styled-components';
-import { useSelector } from 'react-redux';
-import { RootState } from 'src/store/store';
+import { useAppSelector } from 'src/hooks/redux';
 import { ThemeWrapperProps } from './types';
 
 const ThemeWrapper = ({ children }: ThemeWrapperProps) => {
-  const theme = useSelector(({ theme }: RootState) => theme);
+  const theme = useAppSelector(({ theme }) => theme);
 
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
