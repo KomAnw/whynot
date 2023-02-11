@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
+import { paths } from './constants';
 import { SignIn, SignUp, Welcome, Leaderboard, ErrorPage, GameMenu } from 'src/pages';
 import NotFoundPage from 'pages/404';
-import { paths } from './constants';
 import { gameRoutes } from 'src/pages/Game';
 import { profileRoutes } from 'src/pages/Profile';
 import { forumRoutes } from 'src/pages/Forum';
