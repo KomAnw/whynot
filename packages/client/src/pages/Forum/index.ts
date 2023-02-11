@@ -1,1 +1,1 @@
-export { Routes as ForumRoutes } from './Routes';
+export { routes as forumRoutes } from './Routes';

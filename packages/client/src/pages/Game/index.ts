@@ -1,1 +1,1 @@
-export { Routes as GameRoutes } from './Routes';
+export { routes as gameRoutes } from './Routes';

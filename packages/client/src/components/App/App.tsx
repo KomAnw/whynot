@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
-import { GameRoutes } from 'src/pages/Game';
 import { SignIn, SignUp, Welcome, Leaderboard, ErrorPage } from 'src/pages';
 import NotFoundPage from 'pages/404';
 import { paths } from './constants';
-import { ProfileRoutes } from 'src/pages/Profile';
+import { gameRoutes } from 'src/pages/Game';
+import { profileRoutes } from 'src/pages/Profile';
+import { forumRoutes } from 'src/pages/Forum';
 import Menu from 'src/pages/Menu';
-import { ForumRoutes } from 'src/pages/Forum';
 
 const { login, registration, errorPage, game, forum, leaderboard, profile, menu } = paths;
 
@@ -27,9 +27,9 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path={menu} element={<Menu />} />
             <Route path={leaderboard} element={<Leaderboard />} />
-            <Route path={game.index}>{GameRoutes}</Route>
-            <Route path={profile.index}>{ProfileRoutes}</Route>
-            <Route path={forum.index}>{ForumRoutes}</Route>
+            <Route path={game.index}>{gameRoutes}</Route>
+            <Route path={profile.index}>{profileRoutes}</Route>
+            <Route path={forum.index}>{forumRoutes}</Route>
           </Route>
         </Route>
       </Routes>
