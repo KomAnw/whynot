@@ -38,8 +38,8 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
 
           {/* Приватные */}
-          <Route path={game} element={<GameMenu />}>
-            <Route index element={<Game />} />
+          <Route path={game} element={<PrivateRoute />}>
+            <Route index element={<GameMenu />} />
             <Route path={play} element={<div>Страница игры(canvas)</div>} />
             <Route path={end} element={<div>Страница конца игры</div>} />
           </Route>
