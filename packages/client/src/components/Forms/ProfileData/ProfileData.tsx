@@ -1,15 +1,15 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { Input } from 'components/Input';
-import { Button } from 'components/Button';
+import { Input } from 'src/components/Input';
+import { Button } from 'src/components/Button';
 import { H1 } from 'src/design/H1';
-import { Link } from 'components/Link';
-import { paths } from 'components/App/constants';
-import { registrationFields } from './consts/RegistrationConsts';
+import { Link } from 'src/components/Link'
+import { paths } from 'src/components/App/constants';
+import { profileDateFields } from './consts/ProfileDataConsts';
 
-const { login } = paths;
+const { profile } = paths;
 
-const Registration = () => {
+const ProfileData = () => {
   const {
     register,
     handleSubmit,
@@ -24,10 +24,10 @@ const Registration = () => {
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
       <FormHeader>
-        <H1Style> Registration </H1Style>
+        <H1Style>Редактирование данных</H1Style>
       </FormHeader>
       <FormBody>
-        {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (
+        {profileDateFields.map(({ type, name, placeholder, label, validationRules }) => (
           <Input
             key={name}
             register={register}
@@ -42,17 +42,17 @@ const Registration = () => {
       </FormBody>
       <FormFooter>
         <Button variant="primary" type="submit">
-          REGISTER
+          СОХРАНИТЬ
         </Button>
-        <Link to={login} variant="size24">
-          LOGIN
+        <Link to={profile} variant="size30">
+          Назад
         </Link>
       </FormFooter>
     </Form>
   );
 };
 
-export default Registration;
+export default ProfileData;
 
 const H1Style = styled(H1)`
   margin: 0;

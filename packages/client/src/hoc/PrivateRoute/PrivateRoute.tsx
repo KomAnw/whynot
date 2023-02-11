@@ -5,7 +5,8 @@ import { paths } from 'src/components/App/constants';
 const { login } = paths;
 
 const PrivateRoute = () => {
-  const { isLoading, data } = useGetUserQuery();
+
+  const { isLoading, data = true } = useGetUserQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;

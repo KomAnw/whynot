@@ -17,21 +17,22 @@ const InputContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  margin: 0 0 5px 0;
+  margin: 0;
   font-family: ${({ theme }) => theme.fonts.main};
   font-style: normal;
 `;
 
 const ValidationText = styled(Label)`
   margin: 0 auto;
-  height: 15px;
+  height: 20px;
   display: block;
   align-items: flex-start;
   color: ${({ theme }) => theme.colors.core.text.error};
 `;
 
 const LabelStyled = styled(Label)`
-  margin: 5px 3px;
+  height: 20px;
+  margin: 0;
   display: block;
   align-items: flex-start;
   color: ${({ theme }) => theme.colors.control.input.label};
@@ -39,14 +40,17 @@ const LabelStyled = styled(Label)`
 
 const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`
   box-sizing: border-box;
-  flex: 1;
-  padding: 8px;
   border-radius: 5px;
+  padding-left: 26px;
   width: 100%;
+  height: 40px;
   outline: none;
-  height: 48px;
   background-color: ${({ theme }) => theme.colors.control.input.background};
   border: none;
   color: ${({ theme }) => theme.colors.control.input.color};
-  ::placeholder: ${({ theme }) => theme.colors.control.input.placeHolder};
+  ::placeholder {
+    color: ${({ theme }) => theme.colors.control.input.placeHolder};
+    font-size: 20px;
+    font-weight: 500;
+  }
 `;

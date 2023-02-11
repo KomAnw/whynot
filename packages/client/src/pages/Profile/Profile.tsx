@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { H1 } from 'src/design/H1';
 import { H3 } from 'src/design/H3';
-import Link from 'src/components/Link';
+import { Link } from 'src/components/Link';
 import { Label } from 'src/design/Label';
 import { LinkText } from 'src/design/LinkText';
 import defaultAvatar from 'src/assets/defaultAvatar.svg';
@@ -10,7 +10,7 @@ import { CenterDivContainer } from 'src/design/CenterDivContainer';
 import { MiniDivForm } from 'src/design/MiniDivForm';
 
 const { mobileM } = breakpoints;
-const { game, profileEditData, profileEditPassword } = paths;
+const { game, profileUpdateData, profileUpdatePassword } = paths;
 
 const Profile = () => {
   return (
@@ -20,34 +20,42 @@ const Profile = () => {
         <Avatar src={defaultAvatar} />
         <Data>
           <DataRow>
-            <DataLabel>Nickname:</DataLabel>
-            <DataValue>Ivan2002</DataValue>
-          </DataRow>
-          <DataRow>
             <DataLabel>First Name:</DataLabel>
             <DataValue>Иван</DataValue>
           </DataRow>
           <DataRow>
-            <DataLabel>Last Name:</DataLabel>
+            <DataLabel>Second Name:</DataLabel>
             <DataValue>Иванов</DataValue>
+          </DataRow>
+          <DataRow>
+            <DataLabel>Nickname:</DataLabel>
+            <DataValue>Ivan2002</DataValue>
+          </DataRow>
+          <DataRow>
+            <DataLabel>Login:</DataLabel>
+            <DataValue>Ivan2002</DataValue>
           </DataRow>
           <DataRow>
             <DataLabel>Email:</DataLabel>
             <DataValue>ivan2002@mail.ru</DataValue>
           </DataRow>
+          <DataRow>
+            <DataLabel>Phone:</DataLabel>
+            <DataValue>+79053333333</DataValue>
+          </DataRow>
         </Data>
         <TextH3>
-          <Link url={profileEditData} variant="size24">
+          <Link to={profileUpdateData} variant="size24">
             Редактировать данные
           </Link>
         </TextH3>
         <TextH3>
-          <Link url={profileEditPassword} variant="size24">
+          <Link to={profileUpdatePassword} variant="size24">
             Изменить пароль
           </Link>
         </TextH3>
         <TextH4>
-          <Link url={game} variant="size20">
+          <Link to={game} variant="size20">
             Назад в меню
           </Link>
         </TextH4>
@@ -84,11 +92,11 @@ const Avatar = styled.img`
 `;
 
 const Data = styled.div`
-  margin: 41px 0 28px 0;
+  margin: 20px 0 19px 0;
   padding: 0;
   display: grid;
   text-align: center;
-  grid-row-gap: 24px;
+  grid-row-gap: 10px;
 `;
 
 const DataRow = styled.div`

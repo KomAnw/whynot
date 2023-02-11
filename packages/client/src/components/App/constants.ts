@@ -14,7 +14,7 @@ export const paths = {
   leaderboard: '/leaderboard',
   profile: '/profile',
   profileUpdateData: '/profile/update',
-  profileUpdateAvatar: '/profile/avatar',
+  profileUpdatePassword: '/profile/password',
 } as const;
 
 export const breakpoints = {
