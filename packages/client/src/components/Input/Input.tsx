@@ -3,6 +3,9 @@ import { InputHTMLAttributes } from 'react';
 import { InputProps } from 'components/Input/type';
 import { Label } from 'src/design/Label';
 import { LinkText } from 'src/design/LinkText';
+import { breakpoints } from 'components/App/constants';
+
+const { mobileM } = breakpoints;
 
 export const Input = ({ name, type, label, errorMessage = '', placeholder, register, validationRules }: InputProps) => (
   <InputContainer>
@@ -52,5 +55,8 @@ const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<
     color: ${({ theme }) => theme.colors.control.input.placeHolder};
     font-size: 20px;
     font-weight: 500;
+  }
+  @media (max-width: ${mobileM}) {
+    padding-left: 12px;
   }
 `;

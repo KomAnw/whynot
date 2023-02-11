@@ -4,10 +4,11 @@ import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link'
-import { paths } from 'src/components/App/constants';
+import { breakpoints, paths } from 'src/components/App/constants';
 import { profilePasswordFields } from './consts/ProfilePasswordConsts';
 
 const { profile } = paths;
+const { mobileM } = breakpoints;
 
 const ProfileData = () => {
   const {
@@ -24,7 +25,7 @@ const ProfileData = () => {
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
       <FormHeader>
-        <H1Style>Редактирование данных</H1Style>
+        <H1Style>Изменение пароля</H1Style>
       </FormHeader>
       <FormBody>
         {profilePasswordFields.map(({ type, name, placeholder, label, validationRules }) => (
@@ -67,6 +68,9 @@ const FormHeader = styled(`div`)`
 const FormBody = styled('div')`
   width: 354px;
   flex-grow: 1;
+  @media (max-width: ${mobileM}) {
+    width: 330px;
+  }
 `;
 
 const FormFooter = styled('div')`
@@ -89,4 +93,7 @@ const Form = styled('form')`
   background-color: ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
   padding: 12px 24px;
+  @media (max-width: ${mobileM}) {
+    padding: 12px;
+  }
 `;
