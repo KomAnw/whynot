@@ -26,7 +26,7 @@ export const authApi = createApi({
       query: signUpData => ({ url: AUTH_ENDPOINTS.singUp, method: 'POST', body: signUpData }),
     }),
     logout: build.mutation<void, void>({
-      query: () => ({ url: AUTH_ENDPOINTS.logout, method: 'POST' }),
+      query: () => ({ url: AUTH_ENDPOINTS.logout, method: 'POST', responseHandler: 'text' }),
     }),
   }),
 });

@@ -24,6 +24,7 @@ export type Theme = {
         link: string;
         linkHover: string;
       };
+      spinner: string;
     };
     control: {
       input: {
