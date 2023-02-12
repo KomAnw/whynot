@@ -12,7 +12,7 @@ export const paths = {
     win: 'win',
   },
   forum: {
-    index: 'forum/posts',
+    index: '/forum/posts',
     newForum: 'new',
     id: ':postId',
     edit: 'edit',
