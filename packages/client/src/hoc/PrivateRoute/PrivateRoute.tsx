@@ -6,7 +6,7 @@ const { login } = paths;
 
 const PrivateRoute = () => {
 
-  const { isLoading, data = true } = useGetUserQuery();
+  const { isLoading, data} = useGetUserQuery();
 
   if (isLoading) {
     return <div>Loading...</div>;
