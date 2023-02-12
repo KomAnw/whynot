@@ -12,12 +12,12 @@ const buttons = [
   {
     variant: 'primary' as ButtonVariants,
     to: login,
-    text: 'Войти',
+    text: 'Sign in',
   },
   {
     variant: 'secondary' as ButtonVariants,
     to: registration,
-    text: 'Регистрация',
+    text: 'Sign up',
   },
 ];
 
@@ -37,7 +37,7 @@ const Welcome = () => {
   return (
     <OuterContainer>
       <InnerContainer>
-        <Title>Добро пожаловать в игру</Title>
+        <Title>Welcome to the game</Title>
         <Image />
         <Buttons />
       </InnerContainer>
