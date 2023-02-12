@@ -5,7 +5,16 @@ import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
 import { breakpoints, paths } from 'components/App/constants';
-import { registrationFields } from './consts/RegistrationConsts';
+import { formsConsts } from 'src/components/Forms/consts/formsConsts'
+
+const registrationFields = [
+  formsConsts.firstName,
+  formsConsts.secondName,
+  formsConsts.login,
+  formsConsts.email,
+  formsConsts.phone,
+  formsConsts.password,
+];
 
 const { login } = paths;
 const { mobileM } = breakpoints;
@@ -57,7 +66,7 @@ export default Registration;
 
 const H1Style = styled(H1)`
   margin: 0;
-`
+`;
 
 const FormHeader = styled(`div`)`
   height: 45px;

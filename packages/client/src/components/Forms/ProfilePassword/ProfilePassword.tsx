@@ -5,7 +5,9 @@ import { Button } from 'src/components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
-import { profilePasswordFields } from './consts/ProfilePasswordConsts';
+import { formsConsts } from 'src/components/Forms/consts/formsConsts'
+
+const profilePasswordFields = [formsConsts.password, formsConsts.confirmPassword];
 
 const { profile } = paths;
 const { mobileM } = breakpoints;
@@ -13,6 +15,7 @@ const { mobileM } = breakpoints;
 const ProfileData = () => {
   const {
     register,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -28,18 +31,36 @@ const ProfileData = () => {
         <H1Style>Изменение пароля</H1Style>
       </FormHeader>
       <FormBody>
-        {profilePasswordFields.map(({ type, name, placeholder, label, validationRules }) => (
-          <Input
-            key={name}
-            register={register}
-            errorMessage={errors[name]?.message as string}
-            name={name}
-            type={type}
-            label={label}
-            placeholder={placeholder}
-            validationRules={validationRules}
-          />
-        ))}
+        <Input
+          key={profilePasswordFields[0].name}
+          register={register}
+          errorMessage={errors[profilePasswordFields[0].name]?.message as string}
+          name={profilePasswordFields[0].name}
+          type={profilePasswordFields[0].type}
+          label={profilePasswordFields[0].label}
+          placeholder={profilePasswordFields[0].placeholder}
+          validationRules={profilePasswordFields[0].validationRules}
+        />
+        <Input
+          key={profilePasswordFields[1].name}
+          register={register}
+          errorMessage={errors[profilePasswordFields[1].name]?.message as string}
+          name={profilePasswordFields[1].name}
+          type={profilePasswordFields[1].type}
+          label={profilePasswordFields[1].label}
+          placeholder={profilePasswordFields[1].placeholder}
+          validationRules={{
+            required: profilePasswordFields[1].validationRules.required,
+            validate: {
+              ...profilePasswordFields[1].validationRules.validate,
+              confirmPassword: (val: string) => {
+                if (watch('password') !== val) {
+                  return 'Your passwords do no match';
+                }
+              },
+            },
+          }}
+        />
       </FormBody>
       <FormFooter>
         <Button variant="primary" type="submit">

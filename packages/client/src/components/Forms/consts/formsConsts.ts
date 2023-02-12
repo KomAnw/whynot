@@ -1,5 +1,8 @@
 import {
   firstLetterUppercase,
+  hasCapitalLetters,
+  hasNumber,
+  hasSpecialCharacter,
   lettersAndDash,
   maxAndMinLength,
   noSpaces,
@@ -7,12 +10,13 @@ import {
   validPhoneNumber,
 } from 'src/utils/validation';
 
-export const profileDateFields = [
-  {
+export const formsConsts = {
+  firstName: {
     type: 'text',
-    placeholder: '',
+    placeholder: 'John',
     label: 'First Name',
     name: 'firstName',
+    value: '',
     validationRules: {
       required: 'Required field',
       validate: {
@@ -22,11 +26,12 @@ export const profileDateFields = [
       },
     },
   },
-  {
+  secondName: {
     type: 'text',
-    placeholder: '',
+    placeholder: 'Doe',
     label: 'Second Name',
     name: 'secondName',
+    value: '',
     validationRules: {
       required: 'Required field',
       validate: {
@@ -36,11 +41,12 @@ export const profileDateFields = [
       },
     },
   },
-  {
+  displayName: {
     type: 'text',
     placeholder: '',
     label: 'Display Name',
     name: 'displayName',
+    value: '',
     validationRules: {
       required: 'Required field',
       validate: {
@@ -50,11 +56,12 @@ export const profileDateFields = [
       },
     },
   },
-  {
+  login: {
     type: 'text',
-    placeholder: '',
+    placeholder: 'JohnDoeForever',
     label: 'Login',
     name: 'login',
+    value: '',
     validationRules: {
       required: 'Required field',
       validate: {
@@ -64,11 +71,12 @@ export const profileDateFields = [
       },
     },
   },
-  {
+  email: {
     type: 'email',
-    placeholder: '',
-    label: 'example@gmail.com',
+    placeholder: 'example@gmail.com',
+    label: 'Email',
     name: 'email',
+    value: '',
     validationRules: {
       required: 'Required field',
       validate: {
@@ -76,11 +84,12 @@ export const profileDateFields = [
       },
     },
   },
-  {
+  phone: {
     type: 'tel',
-    placeholder: '',
+    placeholder: '88005553535',
     label: 'Phone',
     name: 'phone',
+    value: '',
     validationRules: {
       required: 'Required field',
       validate: {
@@ -88,4 +97,37 @@ export const profileDateFields = [
       },
     },
   },
-];
+  password: {
+    type: 'password',
+    placeholder: '*****',
+    label: 'Password',
+    name: 'password',
+    value: '',
+    validationRules: {
+      required: 'Required field',
+      validate: {
+        spaces: (v: string) => noSpaces(v),
+        hasCapitalLetters: (v: string) => hasCapitalLetters(v),
+        hasNumber: (v: string) => hasNumber(v),
+        hasSpecialCharacter: (v: string) => hasSpecialCharacter(v),
+        maxAndMinLength: (v: string) => maxAndMinLength(v, 8, 40),
+      },
+    },
+  },
+  confirmPassword: {
+    type: 'password',
+    placeholder: '*****',
+    label: 'confirm Password',
+    name: 'confirmPassword',
+    validationRules: {
+      required: 'Required field',
+      validate: {
+        spaces: (v: string) => noSpaces(v),
+        hasCapitalLetters: (v: string) => hasCapitalLetters(v),
+        hasNumber: (v: string) => hasNumber(v),
+        hasSpecialCharacter: (v: string) => hasSpecialCharacter(v),
+        maxAndMinLength: (v: string) => maxAndMinLength(v, 8, 40),
+      },
+    },
+  },
+};

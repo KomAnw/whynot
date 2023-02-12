@@ -5,7 +5,15 @@ import { Button } from 'src/components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
-import { profileDateFields } from './consts/ProfileDataConsts';
+import { formsConsts } from 'components/Forms/consts/formsConsts';
+
+const profileDateFields = [
+  formsConsts.firstName,
+  formsConsts.secondName,
+  formsConsts.login,
+  formsConsts.email,
+  formsConsts.phone,
+];
 
 const { profile } = paths;
 const { mobileM } = breakpoints;
@@ -75,7 +83,6 @@ const FormBody = styled('div')`
 
 const FormFooter = styled('div')`
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 100px;
   flex-shrink: 0;
