@@ -1,9 +1,9 @@
-import { useDispatch } from 'react-redux';
-import { changeTheme } from 'src/hoc/ThemeWrapper/themeSlice';
 import styled from 'styled-components';
+import { useAppDispatch } from 'src/hooks/redux';
+import { changeTheme } from 'src/hoc/ThemeWrapper/themeSlice';
 
 const Switch = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const themeHandler = () => dispatch(changeTheme());
 
   return (

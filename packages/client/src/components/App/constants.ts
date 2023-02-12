@@ -2,6 +2,26 @@ export const paths = {
   welcome: '/',
   login: '/login',
   registration: '/registration',
+  errorPage: '/errorPage',
+  notFound: '/notFound',
+  leaderboard: '/leaderboard',
+  game: {
+    index: '/game',
+    lose: 'lose',
+    win: 'win',
+  },
+  forum: {
+    index: 'forum/posts',
+    newForum: 'new',
+    id: ':postId',
+    edit: 'edit',
+  },
+  menu: '/menu',
+  profile: {
+    index: '/profile',
+    update: 'update',
+    avatar: 'avatar',
+  },
 } as const;
 
 export const breakpoints = {
@@ -37,6 +57,7 @@ export const themes = {
       },
       control: {
         input: {
+          color: '#000000',
           background: '#ABCDCE',
           label: '#6C5BC3',
           placeHolder: '#6B687D',
@@ -47,10 +68,16 @@ export const themes = {
           backgroundSecondary: '#F2CE0D',
         },
         button: {
-          primary: '#6C5BC3',
-          primaryHover: 'rgba(108, 91, 195, 0.8)',
-          secondary: '#6BD35A',
-          secondaryHover: 'rgba(107, 211, 90, 0.8)',
+          primary: {
+            color: '#FFFFFF',
+            background: '#6C5BC3',
+            hoverBackground: 'rgba(108, 91, 195, 0.8)',
+          },
+          secondary: {
+            color: '#FFFFFF',
+            background: '#6BD35A',
+            hoverBackground: 'rgba(107, 211, 90, 0.8)',
+          },
         },
       },
     },
@@ -81,9 +108,10 @@ export const themes = {
       },
       control: {
         input: {
+          color: '#6C5BC3',
           background: '#ABCDCE',
           label: '#6C5BC3',
-          placeHolder: '#6B687D',
+          placeHolder: '#FFFFFF',
         },
         toggle: {
           control: '#FFFFFF',
@@ -91,10 +119,16 @@ export const themes = {
           backgroundSecondary: '#F2CE0D',
         },
         button: {
-          primary: '#6C5BC3',
-          primaryHover: 'rgba(108, 91, 195, 0.8)',
-          secondary: '#6BD35A',
-          secondaryHover: 'rgba(107, 211, 90, 0.8)',
+          primary: {
+            color: '#FFFFFF',
+            background: '#6C5BC3',
+            hoverBackground: 'rgba(108, 91, 195, 0.8)',
+          },
+          secondary: {
+            color: '#FFFFFF',
+            background: '#6BD35A',
+            hoverBackground: 'rgba(107, 211, 90, 0.8)',
+          },
         },
       },
     },

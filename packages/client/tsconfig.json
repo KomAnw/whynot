@@ -31,7 +31,8 @@
     "paths": {
       "src/*": ["src/*"],
       "components/*": ["src/components/*"],
-      "pages/*": ["src/pages/*"]
+      "pages/*": ["src/pages/*"],
+      "assets/*": ["src/assets/*"],
     },
     "types": ["vite/client"]
   },
