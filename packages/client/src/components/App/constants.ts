@@ -38,6 +38,7 @@ export const themes = {
     name: 'default',
     colors: {
       core: {
+        borderMenu: 'transpanent',
         background: {
           primary: '#D9D9D9',
           secondary: '#5BCDC9',
@@ -49,6 +50,7 @@ export const themes = {
           error: '#FF0000',
           tertiary: '#6B687D',
           quaternary: '#000000',
+          quinary: '#000000',
         },
         link: {
           link: '#6457B8',
@@ -89,27 +91,29 @@ export const themes = {
     name: 'other',
     colors: {
       core: {
+        borderMenu: '#68B4D1',
         background: {
-          primary: '#D9D9D9',
-          secondary: '#5BCDC9',
+          primary: '#6C5BC3',
+          secondary: '#C1CDF7',
           tertiary: '#F2CE0D',
         },
         text: {
-          primary: '#6C5BC3',
+          primary: '#FFFFFF',
           secondary: '#FFFFFF',
-          error: '#FF0000',
+          error: '#FFD600',
           tertiary: '#6B687D',
-          quaternary: '#000000',
+          quaternary: '#6BD35A',
+          quinary: '#6C5BC3',
         },
         link: {
-          link: '#6457B8',
-          linkHover: '#6457b8b3',
+          link: '#FFFFFF',
+          linkHover: 'rgba(255, 255, 255, 0.8)',
         },
       },
       control: {
         input: {
           color: '#6C5BC3',
-          background: '#ABCDCE',
+          background: '#FFFFFF',
           label: '#6C5BC3',
           placeHolder: '#FFFFFF',
         },
@@ -121,12 +125,12 @@ export const themes = {
         button: {
           primary: {
             color: '#FFFFFF',
-            background: '#6C5BC3',
+            background: '#68B4D1',
             hoverBackground: 'rgba(108, 91, 195, 0.8)',
           },
           secondary: {
             color: '#FFFFFF',
-            background: '#6BD35A',
+            background: '#F2CE0D',
             hoverBackground: 'rgba(107, 211, 90, 0.8)',
           },
         },
