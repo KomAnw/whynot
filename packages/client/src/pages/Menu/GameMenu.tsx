@@ -1,41 +1,27 @@
 import styled from 'styled-components';
-import { paths } from 'components/App/constants';
 import { Button } from 'src/components/Button';
 import { Link } from 'src/components/Link';
-
-const { leaderboard, profile, forum, tutorial } = paths;
+import { Link as RouteLink } from 'react-router-dom';
+import { listMenu } from './constants';
 
 const GameMenu = () => {
   return (
     <Page>
       <Container>
-        <Button variant="secondary">ИГРАТЬ</Button>
         <Wrapper>
-          <ListItem>
-            <Link to={tutorial} variant="size40">
-              Туториал
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link to={profile.index} variant="size40">
-              Профиль
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link to={leaderboard} variant="size40">
-              Таблица Лидеров
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link to={forum.index} variant="size40">
-              Форум
-            </Link>
-          </ListItem>
-          <ListItem>
-            <Link to="/" variant="size40">
-              Выход
-            </Link>
-          </ListItem>
+          {listMenu.map(item =>
+            item.type === 'button' ? (
+              <RouteLink key={item.name} to={item.path}>
+                <Button variant="secondary">{item.name}</Button>
+              </RouteLink>
+            ) : (
+              <ListItem key={item.name}>
+                <Link to={item.path} variant="size40">
+                  {item.name}
+                </Link>
+              </ListItem>
+            )
+          )}
         </Wrapper>
       </Container>
     </Page>
