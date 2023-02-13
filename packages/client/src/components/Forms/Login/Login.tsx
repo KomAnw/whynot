@@ -6,8 +6,8 @@ import { useSingInMutation } from 'src/api/auth/auth';
 import { paths } from 'components/App/constants';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
-import { loginFields } from './consts/LoginConsts';
 import { H1 } from 'src/design/H1';
+import { loginFields } from './consts/LoginConsts';
 
 const { game } = paths;
 
