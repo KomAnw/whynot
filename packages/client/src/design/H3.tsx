@@ -6,4 +6,5 @@ export const H3 = styled(Typography).attrs({ as: 'h3' })`
   font-weight: 500;
   font-size: 40px;
   line-height: 45px;
+  color: ${({ theme }) => theme.colors.core.text.primary};
 `;
