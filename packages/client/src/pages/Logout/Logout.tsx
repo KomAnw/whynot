@@ -11,12 +11,10 @@ const Logout = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
-      logout()
-        .unwrap()
-        .catch(() => navigate(errorPage))
-        .finally(() => navigate(login));
-    }, 800);
+    logout()
+      .unwrap()
+      .catch(() => navigate(errorPage))
+      .finally(() => navigate(login));
   }, []);
 
   return <Spinner />;
