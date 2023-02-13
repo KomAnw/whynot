@@ -7,11 +7,11 @@ import { Label } from 'src/design/Label';
 import { LinkText } from 'src/design/LinkText';
 import defaultAvatar from 'src/assets/defaultAvatar.svg';
 import { MiniDivForm } from 'src/design/MiniDivForm';
-import { typeProfileProps } from 'src/pages/Profile/type';
-import { typeDataForm } from 'components/Forms/ProfileForm/type';
-import { formsConsts } from 'components/Forms/consts/formsConsts';
+import { TypeProfileProps } from 'src/pages/Profile/types';
+import { formsConsts } from 'src/components/Forms/consts/formsConsts';
+import { TypeFormsConst } from 'src/components/Forms/consts/types';
 
-const DataRowData = [
+const DataRowData: Array<TypeFormsConst> = [
   formsConsts.firstName,
   formsConsts.secondName,
   formsConsts.displayName,
@@ -24,17 +24,19 @@ const { mobileM } = breakpoints;
 const { menu } = paths;
 const { updateData, updatePassword } = paths.profile;
 
-const Profile = (props: typeProfileProps) => {
+const Profile = (props: TypeProfileProps) => {
 
   const { data } = props;
-  const dataUpdate = DataRowData.map((item: typeDataForm) => ({ ...item, value: data[item.name] }));
+  const dataUpdate = DataRowData.map((item: TypeFormsConst) => {
+    return { ...item, value: data[item.name] };
+  });
 
   return (
     <PageStyle>
       <TextH1>Профиль</TextH1>
       <Avatar src={defaultAvatar} />
       <Data>
-        {dataUpdate.map((item: typeDataForm) => (
+        {dataUpdate.map((item: TypeFormsConst) => (
           <DataRow key={item.name}>
             <DataLabel>{item.label} :</DataLabel>
             <DataValue>{item.value}</DataValue>
