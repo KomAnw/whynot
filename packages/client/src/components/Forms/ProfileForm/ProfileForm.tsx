@@ -25,7 +25,6 @@ const { menu } = paths;
 const { updateData, updatePassword } = paths.profile;
 
 const Profile = (props: TypeProfileProps) => {
-
   const { data } = props;
   const dataUpdate = DataRowData.map((item: TypeFormsConst) => {
     return { ...item, value: data[item.name] };

@@ -5,7 +5,7 @@ import { Button } from 'src/components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
-import { formsConsts } from 'src/components/Forms/consts/formsConsts'
+import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 
 const profilePasswordFields = [formsConsts.password, formsConsts.confirmPassword];
 
