@@ -47,10 +47,10 @@ export const GameOver = ({ isWon, level, gameScore, totalScore }: GameOverProps)
       <Message>{message}</Message>
       <Image isWon={isWon} />
       <TextScore>
-        Game score:&nbsp; <TetBold>{gameScore}</TetBold>{' '}
+        Game score:&nbsp; <TextBold>{gameScore}</TextBold>{' '}
       </TextScore>
       <TextScore>
-        Total score:&nbsp; <TetBold>{totalScore}</TetBold>
+        Total score:&nbsp; <TextBold>{totalScore}</TextBold>
       </TextScore>
       <Buttons />
     </InnerContainer>
@@ -93,7 +93,7 @@ const TextScore = styled(Text)`
   width: 100%;
 `;
 
-const TetBold = styled(Text)`
+const TextBold = styled(Text)`
   font-weight: bold;
 `;
 
