@@ -4,7 +4,7 @@ import { H1 } from 'src/design/H1';
 import LeaderboardRow from 'components/LeaderboardRow';
 import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
 import { paths } from 'components/App/constants';
-import {Link} from "components/Link";
+import { Link } from 'components/Link';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
