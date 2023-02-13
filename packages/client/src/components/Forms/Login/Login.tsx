@@ -7,6 +7,7 @@ import { paths } from 'components/App/constants';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { loginFields } from './consts/LoginConsts';
+import { H1 } from 'src/design/H1';
 
 const { game } = paths;
 
@@ -27,13 +28,13 @@ export const Login = () => {
 
       response && navigate(game.index);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
 
   return (
     <Form onSubmit={handleSubmit(submitForm as SubmitHandler<FieldValues>)}>
+      <FormHeader>Login</FormHeader>
       <FormBody>
         {loginFields.map(({ type, name, placeholder, label, validationRules }) => (
           <Input
@@ -62,6 +63,11 @@ const Form = styled.form`
   flex-direction: column;
   justify-content: center;
   gap: 10px;
+`;
+
+const FormHeader = styled(H1)`
+  margin: 0 auto;
+  width: max-content;
 `;
 
 const FormBody = styled('div')`
