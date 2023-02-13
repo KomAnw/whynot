@@ -5,18 +5,20 @@ export const paths = {
   errorPage: '/errorPage',
   notFound: '/notFound',
   leaderboard: '/leaderboard',
+  tutorial: '/tutorial',
   game: {
     index: '/game',
     lose: 'lose',
     win: 'win',
   },
   forum: {
-    index: 'forum/posts',
+    index: '/forum/posts',
     newForum: 'new',
     id: ':postId',
     edit: 'edit',
   },
   menu: '/menu',
+  settings: '/settings',
   profile: {
     index: '/profile',
     update: 'update',
