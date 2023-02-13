@@ -6,9 +6,10 @@ import NotFoundPage from 'pages/404';
 import { gameRoutes } from 'src/pages/Game';
 import { profileRoutes } from 'src/pages/Profile';
 import { forumRoutes } from 'src/pages/Forum';
+import Logout from 'src/pages/Logout';
 import { paths } from './constants';
 
-const { login, registration, errorPage, game, forum, leaderboard, profile, menu, settings } = paths;
+const { login, registration, errorPage, game, forum, leaderboard, profile, menu, logout, settings } = paths;
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path={game.index}>{gameRoutes}</Route>
             <Route path={profile.index}>{profileRoutes}</Route>
             <Route path={forum.index}>{forumRoutes}</Route>
+            <Route path={logout} element={<Logout />} />
             <Route path={settings} element={<Settings />} />
           </Route>
 
