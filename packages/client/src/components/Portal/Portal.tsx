@@ -1,19 +1,24 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { ModalContent } from 'components/Portal/ModalContent';
+import React from 'react';
 
-export function Portal() {
-  const [showModal, setShowModal] = useState(false);
-
-  return (
-    <>
-      <button onClick={() => setShowModal(true)}>
-        Show modal using a portal
-      </button>
-      {showModal && createPortal(
-        <ModalContent onClose={() => setShowModal(false)} />,
-        document.body
-      )}
-    </>
-  );
+interface TypeProps {
+  children: React.ReactNode;
 }
+
+type TypeFun = () => void;
+
+export const Portal = ({ children }: TypeProps) => {
+  const mount = document.getElementById('portal');
+  const el = document.createElement('div');
+
+  useEffect((): TypeFun => {
+    mount!.appendChild(el);
+
+    return () => mount!.removeChild(el);
+  }, [el, mount]);
+
+  return createPortal(children, el);
+};
+
+export default Portal;

@@ -2,7 +2,6 @@ import Switch from 'src/components/Switch';
 import { H1 } from 'src/design/H1';
 import styled from 'styled-components';
 import { Link } from 'components/Link';
-import { Portal } from 'src/components/Portal/Portal'
 
 const Welcome = () => {
   return (
@@ -12,7 +11,6 @@ const Welcome = () => {
       <Link to="/game" variant="size30">
         Перейти в игру
       </Link>
-      <Portal/>
     </Container>
   );
 };
