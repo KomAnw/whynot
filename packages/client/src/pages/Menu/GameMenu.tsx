@@ -42,7 +42,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 360px;
-  height: 360px;
+  height: 416px;
   border-radius: 20px;
   padding-top: 30px;
   background: ${({ theme }) => theme.colors.core.background.primary};

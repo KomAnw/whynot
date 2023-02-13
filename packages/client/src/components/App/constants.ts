@@ -18,6 +18,7 @@ export const paths = {
     edit: 'edit',
   },
   menu: '/menu',
+  settings: '/settings',
   profile: {
     index: '/profile',
     update: 'update',

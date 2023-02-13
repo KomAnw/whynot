@@ -1,35 +1,40 @@
 import { paths } from 'components/App/constants';
 
-const { tutorial, profile, leaderboard, forum, game, welcome } = paths;
+const { tutorial, profile, leaderboard, forum, game, welcome, settings } = paths;
 
 export const listMenu = [
   {
-    name: 'ИГРАТЬ',
+    name: 'PLAY',
     path: game.index,
     type: 'button',
   },
   {
-    name: 'Туториал',
+    name: 'Tutorial',
     path: tutorial,
     type: 'link',
   },
   {
-    name: 'Профиль',
+    name: 'Profile',
     path: profile.index,
     type: 'link',
   },
   {
-    name: 'Таблица Лидеров',
+    name: 'Leaderboard',
     path: leaderboard,
     type: 'link',
   },
   {
-    name: 'Форум',
+    name: 'Forum',
     path: forum.index,
     type: 'link',
   },
   {
-    name: 'Выход',
+    name: 'Settings',
+    path: settings,
+    type: 'link',
+  },
+  {
+    name: 'Exit',
     path: welcome,
     type: 'link',
   },
