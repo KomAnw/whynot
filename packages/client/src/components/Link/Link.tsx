@@ -20,10 +20,6 @@ export const Link = ({ children, to, variant = 'size20' }: propsLink) => {
 const StyledLink = styled(ReactLink)<propsLinkStyle>`
   cursor: pointer;
   text-decoration: none;
-  &:hover {
-    opacity: 0.8;
-  }
-
   ${({ theme, variant }) => {
     const { fontSize, lineHeight } = styleProps[variant!];
 
@@ -32,6 +28,9 @@ const StyledLink = styled(ReactLink)<propsLinkStyle>`
       line-height: ${lineHeight};
       font-family: ${theme.fonts.main};
       color: ${theme.colors.core.text.primary};
+      &:hover {
+        color: ${theme.colors.core.text.primary};
+      }
     `;
   }}
 `;

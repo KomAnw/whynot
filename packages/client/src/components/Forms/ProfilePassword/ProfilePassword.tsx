@@ -7,7 +7,7 @@ import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 
-const profilePasswordFields = [formsConsts.password, formsConsts.confirmPassword];
+const { password, confirmPassword } = formsConsts;
 
 const { profile } = paths;
 const { mobileM } = breakpoints;
@@ -27,32 +27,30 @@ const ProfileData = () => {
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
-      <FormHeader>
-        <H1Style>Изменение пароля</H1Style>
-      </FormHeader>
+      <H1Style>Edit password</H1Style>
       <FormBody>
         <Input
-          key={profilePasswordFields[0].name}
+          key={password.name}
           register={register}
-          errorMessage={errors[profilePasswordFields[0].name]?.message as string}
-          name={profilePasswordFields[0].name}
-          type={profilePasswordFields[0].type}
-          label={profilePasswordFields[0].label}
-          placeholder={profilePasswordFields[0].placeholder}
-          validationRules={profilePasswordFields[0].validationRules}
+          errorMessage={errors[password.name]?.message as string}
+          name={password.name}
+          type={password.type}
+          label={password.label}
+          placeholder={password.placeholder}
+          validationRules={password.validationRules}
         />
         <Input
-          key={profilePasswordFields[1].name}
+          key={confirmPassword.name}
           register={register}
-          errorMessage={errors[profilePasswordFields[1].name]?.message as string}
-          name={profilePasswordFields[1].name}
-          type={profilePasswordFields[1].type}
-          label={profilePasswordFields[1].label}
-          placeholder={profilePasswordFields[1].placeholder}
+          errorMessage={errors[confirmPassword.name]?.message as string}
+          name={confirmPassword.name}
+          type={confirmPassword.type}
+          label={confirmPassword.label}
+          placeholder={confirmPassword.placeholder}
           validationRules={{
-            required: profilePasswordFields[1].validationRules.required,
+            required: confirmPassword.validationRules.required,
             validate: {
-              ...profilePasswordFields[1].validationRules.validate,
+              ...confirmPassword.validationRules.validate,
               confirmPassword: (val: string) => {
                 if (watch('password') !== val) {
                   return 'Your passwords do no match';
@@ -64,10 +62,10 @@ const ProfileData = () => {
       </FormBody>
       <FormFooter>
         <Button variant="primary" type="submit">
-          СОХРАНИТЬ
+          Apply
         </Button>
-        <Link to={profile.index} variant="size30">
-          Назад
+        <Link to={profile.index} variant="size20">
+          back
         </Link>
       </FormFooter>
     </Form>
@@ -77,10 +75,6 @@ const ProfileData = () => {
 export default ProfileData;
 
 const H1Style = styled(H1)`
-  margin: 0;
-`;
-
-const FormHeader = styled(`div`)`
   height: 45px;
   text-align: center;
   margin: 0 0 12px 0;
@@ -96,9 +90,9 @@ const FormBody = styled('div')`
 
 const FormFooter = styled('div')`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 100px;
+  gap: 5px;
   flex-shrink: 0;
   margin: 27px auto 0;
 `;

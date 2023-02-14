@@ -32,7 +32,7 @@ const Profile = (props: TypeProfileProps) => {
 
   return (
     <PageStyle>
-      <TextH1>Профиль</TextH1>
+      <TextH1>Profile</TextH1>
       <Avatar src={defaultAvatar} />
       <Data>
         {dataUpdate.map((item: TypeFormsConst) => (
@@ -42,21 +42,21 @@ const Profile = (props: TypeProfileProps) => {
           </DataRow>
         ))}
       </Data>
-      <TextH3>
+      <TextLink>
         <Link to={updateData} variant="size24">
-          Редактировать данные
+          Edit date
         </Link>
-      </TextH3>
-      <TextH3>
+      </TextLink>
+      <TextLink>
         <Link to={updatePassword} variant="size24">
-          Изменить пароль
+          Edit password
         </Link>
-      </TextH3>
-      <TextH4>
+      </TextLink>
+      <TextLinkBack>
         <Link to={menu} variant="size20">
-          Назад в меню
+          back
         </Link>
-      </TextH4>
+      </TextLinkBack>
     </PageStyle>
   );
 };
@@ -66,13 +66,11 @@ export default Profile;
 const PageStyle = styled(MiniDivForm)`
   display: grid;
   justify-items: center;
-  grid-template-columns: auto;
-  grid-column-gap: 26px;
 `;
 
 const TextH1 = styled(H1)`
+  height: 45px;
   margin: 14px 0 0 0;
-  padding: 0;
   display: grid;
   text-align: center;
   color: ${({ theme }) => theme.colors.core.text.primary};
@@ -80,7 +78,6 @@ const TextH1 = styled(H1)`
 
 const Avatar = styled.img`
   margin: 22px 0 0 0;
-  padding: 0;
   left: 138px;
   top: 138px;
   border-radius: 50%;
@@ -88,6 +85,7 @@ const Avatar = styled.img`
 
 const Data = styled.div`
   margin: 20px 0 19px 0;
+  height: 242px;
   padding: 0;
   display: grid;
   text-align: center;
@@ -95,8 +93,6 @@ const Data = styled.div`
 `;
 
 const DataRow = styled.div`
-  margin: 0;
-  padding: 0;
   width: 354px;
   height: 32px;
   display: grid;
@@ -111,29 +107,26 @@ const DataRow = styled.div`
 `;
 
 const DataLabel = styled(Label)`
-  margin: 0;
-  padding: 0;
   display: grid;
   text-align: center;
   color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
 const DataValue = styled(LinkText)`
-  margin: 0;
-  padding: 0;
   display: grid;
   color: ${({ theme }) => theme.colors.core.text.tertiary};
   font-weight: 400;
 `;
 
-const TextH3 = styled(LinkText)`
+const TextLink = styled(LinkText)`
+  height: 27px;
   margin: 12px 0 0 0;
   padding: 0;
   display: grid;
 `;
 
-const TextH4 = styled(H3)`
-  margin: 30px 0 18px 0;
+const TextLinkBack = styled(H3)`
+  margin: 20px 0 0 0;
   padding: 0;
   height: 22px;
   display: grid;

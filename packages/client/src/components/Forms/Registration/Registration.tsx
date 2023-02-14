@@ -33,9 +33,7 @@ const Registration = () => {
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
-      <FormHeader>
-        <H1Style> Registration </H1Style>
-      </FormHeader>
+      <H1Style> Registration </H1Style>
       <FormBody>
         {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (
           <Input
@@ -65,10 +63,6 @@ const Registration = () => {
 export default Registration;
 
 const H1Style = styled(H1)`
-  margin: 0;
-`;
-
-const FormHeader = styled(`div`)`
   height: 45px;
   text-align: center;
   margin: 0 0 12px 0;
@@ -84,11 +78,11 @@ const FormBody = styled('div')`
 
 const FormFooter = styled('div')`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 100px;
+  gap: 5px;
   flex-shrink: 0;
-  margin: 27px auto 0;
+  margin: 3px auto 0;
 `;
 
 const Form = styled('form')`
@@ -101,8 +95,8 @@ const Form = styled('form')`
   transform: translate(-50%, -50%);
   background-color: ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
-  padding: 12px 24px;
+  padding: 6px 24px;
   @media (max-width: ${mobileM}) {
-    padding: 12px;
+    padding: 6px;
   }
 `;

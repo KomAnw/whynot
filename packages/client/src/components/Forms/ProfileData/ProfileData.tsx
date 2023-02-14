@@ -27,14 +27,11 @@ const ProfileData = () => {
     mode: 'all',
   });
 
-  // eslint-disable-next-line no-console
   const submitForm = (data: any) => console.log(data);
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
-      <FormHeader>
-        <H1Style>Редактирование данных</H1Style>
-      </FormHeader>
+      <H1Style>Profile edit</H1Style>
       <FormBody>
         {profileDateFields.map(({ type, name, placeholder, label, validationRules }) => (
           <Input
@@ -50,11 +47,11 @@ const ProfileData = () => {
         ))}
       </FormBody>
       <FormFooter>
-        <Button variant="primary" type="submit">
-          СОХРАНИТЬ
+        <Button variant='primary' type='submit'>
+          Apply
         </Button>
-        <Link to={profile.index} variant="size30">
-          Назад
+        <Link to={profile.index} variant='size20'>
+          back
         </Link>
       </FormFooter>
     </Form>
@@ -64,10 +61,6 @@ const ProfileData = () => {
 export default ProfileData;
 
 const H1Style = styled(H1)`
-  margin: 0;
-`;
-
-const FormHeader = styled(`div`)`
   height: 45px;
   text-align: center;
   margin: 0 0 12px 0;
@@ -83,8 +76,9 @@ const FormBody = styled('div')`
 
 const FormFooter = styled('div')`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 100px;
+  gap: 5px;
   flex-shrink: 0;
   margin: 27px auto 0;
 `;

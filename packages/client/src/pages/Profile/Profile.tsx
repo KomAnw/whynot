@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { CenterDivContainer } from 'src/design/CenterDivContainer';
 import ProfileForm from 'src/components/Forms/ProfileForm/ProfileForm';
-import { typeDataProfile } from 'src/pages/Profile/types';
+import { TypeDataProfile } from 'src/pages/Profile/types';
 
-const valueData: typeDataProfile = {
+const valueData: TypeDataProfile = {
   firstName: 'Иван',
   secondName: 'Иванов',
   login: 'Ivan2002',
