@@ -3,8 +3,8 @@ import { TSizes } from 'pages/Game/types/types';
 export class Player {
   width = 55;
   height = 40;
-  #isMovingLeft: boolean;
-  #isMovingRight: boolean;
+  isMovingLeft: boolean;
+  isMovingRight: boolean;
   ctx: CanvasRenderingContext2D;
   currentYPosition: number;
   currentXPosition: number;
@@ -12,29 +12,13 @@ export class Player {
   yPosition: number;
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes) {
-    this.#isMovingLeft = false;
-    this.#isMovingRight = false;
+    this.isMovingLeft = false;
+    this.isMovingRight = false;
     this.ctx = context;
     this.currentYPosition = 11;
     this.currentXPosition = 0;
     this.xPosition = sizes.width / 2 - this.width / 2;
     this.yPosition = sizes.height - 20;
-  }
-
-  get isMovingLeft() {
-    return this.#isMovingLeft;
-  }
-
-  set isMovingLeft(value: boolean) {
-    this.#isMovingLeft = value;
-  }
-
-  get isMovingRight() {
-    return this.#isMovingRight;
-  }
-
-  set isMovingRight(value: boolean) {
-    this.#isMovingRight = value;
   }
 
   jump() {

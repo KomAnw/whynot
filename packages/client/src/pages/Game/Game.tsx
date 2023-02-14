@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useEffect, useMemo, useRef } from 'react';
 import { TSizes } from 'pages/Game/types/types';
-import { Player } from 'pages/Game/controllers/Player/Players';
+import { Player } from 'pages/Game/controllers/Player/Player';
 import { Platforms } from './controllers/Platforms/Platforms';
 
 export const Game = () => {
