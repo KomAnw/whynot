@@ -1,9 +1,6 @@
-import { ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
-
-type PortalProps = {
-  children: ReactNode;
-};
+import { PortalProps } from './types';
 
 export const Portal = ({ children }: PortalProps) => {
   const portal = document.getElementById('portal')!;
