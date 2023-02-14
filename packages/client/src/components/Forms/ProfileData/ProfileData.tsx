@@ -47,10 +47,10 @@ const ProfileData = () => {
         ))}
       </FormBody>
       <FormFooter>
-        <Button variant='primary' type='submit'>
+        <Button variant="primary" type="submit">
           Apply
         </Button>
-        <Link to={profile.index} variant='size20'>
+        <Link to={profile.index} variant="size20">
           back
         </Link>
       </FormFooter>
