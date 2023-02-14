@@ -1,7 +1,9 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
+export type ButtonVariants = 'primary' | 'secondary';
+
 export type ButtonProps = {
-  variant: 'primary' | 'secondary';
+  variant: ButtonVariants;
   children: ReactNode;
   type?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   onSubmit?: () => void;

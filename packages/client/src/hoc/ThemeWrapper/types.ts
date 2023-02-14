@@ -8,6 +8,7 @@ export type Theme = {
   name: string;
   colors: {
     core: {
+      borderMenu: string;
       background: {
         primary: string;
         secondary: string;
@@ -19,11 +20,13 @@ export type Theme = {
         error: string;
         tertiary: string;
         quaternary: string;
+        quinary: string;
       };
       link: {
         link: string;
         linkHover: string;
       };
+      spinner: string;
     };
     control: {
       input: {

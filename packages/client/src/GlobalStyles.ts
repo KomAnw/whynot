@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
           url(${HanjetWoff2}) format('woff2'),
           url(${HandjetTtf}) format('truetype');
   }
-  * {
+  body * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
