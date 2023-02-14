@@ -1,101 +1,11 @@
 import styled from 'styled-components';
 import { useEffect, useMemo, useRef } from 'react';
-
-type TSizes = {
-  width: number;
-  height: number;
-};
-
-class Player {
-  width = 50;
-  height = 40;
-  isMovingLeft: boolean;
-  isMovingRight: boolean;
-  ctx: CanvasRenderingContext2D;
-  currentYPosition: number;
-  currentXPosition: number;
-  xPosition: number;
-  yPosition: number;
-
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes) {
-    this.isMovingLeft = false;
-    this.isMovingRight = false;
-    this.ctx = context;
-    this.currentYPosition = 11;
-    this.currentXPosition = 0;
-    this.xPosition = sizes.width / 2 - this.width / 2;
-    this.yPosition = sizes.height - 20;
-  }
-
-  movedLeft() {
-    this.isMovingLeft = !this.isMovingLeft;
-  }
-
-  movedRight() {
-    this.isMovingRight = !this.isMovingRight;
-  }
-
-  changeX(value: number) {
-    this.xPosition = value;
-  }
-
-  jump() {
-    this.currentYPosition = -8;
-  }
-
-  jumpHigh() {
-    this.currentYPosition = -16;
-  }
-
-  draw() {
-    this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
-  }
-}
-
-class Platform {
-  ctx: CanvasRenderingContext2D;
-  width = 70;
-  height = 17;
-  xPosition: number;
-  yPosition: number;
-  currentPosition: number;
-
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number) {
-    this.ctx = context;
-    this.xPosition = Math.random() * (sizes.width - this.width);
-    this.yPosition = position;
-    this.currentPosition = position;
-  }
-
-  draw() {
-    this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
-  }
-}
-
-class Platforms {
-  static position = 0;
-  static platformCount = 10;
-  ctx: CanvasRenderingContext2D;
-  sizes: TSizes;
-
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes) {
-    this.ctx = context;
-    this.sizes = sizes;
-  }
-
-  draw() {
-    for (let i = 0; i < Platforms.platformCount; i++) {
-      const platform = new Platform(this.ctx, this.sizes, Platforms.position);
-
-      Platforms.position += this.sizes.height / Platforms.platformCount;
-
-      platform.draw();
-    }
-  }
-}
+import { TSizes } from 'pages/Game/types/types';
+import { Player } from 'pages/Game/controllers/Player/Players';
+import { Platforms } from './controllers/Platforms/Platforms';
 
 export const Game = () => {
-  const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
+  const sizes = useMemo<TSizes>(() => ({ width: 422, height: 522 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
   let player: Player = new Player(canvasContextRef.current as CanvasRenderingContext2D, sizes);
@@ -108,26 +18,47 @@ export const Game = () => {
   };
 
   const calculatePlayerActions = () => {
-    if (player?.isMovingLeft) {
-      player.changeX((player.xPosition += player.currentXPosition));
+    // Accelerations produces when the user hold the keys
+    if (player.isMovingLeft) {
+      player.xPosition += player.currentXPosition;
       player.currentXPosition -= 0.15;
-      player.movedLeft();
     } else {
-      player!.xPosition += player!.currentXPosition;
-      if (player!.currentXPosition < 0) {
-        player!.currentXPosition += 0.1;
+      player.xPosition += player.currentXPosition;
+
+      if (player.currentXPosition < 0) {
+        player.currentXPosition += 0.1;
       }
     }
 
-    if (player?.isMovingRight) {
+    if (player.isMovingRight) {
       player.xPosition += player.currentXPosition;
       player.currentXPosition += 0.15;
-      player.movedRight();
     } else {
-      player!.xPosition += player!.currentXPosition;
-      if (player!.currentXPosition > 0) {
-        player!.currentXPosition -= 0.1;
+      player.xPosition += player.currentXPosition;
+
+      if (player.currentXPosition > 0) {
+        player.currentXPosition -= 0.1;
       }
+    }
+
+    // Speed limits
+    if (player.currentXPosition > 8) {
+      player.currentXPosition = 8;
+    } else if (player.currentXPosition < -8) {
+      player.currentXPosition = -8;
+    }
+
+    if (player.currentXPosition > sizes.width) {
+      player.currentXPosition = 0 - player.width;
+    } else if (player.currentXPosition < 0 - player.width) {
+      player.currentXPosition = sizes.width;
+    }
+
+    // Make the player move through walls
+    if (player.xPosition > sizes.width) {
+      player.xPosition = 0 - player.width;
+    } else if (player.xPosition < 0 - player.width) {
+      player.xPosition = sizes.width;
     }
   };
 
@@ -145,17 +76,30 @@ export const Game = () => {
 
   const init = () => {
     player = new Player(canvasContextRef.current as CanvasRenderingContext2D, sizes);
+
     platforms = new Platforms(canvasContextRef.current as CanvasRenderingContext2D, sizes);
 
     document.addEventListener('keydown', e => {
       const { key } = e;
 
       if (key === 'ArrowLeft') {
-        player.movedLeft();
+        player.isMovingLeft = true;
       }
 
       if (key === 'ArrowRight') {
-        player.movedRight();
+        player.isMovingRight = true;
+      }
+    });
+
+    document.addEventListener('keyup', e => {
+      const { key } = e;
+
+      if (key === 'ArrowLeft') {
+        player.isMovingLeft = false;
+      }
+
+      if (key === 'ArrowRight') {
+        player.isMovingRight = false;
       }
     });
   };
