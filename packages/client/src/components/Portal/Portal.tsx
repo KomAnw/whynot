@@ -1,24 +1,29 @@
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import React from 'react';
 
-interface TypeProps {
-  children: React.ReactNode;
-}
+type PortalProps = {
+  children: ReactNode;
+};
 
-type TypeFun = () => void;
+export const Portal = ({ children }: PortalProps) => {
+  const portal = document.getElementById('portal')!;
+  const element = document.createElement('div');
 
-export const Portal = ({ children }: TypeProps) => {
-  const mount = document.getElementById('portal');
-  const el = document.createElement('div');
+  function createElement() {
+    portal.appendChild(element);
+  }
 
-  useEffect((): TypeFun => {
-    mount!.appendChild(el);
+  function removeElement() {
+    portal.removeChild(element);
+  }
 
-    return () => mount!.removeChild(el);
-  }, [el, mount]);
+  useEffect(() => {
+    createElement();
 
-  return createPortal(children, el);
+    return () => removeElement();
+  }, [element, portal]);
+
+  return createPortal(children, element);
 };
 
 export default Portal;
