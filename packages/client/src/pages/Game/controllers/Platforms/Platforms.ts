@@ -23,9 +23,9 @@ class Platform {
 export class Platforms {
   static position = 0;
   static platformCount = 10;
+  static platforms: Platform[] = [];
   ctx: CanvasRenderingContext2D;
   sizes: TSizes;
-  platforms: Platform[] = [];
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes) {
     this.ctx = context;
@@ -38,14 +38,14 @@ export class Platforms {
 
       Platforms.position += this.sizes.height / Platforms.platformCount;
 
-      this.platforms.push(platform);
+      Platforms.platforms.push(platform);
     }
   }
 
   draw() {
     this.add();
 
-    this.platforms.forEach(platform => {
+    Platforms.platforms.forEach(platform => {
       platform.draw();
     });
   }

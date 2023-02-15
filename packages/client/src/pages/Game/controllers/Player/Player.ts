@@ -1,5 +1,6 @@
 import { TSizes } from 'pages/Game/types/types';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
+import { Platforms } from 'pages/Game/controllers/Platforms/Platforms';
 
 export class Player {
   maxSpeed = 8;
@@ -48,6 +49,21 @@ export class Player {
     ) {
       this.jump();
     }
+  }
+
+  // Registration jumps from platforms
+  collides() {
+    Platforms.platforms.forEach(platform => {
+      if (
+        this.currentYPosition > 0 &&
+        this.xPosition + 15 < platform.xPosition + platform.width &&
+        this.xPosition + this.width - 15 > platform.xPosition &&
+        this.yPosition + this.height > platform.yPosition &&
+        this.yPosition + this.height < platform.yPosition + platform.height
+      ) {
+        this.jump();
+      }
+    });
   }
 
   calculatePlayerActions() {
@@ -100,6 +116,8 @@ export class Player {
     if (this.yPosition + this.height > ground.yPosition && ground.yPosition < this.sizes.height) {
       this.jump();
     }
+
+    this.collides();
   }
 
   draw() {

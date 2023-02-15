@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import { useEffect, useMemo, useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { TSizes } from 'pages/Game/types/types';
 import { Player } from 'pages/Game/controllers/Player/Player';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
+import { useDidMount } from 'src/hooks/react';
 import { Platforms } from './controllers/Platforms/Platforms';
 
 export const Game = () => {
@@ -44,9 +45,9 @@ export const Game = () => {
   const init = () => {
     const context = canvasContextRef.current as CanvasRenderingContext2D;
 
-    player = new Player(context, sizes);
-
     platforms = new Platforms(context, sizes);
+
+    player = new Player(context, sizes);
 
     ground = new Ground(context, sizes);
 
@@ -79,13 +80,13 @@ export const Game = () => {
     player.draw();
   };
 
-  useEffect(() => {
+  useDidMount(() => {
     canvasInit();
 
     init();
 
     update();
-  }, []);
+  });
 
   return (
     <GameWindow>
