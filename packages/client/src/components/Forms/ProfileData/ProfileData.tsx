@@ -6,8 +6,9 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'components/Forms/consts/formsConsts';
+import { TypeFormsConst } from 'components/Forms/consts/types';
 
-const profileDateFields = [
+const profileDateFields: Array<TypeFormsConst> = [
   formsConsts.firstName,
   formsConsts.secondName,
   formsConsts.login,

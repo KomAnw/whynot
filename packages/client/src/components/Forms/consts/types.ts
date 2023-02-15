@@ -1,10 +1,10 @@
 export type TypeFormsConst = {
   type: string;
-  placeholder?: string;
-  label?: string;
+  placeholder: string;
+  label: string;
   name: string;
-  value?: string;
-  validationRules?: TypeValidationRules;
+  value: string;
+  validationRules: TypeValidationRules;
 };
 
 export type TypeValidationRules = {
@@ -12,6 +12,4 @@ export type TypeValidationRules = {
   validate?: TypeValidate;
 };
 
-interface TypeValidate {
-  [key: string]: (v: string) => boolean | string;
-}
+export type TypeValidate = Record<string, (v: string) => boolean | string>;

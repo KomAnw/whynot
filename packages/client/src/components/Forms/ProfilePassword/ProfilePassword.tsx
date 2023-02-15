@@ -53,7 +53,7 @@ const ProfileData = () => {
               ...confirmPassword.validationRules.validate,
               confirmPassword: (val: string) => {
                 if (watch('password') !== val) {
-                  return 'Your passwords do no match';
+                  return 'Your passwords do not match';
                 }
               },
             },

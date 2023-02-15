@@ -6,8 +6,9 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
 import { breakpoints, paths } from 'components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
+import { TypeFormsConst } from 'components/Forms/consts/types';
 
-const registrationFields = [
+const registrationFields: Array<TypeFormsConst> = [
   formsConsts.firstName,
   formsConsts.secondName,
   formsConsts.login,
