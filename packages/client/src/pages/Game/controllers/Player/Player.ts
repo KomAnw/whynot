@@ -139,6 +139,8 @@ export class Player {
     } else {
       this.platforms.calculate(this.currentYPosition);
 
+      this.currentYPosition += this.gravity;
+
       if (this.currentYPosition >= 0) {
         this.yPosition += this.currentYPosition;
         this.currentYPosition += this.gravity;

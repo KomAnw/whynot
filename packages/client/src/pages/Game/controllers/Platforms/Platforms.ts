@@ -45,11 +45,11 @@ export class Platforms {
   calculate(playerYPosition: number) {
     this.data.forEach((platform, index) => {
       if (playerYPosition < 0) {
-        platform.yPosition -= playerYPosition * 2;
+        platform.yPosition -= playerYPosition;
       }
 
       if (platform.yPosition > this.sizes.height) {
-        this.data[index] = new Platform(this.ctx, this.sizes, this.position * 2);
+        this.data[index] = new Platform(this.ctx, this.sizes, this.position);
         this.data[index].yPosition = platform.yPosition - this.sizes.height;
       }
     });
