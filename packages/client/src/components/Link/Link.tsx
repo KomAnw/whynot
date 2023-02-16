@@ -31,7 +31,10 @@ const StyledLink = styled(ReactLink)<propsLinkStyle>`
       font-size: ${fontSize};
       line-height: ${lineHeight};
       font-family: ${theme.fonts.main};
-      color: ${theme.colors.core.link.link};
+      color: ${theme.colors.core.text.primary};
+      &:hover {
+        color: ${theme.colors.core.text.primary};
+      }
     `;
   }}
 `;
