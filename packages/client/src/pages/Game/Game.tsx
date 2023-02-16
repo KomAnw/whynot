@@ -57,9 +57,9 @@ export const Game = () => {
   const update = () => {
     canvasClearFrame();
 
-    platforms.draw();
-
     player.calculatePlayerActions();
+
+    platforms.draw();
 
     player.draw();
 
@@ -83,9 +83,11 @@ export const Game = () => {
 
     platforms = new Platforms(context, sizes);
 
-    player = new Player(context, sizes);
+    player = new Player(context, sizes, platforms);
 
     ground = new Ground(context, sizes);
+
+    platforms.init();
   };
 
   useDidMount(() => {

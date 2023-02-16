@@ -21,9 +21,9 @@ class Platform {
 }
 
 export class Platforms {
-  static position = 0;
-  static platformCount = 10;
-  static platforms: Platform[] = [];
+  position = 0;
+  platformCount = 10;
+  data: Platform[] = [];
   ctx: CanvasRenderingContext2D;
   sizes: TSizes;
 
@@ -32,20 +32,31 @@ export class Platforms {
     this.sizes = sizes;
   }
 
-  add() {
-    for (let i = 0; i < Platforms.platformCount; i++) {
-      const platform = new Platform(this.ctx, this.sizes, Platforms.position);
+  init() {
+    for (let i = 0; i < this.platformCount; i++) {
+      const platform = new Platform(this.ctx, this.sizes, this.position);
 
-      Platforms.position += this.sizes.height / Platforms.platformCount;
+      this.position += this.sizes.height / this.platformCount;
 
-      Platforms.platforms.push(platform);
+      this.data.push(platform);
     }
   }
 
-  draw() {
-    this.add();
+  calculate(playerYPosition: number) {
+    this.data.forEach((platform, index) => {
+      if (playerYPosition < 0) {
+        platform.yPosition -= playerYPosition * 2;
+      }
 
-    Platforms.platforms.forEach(platform => {
+      if (platform.yPosition > this.sizes.height) {
+        this.data[index] = new Platform(this.ctx, this.sizes, this.position * 2);
+        this.data[index].yPosition = platform.yPosition - this.sizes.height;
+      }
+    });
+  }
+
+  draw() {
+    this.data.forEach(platform => {
       platform.draw();
     });
   }

@@ -16,8 +16,9 @@ export class Player {
   xPosition: number;
   yPosition: number;
   sizes: TSizes;
+  platforms: Platforms;
 
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes) {
+  constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms) {
     this.isMovingLeft = false;
     this.isMovingRight = false;
     this.ctx = context;
@@ -26,6 +27,7 @@ export class Player {
     this.xPosition = sizes.width / 2 - this.width / 2;
     this.yPosition = sizes.height;
     this.sizes = sizes;
+    this.platforms = platforms;
   }
 
   jump() {
@@ -51,9 +53,11 @@ export class Player {
     }
   }
 
-  // Registration jumps from platforms
+  /**
+   * Registration jumps out of platforms.
+   */
   collides() {
-    Platforms.platforms.forEach(platform => {
+    this.platforms.data.forEach(platform => {
       if (
         this.currentYPosition > 0 &&
         this.xPosition + 15 < platform.xPosition + platform.width &&
@@ -69,7 +73,9 @@ export class Player {
   calculatePlayerActions() {
     const ground = new Ground(this.ctx, this.sizes);
 
-    // Accelerations produces when the user hold the keys
+    /**
+     * Accelerations produces when the user hold the keys.
+     */
     if (this.isMovingLeft) {
       this.xPosition += this.currentXPosition;
       this.currentXPosition -= 0.15;
@@ -92,7 +98,9 @@ export class Player {
       }
     }
 
-    // Speed limits
+    /**
+     * Speed limits.
+     */
     if (this.currentXPosition > this.maxSpeed) {
       this.currentXPosition = this.maxSpeed;
     } else if (this.currentXPosition < -this.maxSpeed) {
@@ -105,16 +113,36 @@ export class Player {
       this.currentXPosition = this.sizes.width;
     }
 
-    // Make the player move through walls
+    /**
+     * Make the player move through walls.
+     */
     if (this.xPosition > this.sizes.width) {
       this.xPosition = 0 - this.width;
     } else if (this.xPosition < 0 - this.width) {
       this.xPosition = this.sizes.width;
     }
 
-    // Player jumps when he is on the ground.
+    /**
+     * Player jumps when he is on the ground.
+     */
     if (this.yPosition + this.height > ground.yPosition && ground.yPosition < this.sizes.height) {
       this.jump();
+    }
+
+    /**
+     * When the player reaches half height, move the platforms to create the illusion of scrolling
+     * and recreate the platforms that are out of viewport.
+     */
+    if (this.yPosition >= this.sizes.height / 2 - this.height / 2) {
+      this.yPosition += this.currentYPosition;
+      this.currentYPosition += this.gravity;
+    } else {
+      this.platforms.calculate(this.currentYPosition);
+
+      if (this.currentYPosition >= 0) {
+        this.yPosition += this.currentYPosition;
+        this.currentYPosition += this.gravity;
+      }
     }
 
     this.collides();
