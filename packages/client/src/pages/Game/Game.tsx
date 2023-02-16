@@ -3,27 +3,55 @@ import { useMemo, useRef } from 'react';
 import { TSizes } from 'pages/Game/types/types';
 import { Player } from 'pages/Game/controllers/Player/Player';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
-import { useDidMount } from 'src/hooks/react';
+import { useDidMount, useWillUnmount } from 'src/hooks/react';
 import { Platforms } from './controllers/Platforms/Platforms';
 
 export const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
-  let player = new Player(canvasContextRef.current as CanvasRenderingContext2D, sizes);
-  let platforms = new Platforms(canvasContextRef.current as CanvasRenderingContext2D, sizes);
-  let ground = new Ground(canvasContextRef.current as CanvasRenderingContext2D, sizes);
+  let player: Player;
+  let platforms: Platforms;
+  let ground: Ground;
+
+  const onKeyDownHandler = (e: KeyboardEvent) => {
+    const { key } = e;
+
+    if (key === 'ArrowLeft') {
+      player.isMovingLeft = true;
+    }
+
+    if (key === 'ArrowRight') {
+      player.isMovingRight = true;
+    }
+  };
+
+  const onKeyUpHandler = (e: KeyboardEvent) => {
+    const { key } = e;
+
+    if (key === 'ArrowLeft') {
+      player.isMovingLeft = false;
+    }
+
+    if (key === 'ArrowRight') {
+      player.isMovingRight = false;
+    }
+  };
 
   const canvasInit = () => {
-    const canvas = canvasRef.current as HTMLCanvasElement;
+    const canvas = canvasRef.current;
 
-    canvasContextRef.current = canvas.getContext('2d');
+    if (canvas) {
+      canvasContextRef.current = canvas.getContext('2d');
+    }
   };
 
   const canvasClearFrame = () => {
-    const ctx = canvasContextRef.current as CanvasRenderingContext2D;
+    const context = canvasContextRef.current;
 
-    ctx.clearRect(0, 0, sizes.width, sizes.height);
+    if (context) {
+      context.clearRect(0, 0, sizes.width, sizes.height);
+    }
   };
 
   const update = () => {
@@ -43,41 +71,21 @@ export const Game = () => {
   };
 
   const init = () => {
-    const context = canvasContextRef.current as CanvasRenderingContext2D;
+    const context = canvasContextRef.current;
+
+    if (!context) {
+      return;
+    }
+
+    document.addEventListener('keydown', onKeyDownHandler);
+
+    document.addEventListener('keyup', onKeyUpHandler);
 
     platforms = new Platforms(context, sizes);
 
     player = new Player(context, sizes);
 
     ground = new Ground(context, sizes);
-
-    document.addEventListener('keydown', e => {
-      const { key } = e;
-
-      if (key === 'ArrowLeft') {
-        player.isMovingLeft = true;
-      }
-
-      if (key === 'ArrowRight') {
-        player.isMovingRight = true;
-      }
-    });
-
-    document.addEventListener('keyup', e => {
-      const { key } = e;
-
-      if (key === 'ArrowLeft') {
-        player.isMovingLeft = false;
-      }
-
-      if (key === 'ArrowRight') {
-        player.isMovingRight = false;
-      }
-    });
-
-    ground.draw();
-
-    player.draw();
   };
 
   useDidMount(() => {
@@ -86,6 +94,12 @@ export const Game = () => {
     init();
 
     update();
+  });
+
+  useWillUnmount(() => {
+    document.removeEventListener('keydown', onKeyDownHandler);
+
+    document.removeEventListener('keyup', onKeyUpHandler);
   });
 
   return (
