@@ -1,19 +1,12 @@
-export type TUser = {
-  id: string | number;
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-  avatar: string;
+import { TUser } from 'src/api/auth/models';
+
+export type TUserData = Omit<TUser, 'password'> & UserDisplayName;
+
+type UserDisplayName = {
+  display_name: 'string';
 };
 
-export type TChangeData = {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
+export type TPasswordData = {
+  oldPassword: string;
+  newPassword: string;
 };
