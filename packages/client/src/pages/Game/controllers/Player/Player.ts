@@ -17,6 +17,8 @@ export class Player {
   yPosition: number;
   sizes: TSizes;
   platforms: Platforms;
+  isDisplayUp: boolean;
+  isDead: boolean;
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms) {
     this.isMovingLeft = false;
@@ -28,6 +30,8 @@ export class Player {
     this.yPosition = sizes.height;
     this.sizes = sizes;
     this.platforms = platforms;
+    this.isDisplayUp = false;
+    this.isDead = false;
   }
 
   jump() {
@@ -129,6 +133,10 @@ export class Player {
       this.jump();
     }
 
+    // Gameover if display is up and player fall down on the bottom
+    if ((this.yPosition + this.height > this.sizes.height) && this.isDisplayUp === true) {
+      this.isDead = true;
+    }
     /**
      * When the player reaches half height, move the platforms to create the illusion of scrolling
      * and recreate the platforms that are out of viewport.
@@ -144,6 +152,7 @@ export class Player {
       if (this.currentYPosition >= 0) {
         this.yPosition += this.currentYPosition;
         this.currentYPosition += this.gravity;
+        this.isDisplayUp = true;
       }
     }
 

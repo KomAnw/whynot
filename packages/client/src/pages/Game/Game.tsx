@@ -4,9 +4,14 @@ import { TSizes } from 'pages/Game/types/types';
 import { Player } from 'pages/Game/controllers/Player/Player';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
+import { useNavigate } from 'react-router-dom';
+import { paths } from 'src/components/App/constants';
 import { Platforms } from './controllers/Platforms/Platforms';
 
+const { lose } = paths.game;
+
 export const Game = () => {
+  const navigate = useNavigate();
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -54,6 +59,12 @@ export const Game = () => {
     }
   };
 
+  const finishGame = () => {
+    if (player.isDead) {
+      navigate(lose);
+    }
+  };
+
   const update = () => {
     canvasClearFrame();
 
@@ -66,6 +77,8 @@ export const Game = () => {
     ground.draw();
 
     player.playerMovement();
+
+    finishGame();
 
     requestAnimationFrame(update);
   };
