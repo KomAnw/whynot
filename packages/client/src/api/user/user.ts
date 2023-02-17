@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiSettings } from 'src/api';
-import { TUserData, TPasswordData } from 'src/api/user/models';
+import { TUserData, TPasswordData, TAvatarData } from 'src/api/user/models';
 
 const ROOT_USER_URL = 'user';
 
@@ -18,7 +18,7 @@ export const userApi = createApi({
     changeProfile: build.mutation<TUserData, Omit<TUserData, 'id' | 'avatar'>>({
       query: profileData => ({ url: USER_ENDPOINTS.profile, method: 'PUT', body: profileData }),
     }),
-    changeAvatar: build.mutation<TUserData, FormData>({
+    changeAvatar: build.mutation<TUserData, TAvatarData>({
       query: avatarData => ({ url: USER_ENDPOINTS.avatar, method: 'PUT', body: avatarData }),
     }),
     changePassword: build.mutation<string, TPasswordData>({
