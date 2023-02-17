@@ -4,6 +4,7 @@ export const paths = {
   registration: '/registration',
   errorPage: '/errorPage',
   notFound: '/notFound',
+  logout: '/logout',
   leaderboard: '/leaderboard',
   tutorial: '/tutorial',
   game: {
@@ -21,8 +22,8 @@ export const paths = {
   settings: '/settings',
   profile: {
     index: '/profile',
-    update: 'update',
-    avatar: 'avatar',
+    updateData: 'update/data',
+    updatePassword: 'update/password',
   },
 } as const;
 
@@ -58,6 +59,7 @@ export const themes = {
           link: '#6457B8',
           linkHover: '#6457b8b3',
         },
+        spinner: '#F2CE0D',
       },
       control: {
         input: {
@@ -111,6 +113,7 @@ export const themes = {
           link: '#FFFFFF',
           linkHover: 'rgba(255, 255, 255, 0.8)',
         },
+        spinner: '#F2CE0D',
       },
       control: {
         input: {

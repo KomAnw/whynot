@@ -1,14 +1,16 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useGetUserQuery } from 'src/api/auth/auth';
 import { paths } from 'src/components/App/constants';
+import Spinner from 'src/components/Spinner';
 
 const { login } = paths;
 
 const PrivateRoute = () => {
-  const { isLoading, data } = useGetUserQuery();
+
+  const { isLoading, data} = useGetUserQuery();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return data ? <Outlet /> : <Navigate to={login} replace={true} />;

@@ -1,26 +1,25 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { Input } from 'components/Input';
-import { Button } from 'components/Button';
+import { Input } from 'src/components/Input';
+import { Button } from 'src/components/Button';
 import { H1 } from 'src/design/H1';
-import { Link } from 'components/Link';
-import { breakpoints, paths } from 'components/App/constants';
-import { formsConsts } from 'src/components/Forms/consts/formsConsts';
+import { Link } from 'src/components/Link';
+import { breakpoints, paths } from 'src/components/App/constants';
+import { formsConsts } from 'components/Forms/consts/formsConsts';
 import { TypeFormsConst } from 'components/Forms/consts/types';
 
-const registrationFields: Array<TypeFormsConst> = [
+const profileDateFields: Array<TypeFormsConst> = [
   formsConsts.firstName,
   formsConsts.secondName,
   formsConsts.login,
   formsConsts.email,
   formsConsts.phone,
-  formsConsts.password,
 ];
 
-const { login } = paths;
+const { profile } = paths;
 const { mobileM } = breakpoints;
 
-const Registration = () => {
+const ProfileData = () => {
   const {
     register,
     handleSubmit,
@@ -29,14 +28,13 @@ const Registration = () => {
     mode: 'all',
   });
 
-  // eslint-disable-next-line no-console
   const submitForm = (data: any) => console.log(data);
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
-      <H1Style> Registration </H1Style>
+      <H1Style>Profile edit</H1Style>
       <FormBody>
-        {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (
+        {profileDateFields.map(({ type, name, placeholder, label, validationRules }) => (
           <Input
             key={name}
             register={register}
@@ -51,17 +49,17 @@ const Registration = () => {
       </FormBody>
       <FormFooter>
         <Button variant="primary" type="submit">
-          REGISTER
+          Apply
         </Button>
-        <Link to={login} variant="size24">
-          LOGIN
+        <Link to={profile.index} variant="size20">
+          back
         </Link>
       </FormFooter>
     </Form>
   );
 };
 
-export default Registration;
+export default ProfileData;
 
 const H1Style = styled(H1)`
   height: 45px;
@@ -83,7 +81,7 @@ const FormFooter = styled('div')`
   align-items: center;
   gap: 5px;
   flex-shrink: 0;
-  margin: 3px auto 0;
+  margin: 27px auto 0;
 `;
 
 const Form = styled('form')`
@@ -96,8 +94,8 @@ const Form = styled('form')`
   transform: translate(-50%, -50%);
   background-color: ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
-  padding: 6px 24px;
+  padding: 12px 24px;
   @media (max-width: ${mobileM}) {
-    padding: 6px;
+    padding: 12px;
   }
 `;
