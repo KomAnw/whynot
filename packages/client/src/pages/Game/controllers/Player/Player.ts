@@ -57,7 +57,7 @@ export class Player {
    * Registration jumps out of platforms.
    */
   collides() {
-    this.platforms.data.forEach(platform => {
+    this.platforms.platformList.forEach(platform => {
       if (
         this.currentYPosition > 0 &&
         this.xPosition + 15 < platform.xPosition + platform.width &&

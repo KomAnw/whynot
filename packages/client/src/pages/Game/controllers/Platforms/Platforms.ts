@@ -23,7 +23,7 @@ class Platform {
 export class Platforms {
   position = 0;
   platformCount = 10;
-  data: Platform[] = [];
+  platformList: Platform[] = [];
   ctx: CanvasRenderingContext2D;
   sizes: TSizes;
 
@@ -38,25 +38,25 @@ export class Platforms {
 
       this.position += this.sizes.height / this.platformCount;
 
-      this.data.push(platform);
+      this.platformList.push(platform);
     }
   }
 
   calculate(playerYPosition: number) {
-    this.data.forEach((platform, index) => {
+    this.platformList.forEach((platform, index) => {
       if (playerYPosition < 0) {
         platform.yPosition -= playerYPosition;
       }
 
       if (platform.yPosition > this.sizes.height) {
-        this.data[index] = new Platform(this.ctx, this.sizes, this.position);
-        this.data[index].yPosition = platform.yPosition - this.sizes.height;
+        this.platformList[index] = new Platform(this.ctx, this.sizes, this.position);
+        this.platformList[index].yPosition = platform.yPosition - this.sizes.height;
       }
     });
   }
 
   draw() {
-    this.data.forEach(platform => {
+    this.platformList.forEach(platform => {
       platform.draw();
     });
   }
