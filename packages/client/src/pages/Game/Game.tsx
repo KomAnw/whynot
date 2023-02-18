@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useEffect, useState } from 'react';
 import { TSizes } from 'pages/Game/types/types';
 import { Player } from 'pages/Game/controllers/Player/Player';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
@@ -8,9 +8,17 @@ import { useNavigate } from 'react-router-dom';
 import { paths } from 'src/components/App/constants';
 import { Platforms } from './controllers/Platforms/Platforms';
 
-const { lose } = paths.game;
+const { lose, win } = paths.game;
 
 export const Game = () => {
+  const [count, setCount] = useState(5);
+  const [score, setScore] = useState(0);
+  const result = {
+    lose: false,
+    win: false,
+    score: 0,
+    totalScore: 0,
+  };
   const navigate = useNavigate();
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -18,6 +26,21 @@ export const Game = () => {
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount(count - 1);
+      setScore(score + Math.floor(Math.random() * 10.6));
+    }, 1000);
+
+    if (!count) {
+      clearInterval(interval);
+      navigate(win);
+      result.win = true;
+      result.score = score;
+      console.log(result);
+    }
+  }, [count, navigate, score, result]);
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     const { key } = e;
@@ -62,6 +85,9 @@ export const Game = () => {
   const finishGame = () => {
     if (player.isDead) {
       navigate(lose);
+      result.lose = true;
+      result.score = score;
+      console.log(result);
     }
   };
 
@@ -119,7 +145,9 @@ export const Game = () => {
 
   return (
     <GameWindow>
+      <div>Time remain: {count} sec.</div>
       <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
+      <div>Score: {score} points</div>
     </GameWindow>
   );
 };

@@ -134,7 +134,7 @@ export class Player {
     }
 
     // Gameover if display is up and player fall down on the bottom
-    if ((this.yPosition + this.height > this.sizes.height) && this.isDisplayUp === true) {
+    if (this.yPosition + this.height > this.sizes.height && this.isDisplayUp === true) {
       this.isDead = true;
     }
     /**
