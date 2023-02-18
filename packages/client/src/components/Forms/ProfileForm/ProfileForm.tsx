@@ -25,15 +25,19 @@ const { menu } = paths;
 const { updateData, updatePassword } = paths.profile;
 
 const Profile = (props: TypeProfileProps) => {
-  const { data } = props;
+  const { data, setIsOpenPopup } = props;
   const dataUpdate = DataRowData.map((item: TypeFormsConst) => {
     return { ...item, value: data[item.name] };
   });
 
+  const openPopup = () => {
+    setIsOpenPopup(true);
+  };
+
   return (
     <PageStyle>
       <TextH1>Profile</TextH1>
-      <Avatar src={defaultAvatar} />
+      <Avatar src={defaultAvatar} onClick={openPopup} />
       <Data>
         {dataUpdate.map((item: TypeFormsConst) => (
           <DataRow key={item.name}>
@@ -81,6 +85,10 @@ const Avatar = styled.img`
   left: 138px;
   top: 138px;
   border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
 `;
 
 const Data = styled.div`

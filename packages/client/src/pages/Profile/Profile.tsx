@@ -15,14 +15,14 @@ const valueData: TypeDataProfile = {
 };
 
 const Profile = () => {
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
+  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
 
   return (
     <Container>
-      <ProfileForm data={valueData} />
+      <ProfileForm data={valueData} setIsOpenPopup={setIsOpenPopup} />
       {isOpenPopup ? (
         <Portal>
-          <ProfileUpdateAvatar onClose={setIsOpenPopup} />
+          <ProfileUpdateAvatar setIsOpenPopup={setIsOpenPopup} />
         </Portal>
       ) : (
         <></>
