@@ -1,5 +1,11 @@
-export type TypeDataProfile = Record<string, string>
+import { Dispatch } from 'react';
+
+export type TypeDataProfile = Record<string, string>;
 
 export type TypeProfileProps = {
   data: TypeDataProfile;
+};
+
+export type TypeAvatarProps = {
+  onClose: Dispatch<boolean>;
 };
