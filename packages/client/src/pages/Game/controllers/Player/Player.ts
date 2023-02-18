@@ -1,6 +1,7 @@
 import { TSizes } from 'pages/Game/types/types';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { Platforms } from 'pages/Game/controllers/Platforms/Platforms';
+import { sprite } from 'pages/Game';
 
 export class Player {
   maxSpeed = 8;
@@ -10,6 +11,8 @@ export class Player {
   height = 40;
   isMovingLeft: boolean;
   isMovingRight: boolean;
+  isLooking2left: boolean;
+  isLooking2right: boolean;
   ctx: CanvasRenderingContext2D;
   currentYPosition: number;
   currentXPosition: number;
@@ -18,9 +21,16 @@ export class Player {
   sizes: TSizes;
   platforms: Platforms;
 
+  // Sprite clipping
+  cx = 0;
+  cy = 121;
+  cwidth = 110;
+  cheight = 80;
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms) {
     this.isMovingLeft = false;
     this.isMovingRight = false;
+    this.isLooking2left = false;
+    this.isLooking2right = false;
     this.ctx = context;
     this.currentYPosition = 11;
     this.currentXPosition = 0;
@@ -151,6 +161,9 @@ export class Player {
   }
 
   draw() {
-    this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
+    this.cy = this.isLooking2left ? 201 : 121;
+    this.cy = this.isLooking2right ? 121 : 201;
+    // this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
+    this.ctx.drawImage(sprite, this.cx, this.cy, this.cwidth, this.cheight, this.xPosition, this.yPosition, this.width, this.height);
   }
 }

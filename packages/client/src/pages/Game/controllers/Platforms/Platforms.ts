@@ -1,4 +1,5 @@
 import { TSizes } from 'pages/Game/types/types';
+import { sprite }  from "pages/Game";
 
 class Platform {
   ctx: CanvasRenderingContext2D;
@@ -8,6 +9,13 @@ class Platform {
   yPosition: number;
   currentPosition: number;
 
+  // Sprite clipping
+  cx = 0;
+  cy = 61;
+  cwidth = 105;
+  cheight = 31;
+
+
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number) {
     this.ctx = context;
     this.xPosition = Math.random() * (sizes.width - this.width);
@@ -16,7 +24,18 @@ class Platform {
   }
 
   draw() {
-    this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
+    this.ctx.drawImage(
+      sprite,
+      this.cx,
+      this.cy,
+      this.cwidth,
+      this.cheight,
+      this.xPosition,
+      this.yPosition,
+      this.width,
+      this.height
+    );
+    // this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
   }
 }
 

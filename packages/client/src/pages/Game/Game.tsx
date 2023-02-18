@@ -19,10 +19,14 @@ export const Game = () => {
 
     if (key === 'ArrowLeft') {
       player.isMovingLeft = true;
+      player.isLooking2left = player.isMovingLeft;
+      player.isLooking2right = false;
     }
 
     if (key === 'ArrowRight') {
       player.isMovingRight = true;
+      player.isLooking2right = player.isMovingRight;
+      player.isLooking2left = false;
     }
   };
 
