@@ -12,7 +12,7 @@ const Layout = () => {
 
 export default Layout;
 
-const BackgroundContainer = styled('div')`
+export const BackgroundContainer = styled('div')`
   height: 100vh;
   width: 100vw;
   background: url(${backgroundImg}) no-repeat;
