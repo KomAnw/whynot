@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 import { ButtonVariants } from 'src/components/Button/types';
 import { Children } from 'react';
 
-const { login, registration } = paths;
+const { game, registration } = paths;
 const buttons = [
   {
     variant: 'primary' as ButtonVariants,
-    to: login,
+    to: game.index,
     text: 'Sign in',
   },
   {

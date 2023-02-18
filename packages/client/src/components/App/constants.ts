@@ -22,8 +22,8 @@ export const paths = {
   settings: '/settings',
   profile: {
     index: '/profile',
-    update: 'update',
-    avatar: 'avatar',
+    updateData: 'update/data',
+    updatePassword: 'update/password',
   },
 } as const;
 

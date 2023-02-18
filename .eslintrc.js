@@ -25,6 +25,7 @@ module.exports = {
     'import/extensions': 0,
     eqeqeq: [1, 'always'],
     'no-undef': 1,
+    'no-plusplus': 0,
     'no-console': 1,
     'no-unused-vars': 0,
     'no-mixed-operators': 0,
@@ -135,6 +136,7 @@ module.exports = {
 
     'max-len': [1, { code: 120 }],
     'class-methods-use-this': 1,
+    'lines-between-class-members': 0,
     'no-useless-constructor': 1,
     'import/no-absolute-path': 0,
     'no-underscore-dangle': 0,
