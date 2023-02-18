@@ -11,14 +11,17 @@ import { Platforms } from './controllers/Platforms/Platforms';
 const { lose, win } = paths.game;
 
 export const Game = () => {
-  const [count, setCount] = useState(5);
+  const [count, setCount] = useState(10);
   const [score, setScore] = useState(0);
+  // Пока выводим все в объект
   const result = {
     lose: false,
     win: false,
     score: 0,
     totalScore: 0,
+    level: 6,
   };
+
   const navigate = useNavigate();
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -26,6 +29,7 @@ export const Game = () => {
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
+  let isLose = false;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -84,11 +88,15 @@ export const Game = () => {
 
   const finishGame = () => {
     if (player.isDead) {
+      isLose = true;
       navigate(lose);
       result.lose = true;
-      result.score = score;
       console.log(result);
     }
+  };
+
+  const finishGameOnce = () => {
+    if (!isLose) finishGame();
   };
 
   const update = () => {
@@ -104,7 +112,7 @@ export const Game = () => {
 
     player.playerMovement();
 
-    finishGame();
+    finishGameOnce();
 
     requestAnimationFrame(update);
   };

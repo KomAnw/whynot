@@ -152,7 +152,9 @@ export class Player {
       if (this.currentYPosition >= 0) {
         this.yPosition += this.currentYPosition;
         this.currentYPosition += this.gravity;
-        this.isDisplayUp = true;
+        if (this.isDisplayUp === false) {
+          this.isDisplayUp = true;
+        } 
       }
     }
 
