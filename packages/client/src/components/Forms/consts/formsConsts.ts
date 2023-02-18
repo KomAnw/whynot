@@ -1,8 +1,6 @@
 import {
   firstLetterUppercase,
-  hasCapitalLetters,
   hasNumber,
-  hasSpecialCharacter,
   lettersAndDash,
   maxAndMinLength,
   noSpaces,
@@ -15,7 +13,7 @@ export const formsConsts = {
     type: 'text',
     placeholder: 'John',
     label: 'First Name',
-    name: 'firstName',
+    name: 'first_name' as const,
     value: '',
     validationRules: {
       required: 'Required field',
@@ -30,7 +28,7 @@ export const formsConsts = {
     type: 'text',
     placeholder: 'Doe',
     label: 'Second Name',
-    name: 'secondName',
+    name: 'second_name' as const,
     value: '',
     validationRules: {
       required: 'Required field',
@@ -45,7 +43,7 @@ export const formsConsts = {
     type: 'text',
     placeholder: '',
     label: 'Display Name',
-    name: 'displayName',
+    name: 'display_name' as const,
     value: '',
     validationRules: {
       required: 'Required field',
@@ -60,7 +58,7 @@ export const formsConsts = {
     type: 'text',
     placeholder: 'JohnDoeForever',
     label: 'Login',
-    name: 'login',
+    name: 'login' as const,
     value: '',
     validationRules: {
       required: 'Required field',
@@ -75,7 +73,7 @@ export const formsConsts = {
     type: 'email',
     placeholder: 'example@gmail.com',
     label: 'Email',
-    name: 'email',
+    name: 'email' as const,
     value: '',
     validationRules: {
       required: 'Required field',
@@ -88,7 +86,7 @@ export const formsConsts = {
     type: 'tel',
     placeholder: '88005553535',
     label: 'Phone',
-    name: 'phone',
+    name: 'phone' as const,
     value: '',
     validationRules: {
       required: 'Required field',
@@ -101,16 +99,14 @@ export const formsConsts = {
     type: 'password',
     placeholder: '*****',
     label: 'Password',
-    name: 'password',
+    name: 'password' as const,
     value: '',
     validationRules: {
       required: 'Required field',
       validate: {
         spaces: (v: string) => noSpaces(v),
-        hasCapitalLetters: (v: string) => hasCapitalLetters(v),
         hasNumber: (v: string) => hasNumber(v),
-        hasSpecialCharacter: (v: string) => hasSpecialCharacter(v),
-        maxAndMinLength: (v: string) => maxAndMinLength(v, 8, 40),
+        maxAndMinLength: (v: string) => maxAndMinLength(v, 3, 40),
       },
     },
   },
@@ -118,15 +114,13 @@ export const formsConsts = {
     type: 'password',
     placeholder: '*****',
     label: 'confirm Password',
-    name: 'confirmPassword',
+    name: 'confirmPassword' as const,
     validationRules: {
       required: 'Required field',
       validate: {
         spaces: (v: string) => noSpaces(v),
-        hasCapitalLetters: (v: string) => hasCapitalLetters(v),
         hasNumber: (v: string) => hasNumber(v),
-        hasSpecialCharacter: (v: string) => hasSpecialCharacter(v),
-        maxAndMinLength: (v: string) => maxAndMinLength(v, 8, 40),
+        maxAndMinLength: (v: string) => maxAndMinLength(v, 3, 40),
       },
     },
   },
