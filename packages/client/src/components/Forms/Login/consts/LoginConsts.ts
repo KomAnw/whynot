@@ -1,8 +1,4 @@
-import {
-  lettersAndDash,
-  maxAndMinLength,
-  noSpaces,
-} from 'src/utils/validation';
+import { lettersAndDash, maxAndMinLength, noSpaces } from 'src/utils/validation';
 
 export const loginFields = [
   {
@@ -27,7 +23,7 @@ export const loginFields = [
     validationRules: {
       required: 'Required field',
       validate: {
-        maxAndMinLength: (v: string) => maxAndMinLength(v, 8, 40),
+        maxAndMinLength: (v: string) => maxAndMinLength(v, 3, 40),
       },
     },
   },

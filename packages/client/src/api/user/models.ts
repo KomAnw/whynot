@@ -1,12 +1,10 @@
-import { TUser } from 'src/api/auth/models';
+import { TUser } from '../auth/models';
 
-export type TUserData = Omit<TUser, 'password'> & { display_name: 'string' };
+export type TAvatarRequest = Record<string, File | string>;
 
-export type TAvatarData = {
-  [key: string]: File | string;
-};
-
-export type TPasswordData = {
+export type TPasswordRequest = {
   oldPassword: string;
   newPassword: string;
 };
+
+export type TChangeProfileRequest = Omit<TUser, 'id' | 'avatar'>;
