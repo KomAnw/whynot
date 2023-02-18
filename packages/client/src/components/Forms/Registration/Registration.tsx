@@ -4,7 +4,7 @@ import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
-import { breakpoints, paths } from 'components/App/constants';
+import { breakpoints, paths } from 'src/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
@@ -19,7 +19,7 @@ const registrationFields = [
   formsConsts.password,
 ];
 
-const { login, game } = paths;
+const { login, menu } = paths;
 const { mobileM } = breakpoints;
 
 const Registration = () => {
@@ -37,7 +37,7 @@ const Registration = () => {
     try {
       const response = await registration(data);
 
-      response && navigate(game.index);
+      response && navigate(menu);
     } catch (error) {
       console.log(error);
     }

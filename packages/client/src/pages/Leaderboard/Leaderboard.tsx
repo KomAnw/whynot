@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { breakpoints } from 'components/App/constants';
+import { breakpoints } from 'src/App/constants';
 import { H1 } from 'src/design/H1';
 import LeaderboardRow from 'components/LeaderboardRow';
 import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
-import { paths } from 'components/App/constants';
+import { paths } from 'src/App/constants';
 import { Link } from 'components/Link';
 
 const { mobileM } = breakpoints;
