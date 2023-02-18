@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TSignInData } from 'src/api/auth/models';
+import { TSignInRequest } from 'src/api/auth/models';
 import { useNavigate } from 'react-router-dom';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useSingInMutation } from 'src/api/auth/auth';
@@ -22,7 +22,7 @@ export const Login = () => {
   });
   const [login] = useSingInMutation();
 
-  const submitForm = async (data: TSignInData) => {
+  const submitForm = async (data: TSignInRequest) => {
     try {
       const response = await login(data);
 

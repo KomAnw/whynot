@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiSettings } from 'src/api';
-import { TSignInData, TSignUpData, TUser } from 'src/api/auth/models';
+import { TSignInRequest, TSignUpResponse, TSignUpRequest, TUser } from 'src/api/auth/models';
 
 const ROOT_AUTH_URL = 'auth';
 
@@ -19,13 +19,13 @@ export const authApi = createApi({
     getUser: build.query<TUser, void>({
       query: () => ({ url: AUTH_ENDPOINTS.user, method: 'GET' }),
     }),
-    singIn: build.mutation<string, TSignInData>({
+    singIn: build.mutation<string, TSignInRequest>({
       query: signInData => ({ url: AUTH_ENDPOINTS.singIn, method: 'POST', body: signInData, responseHandler: 'text' }),
     }),
-    singUp: build.mutation<TUser, TSignUpData>({
+    singUp: build.mutation<TSignUpResponse, TSignUpRequest>({
       query: signUpData => ({ url: AUTH_ENDPOINTS.singUp, method: 'POST', body: signUpData }),
     }),
-    logout: build.mutation<void, void>({
+    logout: build.mutation<string, void>({
       query: () => ({ url: AUTH_ENDPOINTS.logout, method: 'POST', responseHandler: 'text' }),
     }),
   }),
