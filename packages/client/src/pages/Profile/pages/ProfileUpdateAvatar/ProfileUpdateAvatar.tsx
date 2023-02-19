@@ -1,12 +1,14 @@
 import { TypeAvatarProps } from 'src/pages/Profile/types';
 import styled from 'styled-components';
 import { MiniDivForm } from 'src/design/MiniDivForm';
+import { useChangeAvatarMutation } from 'src/api/user/user'
 import { H1 } from 'src/design/H1';
 import { LinkText } from 'src/design/LinkText';
 import { Button } from 'src/components/Button';
 import { useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { InputProps, onChangeProps } from 'src/pages/Profile/pages/ProfileUpdateAvatar/types';
+import { TAvatarRequest } from 'src/api/user/models';
 
 const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
   const [fileName, setFileName] = useState('');
@@ -27,9 +29,17 @@ const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
     props.setIsOpenPopup(false);
   };
 
-  const submitForm = () => {
-    // eslint-disable-next-line no-console
-    console.log('yes');
+  const [avatar] = useChangeAvatarMutation();
+
+  const submitForm = async (data: TAvatarRequest) => {
+    try {
+      await avatar(data);
+
+      onClick();
+    } catch (error) {
+      console.log(error);
+      onClick();
+    }
   };
 
   return (
