@@ -3,16 +3,13 @@ import { breakpoints, paths } from 'src/App/constants';
 import { Label } from 'src/design/Label';
 import { H3 } from 'src/design/H3';
 import gomer from 'assets/images/gomer500.svg';
-import { useNavigate } from 'react-router-dom';
 
 const { menu } = paths;
 const { mobileM } = breakpoints;
 
 const ErrorPage = () => {
-  const navigate = useNavigate();
-
   const onclickHandler = () => {
-    navigate(menu, { replace: true });
+    window.location.replace(menu);
   };
 
   return (
