@@ -6,8 +6,8 @@ import Spinner from 'src/components/Spinner';
 const { login } = paths;
 
 const PrivateRoute = () => {
+  const { isLoading, data, error } = useGetUserQuery();
 
-  const { isLoading, data, error} = useGetUserQuery();
   console.log(error);
 
   if (isLoading) {

@@ -5,8 +5,10 @@ import { Player } from 'pages/Game/controllers/Player/Player';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
 import defaultBackground from 'assets/images/default-background.png';
-import marioBackground from 'assets/images/mario-background.png';
-import gomerBackground from 'assets/images/gomer-background.png';
+/*
+ * import marioBackground from 'assets/images/mario-background.png';
+ * import gomerBackground from 'assets/images/gomer-background.png';
+ */
 import { Platforms } from './controllers/Platforms/Platforms';
 
 export const Game = () => {
@@ -48,9 +50,11 @@ export const Game = () => {
   const canvasInit = () => {
     const canvas = canvasRef.current;
 
-    // const cy = 552 - sizes.height;
-    // const context = canvasContextRef.current;
-    // context.drawImage(sprite, 0, 614, 100, 5, 0, cy, sizes.width, sizes.height);
+    /*
+     * const cy = 552 - sizes.height;
+     * const context = canvasContextRef.current;
+     * context.drawImage(sprite, 0, 614, 100, 5, 0, cy, sizes.width, sizes.height);
+     */
 
     if (canvas) {
       canvasContextRef.current = canvas.getContext('2d');

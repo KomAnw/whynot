@@ -18,7 +18,6 @@ function App() {
         <Route element={<Layout />}>
           {/* Общие */}
           <Route index element={<Welcome />} />
-          {/*<Route path={game.index}>{gameRoutes}</Route>*/}
           <Route path={login} element={<SignIn />} />
           <Route path={registration} element={<SignUp />} />
           <Route path={errorPage} element={<ErrorPage />} />
@@ -27,7 +26,7 @@ function App() {
           <Route element={<PrivateRoute />}>
             <Route path={menu} element={<GameMenu />} />
             <Route path={leaderboard} element={<Leaderboard />} />
-            {/*<Route path={game.index}>{gameRoutes}</Route>*/}
+            <Route path={game.index}>{gameRoutes}</Route>
             <Route path={profile.index}>{profileRoutes}</Route>
             <Route path={forum.index}>{forumRoutes}</Route>
             <Route path={logout} element={<Logout />} />

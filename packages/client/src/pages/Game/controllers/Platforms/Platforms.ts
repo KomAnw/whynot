@@ -1,5 +1,5 @@
 import { TSizes } from 'pages/Game/types/types';
-import { sprite }  from "pages/Game";
+import { sprite } from 'pages/Game';
 
 class Platform {
   ctx: CanvasRenderingContext2D;
@@ -14,7 +14,6 @@ class Platform {
   cy = 0;
   cwidth = 105;
   cheight = 31;
-
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number) {
     this.ctx = context;
