@@ -3,8 +3,8 @@ import store from 'src/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Normalize } from 'styled-normalize';
-import { GlobalStyles } from './GlobalStyles';
-import App from './components/App/App';
+import { GlobalStyles } from './App/GlobalStyles';
+import App from './App/App';
 import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
 
 const rootElement = document.getElementById('root');
