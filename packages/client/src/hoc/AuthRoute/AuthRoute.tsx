@@ -3,16 +3,16 @@ import { useGetUserQuery } from 'src/api/auth/auth';
 import { paths } from 'src/App/constants';
 import Spinner from 'src/components/Spinner';
 
-const { login } = paths;
+const { menu } = paths;
 
-const PrivateRoute = () => {
-  const { isLoading, data } = useGetUserQuery();
+const AuthRoute = () => {
+  const { data, isLoading } = useGetUserQuery();
 
   if (isLoading) {
     return <Spinner />;
   }
 
-  return data ? <Outlet /> : <Navigate to={login} replace={true} />;
+  return data ? <Navigate to={menu} replace={true} /> : <Outlet />;
 };
 
-export default PrivateRoute;
+export default AuthRoute;

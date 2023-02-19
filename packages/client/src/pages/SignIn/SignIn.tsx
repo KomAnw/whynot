@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Login from 'components/Forms/Login';
-import { breakpoints } from 'components/App/constants';
+import { breakpoints } from 'src/App/constants';
 
 const { mobileM } = breakpoints;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { breakpoints } from 'src/components/App/constants';
+import { breakpoints } from 'src/App/constants';
 
 const { mobileM } = breakpoints;
 

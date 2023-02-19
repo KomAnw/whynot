@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import { paths } from 'src/components/App/constants';
+import { paths } from 'src/App/constants';
 import { Forum } from './Forum';
 
 const { edit, id, newForum, index } = paths.forum;
