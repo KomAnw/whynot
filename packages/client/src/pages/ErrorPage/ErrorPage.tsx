@@ -2,13 +2,16 @@ import styled from 'styled-components';
 import { breakpoints, paths } from 'src/App/constants';
 import { Label } from 'src/design/Label';
 import { H3 } from 'src/design/H3';
-import { Link } from 'components/Link';
 import gomer from 'assets/images/gomer500.svg';
 
-const { welcome } = paths;
+const { menu } = paths;
 const { mobileM } = breakpoints;
 
 const ErrorPage = () => {
+  const onclickHandler = () => {
+    window.location.replace(menu);
+  };
+
   return (
     <Page>
       <Container>
@@ -18,9 +21,7 @@ const ErrorPage = () => {
           <ImageHomer src={gomer} alt="Angry Gomer" />
           <BigText>500</BigText>
         </Wrapper>
-        <Link to={welcome} variant="size30">
-          <H3>в меню</H3>
-        </Link>
+        <StyledH3 onClick={onclickHandler}>в меню</StyledH3>
       </Container>
     </Page>
   );
@@ -45,6 +46,13 @@ const Container = styled.div`
 
   @media (max-width: ${mobileM}) {
     width: 354px;
+  }
+`;
+
+const StyledH3 = styled(H3)`
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
   }
 `;
 

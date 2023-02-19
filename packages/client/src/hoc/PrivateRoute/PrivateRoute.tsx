@@ -3,7 +3,7 @@ import { useGetUserQuery } from 'src/api/auth/auth';
 import { paths } from 'src/App/constants';
 import Spinner from 'src/components/Spinner';
 
-const { login } = paths;
+const { welcome } = paths;
 
 const PrivateRoute = () => {
   const { isLoading, data } = useGetUserQuery();
@@ -12,7 +12,7 @@ const PrivateRoute = () => {
     return <Spinner />;
   }
 
-  return data ? <Outlet /> : <Navigate to={login} replace={true} />;
+  return data ? <Outlet /> : <Navigate to={welcome} replace={true} />;
 };
 
 export default PrivateRoute;
