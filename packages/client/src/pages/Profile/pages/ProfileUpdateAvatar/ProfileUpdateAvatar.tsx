@@ -2,9 +2,27 @@ import { TypeAvatarProps } from 'src/pages/Profile/types';
 import styled from 'styled-components';
 import { MiniDivForm } from 'src/design/MiniDivForm';
 import { H1 } from 'src/design/H1';
-import { Button } from 'components/Button';
+import { LinkText } from 'src/design/LinkText';
+import { Button } from 'src/components/Button';
+import { useState } from 'react';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { InputProps, onChangeProps } from 'src/pages/Profile/pages/ProfileUpdateAvatar/types';
 
 const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
+  const [fileName, setFileName] = useState('');
+
+  const { register, handleSubmit } = useForm({ mode: 'all' });
+
+  const onChangeFile = (event: onChangeProps) => {
+    const { files } = event.target;
+
+    if (files) {
+      const { name } = files[0];
+
+      setFileName(name);
+    }
+  };
+
   const onClick = () => {
     props.setIsOpenPopup(false);
   };
@@ -17,9 +35,15 @@ const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
   return (
     <ModalStyle>
       <PageStyle>
-        <Form onSubmit={submitForm}>
+        <Form onSubmit={handleSubmit(submitForm as SubmitHandler<FieldValues>)}>
           <TextH1>Edit Avatar</TextH1>
-          <Input type="file" />
+          <DivInput>
+            <LabelForm>
+              <Input type="file" register={register} onChange={onChangeFile} />
+              choose file...
+            </LabelForm>
+            <FileName>{fileName}</FileName>
+          </DivInput>
           <Button variant="primary" type="submit">
             Apply
           </Button>
@@ -64,33 +88,55 @@ const PageStyle = styled(MiniDivForm)`
   justify-items: center;
   width: 354px;
   height: 372px;
-  background-color: ${({ theme }) => theme.colors.core.background.primary};
-  border-radius: 20px;
-  padding: 12px 24px;
+  padding: 24px 24px;
 `;
 
 const TextH1 = styled(H1)`
-  height: 45px;
-  margin: 14px 0 0 0;
   display: grid;
   text-align: center;
   color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
 const Form = styled.form`
-  font-style: normal;
-  font-weight: 700;
+  display: grid;
+  justify-items: center;
+  align-content: space-between;
+`;
+
+const DivInput = styled.div`
+  display: grid;
+  grid-template-columns: 98px auto;
+`;
+
+const Input = styled.input<InputProps>`
+  &[type='file'] {
+    display: none;
+  }
+`;
+
+const LabelForm = styled(LinkText).attrs({ as: 'label' })`
+  display: grid;
+  cursor: pointer;
+  text-decoration: none;
+  align-items: center;
   font-size: 20px;
-  line-height: 23px;
+  line-height: 22px;
   color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
-const Input = styled.input`
-  font-style: normal;
-  font-weight: 700;
+const FileName = styled(LinkText).attrs({ as: 'div' })`
+  display: grid;
+  height: 48px;
+  width: 220px;
+  padding: 0 5px;
+  border-radius: 5px;
+  justify-items: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.control.input.background};
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   font-size: 20px;
-  line-height: 23px;
-  background-color: deepskyblue;
+  line-height: 22px;
   color: ${({ theme }) => theme.colors.core.text.primary};
-  &
 `;
