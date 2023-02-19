@@ -1,21 +1,26 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useLogoutMutation } from 'src/api/auth/auth';
-import { paths } from 'src/components/App/constants';
+import { authApi, useLogoutMutation } from 'src/api/auth/auth';
+import { paths } from 'src/App/constants';
 import Spinner from 'src/components/Spinner';
+import { useAppDispatch } from 'src/hooks/redux';
 
 const { login, errorPage } = paths;
 
 const Logout = () => {
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     logout()
       .unwrap()
       .catch(() => navigate(errorPage))
-      .finally(() => navigate(login));
-  }, []);
+      .finally(() => {
+        dispatch(authApi.util.resetApiState());
+        navigate(login);
+      });
+  }, [dispatch, logout, navigate]);
 
   return <Spinner />;
 };

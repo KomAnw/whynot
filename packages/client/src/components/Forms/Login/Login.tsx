@@ -3,14 +3,14 @@ import { TSignInRequest } from 'src/api/auth/models';
 import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSingInMutation } from 'src/api/auth/auth';
-import { paths } from 'components/App/constants';
+import { paths } from 'src/App/constants';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
 import { formsConsts } from '../consts/formsConsts';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
-const { game } = paths;
+const { menu } = paths;
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export const Login = () => {
     try {
       const response = await login(data);
 
-      response && navigate(game.index);
+      response && navigate(menu);
     } catch (error) {
       console.log(error);
     }

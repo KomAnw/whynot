@@ -1,15 +1,16 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
-import { SignIn, SignUp, Welcome, Leaderboard, ErrorPage, GameMenu, Settings } from 'src/pages';
+import { SignIn, SignUp, Welcome, Leaderboard, GameMenu, Settings } from 'src/pages';
 import NotFoundPage from 'pages/404';
 import { gameRoutes } from 'src/pages/Game';
 import { profileRoutes } from 'src/pages/Profile';
 import { forumRoutes } from 'src/pages/Forum';
 import Logout from 'src/pages/Logout';
+import AuthRoute from 'src/hoc/AuthRoute';
 import { paths } from './constants';
 
-const { login, registration, errorPage, game, forum, leaderboard, profile, menu, logout, settings } = paths;
+const { login, registration, game, forum, leaderboard, profile, menu, logout, settings } = paths;
 
 function App() {
   return (
@@ -17,10 +18,11 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           {/* Общие */}
-          <Route index element={<Welcome />} />
-          <Route path={login} element={<SignIn />} />
-          <Route path={registration} element={<SignUp />} />
-          <Route path={errorPage} element={<ErrorPage />} />
+          <Route element={<AuthRoute />}>
+            <Route index element={<Welcome />} />
+            <Route path={login} element={<SignIn />} />
+            <Route path={registration} element={<SignUp />} />
+          </Route>
 
           {/* Приватные */}
           <Route element={<PrivateRoute />}>

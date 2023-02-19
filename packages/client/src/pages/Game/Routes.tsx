@@ -1,5 +1,5 @@
 import { Route } from 'react-router-dom';
-import { paths } from 'src/components/App/constants';
+import { paths } from 'src/App/constants';
 import { Game } from './Game';
 
 const { lose, win, index } = paths.game;
