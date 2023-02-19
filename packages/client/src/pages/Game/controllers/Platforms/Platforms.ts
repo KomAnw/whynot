@@ -11,7 +11,7 @@ class Platform {
 
   // Sprite clipping
   cx = 0;
-  cy = 61;
+  cy = 0;
   cwidth = 105;
   cheight = 31;
 

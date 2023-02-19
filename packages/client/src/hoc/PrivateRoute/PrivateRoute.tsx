@@ -7,7 +7,8 @@ const { login } = paths;
 
 const PrivateRoute = () => {
 
-  const { isLoading, data} = useGetUserQuery();
+  const { isLoading, data, error} = useGetUserQuery();
+  console.log(error);
 
   if (isLoading) {
     return <Spinner />;
