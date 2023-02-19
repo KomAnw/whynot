@@ -20,7 +20,7 @@ const Logout = () => {
         dispatch(authApi.util.resetApiState());
         navigate(login);
       });
-  }, []);
+  }, [dispatch, logout, navigate]);
 
   return <Spinner />;
 };

@@ -5,5 +5,4 @@ export type GameOverProps = {
   level: number;
 };
 
-export type ImageProps = Pick<GameOverProps, 'isWon'>
-
+export type ImageProps = Pick<GameOverProps, 'isWon'>;

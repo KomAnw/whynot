@@ -6,3 +6,4 @@ export { default as Welcome } from './Welcome';
 export { default as Leaderboard } from './Leaderboard';
 export { default as GameMenu } from './Menu';
 export { default as Settings } from './Settings';
+export { default as Tutorial } from './Tutorial';
