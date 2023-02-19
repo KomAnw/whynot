@@ -23,6 +23,7 @@ const { login, menu } = paths;
 const { mobileM } = breakpoints;
 
 const Registration = () => {
+  throw new Error('yoyo');
   const [registration] = useSingUpMutation();
   const navigate = useNavigate();
   const {

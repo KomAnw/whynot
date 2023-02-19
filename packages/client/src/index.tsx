@@ -6,7 +6,6 @@ import { Normalize } from 'styled-normalize';
 import { GlobalStyles } from './App/GlobalStyles';
 import App from './App/App';
 import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
-import ErrorBoundary from './hoc/ErrorBoundary';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement as HTMLElement);
@@ -18,9 +17,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <ThemeWrapper>
-          <ErrorBoundary>
-            <App />
-          </ErrorBoundary>
+          <App />
         </ThemeWrapper>
       </BrowserRouter>
     </Provider>
