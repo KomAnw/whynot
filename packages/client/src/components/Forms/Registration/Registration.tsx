@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
@@ -6,9 +6,11 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
 import { breakpoints, paths } from 'components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
-import { TypeFormsConst } from 'components/Forms/consts/types';
+import { TSignUpRequest } from 'src/api/auth/models';
+import { useSingUpMutation } from 'src/api/auth/auth';
+import { useNavigate } from 'react-router-dom';
 
-const registrationFields: Array<TypeFormsConst> = [
+const registrationFields = [
   formsConsts.firstName,
   formsConsts.secondName,
   formsConsts.login,
@@ -17,20 +19,29 @@ const registrationFields: Array<TypeFormsConst> = [
   formsConsts.password,
 ];
 
-const { login } = paths;
+const { login, game } = paths;
 const { mobileM } = breakpoints;
 
 const Registration = () => {
+  const [registration] = useSingUpMutation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<TSignUpRequest>({
     mode: 'all',
   });
 
-  // eslint-disable-next-line no-console
-  const submitForm = (data: any) => console.log(data);
+  const submitForm: SubmitHandler<TSignUpRequest> = async data => {
+    try {
+      const response = await registration(data);
+
+      response && navigate(game.index);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
@@ -39,12 +50,12 @@ const Registration = () => {
         {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (
           <Input
             key={name}
-            register={register}
-            errorMessage={errors[name]?.message as string}
             name={name}
+            errorMessage={errors[name]?.message}
             type={type}
             label={label}
             placeholder={placeholder}
+            register={register}
             validationRules={validationRules}
           />
         ))}

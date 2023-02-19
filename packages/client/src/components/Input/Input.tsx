@@ -7,13 +7,15 @@ import { breakpoints } from 'components/App/constants';
 
 const { mobileM } = breakpoints;
 
-export const Input = ({ name, type, label, errorMessage = '', placeholder, register, validationRules }: InputProps) => (
-  <InputContainer>
-    <LabelStyled>{label}</LabelStyled>
-    <InputStyled type={type} placeholder={placeholder} {...register(name, { ...validationRules })} />
-    <ValidationText>{errorMessage}</ValidationText>
-  </InputContainer>
-);
+export const Input = ({ name, type, label, errorMessage, placeholder, validationRules, register }: InputProps) => {
+  return (
+    <InputContainer>
+      <LabelStyled>{label}</LabelStyled>
+      <InputStyled type={type} placeholder={placeholder} {...register(name, { ...validationRules })} />
+      <ValidationText>{errorMessage}</ValidationText>
+    </InputContainer>
+  );
+};
 
 const InputContainer = styled.div`
   display: flex;
