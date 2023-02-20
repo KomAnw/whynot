@@ -2,7 +2,7 @@ import lose from 'assets/images/gomer-lose.png';
 import win from 'assets/images/gomer-win.png';
 import styled from 'styled-components';
 import { paths } from 'components/App/constants';
-import { GameOverProps, ImageProps } from 'components/GameOver/types';
+import { GameOverProps, ImageProps, ButtonProps } from 'components/GameOver/types';
 import { H1 } from 'src/design/H1';
 import { H3 } from 'src/design/H3';
 import { Text } from 'src/design/Text';
@@ -22,22 +22,25 @@ const buttons = [
     variant: 'secondary' as ButtonVariants,
     to: game.index,
     text: 'Play',
+    action: 'onClick',
   },
 ];
 
-const Buttons = () => {
+const Buttons = ({ onClick }: ButtonProps) => {
   return (
     <ButtonsContainer>
       {buttons.map(({ variant, text, to }) => (
         <Link to={to} key={text}>
-          <Button variant={variant}>{text}</Button>
+          <Button variant={variant} onClick={onClick}>
+            {text}
+          </Button>
         </Link>
       ))}
     </ButtonsContainer>
   );
 };
 
-export const GameOver = ({ isWon, level, gameScore, totalScore }: GameOverProps) => {
+export const GameOver = ({ isWon, level, gameScore, totalScore, onClick }: GameOverProps) => {
   const title = isWon ? 'Congratulations!' : 'Wasted!';
   const message = isWon ? `You've passed level ${level}!` : `Level ${level} hasn't been completed!`;
 
@@ -46,13 +49,15 @@ export const GameOver = ({ isWon, level, gameScore, totalScore }: GameOverProps)
       <Title>{title}</Title>
       <Message>{message}</Message>
       <Image isWon={isWon} />
-      <TextScore>
-        Game score:&nbsp; <TextBold>{gameScore}</TextBold>{' '}
-      </TextScore>
-      <TextScore>
-        Total score:&nbsp; <TextBold>{totalScore}</TextBold>
-      </TextScore>
-      <Buttons />
+      <Wrapper>
+        <TextScore>Game score:&nbsp;</TextScore>
+        <TextBold>{gameScore}</TextBold>
+      </Wrapper>
+      <Wrapper>
+        <TextScore>Total score:&nbsp;</TextScore>
+        <TextBold>{totalScore}</TextBold>
+      </Wrapper>
+      <Buttons onClick={onClick} />
     </InnerContainer>
   );
 };
@@ -62,6 +67,11 @@ const Image = styled.div<ImageProps>`
   height: 354px;
   background-image: url(${props => (props.isWon ? win : lose)});
   background-repeat: no-repeat;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 const InnerContainer = styled('div')`
@@ -88,7 +98,6 @@ const Message = styled(H3)`
 `;
 
 const TextScore = styled(Text)`
-  display: flex;
   text-align: left;
   width: 100%;
 `;

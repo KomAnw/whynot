@@ -19,6 +19,7 @@ export class Player {
   platforms: Platforms;
   isDisplayUp: boolean;
   isDead: boolean;
+  sum: number;
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms) {
     this.isMovingLeft = false;
@@ -32,6 +33,7 @@ export class Player {
     this.platforms = platforms;
     this.isDisplayUp = false;
     this.isDead = false;
+    this.sum = 0;
   }
 
   jump() {
@@ -152,9 +154,10 @@ export class Player {
       if (this.currentYPosition >= 0) {
         this.yPosition += this.currentYPosition;
         this.currentYPosition += this.gravity;
+        this.sum += Math.floor(this.currentYPosition);
         if (this.isDisplayUp === false) {
           this.isDisplayUp = true;
-        } 
+        }
       }
     }
 

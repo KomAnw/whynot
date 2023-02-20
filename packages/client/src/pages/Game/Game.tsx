@@ -4,47 +4,49 @@ import { TSizes } from 'pages/Game/types/types';
 import { Player } from 'pages/Game/controllers/Player/Player';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
-import { useNavigate } from 'react-router-dom';
-import { paths } from 'src/components/App/constants';
+import Portal from 'src/components/Portal';
+import { Text } from 'src/design/Text';
 import { Platforms } from './controllers/Platforms/Platforms';
-
-const { lose, win } = paths.game;
+import GameOverPage from './pages/GameOverPage';
 
 export const Game = () => {
-  const [count, setCount] = useState(10);
+  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
+  const [count, setCount] = useState(500);
   const [score, setScore] = useState(0);
-  // Пока выводим все в объект
-  const result = {
-    lose: false,
-    win: false,
-    score: 0,
-    totalScore: 0,
-    level: 6,
-  };
+  const [finalScore, setFinalScore] = useState(0);
+  const [isLose, setIsLose] = useState<boolean>(false);
+  const [isWon, setIsWon] = useState<boolean>();
 
-  const navigate = useNavigate();
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
-  let isLose = false;
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCount(count - 1);
-      setScore(score + Math.floor(Math.random() * 10.6));
-    }, 1000);
+    const timer: any = count > 0 && setInterval(() => setCount(count - 1), 10);
+    let switcher = false;
 
-    if (!count) {
-      clearInterval(interval);
-      navigate(win);
-      result.win = true;
-      result.score = score;
-      console.log(result);
+    if (count === 0) {
+      setIsWon(true);
+      if (!switcher) {
+        switcher = true;
+        setFinalScore(score);
+        clearInterval(timer);
+      }
+      openPopup();
     }
-  }, [count, navigate, score, result]);
+
+    if (isLose) {
+      setIsLose(true);
+      setScore(0);
+      clearInterval(timer);
+      openPopup();
+    }
+
+    return () => clearInterval(timer);
+  }, [count]);
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     const { key } = e;
@@ -86,35 +88,30 @@ export const Game = () => {
     }
   };
 
-  const finishGame = () => {
-    if (player.isDead) {
-      isLose = true;
-      navigate(lose);
-      result.lose = true;
-      console.log(result);
-    }
-  };
-
-  const finishGameOnce = () => {
-    if (!isLose) finishGame();
-  };
-
   const update = () => {
-    canvasClearFrame();
+    if (!player.isDead) {
+      setScore(player.sum);
 
-    player.calculatePlayerActions();
+      setIsLose(false);
 
-    platforms.draw();
+      canvasClearFrame();
 
-    player.draw();
+      player.calculatePlayerActions();
 
-    ground.draw();
+      platforms.draw();
 
-    player.playerMovement();
+      player.draw();
 
-    finishGameOnce();
+      ground.draw();
 
-    requestAnimationFrame(update);
+      player.playerMovement();
+
+      requestAnimationFrame(update);
+    } else {
+      setIsLose(true);
+
+      requestAnimationFrame(update);
+    }
   };
 
   const init = () => {
@@ -151,12 +148,44 @@ export const Game = () => {
     document.removeEventListener('keyup', onKeyUpHandler);
   });
 
+  const openPopup = () => {
+    setIsOpenPopup(true);
+  };
+
+  const startGameAgain = () => {
+    setCount(0);
+  };
+
   return (
-    <GameWindow>
-      <div>Time remain: {count} sec.</div>
-      <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
-      <div>Score: {score} points</div>
-    </GameWindow>
+    <>
+      {isOpenPopup ? (
+        <Portal>
+          <GameOverPage
+            setIsOpenPopup={setIsOpenPopup}
+            startGameAgain={startGameAgain}
+            level={6}
+            score={finalScore}
+            totalScore={1200}
+            win={isWon}
+          />
+        </Portal>
+      ) : (
+        <GameWindow>
+          <Wrapper>
+            <Wrapper>
+              <TextScore>Time remain:&nbsp;</TextScore>
+              <TextBold>{count}</TextBold>
+            </Wrapper>
+            <Wrapper>
+              <TextScore>Score:&nbsp;</TextScore>
+              <TextBold>{score}&nbsp;points</TextBold>
+            </Wrapper>
+          </Wrapper>
+
+          <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
+        </GameWindow>
+      )}
+    </>
   );
 };
 
@@ -166,4 +195,19 @@ const GameWindow = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+`;
+
+const TextScore = styled(Text)`
+  text-align: left;
+  width: 100%;
+`;
+
+const TextBold = styled(Text)`
+  font-weight: bold;
 `;

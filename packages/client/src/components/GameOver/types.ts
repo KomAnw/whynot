@@ -3,7 +3,11 @@ export type GameOverProps = {
   gameScore: number;
   totalScore: number;
   level: number;
+  onClick: () => void;
 };
 
-export type ImageProps = Pick<GameOverProps, 'isWon'>
+export type ButtonProps = {
+  onClick: () => void;
+};
 
+export type ImageProps = Pick<GameOverProps, 'isWon'>;
