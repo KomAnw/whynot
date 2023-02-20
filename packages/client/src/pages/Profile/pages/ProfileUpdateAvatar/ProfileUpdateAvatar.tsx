@@ -1,55 +1,49 @@
 import { TypeAvatarProps } from 'src/pages/Profile/types';
 import styled from 'styled-components';
 import { MiniDivForm } from 'src/design/MiniDivForm';
-import { useChangeAvatarMutation } from 'src/api/user/user'
+import { useChangeAvatarMutation } from 'src/api/user/user';
 import { H1 } from 'src/design/H1';
 import { LinkText } from 'src/design/LinkText';
 import { Button } from 'src/components/Button';
-import { useState } from 'react';
+import { InputHTMLAttributes, useState } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
-import { InputProps, onChangeProps } from 'src/pages/Profile/pages/ProfileUpdateAvatar/types';
-import { TAvatarRequest } from 'src/api/user/models';
 
 const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
+  const [avatar] = useChangeAvatarMutation();
+
   const [fileName, setFileName] = useState('');
 
-  const { register, handleSubmit } = useForm({ mode: 'all' });
+  const { register, handleSubmit, getValues } = useForm();
 
-  const onChangeFile = (event: onChangeProps) => {
-    const { files } = event.target;
-
-    if (files) {
-      const { name } = files[0];
-
-      setFileName(name);
-    }
+  const onChangeFile = () => {
+    setFileName(getValues().file[0].name);
   };
 
   const onClick = () => {
     props.setIsOpenPopup(false);
   };
 
-  const [avatar] = useChangeAvatarMutation();
-
-  const submitForm = async (data: TAvatarRequest) => {
+  const submitForm: SubmitHandler<FieldValues> = async data => {
     try {
-      await avatar(data);
+      const formData: FormData = new FormData();
 
-      onClick();
+      formData.append('avatar', data.file[0]);
+      const response = await avatar(formData);
+
+      response && onClick();
     } catch (error) {
       console.log(error);
-      onClick();
     }
   };
 
   return (
     <ModalStyle>
       <PageStyle>
-        <Form onSubmit={handleSubmit(submitForm as SubmitHandler<FieldValues>)}>
+        <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeFile}>
           <TextH1>Edit Avatar</TextH1>
           <DivInput>
             <LabelForm>
-              <Input type="file" register={register} onChange={onChangeFile} />
+              <Input type="file" {...register('file')} />
               choose file...
             </LabelForm>
             <FileName>{fileName}</FileName>
@@ -107,7 +101,7 @@ const TextH1 = styled(H1)`
   color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
-const Form = styled.form`
+const Form = styled('form')`
   display: grid;
   justify-items: center;
   align-content: space-between;
@@ -118,7 +112,7 @@ const DivInput = styled.div`
   grid-template-columns: 98px auto;
 `;
 
-const Input = styled.input<InputProps>`
+const Input = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`
   &[type='file'] {
     display: none;
   }
