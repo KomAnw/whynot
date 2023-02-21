@@ -5,7 +5,7 @@ import { paths } from 'src/App/constants';
 import Spinner from 'src/components/Spinner';
 import { useAppDispatch } from 'src/hooks/redux';
 
-const { login, errorPage } = paths;
+const { welcome, errorPage } = paths;
 
 const Logout = () => {
   const [logout] = useLogoutMutation();
@@ -18,7 +18,7 @@ const Logout = () => {
       .catch(() => navigate(errorPage))
       .finally(() => {
         dispatch(authApi.util.resetApiState());
-        navigate(login);
+        navigate(welcome);
       });
   }, [dispatch, logout, navigate]);
 
