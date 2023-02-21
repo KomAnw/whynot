@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 import { ButtonVariants } from 'src/components/Button/types';
 import { Children } from 'react';
 
-const { game, registration } = paths;
+const { login, registration } = paths;
 const buttons = [
   {
     variant: 'primary' as ButtonVariants,
-    to: game.index,
+    to: login,
     text: 'Sign in',
   },
   {
@@ -83,7 +83,6 @@ const ButtonsContainer = styled('div')`
 `;
 
 const Title = styled(H1)`
-  margin: 0;
   margin-bottom: 19px;
 
   @media (max-width: ${breakpoints.mobileM}) {
