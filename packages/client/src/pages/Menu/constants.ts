@@ -1,6 +1,6 @@
-import { paths } from 'components/App/constants';
+import { paths } from 'src/App/constants';
 
-const { tutorial, profile, leaderboard, forum, game, welcome, settings } = paths;
+const { tutorial, profile, leaderboard, forum, game, logout, settings } = paths;
 
 export const listMenu = [
   {
@@ -35,7 +35,7 @@ export const listMenu = [
   },
   {
     name: 'Exit',
-    path: welcome,
+    path: logout,
     type: 'link',
   },
 ] as const;

@@ -1,15 +1,17 @@
 import styled from 'styled-components';
-import { TSignInData } from 'src/api/auth/models';
+import { TSignInRequest } from 'src/api/auth/models';
 import { useNavigate } from 'react-router-dom';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSingInMutation } from 'src/api/auth/auth';
-import { paths } from 'components/App/constants';
+import { paths } from 'src/App/constants';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
-import { loginFields } from './consts/LoginConsts';
+import { Link } from 'src/components/Link';
+import { formsConsts } from '../consts/formsConsts';
 
-const { game } = paths;
+const registrationFields = [formsConsts.login, formsConsts.password];
+const { menu, registration } = paths;
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -17,34 +19,34 @@ export const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<TSignInRequest>({
     mode: 'all',
   });
   const [login] = useSingInMutation();
 
-  const submitForm = async (data: TSignInData) => {
+  const submitForm: SubmitHandler<TSignInRequest> = async data => {
     try {
       const response = await login(data);
 
-      response && navigate(game.index);
+      response && navigate(menu);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitForm as SubmitHandler<FieldValues>)}>
+    <Form onSubmit={handleSubmit(submitForm)}>
       <FormHeader>Login</FormHeader>
       <FormBody>
-        {loginFields.map(({ type, name, placeholder, label, validationRules }) => (
+        {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (
           <Input
             key={name}
-            register={register}
-            errorMessage={errors[name]?.message as string}
             name={name}
+            errorMessage={errors[name]?.message}
             type={type}
             label={label}
             placeholder={placeholder}
+            register={register}
             validationRules={validationRules}
           />
         ))}
@@ -53,6 +55,9 @@ export const Login = () => {
         <Button variant="primary" type="submit">
           LOGIN
         </Button>
+        <Link to={registration} variant="size24">
+          Registration
+        </Link>
       </FormFooter>
     </Form>
   );
@@ -75,8 +80,8 @@ const FormBody = styled('div')`
 `;
 
 const FormFooter = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
   margin-top: 45px;
 `;

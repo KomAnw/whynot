@@ -1,6 +1,7 @@
 import { TSizes } from 'pages/Game/types/types';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { Platforms } from 'pages/Game/controllers/Platforms/Platforms';
+import { Score } from 'pages/Game/controllers/Score/Score';
 
 export class Player {
   maxSpeed = 8;
@@ -17,9 +18,9 @@ export class Player {
   yPosition: number;
   sizes: TSizes;
   platforms: Platforms;
-  isDisplayUp: boolean;
-  isDead: boolean;
-  sum: number;
+
+  isDisplayUp = false;
+  isDead = false;
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms) {
     this.isMovingLeft = false;
@@ -31,9 +32,6 @@ export class Player {
     this.yPosition = sizes.height;
     this.sizes = sizes;
     this.platforms = platforms;
-    this.isDisplayUp = false;
-    this.isDead = false;
-    this.sum = 0;
   }
 
   jump() {
@@ -63,7 +61,7 @@ export class Player {
    * Registration jumps out of platforms.
    */
   collides() {
-    this.platforms.data.forEach(platform => {
+    this.platforms.platformList.forEach(platform => {
       if (
         this.currentYPosition > 0 &&
         this.xPosition + 15 < platform.xPosition + platform.width &&
@@ -74,6 +72,10 @@ export class Player {
         this.jump();
       }
     });
+  }
+
+  gameOver() {
+    this.isDead = true;
   }
 
   calculatePlayerActions() {
@@ -135,10 +137,13 @@ export class Player {
       this.jump();
     }
 
-    // Gameover if display is up and player fall down on the bottom
-    if (this.yPosition + this.height > this.sizes.height && this.isDisplayUp === true) {
-      this.isDead = true;
+    /**
+     * Gameover if display is up and player fall down on the bottom
+     */
+    if (this.yPosition + this.height > this.sizes.height && this.isDisplayUp) {
+      this.gameOver();
     }
+
     /**
      * When the player reaches half height, move the platforms to create the illusion of scrolling
      * and recreate the platforms that are out of viewport.
@@ -154,8 +159,10 @@ export class Player {
       if (this.currentYPosition >= 0) {
         this.yPosition += this.currentYPosition;
         this.currentYPosition += this.gravity;
-        this.sum += Math.floor(this.currentYPosition);
-        if (this.isDisplayUp === false) {
+
+        Score.updateScore();
+
+        if (!this.isDisplayUp) {
           this.isDisplayUp = true;
         }
       }

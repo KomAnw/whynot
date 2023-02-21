@@ -1,5 +1,6 @@
 import { Component, ErrorInfo } from 'react';
-import { H3 } from 'src/design/H3';
+import { ErrorPage } from 'src/pages';
+import { BackgroundContainer } from '../Layout/Layout';
 import { Props, State } from './types';
 
 class ErrorBoundary extends Component<Props, State> {
@@ -21,7 +22,11 @@ class ErrorBoundary extends Component<Props, State> {
 
   public render() {
     if (this.state.hasError) {
-      return <H3>Что то пошло не так...</H3>;
+      return (
+        <BackgroundContainer>
+          <ErrorPage />
+        </BackgroundContainer>
+      );
     }
 
     return this.props.children;

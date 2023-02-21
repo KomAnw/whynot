@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { breakpoints, paths } from 'src/components/App/constants';
+import { breakpoints, paths } from 'src/App/constants';
 import { H1 } from 'src/design/H1';
 import { H3 } from 'src/design/H3';
 import { Link } from 'src/components/Link';
@@ -44,7 +44,7 @@ const Profile = (props: TypeProfileProps) => {
       </Data>
       <TextLink>
         <Link to={updateData} variant="size24">
-          Edit date
+          Edit data
         </Link>
       </TextLink>
       <TextLink>

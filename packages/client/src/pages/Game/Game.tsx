@@ -1,52 +1,23 @@
 import styled from 'styled-components';
-import { useMemo, useRef, useEffect, useState } from 'react';
-import { TSizes } from 'pages/Game/types/types';
-import { Player } from 'pages/Game/controllers/Player/Player';
-import { Ground } from 'pages/Game/controllers/Ground/Ground';
+import { useMemo, useRef, useState } from 'react';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
-import Portal from 'src/components/Portal';
 import { Text } from 'src/design/Text';
+import { Score } from 'pages/Game/controllers/Score/Score';
+import GameResult from './components/GameResult';
+import { TSizes } from './types/types';
+import { Player } from './controllers/Player/Player';
 import { Platforms } from './controllers/Platforms/Platforms';
-import GameOverPage from './pages/GameOverPage';
+import { Ground } from './controllers/Ground/Ground';
 
-export const Game = () => {
+const Game = () => {
   const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
-  const [count, setCount] = useState(500);
-  const [score, setScore] = useState(0);
-  const [finalScore, setFinalScore] = useState(0);
-  const [isLose, setIsLose] = useState<boolean>(false);
-  const [isWon, setIsWon] = useState<boolean>();
-
+  const [stateScore, setStateScore] = useState(Score.count);
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
-
-  useEffect(() => {
-    const timer: any = count > 0 && setInterval(() => setCount(count - 1), 10);
-    let switcher = false;
-
-    if (count === 0) {
-      setIsWon(true);
-      if (!switcher) {
-        switcher = true;
-        setFinalScore(score);
-        clearInterval(timer);
-      }
-      openPopup();
-    }
-
-    if (isLose) {
-      setIsLose(true);
-      setScore(0);
-      clearInterval(timer);
-      openPopup();
-    }
-
-    return () => clearInterval(timer);
-  }, [count]);
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     const { key } = e;
@@ -90,10 +61,6 @@ export const Game = () => {
 
   const update = () => {
     if (!player.isDead) {
-      setScore(player.sum);
-
-      setIsLose(false);
-
       canvasClearFrame();
 
       player.calculatePlayerActions();
@@ -106,12 +73,22 @@ export const Game = () => {
 
       player.playerMovement();
 
-      requestAnimationFrame(update);
-    } else {
-      setIsLose(true);
+      setStateScore(Score.count);
 
       requestAnimationFrame(update);
+    } else {
+      setIsOpenPopup(true);
     }
+  };
+
+  const reset = () => {
+    Score.resetScore();
+
+    canvasClearFrame();
+
+    init();
+
+    update();
   };
 
   const init = () => {
@@ -148,40 +125,25 @@ export const Game = () => {
     document.removeEventListener('keyup', onKeyUpHandler);
   });
 
-  const openPopup = () => {
-    setIsOpenPopup(true);
-  };
-
   const startGameAgain = () => {
-    setCount(0);
+    reset();
   };
 
   return (
     <>
       {isOpenPopup ? (
-        <Portal>
-          <GameOverPage
-            setIsOpenPopup={setIsOpenPopup}
-            startGameAgain={startGameAgain}
-            level={6}
-            score={finalScore}
-            totalScore={1200}
-            win={isWon}
-          />
-        </Portal>
+        <GameResult
+          setIsOpenPopup={setIsOpenPopup}
+          startGameAgain={startGameAgain}
+          score={50}
+          totalScore={1200}
+          isWon={false}
+        />
       ) : (
         <GameWindow>
-          <Wrapper>
-            <Wrapper>
-              <TextScore>Time remain:&nbsp;</TextScore>
-              <TextBold>{count}</TextBold>
-            </Wrapper>
-            <Wrapper>
-              <TextScore>Score:&nbsp;</TextScore>
-              <TextBold>{score}&nbsp;points</TextBold>
-            </Wrapper>
-          </Wrapper>
-
+          <TextScore>
+            Score: <b> {stateScore} points </b>
+          </TextScore>
           <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
         </GameWindow>
       )}
@@ -197,17 +159,9 @@ const GameWindow = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-`;
-
 const TextScore = styled(Text)`
   text-align: left;
   width: 100%;
 `;
 
-const TextBold = styled(Text)`
-  font-weight: bold;
-`;
+export default Game;
