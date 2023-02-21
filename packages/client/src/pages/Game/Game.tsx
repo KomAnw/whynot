@@ -43,6 +43,16 @@ const Game = () => {
     }
   };
 
+  const addHandlers = () => {
+    document.addEventListener('keydown', onKeyDownHandler);
+    document.addEventListener('keyup', onKeyUpHandler);
+  };
+
+  const removeHandlers = () => {
+    document.removeEventListener('keydown', onKeyDownHandler);
+    document.removeEventListener('keyup', onKeyUpHandler);
+  };
+
   const canvasInit = () => {
     const canvas = canvasRef.current;
 
@@ -82,6 +92,8 @@ const Game = () => {
   };
 
   const reset = () => {
+    removeHandlers();
+
     Score.resetScore();
 
     canvasClearFrame();
@@ -98,6 +110,8 @@ const Game = () => {
       return;
     }
 
+    addHandlers();
+
     platforms = new Platforms(context, sizes);
 
     player = new Player(context, sizes, platforms);
@@ -108,10 +122,6 @@ const Game = () => {
   };
 
   useDidMount(() => {
-    document.addEventListener('keydown', onKeyDownHandler);
-
-    document.addEventListener('keyup', onKeyUpHandler);
-
     canvasInit();
 
     init();
@@ -120,9 +130,7 @@ const Game = () => {
   });
 
   useWillUnmount(() => {
-    document.removeEventListener('keydown', onKeyDownHandler);
-
-    document.removeEventListener('keyup', onKeyUpHandler);
+    removeHandlers();
   });
 
   const startGameAgain = () => {
@@ -131,7 +139,7 @@ const Game = () => {
 
   return (
     <>
-      {isPopupOpen ? (
+      {isPopupOpen && (
         <GameResult
           setIsPopupOpen={setIsPopupOpen}
           startGameAgain={startGameAgain}
@@ -139,14 +147,13 @@ const Game = () => {
           totalScore={1200}
           isWon={false}
         />
-      ) : (
-        <GameWindow>
-          <TextScore>
-            Score: <b> {stateScore} points </b>
-          </TextScore>
-          <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
-        </GameWindow>
       )}
+      <GameWindow>
+        <TextScore>
+          Score: <b> {stateScore} points </b>
+        </TextScore>
+        <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
+      </GameWindow>
     </>
   );
 };
