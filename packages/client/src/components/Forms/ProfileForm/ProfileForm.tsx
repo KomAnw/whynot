@@ -10,6 +10,7 @@ import { MiniDivForm } from 'src/design/MiniDivForm';
 import { TypeProfileProps } from 'src/pages/Profile/types';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { TypeFormsConst } from 'src/components/Forms/consts/types';
+import { baseUrlAvatar } from 'src/api';
 
 const DataRowData: Array<TypeFormsConst> = [
   formsConsts.firstName,
@@ -33,7 +34,7 @@ const Profile = (props: TypeProfileProps) => {
   return (
     <PageStyle>
       <TextH1>Profile</TextH1>
-      <Avatar src={defaultAvatar} />
+      <Avatar src={data.avatar ? baseUrlAvatar + data.avatar : defaultAvatar} />
       <Data>
         {dataUpdate.map((item: TypeFormsConst) => (
           <DataRow key={item.name}>
@@ -78,8 +79,8 @@ const TextH1 = styled(H1)`
 
 const Avatar = styled.img`
   margin: 22px 0 0 0;
-  left: 138px;
-  top: 138px;
+  height: 138px;
+  width: 138px;
   border-radius: 50%;
 `;
 

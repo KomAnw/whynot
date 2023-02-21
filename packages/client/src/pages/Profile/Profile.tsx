@@ -1,20 +1,19 @@
 import styled from 'styled-components';
 import { CenterDivContainer } from 'src/design/CenterDivContainer';
 import ProfileForm from 'src/components/Forms/ProfileForm/ProfileForm';
-import { TypeDataProfile } from 'src/pages/Profile/types';
-
-const valueData: TypeDataProfile = {
-  firstName: 'Иван',
-  secondName: 'Иванов',
-  login: 'Ivan2002',
-  email: 'Ivan2002',
-  phone: '+79053333333',
-};
+import { useGetUserQuery } from 'src/api/auth/auth';
 
 const Profile = () => {
+  const { data } = useGetUserQuery();
+  let dataUser = {};
+
+  if (data) {
+    dataUser = data;
+  }
+
   return (
     <Container>
-      <ProfileForm data={valueData} />
+      <ProfileForm data={dataUser} />
     </Container>
   );
 };

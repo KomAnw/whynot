@@ -5,3 +5,5 @@ export const apiSettings: FetchBaseQueryArgs = {
   credentials: 'include',
   timeout: 5000,
 };
+
+export const baseUrlAvatar = `${apiSettings.baseUrl}/resources`;
