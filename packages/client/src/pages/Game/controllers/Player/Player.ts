@@ -39,10 +39,6 @@ export class Player {
     this.currentYPosition = this.jumpHeight;
   }
 
-  jumpHigh() {
-    this.currentYPosition = this.jumpHeight * 2;
-  }
-
   playerMovement() {
     this.yPosition += this.currentYPosition;
     this.currentYPosition += this.gravity;
