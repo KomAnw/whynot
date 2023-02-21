@@ -98,10 +98,6 @@ const Game = () => {
       return;
     }
 
-    document.addEventListener('keydown', onKeyDownHandler);
-
-    document.addEventListener('keyup', onKeyUpHandler);
-
     platforms = new Platforms(context, sizes);
 
     player = new Player(context, sizes, platforms);
@@ -112,6 +108,10 @@ const Game = () => {
   };
 
   useDidMount(() => {
+    document.addEventListener('keydown', onKeyDownHandler);
+
+    document.addEventListener('keyup', onKeyUpHandler);
+
     canvasInit();
 
     init();
