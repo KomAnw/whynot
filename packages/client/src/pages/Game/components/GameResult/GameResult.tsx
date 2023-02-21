@@ -2,9 +2,9 @@ import GameOver from 'src/components/GameOver';
 import Portal from 'components/Portal';
 import { GameResultProps } from './types';
 
-const GameResult = ({ score, isWon, totalScore, setIsOpenPopup, startGameAgain }: GameResultProps) => {
+const GameResult = ({ score, isWon, totalScore, setIsPopupOpen, startGameAgain }: GameResultProps) => {
   const onClick = () => {
-    setIsOpenPopup(false);
+    setIsPopupOpen(false);
     startGameAgain();
   };
 

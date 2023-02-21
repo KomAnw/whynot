@@ -10,7 +10,7 @@ import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
 
 const Game = () => {
-  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [stateScore, setStateScore] = useState(Score.count);
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -77,7 +77,7 @@ const Game = () => {
 
       requestAnimationFrame(update);
     } else {
-      setIsOpenPopup(true);
+      setIsPopupOpen(true);
     }
   };
 
@@ -131,9 +131,9 @@ const Game = () => {
 
   return (
     <>
-      {isOpenPopup ? (
+      {isPopupOpen ? (
         <GameResult
-          setIsOpenPopup={setIsOpenPopup}
+          setIsPopupOpen={setIsPopupOpen}
           startGameAgain={startGameAgain}
           score={50}
           totalScore={1200}
