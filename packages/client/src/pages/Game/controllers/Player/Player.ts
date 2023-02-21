@@ -137,7 +137,7 @@ export class Player {
     }
 
     /**
-     * Gameover if display is up and player fall down on the bottom
+     * Game-over if display is up and player fall down on the bottom
      */
     if (
       this.ground.yPosition > this.sizes.height &&
