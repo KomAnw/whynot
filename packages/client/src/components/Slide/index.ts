@@ -1,1 +1,1 @@
-export { default } from './Slide';
+export { SlideHistory, SlideTutorial } from './Slide';

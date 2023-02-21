@@ -1,5 +1,5 @@
 /* eslint-disable */
-export const slidesData = [
+export const Story = [
   {
     text: `Our hero is a little cute creature living in a world where everything interacts with amazing weightless
     platforms. He was just an ordinary inhabitant of his world until he learned about a mysterious giant castle
@@ -26,6 +26,17 @@ export const slidesData = [
     move forward, hoping to find answers to his questions, and maybe something more.`,
     image:
       'https://banner2.cleanpng.com/20180613/pqv/kisspng-computer-icons-clip-art-fairy-castle-5b20abe57fa568.5033202415288678135229.jpg',
+  },
+];
+
+export const Tutorial = [
+  {
+    text: `Here is the default control, but you can change it in the settings`,
+    image: 'https://pixelartmaker-data-78746291193.nyc3.digitaloceanspaces.com/image/92aa5c4689f0115.png',
+  },
+  {
+    text: `Don't forget to go to the game settings:`,
+    image: '',
   },
 ];
 

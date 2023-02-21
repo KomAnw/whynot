@@ -22,7 +22,7 @@
     "react-spinners": "0.13.8",
     "styled-components": "5.3.6",
     "styled-normalize": "8.0.7",
-    "swiper": "^9.0.5"
+    "swiper": "9.0.5"
   },
   "devDependencies": {
     "@testing-library/react": "13.3.0",

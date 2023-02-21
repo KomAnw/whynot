@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from 'src/hoc/Layout';
 import PrivateRoute from 'src/hoc/PrivateRoute';
-import { SignUp, Welcome, Leaderboard, GameMenu, Settings, SignIn, Page404 } from 'src/pages';
+import { SignUp, Welcome, Leaderboard, GameMenu, Settings, SignIn, Page404, Tutorial } from 'src/pages';
 import { gameRoutes } from 'src/pages/Game';
 import { profileRoutes } from 'src/pages/Profile';
 import { forumRoutes } from 'src/pages/Forum';

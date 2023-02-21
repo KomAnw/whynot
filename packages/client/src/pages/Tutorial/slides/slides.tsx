@@ -1,27 +1,33 @@
 import { Link } from 'react-router-dom';
 import { paths } from 'src/App/constants';
 import { Button } from 'src/components/Button';
-import Slide from 'src/components/Slide';
+import { SlideHistory, SlideTutorial } from 'src/components/Slide';
 import styled from 'styled-components';
-import { slidesData } from './constants';
+import { Story, Tutorial } from './constants';
 
 const PlayButton = () => (
-  <StyledLink to={paths.game.index}>
-    <Button variant="secondary">Let's play</Button>
-  </StyledLink>
+  <Container>
+    <StyledLink to={paths.game.index}>
+      <Button variant="secondary">Let's play</Button>
+    </StyledLink>
+  </Container>
 );
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
+const Container = styled('div')`
   width: 100%;
-  height: 400px;
+  height: 100%;
   display: grid;
   justify-content: center;
   align-content: center;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 const slides = [
-  ...slidesData.map((props, id) => <Slide {...props} id={id} key={props.text} />),
+  ...Story.map((props, id) => <SlideHistory {...props} id={id} key={props.text} />),
+  ...Tutorial.map(props => <SlideTutorial {...props} key={props.text} />),
   <PlayButton key="button" />,
 ];
 
