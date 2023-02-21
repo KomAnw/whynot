@@ -1,10 +1,12 @@
+import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { paths } from 'src/App/constants';
-import ProfilePassword from 'src/components/Forms/ProfilePassword/ProfilePassword';
-import ProfileUpdateData from './pages/ProfileUpdateData';
-import Profile from './Profile';
+import WithSuspense from 'src/hoc/WithSuspence';
 
 const { updateData, updatePassword, index } = paths.profile;
+const Profile = WithSuspense(lazy(() => import('./Profile')));
+const ProfilePassword = WithSuspense(lazy(() => import('./pages/ProfileUpdatePassword')));
+const ProfileUpdateData = WithSuspense(lazy(() => import('./pages/ProfileUpdateData')));
 
 export const routes = [
   <Route index element={<Profile />} key={index} />,

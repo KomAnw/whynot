@@ -1,9 +1,11 @@
-export { default as Page404 } from './404';
-export { default as ErrorPage } from './ErrorPage';
-export { default as SignIn } from './SignIn';
-export { default as SignUp } from './SignUp';
-export { default as Welcome } from './Welcome';
-export { default as Leaderboard } from './Leaderboard';
-export { default as GameMenu } from './Menu';
-export { default as Settings } from './Settings';
-export { default as Tutorial } from './Tutorial';
+import { lazy } from 'react';
+import WithSuspense from 'src/hoc/WithSuspence';
+
+export const Page404 = WithSuspense(lazy(() => import('./404')));
+export const ErrorPage = WithSuspense(lazy(() => import('./ErrorPage')));
+export const SignIn = WithSuspense(lazy(() => import('./SignIn')));
+export const SignUp = WithSuspense(lazy(() => import('./SignUp')));
+export const Welcome = WithSuspense(lazy(() => import('./Welcome')));
+export const Leaderboard = WithSuspense(lazy(() => import('./Leaderboard')));
+export const GameMenu = WithSuspense(lazy(() => import('./Menu')));
+export const Settings = WithSuspense(lazy(() => import('./Settings')));

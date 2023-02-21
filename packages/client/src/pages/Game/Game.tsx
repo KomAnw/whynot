@@ -6,7 +6,7 @@ import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
 import { Platforms } from './controllers/Platforms/Platforms';
 
-export const Game = () => {
+const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -110,6 +110,8 @@ export const Game = () => {
     </GameWindow>
   );
 };
+
+export default Game;
 
 const GameWindow = styled.div`
   border: 1px solid black;
