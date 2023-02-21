@@ -44,7 +44,7 @@ export const GameOver = ({ isWon, gameScore, totalScore, onClick }: GameOverProp
 
   return (
     <InnerContainer>
-      <Title>{title}</Title>
+      <H1>{title}</H1>
       <Image isWon={isWon} />
       <TextScore>
         Game score: <b> {gameScore} </b>{' '}
@@ -69,9 +69,7 @@ const InnerContainer = styled('div')`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  text-align: center;
   width: 600px;
-  height: 700px;
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.core.background.primary};
   padding: 25px 31px 30px 31px;
@@ -82,19 +80,13 @@ const InnerContainer = styled('div')`
   transform: translate(-50%, -50%);
 `;
 
-const Title = styled(H1)`
-  margin: 0;
-`;
-
 const TextScore = styled(Text)`
-  text-align: left;
   width: 100%;
 `;
 
 const ButtonsContainer = styled('div')`
   display: flex;
-  flex-direction: row;
-  margin-top: 63px;
   justify-content: space-between;
+  margin-top: 63px;
   width: 336px;
 `;
