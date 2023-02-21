@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
@@ -6,13 +6,17 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
+import { useChangePasswordMutation } from 'src/api/user/user';
+import { useNavigate } from 'react-router-dom';
 
-const { password, confirmPassword } = formsConsts;
-
+const { password, confirmPassword, oldPassword } = formsConsts;
 const { profile } = paths;
 const { mobileM } = breakpoints;
 
 const ProfileData = () => {
+  const [passwordApi] = useChangePasswordMutation();
+  const navigate = useNavigate();
+
   const {
     register,
     watch,
@@ -22,13 +26,31 @@ const ProfileData = () => {
     mode: 'all',
   });
 
-  // eslint-disable-next-line no-console
-  const submitForm = (data: any) => console.log(data);
+  const submitForm: SubmitHandler<FieldValues> = async data => {
+    try {
+      const response = await passwordApi({ oldPassword: data.oldPassword, newPassword: data.confirmPassword });
+
+      response && navigate(profile.index);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
       <H1Style>Edit password</H1Style>
       <FormBody>
+        <Input
+          key={oldPassword.name}
+          register={register}
+          errorMessage={errors[oldPassword.name]?.message as string}
+          name={oldPassword.name}
+          type={oldPassword.type}
+          label={oldPassword.label}
+          placeholder={oldPassword.placeholder}
+          validationRules={oldPassword.validationRules}
+        />
         <Input
           key={password.name}
           register={register}
