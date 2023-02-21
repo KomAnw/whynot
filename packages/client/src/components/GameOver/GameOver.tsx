@@ -39,19 +39,16 @@ const Buttons = ({ onClick }: Pick<ButtonComponent, 'onClick'>) => {
   );
 };
 
-export const GameOver = ({ isWon, gameScore, totalScore, onClick }: GameOverProps) => {
+export const GameOver = ({ isWon, gameScore, onClick }: GameOverProps) => {
   const title = isWon ? 'Congratulations!' : 'Wasted!';
 
   return (
     <InnerContainer>
       <H1>{title}</H1>
       <Image isWon={isWon} />
-      <TextScore>
+      <Text>
         Game score: <b> {gameScore} </b>{' '}
-      </TextScore>
-      <TextScore>
-        Total score: <b> {totalScore} </b>
-      </TextScore>
+      </Text>
       <Buttons onClick={onClick} />
     </InnerContainer>
   );
@@ -61,6 +58,7 @@ const Image = styled.div<ImageProps>`
   width: 406px;
   height: 354px;
   background-image: url(${props => (props.isWon ? win : lose)});
+  background-position: center;
   background-repeat: no-repeat;
 `;
 
@@ -72,16 +70,12 @@ const InnerContainer = styled('div')`
   width: 600px;
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.core.background.primary};
-  padding: 25px 31px 30px 31px;
+  padding: 30px;
   border-radius: 20px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-`;
-
-const TextScore = styled(Text)`
-  width: 100%;
 `;
 
 const ButtonsContainer = styled('div')`

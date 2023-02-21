@@ -1,7 +1,6 @@
 export type GameOverProps = {
   isWon?: boolean;
   gameScore?: number;
-  totalScore?: number;
   onClick?: () => void;
 };
 

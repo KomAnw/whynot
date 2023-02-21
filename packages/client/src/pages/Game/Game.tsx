@@ -138,13 +138,7 @@ const Game = () => {
   return (
     <>
       {isPopupOpen && (
-        <GameResult
-          setIsPopupOpen={setIsPopupOpen}
-          startGameAgain={startGameAgain}
-          score={50}
-          totalScore={1200}
-          isWon={false}
-        />
+        <GameResult setIsPopupOpen={setIsPopupOpen} startGameAgain={startGameAgain} score={stateScore} isWon={true} />
       )}
       <GameWindow>
         <TextScore>
