@@ -96,8 +96,6 @@ const Game = () => {
 
     Score.resetScore();
 
-    canvasClearFrame();
-
     init();
 
     update();
@@ -114,9 +112,9 @@ const Game = () => {
 
     platforms = new Platforms(context, sizes);
 
-    player = new Player(context, sizes, platforms);
-
     ground = new Ground(context, sizes);
+
+    player = new Player(context, sizes, platforms, ground);
 
     platforms.init();
   };
