@@ -1,8 +1,10 @@
+import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { paths } from 'src/App/constants';
-import { Forum } from './Forum';
+import WithSuspense from 'src/hoc/WithSuspence';
 
 const { edit, id, newForum, index } = paths.forum;
+const Forum = WithSuspense(lazy(() => import('./Forum')));
 
 export const routes = [
   <Route index element={<Forum />} key={index} />,

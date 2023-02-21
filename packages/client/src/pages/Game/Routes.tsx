@@ -1,8 +1,10 @@
+import { lazy } from 'react';
 import { Route } from 'react-router-dom';
 import { paths } from 'src/App/constants';
-import { Game } from './Game';
+import WithSuspense from 'src/hoc/WithSuspence';
 
 const { lose, win, index } = paths.game;
+const Game = WithSuspense(lazy(() => import('./Game')));
 
 export const routes = [
   <Route index path="/game" element={<Game />} key={index} />,
