@@ -76,6 +76,10 @@ const InnerContainer = styled('div')`
   background: ${({ theme }) => theme.colors.core.background.primary};
   padding: 25px 31px 30px 31px;
   border-radius: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const Title = styled(H1)`

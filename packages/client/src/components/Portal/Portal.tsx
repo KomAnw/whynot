@@ -1,6 +1,5 @@
 import { useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import styled from 'styled-components';
 import { PortalProps } from './types';
 
 export const Portal = ({ children }: PortalProps) => {
@@ -21,14 +20,7 @@ export const Portal = ({ children }: PortalProps) => {
     return () => removeElement();
   }, [createElement, removeElement]);
 
-  return createPortal(<Wrapper> {children} </Wrapper>, element);
+  return createPortal(children, element);
 };
-
-const Wrapper = styled('div')`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
 
 export default Portal;
