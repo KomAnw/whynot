@@ -4,15 +4,11 @@ import backgroundImg from 'assets/images/background.png';
 import toggleFullScreen from 'src/utils/fullscreenApi';
 
 const Layout = () => {
-  document.addEventListener(
-    'keydown',
-    e => {
-      if (e.key === 'f') {
-        toggleFullScreen();
-      }
-    },
-    false
-  );
+  document.addEventListener('keydown', e => {
+    if (e.key === 'f') {
+      toggleFullScreen();
+    }
+  });
 
   return (
     <BackgroundContainer>
