@@ -70,7 +70,7 @@ const InnerContainer = styled('div')`
   width: 600px;
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.core.background.primary};
-  padding: 30px;
+  padding: 50px;
   border-radius: 20px;
   position: absolute;
   top: 50%;
