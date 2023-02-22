@@ -1,12 +1,8 @@
 import styled from 'styled-components';
 import { CenterDivContainer } from 'src/design/CenterDivContainer';
 import ProfileForm from 'src/components/Forms/ProfileForm/ProfileForm';
-import { TypeDataProfile } from 'src/pages/Profile/types';
-import Portal from 'src/components/Portal';
-import { useState } from 'react';
-import ProfileUpdateAvatar from 'pages/Profile/pages/ProfileUpdateAvatar';
 
-const valueData: TypeDataProfile = {
+const valueData = {
   firstName: 'Иван',
   secondName: 'Иванов',
   login: 'Ivan2002',
@@ -15,18 +11,9 @@ const valueData: TypeDataProfile = {
 };
 
 const Profile = () => {
-  const [isOpenPopup, setIsOpenPopup] = useState<boolean>(false);
-
   return (
     <Container>
-      <ProfileForm data={valueData} setIsOpenPopup={setIsOpenPopup} />
-      {isOpenPopup ? (
-        <Portal>
-          <ProfileUpdateAvatar setIsOpenPopup={setIsOpenPopup} />
-        </Portal>
-      ) : (
-        <></>
-      )}
+      <ProfileForm data={valueData} />
     </Container>
   );
 };

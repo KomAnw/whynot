@@ -6,7 +6,7 @@ import { H1 } from 'src/design/H1';
 import { LinkText } from 'src/design/LinkText';
 import { Button } from 'src/components/Button';
 import { InputHTMLAttributes, useState } from 'react';
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
   const [avatar] = useChangeAvatarMutation();
@@ -23,7 +23,7 @@ const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
     props.setIsOpenPopup(false);
   };
 
-  const submitForm: SubmitHandler<FieldValues> = async data => {
+  const submitForm: SubmitHandler<any> = async data => {
     try {
       const formData: FormData = new FormData();
 
@@ -32,6 +32,7 @@ const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
 
       response && onClick();
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
@@ -41,13 +42,13 @@ const ProfileUpdateAvatar = (props: TypeAvatarProps) => {
       <PageStyle>
         <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeFile}>
           <TextH1>Edit Avatar</TextH1>
-          <DivInput>
+          <InputWrapper>
             <LabelForm>
               <Input type="file" {...register('file')} />
               choose file...
             </LabelForm>
             <FileName>{fileName}</FileName>
-          </DivInput>
+          </InputWrapper>
           <Button variant="primary" type="submit">
             Apply
           </Button>
@@ -107,7 +108,7 @@ const Form = styled('form')`
   align-content: space-between;
 `;
 
-const DivInput = styled.div`
+const InputWrapper = styled.div`
   display: grid;
   grid-template-columns: 98px auto;
 `;

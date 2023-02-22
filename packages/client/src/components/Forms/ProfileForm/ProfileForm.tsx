@@ -10,6 +10,9 @@ import { MiniDivForm } from 'src/design/MiniDivForm';
 import { TypeProfileProps } from 'src/pages/Profile/types';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { TypeFormsConst } from 'src/components/Forms/consts/types';
+import Portal from 'components/Portal';
+import ProfileUpdateAvatar from 'pages/Profile/pages/ProfileUpdateAvatar';
+import { useState } from 'react';
 
 const DataRowData: Array<TypeFormsConst> = [
   formsConsts.firstName,
@@ -25,8 +28,9 @@ const { menu } = paths;
 const { updateData, updatePassword } = paths.profile;
 
 const Profile = (props: TypeProfileProps) => {
-  const { data, setIsOpenPopup } = props;
-  const dataUpdate = DataRowData.map((item: TypeFormsConst) => {
+  const [isOpenPopup, setIsOpenPopup] = useState(false);
+  const { data } = props;
+  const dataUpdate = DataRowData.map(item => {
     return { ...item, value: data[item.name] };
   });
 
@@ -35,33 +39,40 @@ const Profile = (props: TypeProfileProps) => {
   };
 
   return (
-    <PageStyle>
-      <TextH1>Profile</TextH1>
-      <Avatar src={defaultAvatar} onClick={openPopup} />
-      <Data>
-        {dataUpdate.map((item: TypeFormsConst) => (
-          <DataRow key={item.name}>
-            <DataLabel>{item.label} :</DataLabel>
-            <DataValue>{item.value}</DataValue>
-          </DataRow>
-        ))}
-      </Data>
-      <TextLink>
-        <Link to={updateData} variant="size24">
-          Edit data
-        </Link>
-      </TextLink>
-      <TextLink>
-        <Link to={updatePassword} variant="size24">
-          Edit password
-        </Link>
-      </TextLink>
-      <TextLinkBack>
-        <Link to={menu} variant="size20">
-          back
-        </Link>
-      </TextLinkBack>
-    </PageStyle>
+    <>
+      <PageStyle>
+        <TextH1>Profile</TextH1>
+        <Avatar src={defaultAvatar} onClick={openPopup} />
+        <Data>
+          {dataUpdate.map((item: TypeFormsConst) => (
+            <DataRow key={item.name}>
+              <DataLabel>{item.label} :</DataLabel>
+              <DataValue>{item.value}</DataValue>
+            </DataRow>
+          ))}
+        </Data>
+        <TextLink>
+          <Link to={updateData} variant="size24">
+            Edit data
+          </Link>
+        </TextLink>
+        <TextLink>
+          <Link to={updatePassword} variant="size24">
+            Edit password
+          </Link>
+        </TextLink>
+        <TextLinkBack>
+          <Link to={menu} variant="size20">
+            back
+          </Link>
+        </TextLinkBack>
+      </PageStyle>
+      {isOpenPopup && (
+        <Portal>
+          <ProfileUpdateAvatar setIsOpenPopup={setIsOpenPopup} />
+        </Portal>
+      )}
+    </>
   );
 };
 
@@ -85,6 +96,7 @@ const Avatar = styled.img`
   left: 138px;
   top: 138px;
   border-radius: 50%;
+
   &:hover {
     cursor: pointer;
     text-decoration: none;
