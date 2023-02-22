@@ -7,8 +7,8 @@ import { paths } from 'src/App/constants';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
-import { formsConsts } from '../consts/formsConsts';
 import { Link } from 'src/components/Link';
+import { formsConsts } from '../consts/formsConsts';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
 const { menu, registration } = paths;

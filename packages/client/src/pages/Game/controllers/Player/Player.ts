@@ -1,6 +1,7 @@
 import { TSizes } from 'pages/Game/types/types';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { Platforms } from 'pages/Game/controllers/Platforms/Platforms';
+import { Score } from 'pages/Game/controllers/Score/Score';
 
 export class Player {
   maxSpeed = 8;
@@ -17,8 +18,11 @@ export class Player {
   yPosition: number;
   sizes: TSizes;
   platforms: Platforms;
+  ground: Ground;
+  isDisplayUp = false;
+  isDead = false;
 
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms) {
+  constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms, ground: Ground) {
     this.isMovingLeft = false;
     this.isMovingRight = false;
     this.ctx = context;
@@ -28,14 +32,11 @@ export class Player {
     this.yPosition = sizes.height;
     this.sizes = sizes;
     this.platforms = platforms;
+    this.ground = ground;
   }
 
   jump() {
     this.currentYPosition = this.jumpHeight;
-  }
-
-  jumpHigh() {
-    this.currentYPosition = this.jumpHeight * 2;
   }
 
   playerMovement() {
@@ -70,9 +71,11 @@ export class Player {
     });
   }
 
-  calculatePlayerActions() {
-    const ground = new Ground(this.ctx, this.sizes);
+  gameOver() {
+    this.isDead = true;
+  }
 
+  calculatePlayerActions() {
     /**
      * Accelerations produces when the user hold the keys.
      */
@@ -125,8 +128,19 @@ export class Player {
     /**
      * Player jumps when he is on the ground.
      */
-    if (this.yPosition + this.height > ground.yPosition && ground.yPosition < this.sizes.height) {
+    if (this.yPosition + this.height > this.ground.yPosition && this.ground.yPosition < this.sizes.height) {
       this.jump();
+    }
+
+    /**
+     * Game-over if display is up and player fall down on the bottom
+     */
+    if (
+      this.ground.yPosition > this.sizes.height &&
+      this.yPosition + this.height > this.sizes.height &&
+      this.isDisplayUp
+    ) {
+      this.gameOver();
     }
 
     /**
@@ -139,11 +153,18 @@ export class Player {
     } else {
       this.platforms.calculate(this.currentYPosition);
 
+      this.ground.yPosition -= this.currentYPosition;
       this.currentYPosition += this.gravity;
 
       if (this.currentYPosition >= 0) {
         this.yPosition += this.currentYPosition;
         this.currentYPosition += this.gravity;
+
+        Score.updateScore();
+
+        if (!this.isDisplayUp) {
+          this.isDisplayUp = true;
+        }
       }
     }
 
