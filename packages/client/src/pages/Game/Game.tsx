@@ -172,6 +172,7 @@ const GameWindow = styled.div<GameWindowProps>`
 `;
 
 const TextScore = styled(Text)`
+  color: ${({ theme }) => theme.colors.core.text.secondary};
   text-align: left;
   width: 100%;
 `;
