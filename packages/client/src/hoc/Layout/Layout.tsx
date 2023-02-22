@@ -1,8 +1,19 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import backgroundImg from 'assets/images/background.png';
+import toggleFullScreen from 'src/utils/fullscreenApi';
 
 const Layout = () => {
+  document.addEventListener(
+    'keydown',
+    e => {
+      if (e.key === 'f') {
+        toggleFullScreen();
+      }
+    },
+    false
+  );
+
   return (
     <BackgroundContainer>
       <Outlet />
