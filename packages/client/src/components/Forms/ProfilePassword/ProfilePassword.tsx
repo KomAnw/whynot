@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
@@ -8,6 +8,7 @@ import { breakpoints, paths } from 'src/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { useChangePasswordMutation } from 'src/api/user/user';
 import { useNavigate } from 'react-router-dom';
+import { TPasswordNewRequest } from 'src/api/user/models';
 
 const { password, confirmPassword, oldPassword } = formsConsts;
 const { profile } = paths;
@@ -22,11 +23,11 @@ const ProfileData = () => {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<TPasswordNewRequest>({
     mode: 'all',
   });
 
-  const submitForm: SubmitHandler<FieldValues> = async data => {
+  const submitForm: SubmitHandler<TPasswordNewRequest> = async data => {
     try {
       const response = await passwordApi({ oldPassword: data.oldPassword, newPassword: data.confirmPassword });
 

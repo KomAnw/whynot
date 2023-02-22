@@ -39,6 +39,7 @@ const Registration = () => {
 
       response && navigate(menu);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
