@@ -7,36 +7,36 @@ import { Label } from 'src/design/Label';
 import { LinkText } from 'src/design/LinkText';
 import defaultAvatar from 'src/assets/defaultAvatar.svg';
 import { MiniDivForm } from 'src/design/MiniDivForm';
-import { TypeProfileProps } from 'src/pages/Profile/types';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
-import { TypeFormsConst } from 'src/components/Forms/consts/types';
 import { baseUrlAvatar } from 'src/api';
+import { useGetUserQuery } from 'src/api/auth/auth';
 
-const DataRowData: Array<TypeFormsConst> = [
-  formsConsts.firstName,
-  formsConsts.secondName,
-  formsConsts.displayName,
-  formsConsts.login,
-  formsConsts.email,
-  formsConsts.phone,
+const DataRowData = [
+  { name: formsConsts.firstName.name, label: formsConsts.firstName.label },
+  { name: formsConsts.secondName.name, label: formsConsts.secondName.label },
+  { name: formsConsts.displayName.name, label: formsConsts.displayName.label },
+  { name: formsConsts.login.name, label: formsConsts.login.label },
+  { name: formsConsts.email.name, label: formsConsts.email.label },
+  { name: formsConsts.phone.name, label: formsConsts.phone.label },
 ];
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 const { updateData, updatePassword } = paths.profile;
 
-const Profile = (props: TypeProfileProps) => {
-  const { data } = props;
-  const dataUpdate = DataRowData.map((item: TypeFormsConst) => {
-    return { ...item, value: data[item.name] };
+const Profile = () => {
+  const { data } = useGetUserQuery();
+
+  const dataUpdate = DataRowData.map(item => {
+    return { ...item, value: data && item.name ? data[item.name] : '' };
   });
 
   return (
     <PageStyle>
       <TextH1>Profile</TextH1>
-      <Avatar src={data.avatar ? baseUrlAvatar + data.avatar : defaultAvatar} />
+      <Avatar src={data && data.avatar ? baseUrlAvatar + data.avatar : defaultAvatar} />
       <Data>
-        {dataUpdate.map((item: TypeFormsConst) => (
+        {dataUpdate.map(item => (
           <DataRow key={item.name}>
             <DataLabel>{item.label} :</DataLabel>
             <DataValue>{item.value}</DataValue>
