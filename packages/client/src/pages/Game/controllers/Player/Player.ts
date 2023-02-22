@@ -1,7 +1,6 @@
 import { TSizes } from 'pages/Game/types/types';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { Platforms } from 'pages/Game/controllers/Platforms/Platforms';
-import { sprite } from 'pages/Game';
 
 export class Player {
   maxSpeed = 8;
@@ -20,13 +19,16 @@ export class Player {
   yPosition: number;
   sizes: TSizes;
   platforms: Platforms;
+  sprite: HTMLImageElement;
 
-  // Sprite clipping
+  /**
+   * Sprite clipping
+   */
   cx = 0;
   cy = 121;
   cwidth = 110;
   cheight = 80;
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms) {
+  constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms, sprite: HTMLImageElement) {
     this.isMovingLeft = false;
     this.isMovingRight = false;
     this.isLooking2left = false;
@@ -38,6 +40,7 @@ export class Player {
     this.yPosition = sizes.height;
     this.sizes = sizes;
     this.platforms = platforms;
+    this.sprite = sprite;
   }
 
   jump() {
@@ -81,7 +84,7 @@ export class Player {
   }
 
   calculatePlayerActions() {
-    const ground = new Ground(this.ctx, this.sizes);
+    const ground = new Ground(this.ctx, this.sizes, this.sprite);
 
     /**
      * Accelerations produces when the user hold the keys.
@@ -164,6 +167,16 @@ export class Player {
     this.cy = this.isLooking2left ? 201 : 121;
     this.cy = this.isLooking2right ? 121 : 201;
     // this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
-    this.ctx.drawImage(sprite, this.cx, this.cy, this.cwidth, this.cheight, this.xPosition, this.yPosition, this.width, this.height);
+    this.ctx.drawImage(
+      this.sprite,
+      this.cx,
+      this.cy,
+      this.cwidth,
+      this.cheight,
+      this.xPosition,
+      this.yPosition,
+      this.width,
+      this.height
+    );
   }
 }

@@ -1,5 +1,4 @@
 import { TSizes } from 'pages/Game/types/types';
-import { sprite } from 'pages/Game';
 
 class Platform {
   ctx: CanvasRenderingContext2D;
@@ -8,23 +7,27 @@ class Platform {
   xPosition: number;
   yPosition: number;
   currentPosition: number;
+  sprite: HTMLImageElement;
 
-  // Sprite clipping
+  /**
+   * Sprite clipping
+   */
   cx = 0;
   cy = 0;
   cwidth = 105;
   cheight = 31;
 
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number) {
+  constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number, sprite: HTMLImageElement) {
     this.ctx = context;
     this.xPosition = Math.random() * (sizes.width - this.width);
     this.yPosition = position;
     this.currentPosition = position;
+    this.sprite = sprite;
   }
 
   draw() {
     this.ctx.drawImage(
-      sprite,
+      this.sprite,
       this.cx,
       this.cy,
       this.cwidth,
@@ -34,7 +37,6 @@ class Platform {
       this.width,
       this.height
     );
-    // this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
   }
 }
 
@@ -44,15 +46,17 @@ export class Platforms {
   platformList: Platform[] = [];
   ctx: CanvasRenderingContext2D;
   sizes: TSizes;
+  sprite: HTMLImageElement;
 
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes) {
+  constructor(context: CanvasRenderingContext2D, sizes: TSizes, sprite: HTMLImageElement) {
     this.ctx = context;
     this.sizes = sizes;
+    this.sprite = sprite;
   }
 
   init() {
     for (let i = 0; i < this.platformCount; i++) {
-      const platform = new Platform(this.ctx, this.sizes, this.position);
+      const platform = new Platform(this.ctx, this.sizes, this.position, this.sprite);
 
       this.position += this.sizes.height / this.platformCount;
 
@@ -67,7 +71,7 @@ export class Platforms {
       }
 
       if (platform.yPosition > this.sizes.height) {
-        this.platformList[index] = new Platform(this.ctx, this.sizes, this.position);
+        this.platformList[index] = new Platform(this.ctx, this.sizes, this.position, this.sprite);
         this.platformList[index].yPosition = platform.yPosition - this.sizes.height;
       }
     });
@@ -79,3 +83,5 @@ export class Platforms {
     });
   }
 }
+
+// export default withTheme(Platforms);

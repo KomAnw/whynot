@@ -4,17 +4,16 @@ import { TSizes } from 'pages/Game/types/types';
 import { Player } from 'pages/Game/controllers/Player/Player';
 import { Ground } from 'pages/Game/controllers/Ground/Ground';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
-import defaultBackground from 'assets/images/game/default/background.png';
-/*
- * import marioBackground from 'assets/images/game/mario/background.png';
- * import gomerBackground from 'assets/images/game/gomer/background.png';
- */
+import { RootState } from 'src/store/store';
+import { useSelector } from 'react-redux';
+import { GameWindowProps } from 'pages/Game/types/types';
 import { Platforms } from './controllers/Platforms/Platforms';
 
 const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
+  const mode = useSelector((state: RootState) => state.mode);
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
@@ -49,12 +48,6 @@ const Game = () => {
 
   const canvasInit = () => {
     const canvas = canvasRef.current;
-
-    /*
-     * const cy = 552 - sizes.height;
-     * const context = canvasContextRef.current;
-     * context.drawImage(sprite, 0, 614, 100, 5, 0, cy, sizes.width, sizes.height);
-     */
 
     if (canvas) {
       canvasContextRef.current = canvas.getContext('2d');
@@ -96,11 +89,15 @@ const Game = () => {
 
     document.addEventListener('keyup', onKeyUpHandler);
 
-    platforms = new Platforms(context, sizes);
+    const sprite = new Image() as HTMLImageElement;
 
-    player = new Player(context, sizes, platforms);
+    sprite.src = mode.sprite;
 
-    ground = new Ground(context, sizes);
+    platforms = new Platforms(context, sizes, sprite);
+
+    player = new Player(context, sizes, platforms, sprite);
+
+    ground = new Ground(context, sizes, sprite);
 
     platforms.init();
   };
@@ -120,7 +117,7 @@ const Game = () => {
   });
 
   return (
-    <GameWindow>
+    <GameWindow background={mode.background}>
       <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
     </GameWindow>
   );
@@ -128,11 +125,11 @@ const Game = () => {
 
 export default Game;
 
-const GameWindow = styled.div`
+const GameWindow = styled.div<GameWindowProps>`
   border: 1px solid black;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: url(${defaultBackground}) top left;
+  background: url(${props => props.background}) top left;
 `;
