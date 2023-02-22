@@ -34,7 +34,7 @@
       "pages/*": ["src/pages/*"],
       "assets/*": ["src/assets/*"],
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "jest"]
   },
   "include": ["src"],
   "exclude": ["node_modules"],
