@@ -8,9 +8,10 @@ import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
 import { formsConsts } from '../consts/formsConsts';
+import { Link } from 'src/components/Link';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
-const { menu } = paths;
+const { menu, registration } = paths;
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -54,6 +55,9 @@ export const Login = () => {
         <Button variant="primary" type="submit">
           LOGIN
         </Button>
+        <Link to={registration} variant="size24">
+          Registration
+        </Link>
       </FormFooter>
     </Form>
   );
@@ -76,8 +80,8 @@ const FormBody = styled('div')`
 `;
 
 const FormFooter = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  justify-items: center;
+  gap: 10px;
   margin-top: 45px;
 `;

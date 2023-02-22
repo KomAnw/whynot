@@ -30,13 +30,10 @@ const LoginComponent = styled.div`
   flex-direction: column;
   align-items: center;
   width: 402px;
-  height: 372px;
-  box-shadow: 0 0 6px ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
   padding: 14px 19px 24px 29px;
   @media (max-width: ${mobileM}) {
     width: 354px;
-    height: 372px;
   }
 `;

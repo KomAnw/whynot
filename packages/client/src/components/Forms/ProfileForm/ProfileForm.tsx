@@ -48,7 +48,7 @@ const Profile = (props: TypeProfileProps) => {
       </Data>
       <TextLink>
         <Link to={updateData} variant="size24">
-          Edit date
+          Edit data
         </Link>
       </TextLink>
       <TextLink>
