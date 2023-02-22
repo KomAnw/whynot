@@ -6,8 +6,8 @@ import { gameRoutes } from 'src/pages/Game';
 import { profileRoutes } from 'src/pages/Profile';
 import { forumRoutes } from 'src/pages/Forum';
 import Logout from 'src/pages/Logout';
-import { paths } from './constants';
 import AuthRoute from 'src/hoc/AuthRoute';
+import { paths } from './constants';
 
 const { login, registration, game, forum, leaderboard, profile, menu, logout, settings } = paths;
 
