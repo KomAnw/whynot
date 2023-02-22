@@ -18,7 +18,7 @@ const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
-  const mode = useSelector((state: RootState) => state.mode);
+  const mode = useSelector((state: RootState) => state.mode.sprite);
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;

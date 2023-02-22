@@ -179,12 +179,11 @@ export class Player {
         this.yPosition += this.currentYPosition;
         this.currentYPosition += this.gravity;
 
-        Score.updateScore();
-
         if (!this.isDisplayUp) {
           this.isDisplayUp = true;
         }
       }
+      Score.updateScore();
     }
 
     this.collides();
