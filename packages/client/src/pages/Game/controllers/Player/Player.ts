@@ -11,8 +11,8 @@ export class Player {
   height = 40;
   isMovingLeft: boolean;
   isMovingRight: boolean;
-  isLooking2left: boolean;
-  isLooking2right: boolean;
+  isLookingToLeft: boolean;
+  isLookingToRight: boolean;
   ctx: CanvasRenderingContext2D;
   currentYPosition: number;
   currentXPosition: number;
@@ -28,10 +28,10 @@ export class Player {
   /**
    * Sprite clipping
    */
-  cx = 0;
-  cy = 121;
-  cwidth = 110;
-  cheight = 80;
+  clippingXPosition = 0;
+  clippingYPosition = 121;
+  clippingWidth = 110;
+  clippingHeight = 80;
   constructor(
     context: CanvasRenderingContext2D,
     sizes: TSizes,
@@ -41,8 +41,8 @@ export class Player {
   ) {
     this.isMovingLeft = false;
     this.isMovingRight = false;
-    this.isLooking2left = false;
-    this.isLooking2right = false;
+    this.isLookingToLeft = false;
+    this.isLookingToRight = false;
     this.ctx = context;
     this.currentYPosition = 11;
     this.currentXPosition = 0;
@@ -191,14 +191,14 @@ export class Player {
   }
 
   draw() {
-    this.cy = this.isLooking2left ? 201 : 121;
-    this.cy = this.isLooking2right ? 121 : 201;
+    this.clippingYPosition = this.isLookingToLeft ? 201 : 121;
+    this.clippingYPosition = this.isLookingToRight ? 121 : 201;
     this.ctx.drawImage(
       this.sprite,
-      this.cx,
-      this.cy,
-      this.cwidth,
-      this.cheight,
+      this.clippingXPosition,
+      this.clippingYPosition,
+      this.clippingWidth,
+      this.clippingHeight,
       this.xPosition,
       this.yPosition,
       this.width,

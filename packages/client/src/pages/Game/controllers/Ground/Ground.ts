@@ -12,10 +12,10 @@ export class Ground {
   /**
    * Sprite clipping
    */
-  cx = 0;
-  cy = 614;
-  cwidth = 100;
-  cheight = 5;
+  clippingXPosition = 0;
+  clippingYPosition = 614;
+  clippingWidth = 100;
+  clippingHeight = 5;
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, sprite: HTMLImageElement) {
     this.sizes = sizes;
@@ -28,10 +28,10 @@ export class Ground {
   draw() {
     this.ctx.drawImage(
       this.sprite,
-      this.cx,
-      this.cy,
-      this.cwidth,
-      this.cheight,
+      this.clippingXPosition,
+      this.clippingYPosition,
+      this.clippingWidth,
+      this.clippingHeight,
       this.xPosition,
       this.yPosition,
       this.width,

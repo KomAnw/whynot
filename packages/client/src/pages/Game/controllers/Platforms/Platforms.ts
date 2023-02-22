@@ -12,10 +12,10 @@ class Platform {
   /**
    * Sprite clipping
    */
-  cx = 0;
-  cy = 0;
-  cwidth = 105;
-  cheight = 31;
+  clippingXPosition = 0;
+  clippingYPosition = 0;
+  clippingWidth = 105;
+  clippingHeight = 31;
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number, sprite: HTMLImageElement) {
     this.ctx = context;
@@ -28,10 +28,10 @@ class Platform {
   draw() {
     this.ctx.drawImage(
       this.sprite,
-      this.cx,
-      this.cy,
-      this.cwidth,
-      this.cheight,
+      this.clippingXPosition,
+      this.clippingYPosition,
+      this.clippingWidth,
+      this.clippingHeight,
       this.xPosition,
       this.yPosition,
       this.width,
@@ -83,5 +83,3 @@ export class Platforms {
     });
   }
 }
-
-// export default withTheme(Platforms);

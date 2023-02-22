@@ -28,14 +28,14 @@ const Game = () => {
 
     if (key === 'ArrowLeft') {
       player.isMovingLeft = true;
-      player.isLooking2left = player.isMovingLeft;
-      player.isLooking2right = false;
+      player.isLookingToLeft = player.isMovingLeft;
+      player.isLookingToRight = false;
     }
 
     if (key === 'ArrowRight') {
       player.isMovingRight = true;
-      player.isLooking2right = player.isMovingRight;
-      player.isLooking2left = false;
+      player.isLookingToRight = player.isMovingRight;
+      player.isLookingToLeft = false;
     }
   };
 
@@ -118,7 +118,7 @@ const Game = () => {
 
     addHandlers();
 
-    const sprite = new Image() as HTMLImageElement;
+    const sprite: HTMLImageElement = new Image();
 
     sprite.src = mode.sprite;
 
