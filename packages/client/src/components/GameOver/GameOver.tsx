@@ -1,7 +1,7 @@
 import lose from 'assets/images/gomer-lose.png';
 import win from 'assets/images/gomer-win.png';
 import styled from 'styled-components';
-import { paths } from 'src/App/constants';
+import { paths } from 'src/components/App/constants';
 import { GameOverProps, ImageProps } from 'components/GameOver/types';
 import { H1 } from 'src/design/H1';
 import { H3 } from 'src/design/H3';

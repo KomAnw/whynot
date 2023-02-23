@@ -1,7 +1,7 @@
 export type StoryProp = {
-  image?: string;
-  text: string;
   id: number;
+  text: string;
+  image?: string;
 };
 
 export type TutorialProp = Omit<StoryProp, 'id'>;

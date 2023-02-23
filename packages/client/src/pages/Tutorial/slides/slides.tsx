@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { paths } from 'src/App/constants';
+import { paths } from 'src/components/App/constants';
 import { Button } from 'src/components/Button';
 import { SlideHistory, SlideTutorial } from 'src/components/Slide';
 import styled from 'styled-components';
