@@ -4,9 +4,8 @@ import styled from 'styled-components';
 import { paths } from 'src/components/App/constants';
 import { GameOverProps, ImageProps } from 'components/GameOver/types';
 import { H1 } from 'src/design/H1';
-import { H3 } from 'src/design/H3';
 import { Text } from 'src/design/Text';
-import { ButtonVariants } from 'components/Button/types';
+import { ButtonComponent, ButtonVariants } from 'components/Button/types';
 import { Link } from 'react-router-dom';
 import { Button } from 'components/Button';
 
@@ -22,37 +21,35 @@ const buttons = [
     variant: 'secondary' as ButtonVariants,
     to: game.index,
     text: 'Play',
+    action: 'onClick',
   },
 ];
 
-const Buttons = () => {
+const Buttons = ({ onClick }: Pick<ButtonComponent, 'onClick'>) => {
   return (
     <ButtonsContainer>
       {buttons.map(({ variant, text, to }) => (
         <Link to={to} key={text}>
-          <Button variant={variant}>{text}</Button>
+          <Button variant={variant} onClick={onClick}>
+            {text}
+          </Button>
         </Link>
       ))}
     </ButtonsContainer>
   );
 };
 
-export const GameOver = ({ isWon, level, gameScore, totalScore }: GameOverProps) => {
+export const GameOver = ({ isWon, gameScore, onClick }: GameOverProps) => {
   const title = isWon ? 'Congratulations!' : 'Wasted!';
-  const message = isWon ? `You've passed level ${level}!` : `Level ${level} hasn't been completed!`;
 
   return (
     <InnerContainer>
-      <Title>{title}</Title>
-      <Message>{message}</Message>
+      <H1>{title}</H1>
       <Image isWon={isWon} />
-      <TextScore>
-        Game score:&nbsp; <TextBold>{gameScore}</TextBold>{' '}
-      </TextScore>
-      <TextScore>
-        Total score:&nbsp; <TextBold>{totalScore}</TextBold>
-      </TextScore>
-      <Buttons />
+      <Text>
+        Game score: <b> {gameScore} </b>{' '}
+      </Text>
+      <Buttons onClick={onClick} />
     </InnerContainer>
   );
 };
@@ -61,6 +58,7 @@ const Image = styled.div<ImageProps>`
   width: 406px;
   height: 354px;
   background-image: url(${props => (props.isWon ? win : lose)});
+  background-position: center;
   background-repeat: no-repeat;
 `;
 
@@ -69,38 +67,20 @@ const InnerContainer = styled('div')`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  text-align: center;
   width: 600px;
-  height: 700px;
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.core.background.primary};
-  padding: 25px 31px 30px 31px;
+  padding: 50px;
   border-radius: 20px;
-`;
-
-const Title = styled(H1)`
-  margin: 0;
-`;
-
-const Message = styled(H3)`
-  text-align: center;
-  margin-bottom: 18px;
-`;
-
-const TextScore = styled(Text)`
-  display: flex;
-  text-align: left;
-  width: 100%;
-`;
-
-const TextBold = styled(Text)`
-  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 `;
 
 const ButtonsContainer = styled('div')`
   display: flex;
-  flex-direction: row;
-  margin-top: 63px;
   justify-content: space-between;
+  margin-top: 63px;
   width: 336px;
 `;

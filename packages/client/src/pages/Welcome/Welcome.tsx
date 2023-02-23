@@ -83,7 +83,6 @@ const ButtonsContainer = styled('div')`
 `;
 
 const Title = styled(H1)`
-  margin: 0;
   margin-bottom: 19px;
 
   @media (max-width: ${breakpoints.mobileM}) {
