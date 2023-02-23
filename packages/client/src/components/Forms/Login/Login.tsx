@@ -3,7 +3,7 @@ import { TSignInRequest } from 'src/api/auth/models';
 import { useNavigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSingInMutation } from 'src/api/auth/auth';
-import { paths } from 'src/App/constants';
+import { paths } from 'src/components/App/constants';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
