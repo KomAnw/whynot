@@ -8,7 +8,7 @@ const URLS = [
   '/public/fonts/Handjet.woff',
   '/public/fonts/Handjet.woff2',
   '/public/vite.svg',
-  'src/index.tsx',
+  '/src/index.tsx',
 ];
 
 self.addEventListener('install', async () => {
