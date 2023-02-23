@@ -58,6 +58,6 @@ async function networkFirst(request) {
   } catch (e) {
     const cached = await cache.match(request);
 
-    return cached ?? (await cache.match('/offline.html'));
+    return cached;
   }
 }
