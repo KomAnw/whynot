@@ -9,3 +9,4 @@ export const Welcome = WithSuspense(lazy(() => import('./Welcome')));
 export const Leaderboard = WithSuspense(lazy(() => import('./Leaderboard')));
 export const GameMenu = WithSuspense(lazy(() => import('./Menu')));
 export const Settings = WithSuspense(lazy(() => import('./Settings')));
+export const Tutorial = WithSuspense(lazy(() => import('./Tutorial')));
