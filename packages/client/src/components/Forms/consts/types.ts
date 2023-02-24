@@ -7,9 +7,9 @@ export type TypeFormsConst = {
   validationRules: TypeValidationRules;
 };
 
-export type TypeValidationRules = {
+type TypeValidationRules = {
   required?: string;
   validate?: TypeValidate;
 };
 
-export type TypeValidate = Record<string, (v: string) => boolean | string>;
+type TypeValidate = Record<string, (v: string) => boolean | string>;

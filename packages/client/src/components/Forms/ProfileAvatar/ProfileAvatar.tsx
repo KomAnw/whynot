@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { MiniDivForm } from 'src/design/MiniDivForm';
 import { useChangeAvatarMutation } from 'src/api/user/user';
 import { H1 } from 'src/design/H1';
 import { LinkText } from 'src/design/LinkText';
 import { Button } from 'src/components/Button';
 import { InputHTMLAttributes, useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { breakpoints } from 'src/components/App/constants';
 import { ProfilePopupContext } from '../ProfileForm/constants';
 import { AvatarData } from './types';
 
@@ -83,13 +83,19 @@ const ButtonX = styled.button`
   }
 `;
 
-const PageStyle = styled(MiniDivForm)`
+const PageStyle = styled('div')`
   position: relative;
   display: grid;
   justify-items: center;
   width: 354px;
   height: 372px;
   padding: 24px 24px;
+  margin: 0;
+  background: ${({ theme }) => theme.colors.core.background.primary};
+  border-radius: 20px;
+  @media (max-width: ${breakpoints.mobileM}) {
+    width: 354px;
+  }
 `;
 
 const TextH1 = styled(H1)`
