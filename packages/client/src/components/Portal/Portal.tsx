@@ -18,7 +18,7 @@ export const Portal = ({ children }: PortalProps) => {
     createElement();
 
     return () => removeElement();
-  }, [createElement, element, portal, removeElement]);
+  }, [createElement, removeElement]);
 
   return createPortal(children, element);
 };

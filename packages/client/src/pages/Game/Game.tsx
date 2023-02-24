@@ -1,12 +1,17 @@
 import styled from 'styled-components';
-import { useMemo, useRef } from 'react';
-import { TSizes } from 'pages/Game/types/types';
-import { Player } from 'pages/Game/controllers/Player/Player';
-import { Ground } from 'pages/Game/controllers/Ground/Ground';
+import { useMemo, useRef, useState } from 'react';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
+import { Text } from 'src/design/Text';
+import { Score } from 'pages/Game/controllers/Score/Score';
+import GameResult from './components/GameResult';
+import { TSizes } from './types/types';
+import { Player } from './controllers/Player/Player';
 import { Platforms } from './controllers/Platforms/Platforms';
+import { Ground } from './controllers/Ground/Ground';
 
 const Game = () => {
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
+  const [stateScore, setStateScore] = useState(Score.count);
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -38,6 +43,16 @@ const Game = () => {
     }
   };
 
+  const addHandlers = () => {
+    document.addEventListener('keydown', onKeyDownHandler);
+    document.addEventListener('keyup', onKeyUpHandler);
+  };
+
+  const removeHandlers = () => {
+    document.removeEventListener('keydown', onKeyDownHandler);
+    document.removeEventListener('keyup', onKeyUpHandler);
+  };
+
   const canvasInit = () => {
     const canvas = canvasRef.current;
 
@@ -55,19 +70,35 @@ const Game = () => {
   };
 
   const update = () => {
-    canvasClearFrame();
+    if (!player.isDead) {
+      canvasClearFrame();
 
-    player.calculatePlayerActions();
+      player.calculatePlayerActions();
 
-    platforms.draw();
+      platforms.draw();
 
-    player.draw();
+      player.draw();
 
-    ground.draw();
+      ground.draw();
 
-    player.playerMovement();
+      player.playerMovement();
 
-    requestAnimationFrame(update);
+      setStateScore(Score.count);
+
+      requestAnimationFrame(update);
+    } else {
+      setIsPopupOpen(true);
+    }
+  };
+
+  const reset = () => {
+    removeHandlers();
+
+    Score.resetScore();
+
+    init();
+
+    update();
   };
 
   const init = () => {
@@ -77,15 +108,13 @@ const Game = () => {
       return;
     }
 
-    document.addEventListener('keydown', onKeyDownHandler);
-
-    document.addEventListener('keyup', onKeyUpHandler);
+    addHandlers();
 
     platforms = new Platforms(context, sizes);
 
-    player = new Player(context, sizes, platforms);
-
     ground = new Ground(context, sizes);
+
+    player = new Player(context, sizes, platforms, ground);
 
     platforms.init();
   };
@@ -99,19 +128,27 @@ const Game = () => {
   });
 
   useWillUnmount(() => {
-    document.removeEventListener('keydown', onKeyDownHandler);
-
-    document.removeEventListener('keyup', onKeyUpHandler);
+    removeHandlers();
   });
 
+  const startGameAgain = () => {
+    reset();
+  };
+
   return (
-    <GameWindow>
-      <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
-    </GameWindow>
+    <>
+      {isPopupOpen && (
+        <GameResult setIsPopupOpen={setIsPopupOpen} startGameAgain={startGameAgain} score={stateScore} isWon={true} />
+      )}
+      <GameWindow>
+        <TextScore>
+          Score: <b> {stateScore} points </b>
+        </TextScore>
+        <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
+      </GameWindow>
+    </>
   );
 };
-
-export default Game;
 
 const GameWindow = styled.div`
   border: 1px solid black;
@@ -120,3 +157,10 @@ const GameWindow = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
 `;
+
+const TextScore = styled(Text)`
+  text-align: left;
+  width: 100%;
+`;
+
+export default Game;

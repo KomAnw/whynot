@@ -1,6 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useGetUserQuery } from 'src/api/auth/auth';
-import { paths } from 'src/App/constants';
+import { paths } from 'src/components/App/constants';
 import Spinner from 'src/components/Spinner';
 
 const { menu } = paths;
