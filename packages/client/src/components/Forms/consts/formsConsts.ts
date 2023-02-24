@@ -124,4 +124,19 @@ export const formsConsts = {
       },
     },
   },
+  oldPassword: {
+    type: 'password',
+    placeholder: '*****',
+    label: 'old Password',
+    name: 'oldPassword' as const,
+    value: '',
+    validationRules: {
+      required: 'Required field',
+      validate: {
+        spaces: (v: string) => noSpaces(v),
+        hasNumber: (v: string) => hasNumber(v),
+        maxAndMinLength: (v: string) => maxAndMinLength(v, 3, 40),
+      },
+    },
+  },
 };
