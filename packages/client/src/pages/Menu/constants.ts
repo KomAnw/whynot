@@ -1,4 +1,4 @@
-import { paths } from 'src/App/constants';
+import { paths } from 'src/components/App/constants';
 
 const { tutorial, profile, leaderboard, forum, game, logout, settings } = paths;
 

@@ -9,13 +9,13 @@ const styleProps = {
   size40: { fontSize: '40px', lineHeight: '45px' },
 };
 
-export const Link = ({ children, to, variant = 'size20' }: propsLink) => {
+export const Link = styled(({ children, to, variant = 'size20', className }: propsLink) => {
   return (
-    <StyledLink variant={variant} to={to}>
+    <StyledLink variant={variant} to={to} className={className}>
       {children}
     </StyledLink>
   );
-};
+})``;
 
 const StyledLink = styled(ReactLink)<propsLinkStyle>`
   cursor: pointer;
