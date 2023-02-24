@@ -4,30 +4,29 @@ import { useChangeAvatarMutation } from 'src/api/user/user';
 import { H1 } from 'src/design/H1';
 import { LinkText } from 'src/design/LinkText';
 import { Button } from 'src/components/Button';
-import { InputHTMLAttributes, useState } from 'react';
+import { InputHTMLAttributes, useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { ProfilePopupContext } from '../ProfileForm/constants';
+import { AvatarData } from './types';
 
-const ProfileAvatar = (props: any) => {
+const ProfileAvatar = () => {
+  const [closePopup] = useContext(ProfilePopupContext);
   const [avatar] = useChangeAvatarMutation();
   const [fileName, setFileName] = useState('');
-  const { register, handleSubmit, getValues } = useForm();
+  const { register, handleSubmit, getValues } = useForm<AvatarData>();
 
   const onChangeFile = () => {
     setFileName(getValues().file[0].name);
   };
 
-  const onClick = () => {
-    props.setIsOpenPopup(false);
-  };
-
-  const submitForm: SubmitHandler<any> = async data => {
+  const submitForm: SubmitHandler<AvatarData> = async ({ file }) => {
     try {
       const formData: FormData = new FormData();
 
-      formData.append('avatar', data.file[0]);
+      formData.append('avatar', file[0]);
       const response = await avatar(formData);
 
-      response && onClick();
+      response && closePopup();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -50,7 +49,7 @@ const ProfileAvatar = (props: any) => {
             Apply
           </Button>
         </Form>
-        <ButtonX onClick={onClick}>x</ButtonX>
+        <ButtonX onClick={() => closePopup()}>x</ButtonX>
       </PageStyle>
     </ModalStyle>
   );
