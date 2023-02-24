@@ -23,6 +23,13 @@ export const links = [
 ];
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-const defaultValue = () => {};
 
-export const ProfilePopupContext = createContext<[Function]>([defaultValue]);
+type ProfilePopupContextProps = {
+  changeState: () => void;
+};
+
+const defaultValue = {
+  changeState: () => null,
+};
+
+export const ProfilePopupContext = createContext<ProfilePopupContextProps>(defaultValue);

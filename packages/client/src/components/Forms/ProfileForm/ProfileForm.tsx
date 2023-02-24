@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 import { Link } from 'src/components/Link';
 import defaultAvatar from 'src/assets/defaultAvatar.svg';
 import Portal from 'components/Portal';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useGetUserQuery } from 'src/api/auth/auth';
 import { apiSettings } from 'src/api';
 import { Avatar, Data, DataLabel, DataRow, DataValue, PageStyle, TextH1 } from './styles';
@@ -16,12 +15,13 @@ const Profile = () => {
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   const userAvatar = userData?.avatar && baseUrlAvatar + userData.avatar;
   const openPopup = useCallback(() => setIsOpenPopup(!isOpenPopup), [isOpenPopup]);
+  const contextValue = useMemo(() => ({ changeState: openPopup }), [openPopup]);
 
   return (
     <>
       <PageStyle>
         <TextH1>Profile</TextH1>
-        <Avatar src={userAvatar || defaultAvatar} onClick={openPopup} />
+        <Avatar src={userAvatar || defaultAvatar} onClick={() => openPopup()} />
         <Data>
           {dataRowData.map(({ name, label }) => {
             const value = (userData && userData[name]) || '';
@@ -42,7 +42,7 @@ const Profile = () => {
       </PageStyle>
       {isOpenPopup && (
         <Portal>
-          <ProfilePopupContext.Provider value={[openPopup]}>
+          <ProfilePopupContext.Provider value={contextValue}>
             <ProfileAvatar />
           </ProfilePopupContext.Provider>
         </Portal>

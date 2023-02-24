@@ -10,7 +10,7 @@ import { ProfilePopupContext } from '../ProfileForm/constants';
 import { AvatarData } from './types';
 
 const ProfileAvatar = () => {
-  const [closePopup] = useContext(ProfilePopupContext);
+  const { changeState } = useContext(ProfilePopupContext);
   const [avatar] = useChangeAvatarMutation();
   const [fileName, setFileName] = useState('');
   const { register, handleSubmit, getValues } = useForm<AvatarData>();
@@ -26,7 +26,7 @@ const ProfileAvatar = () => {
       formData.append('avatar', file[0]);
       const response = await avatar(formData);
 
-      response && closePopup();
+      response && changeState();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -49,7 +49,7 @@ const ProfileAvatar = () => {
             Apply
           </Button>
         </Form>
-        <ButtonX onClick={() => closePopup()}>x</ButtonX>
+        <ButtonX onClick={() => changeState()}>x</ButtonX>
       </PageStyle>
     </ModalStyle>
   );
