@@ -1,15 +1,22 @@
-// import { create } from 'react-test-renderer';
-// import { Button } from 'components/Button';
-// import { MemoryRouter } from 'react-router-dom';
+import { Button } from 'components/Button';
+import { create } from 'react-test-renderer';
+import ThemeWrapper from 'src/hoc/ThemeWrapper';
+import { Provider } from 'react-redux';
+import store from 'src/store';
 
-// it('renders <Button /> correctly', () => {
-//   const tree = create(
-//     <MemoryRouter>
-//       <Button variant="primary" type="submit" onClick={() => console.log('test')}>
-//         LOGIN
-//       </Button>
-//     </MemoryRouter>
-//   ).toJSON();
+describe('Link', () => {
+  it('renders <Button /> correctly', () => {
+    const mockFn = jest.fn(() => null);
+    const tree = create(
+      <Provider store={store}>
+        <ThemeWrapper>
+          <Button variant="primary" type="submit" onClick={mockFn} onSubmit={mockFn}>
+            LOGIN
+          </Button>
+        </ThemeWrapper>
+      </Provider>
+    ).toJSON();
 
-//   expect(tree).toMatchSnapshot();
-// });
+    expect(tree).toMatchSnapshot();
+  });
+});

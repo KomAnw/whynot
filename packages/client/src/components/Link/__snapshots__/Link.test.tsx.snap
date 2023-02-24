@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link renders <Link /> correctly 1`] = `
+<a
+  className="sc-bcXHqe hMgEco"
+  href="/"
+  onClick={[Function]}
+  variant="size24"
+>
+  LOGIN
+</a>
+`;

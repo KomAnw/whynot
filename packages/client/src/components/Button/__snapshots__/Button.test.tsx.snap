@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link renders <Button /> correctly 1`] = `
+<button
+  className="sc-bcXHqe dIIYKk"
+  onClick={[MockFunction]}
+  onSubmit={[MockFunction]}
+  type="submit"
+>
+  LOGIN
+</button>
+`;

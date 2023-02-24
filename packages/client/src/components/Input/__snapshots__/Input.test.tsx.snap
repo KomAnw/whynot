@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input renders <Input /> correctly 1`] = `
+<div
+  className="sc-hLBbgP fSaKOA"
+>
+  <p
+    className="sc-bcXHqe sc-gswNZR sc-jSUZER bZdROF gQyYxG vyFDV"
+  >
+    label
+  </p>
+  <input
+    className="sc-bcXHqe sc-dkrFOg sc-gKPRtg bZdROF idXDLE iKNuxn"
+    placeholder="placeholder"
+    type="input"
+  />
+  <p
+    className="sc-bcXHqe sc-gswNZR sc-eDvSVe bZdROF gQyYxG iGQJyy"
+  />
+</div>
+`;
