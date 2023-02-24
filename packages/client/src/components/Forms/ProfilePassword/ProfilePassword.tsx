@@ -8,13 +8,13 @@ import { breakpoints, paths } from 'src/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { useChangePasswordMutation } from 'src/api/user/user';
 import { useNavigate } from 'react-router-dom';
-import { TPasswordNewRequest } from 'src/api/user/models';
+import { TPasswordNewRequest } from './types';
 
 const { password, confirmPassword, oldPassword } = formsConsts;
 const { profile } = paths;
 const { mobileM } = breakpoints;
 
-const ProfileData = () => {
+const ProfilePassword = () => {
   const [passwordApi] = useChangePasswordMutation();
   const navigate = useNavigate();
 
@@ -45,7 +45,7 @@ const ProfileData = () => {
         <Input
           key={oldPassword.name}
           register={register}
-          errorMessage={errors[oldPassword.name]?.message as string}
+          errorMessage={errors[oldPassword.name]?.message}
           name={oldPassword.name}
           type={oldPassword.type}
           label={oldPassword.label}
@@ -55,7 +55,7 @@ const ProfileData = () => {
         <Input
           key={password.name}
           register={register}
-          errorMessage={errors[password.name]?.message as string}
+          errorMessage={errors[password.name]?.message}
           name={password.name}
           type={password.type}
           label={password.label}
@@ -65,7 +65,7 @@ const ProfileData = () => {
         <Input
           key={confirmPassword.name}
           register={register}
-          errorMessage={errors[confirmPassword.name]?.message as string}
+          errorMessage={errors[confirmPassword.name]?.message}
           name={confirmPassword.name}
           type={confirmPassword.type}
           label={confirmPassword.label}
@@ -88,14 +88,14 @@ const ProfileData = () => {
           Apply
         </Button>
         <Link to={profile.index} variant="size20">
-          back
+          Back
         </Link>
       </FormFooter>
     </Form>
   );
 };
 
-export default ProfileData;
+export default ProfilePassword;
 
 const H1Style = styled(H1)`
   height: 45px;

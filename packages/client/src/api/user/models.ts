@@ -7,10 +7,4 @@ export type TPasswordRequest = {
   newPassword: string;
 };
 
-export type TPasswordNewRequest = {
-  password: string;
-  oldPassword: string;
-  confirmPassword: string;
-};
-
 export type TChangeProfileRequest = Omit<TUser, 'id' | 'avatar'>;
