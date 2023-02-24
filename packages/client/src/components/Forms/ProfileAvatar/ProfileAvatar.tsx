@@ -1,4 +1,3 @@
-import { TypeAvatarProps } from 'src/pages/Profile/types';
 import styled from 'styled-components';
 import { MiniDivForm } from 'src/design/MiniDivForm';
 import { useChangeAvatarMutation } from 'src/api/user/user';
@@ -8,7 +7,7 @@ import { Button } from 'src/components/Button';
 import { InputHTMLAttributes, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
-const ProfileAvatar = (props: TypeAvatarProps) => {
+const ProfileAvatar = (props: any) => {
   const [avatar] = useChangeAvatarMutation();
   const [fileName, setFileName] = useState('');
   const { register, handleSubmit, getValues } = useForm();

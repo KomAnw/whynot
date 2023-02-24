@@ -1,4 +1,4 @@
-import { paths } from 'src/App/constants';
+import { paths } from 'src/components/App/constants';
 import { formsConsts } from '../consts/formsConsts';
 import { TextLink, TextLinkBack } from './styles';
 

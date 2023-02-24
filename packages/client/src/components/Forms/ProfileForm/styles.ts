@@ -1,4 +1,4 @@
-import { breakpoints } from 'src/App/constants';
+import { breakpoints } from 'src/components/App/constants';
 import { H1 } from 'src/design/H1';
 import { H3 } from 'src/design/H3';
 import { Label } from 'src/design/Label';
