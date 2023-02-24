@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
@@ -6,33 +6,56 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
+import { useChangePasswordMutation } from 'src/api/user/user';
+import { useNavigate } from 'react-router-dom';
+import { TPasswordNewRequest } from './types';
 
-const { password, confirmPassword } = formsConsts;
-
+const { password, confirmPassword, oldPassword } = formsConsts;
 const { profile } = paths;
 const { mobileM } = breakpoints;
 
-const ProfileData = () => {
+const ProfilePassword = () => {
+  const [passwordApi] = useChangePasswordMutation();
+  const navigate = useNavigate();
+
   const {
     register,
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<TPasswordNewRequest>({
     mode: 'all',
   });
 
-  // eslint-disable-next-line no-console
-  const submitForm = (data: any) => console.log(data);
+  const submitForm: SubmitHandler<TPasswordNewRequest> = async data => {
+    try {
+      const response = await passwordApi({ oldPassword: data.oldPassword, newPassword: data.confirmPassword });
+
+      response && navigate(profile.index);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
       <H1Style>Edit password</H1Style>
       <FormBody>
         <Input
+          key={oldPassword.name}
+          register={register}
+          errorMessage={errors[oldPassword.name]?.message}
+          name={oldPassword.name}
+          type={oldPassword.type}
+          label={oldPassword.label}
+          placeholder={oldPassword.placeholder}
+          validationRules={oldPassword.validationRules}
+        />
+        <Input
           key={password.name}
           register={register}
-          errorMessage={errors[password.name]?.message as string}
+          errorMessage={errors[password.name]?.message}
           name={password.name}
           type={password.type}
           label={password.label}
@@ -42,7 +65,7 @@ const ProfileData = () => {
         <Input
           key={confirmPassword.name}
           register={register}
-          errorMessage={errors[confirmPassword.name]?.message as string}
+          errorMessage={errors[confirmPassword.name]?.message}
           name={confirmPassword.name}
           type={confirmPassword.type}
           label={confirmPassword.label}
@@ -65,14 +88,14 @@ const ProfileData = () => {
           Apply
         </Button>
         <Link to={profile.index} variant="size20">
-          back
+          Back
         </Link>
       </FormFooter>
     </Form>
   );
 };
 
-export default ProfileData;
+export default ProfilePassword;
 
 const H1Style = styled(H1)`
   height: 45px;
