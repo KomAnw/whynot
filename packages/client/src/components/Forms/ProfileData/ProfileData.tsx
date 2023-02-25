@@ -1,4 +1,5 @@
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
@@ -7,10 +8,14 @@ import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'components/Forms/consts/formsConsts';
 import { TypeFormsConst } from 'components/Forms/consts/types';
+import { useGetUserQuery } from 'src/api/auth/auth';
+import { TChangeProfileRequest } from 'src/api/user/models';
+import { useChangeProfileMutation } from 'src/api/user/user';
 
 const profileDateFields: Array<TypeFormsConst> = [
   formsConsts.firstName,
   formsConsts.secondName,
+  formsConsts.displayName,
   formsConsts.login,
   formsConsts.email,
   formsConsts.phone,
@@ -20,15 +25,30 @@ const { profile } = paths;
 const { mobileM } = breakpoints;
 
 const ProfileData = () => {
+  const { data } = useGetUserQuery();
+  const [userApi] = useChangeProfileMutation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<TChangeProfileRequest>({
     mode: 'all',
+    defaultValues: data,
   });
 
-  const submitForm = (data: any) => console.log(data);
+  const submitForm: SubmitHandler<TChangeProfileRequest> = async data => {
+    try {
+      const response = await userApi(data);
+
+      response && navigate(profile.index);
+      // eslint-disable-next-line no-console
+      console.log(response);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    }
+  };
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
@@ -38,7 +58,7 @@ const ProfileData = () => {
           <Input
             key={name}
             register={register}
-            errorMessage={errors[name]?.message as string}
+            errorMessage={errors[name]?.message}
             name={name}
             type={type}
             label={label}
@@ -81,7 +101,7 @@ const FormFooter = styled('div')`
   align-items: center;
   gap: 5px;
   flex-shrink: 0;
-  margin: 27px auto 0;
+  margin: 0 auto 0;
 `;
 
 const Form = styled('form')`
