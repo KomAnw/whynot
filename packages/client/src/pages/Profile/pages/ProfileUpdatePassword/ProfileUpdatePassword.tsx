@@ -1,4 +1,4 @@
-import ProfilePassword from 'components/Forms/ProfilePassword/ProfilePassword';
+import ProfilePassword from 'components/Forms/ProfilePassword';
 
 const ProfileUpdatePassword = () => {
   return <ProfilePassword />;

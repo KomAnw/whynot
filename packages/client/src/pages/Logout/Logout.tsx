@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authApi, useLogoutMutation } from 'src/api/auth/auth';
-import { paths } from 'src/App/constants';
+import { paths } from 'src/components/App/constants';
 import Spinner from 'src/components/Spinner';
 import { useAppDispatch } from 'src/hooks/redux';
 
@@ -20,7 +20,7 @@ const Logout = () => {
         dispatch(authApi.util.resetApiState());
         navigate(welcome);
       });
-  }, []);
+  }, [dispatch, logout, navigate]);
 
   return <Spinner />;
 };

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { breakpoints, paths } from 'src/App/constants';
+import { breakpoints, paths } from 'src/components/App/constants';
 import { Label } from 'src/design/Label';
 import { H3 } from 'src/design/H3';
 import gomer from 'assets/images/gomer500.svg';

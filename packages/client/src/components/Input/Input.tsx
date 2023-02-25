@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from 'react';
 import { InputProps } from 'components/Input/type';
 import { Label } from 'src/design/Label';
 import { LinkText } from 'src/design/LinkText';
-import { breakpoints } from 'src/App/constants';
+import { breakpoints } from 'src/components/App/constants';
 
 const { mobileM } = breakpoints;
 

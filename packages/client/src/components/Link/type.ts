@@ -6,6 +6,7 @@ export type propsLink = {
   to: string;
   children: ReactNode;
   variant?: sizeType;
+  className?: string;
 };
 
 export type propsLinkStyle = Pick<propsLink, 'variant'>;
