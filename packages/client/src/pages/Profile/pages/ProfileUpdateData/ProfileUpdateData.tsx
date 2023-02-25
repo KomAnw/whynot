@@ -1,4 +1,4 @@
-import ProfileData from 'components/Forms/ProfileData/ProfileData';
+import ProfileData from 'components/Forms/ProfileData';
 
 const ProfileUpdateData = () => {
   return <ProfileData />;
