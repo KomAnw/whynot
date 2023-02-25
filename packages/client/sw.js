@@ -3,13 +3,7 @@ const VERSION = 'v1';
 const STATIC_CACHE_NAME = `s_app_${VERSION}`;
 const DYNAMIC_CACHE_NAME = `d_app_${VERSION}`;
 
-const URLS = [
-  'index.html',
-  '/public/fonts/Handjet.woff',
-  '/public/fonts/Handjet.woff2',
-  '/public/vite.svg',
-  '/src/index.tsx',
-];
+const URLS = ['index.html', '/fonts/Handjet.woff', '/fonts/Handjet.woff2', '/vite.svg', '/src/index.tsx'];
 
 self.addEventListener('install', async () => {
   const cache = await caches.open(STATIC_CACHE_NAME);
