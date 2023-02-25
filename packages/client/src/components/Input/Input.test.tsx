@@ -1,7 +1,7 @@
 import { Input } from 'components/Input';
 import { create } from 'react-test-renderer';
 import { BrowserRouter } from 'react-router-dom';
-import ThemeWrapper from 'src/hoc/ThemeWrapper';
+import MockThemeWrapper from 'src/hoc/MockThemeWrapper';
 import { Provider } from 'react-redux';
 import store from 'src/store';
 
@@ -12,7 +12,7 @@ describe('Input', () => {
     const tree = create(
       <Provider store={store}>
         <BrowserRouter>
-          <ThemeWrapper>
+          <MockThemeWrapper>
             <Input
               key="name"
               register={mockFn}
@@ -22,7 +22,7 @@ describe('Input', () => {
               placeholder="placeholder"
               validationRules={mockVar}
             />
-          </ThemeWrapper>
+          </MockThemeWrapper>
         </BrowserRouter>
       </Provider>
     ).toJSON();
