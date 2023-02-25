@@ -6,12 +6,15 @@ import { Button } from 'src/components/Button';
 import { InputHTMLAttributes, useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { breakpoints } from 'src/components/App/constants';
+import { useDispatch } from 'react-redux';
+import { authApi } from 'src/api/auth/auth';
 import { ProfilePopupContext } from '../ProfileForm/constants';
 import { AvatarData } from './types';
 
 const ProfileAvatar = () => {
   const { changeState } = useContext(ProfilePopupContext);
   const [avatar] = useChangeAvatarMutation();
+  const dispatch = useDispatch();
   const [fileName, setFileName] = useState('');
   const { register, handleSubmit, getValues } = useForm<AvatarData>();
 
@@ -26,6 +29,7 @@ const ProfileAvatar = () => {
       formData.append('avatar', file[0]);
       const response = await avatar(formData);
 
+      dispatch(authApi.util.invalidateTags(['User']));
       response && changeState();
     } catch (error) {
       // eslint-disable-next-line no-console

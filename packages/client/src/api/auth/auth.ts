@@ -15,9 +15,11 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     ...apiSettings,
   }),
+  tagTypes: ['User'],
   endpoints: build => ({
     getUser: build.query<TUser, void>({
       query: () => ({ url: AUTH_ENDPOINTS.user, method: 'GET' }),
+      providesTags: ['User'],
     }),
     singIn: build.mutation<string, TSignInRequest>({
       query: signInData => ({ url: AUTH_ENDPOINTS.singIn, method: 'POST', body: signInData, responseHandler: 'text' }),

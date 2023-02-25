@@ -7,12 +7,12 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'components/Forms/consts/formsConsts';
-import { TypeFormsConst } from 'components/Forms/consts/types';
-import { useGetUserQuery } from 'src/api/auth/auth';
+import { authApi, useGetUserQuery } from 'src/api/auth/auth';
 import { TChangeProfileRequest } from 'src/api/user/models';
 import { useChangeProfileMutation } from 'src/api/user/user';
+import { useDispatch } from 'react-redux';
 
-const profileDateFields: Array<TypeFormsConst> = [
+const profileDateFields = [
   formsConsts.firstName,
   formsConsts.secondName,
   formsConsts.displayName,
@@ -27,6 +27,7 @@ const { mobileM } = breakpoints;
 const ProfileData = () => {
   const { data } = useGetUserQuery();
   const [userApi] = useChangeProfileMutation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
     register,
@@ -41,9 +42,9 @@ const ProfileData = () => {
     try {
       const response = await userApi(data);
 
+      dispatch(authApi.util.invalidateTags(['User']));
+
       response && navigate(profile.index);
-      // eslint-disable-next-line no-console
-      console.log(response);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
