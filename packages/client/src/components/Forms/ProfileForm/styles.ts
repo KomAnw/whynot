@@ -3,12 +3,20 @@ import { H1 } from 'src/design/H1';
 import { H3 } from 'src/design/H3';
 import { Label } from 'src/design/Label';
 import { LinkText } from 'src/design/LinkText';
-import { MiniDivForm } from 'src/design/MiniDivForm';
 import styled from 'styled-components';
 
-export const PageStyle = styled(MiniDivForm)`
+export const PageStyle = styled('div')`
   display: grid;
   justify-items: center;
+  margin: 0;
+  padding: 0;
+  width: 402px;
+  height: 636px;
+  background: ${({ theme }) => theme.colors.core.background.primary};
+  border-radius: 20px;
+  @media (max-width: ${breakpoints.mobileM}) {
+    width: 354px;
+  }
 `;
 
 export const TextH1 = styled(H1)`

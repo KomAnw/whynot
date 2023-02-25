@@ -1,33 +1,32 @@
 import styled from 'styled-components';
-import { MiniDivForm } from 'src/design/MiniDivForm';
 import { useChangeAvatarMutation } from 'src/api/user/user';
 import { H1 } from 'src/design/H1';
 import { LinkText } from 'src/design/LinkText';
 import { Button } from 'src/components/Button';
-import { InputHTMLAttributes, useState } from 'react';
+import { InputHTMLAttributes, useContext, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { breakpoints } from 'src/components/App/constants';
+import { ProfilePopupContext } from '../ProfileForm/constants';
+import { AvatarData } from './types';
 
-const ProfileAvatar = (props: any) => {
+const ProfileAvatar = () => {
+  const { changeState } = useContext(ProfilePopupContext);
   const [avatar] = useChangeAvatarMutation();
   const [fileName, setFileName] = useState('');
-  const { register, handleSubmit, getValues } = useForm();
+  const { register, handleSubmit, getValues } = useForm<AvatarData>();
 
   const onChangeFile = () => {
     setFileName(getValues().file[0].name);
   };
 
-  const onClick = () => {
-    props.setIsOpenPopup(false);
-  };
-
-  const submitForm: SubmitHandler<any> = async data => {
+  const submitForm: SubmitHandler<AvatarData> = async ({ file }) => {
     try {
       const formData: FormData = new FormData();
 
-      formData.append('avatar', data.file[0]);
+      formData.append('avatar', file[0]);
       const response = await avatar(formData);
 
-      response && onClick();
+      response && changeState();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -50,7 +49,7 @@ const ProfileAvatar = (props: any) => {
             Apply
           </Button>
         </Form>
-        <ButtonX onClick={onClick}>x</ButtonX>
+        <ButtonX onClick={() => changeState()}>x</ButtonX>
       </PageStyle>
     </ModalStyle>
   );
@@ -84,13 +83,19 @@ const ButtonX = styled.button`
   }
 `;
 
-const PageStyle = styled(MiniDivForm)`
+const PageStyle = styled('div')`
   position: relative;
   display: grid;
   justify-items: center;
   width: 354px;
   height: 372px;
   padding: 24px 24px;
+  margin: 0;
+  background: ${({ theme }) => theme.colors.core.background.primary};
+  border-radius: 20px;
+  @media (max-width: ${breakpoints.mobileM}) {
+    width: 354px;
+  }
 `;
 
 const TextH1 = styled(H1)`

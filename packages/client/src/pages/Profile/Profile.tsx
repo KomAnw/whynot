@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { CenterDivContainer } from 'src/design/CenterDivContainer';
 import ProfileForm from 'src/components/Forms/ProfileForm/ProfileForm';
 
 const Profile = () => {
@@ -12,4 +11,10 @@ const Profile = () => {
 
 export default Profile;
 
-const Container = styled(CenterDivContainer)``;
+export const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  align-items: center;
+  justify-items: center;
+`;
