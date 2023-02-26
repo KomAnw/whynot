@@ -9,13 +9,13 @@ const styleProps = {
   size40: { fontSize: '40px', lineHeight: '45px' },
 };
 
-export const Link = ({ children, to, variant = 'size20' }: propsLink) => {
+export const Link = styled(({ children, to, variant = 'size20', className }: propsLink) => {
   return (
-    <StyledLink variant={variant} to={to}>
+    <StyledLink variant={variant} to={to} className={className}>
       {children}
     </StyledLink>
   );
-};
+})``;
 
 const StyledLink = styled(ReactLink)<propsLinkStyle>`
   cursor: pointer;
@@ -25,15 +25,13 @@ const StyledLink = styled(ReactLink)<propsLinkStyle>`
     const { fontSize, lineHeight } = styleProps[variant!];
 
     return css`
-      &:hover {
-        color: ${theme.colors.core.link.linkHover};
-      }
       font-size: ${fontSize};
       line-height: ${lineHeight};
       font-family: ${theme.fonts.main};
       color: ${theme.colors.core.text.primary};
+
       &:hover {
-        color: ${theme.colors.core.text.primary};
+        color: ${theme.colors.core.link.linkHover};
       }
     `;
   }}

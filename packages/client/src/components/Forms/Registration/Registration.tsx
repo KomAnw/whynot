@@ -4,7 +4,7 @@ import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
-import { breakpoints, paths } from 'src/App/constants';
+import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
@@ -39,6 +39,7 @@ const Registration = () => {
 
       response && navigate(menu);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
