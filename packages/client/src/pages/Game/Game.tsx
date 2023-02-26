@@ -118,7 +118,7 @@ const Game = () => {
 
     addHandlers();
 
-    const sprite: HTMLImageElement = new Image();
+    const sprite = new Image();
 
     sprite.src = mode.sprite;
 

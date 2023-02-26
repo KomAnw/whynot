@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { sprites } from 'src/App/constants';
+import { sprites} from "components/App/constants";
 
 const { default: defaultMode } = sprites;
 const initialState = defaultMode;
