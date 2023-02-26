@@ -7,7 +7,7 @@ import store from 'src/store';
 
 describe('Input', () => {
   it('renders <Input /> correctly', () => {
-    const mockVar = {};
+    const mockValidationRules = {};
     const mockFn = jest.fn().mockImplementationOnce(() => null);
     const tree = create(
       <Provider store={store}>
@@ -20,7 +20,7 @@ describe('Input', () => {
               type="input"
               label="label"
               placeholder="placeholder"
-              validationRules={mockVar}
+              validationRules={mockValidationRules}
             />
           </MockThemeWrapper>
         </BrowserRouter>
