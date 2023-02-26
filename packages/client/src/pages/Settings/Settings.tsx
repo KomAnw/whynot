@@ -1,19 +1,18 @@
 import styled from 'styled-components';
-import { breakpoints, sprites } from 'src/App/constants';
+import { breakpoints, sprites } from 'components/App/constants';
 import { H1 } from 'src/design/H1';
-import { paths } from 'src/App/constants';
+import { paths } from 'components/App/constants';
 import { Link } from 'components/Link';
 import { Button } from 'components/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/store/store';
+import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { changeMode } from 'pages/Game/modeSlice';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 
 const Settings = () => {
-  const dispatch = useDispatch();
-  const sprite = useSelector((state: RootState) => state.mode.sprite);
+  const dispatch = useAppDispatch();
+  const sprite = useAppSelector(state => state.mode.sprite);
   const onLeft = () => {
     const currentIndex = sprites.findIndex(item => item.name === sprite.name);
 
@@ -36,30 +35,25 @@ const Settings = () => {
 
   return (
     <Wrapper>
-      <LeaderboardComponent>
-        <LeaderboardH1>Settings</LeaderboardH1>
+      <SettingsComponent>
+        <SettingsH1>Settings</SettingsH1>
         <Column>
           <Row>
-            <div>
-              <Button variant="primary" type="submit" onClick={onLeft}>
-                ◀︎
-              </Button>
-            </div>
-            <div>
-              <Img src={sprite.sprite} />
-            </div>
-            <div>
-              <Button variant="primary" type="submit" onClick={onRight}>
-                ▶︎
-              </Button>
-            </div>
+            <Button variant="primary" type="submit" onClick={onLeft}>
+              ◀︎
+            </Button>
+            <Img src={sprite.sprite} />
+
+            <Button variant="primary" type="submit" onClick={onRight}>
+              ▶︎
+            </Button>
           </Row>
           <NameMode>{sprite.name}</NameMode>
         </Column>
         <Link variant="size30" to={menu}>
           Back to menu
         </Link>
-      </LeaderboardComponent>
+      </SettingsComponent>
     </Wrapper>
   );
 };
@@ -73,7 +67,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const LeaderboardComponent = styled.div`
+const SettingsComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,7 +83,7 @@ const LeaderboardComponent = styled.div`
   }
 `;
 
-const LeaderboardH1 = styled(H1)`
+const SettingsH1 = styled(H1)`
   font-size: 48px;
   line-height: 54px;
 `;
@@ -99,14 +93,12 @@ const Column = styled.div`
   height: 100%;
   padding: 0;
   margin: 0;
-  align-items: last;
   justify-content: center;
 `;
 
 const Row = styled.div`
   margin: 10px;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
 `;
 

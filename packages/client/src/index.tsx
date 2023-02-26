@@ -3,8 +3,9 @@ import store from 'src/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Normalize } from 'styled-normalize';
-import { GlobalStyles } from './App/GlobalStyles';
-import App from './App/App';
+import { GlobalStyles } from 'components/App/GlobalStyles';
+import { startServiceWorker } from 'src/utils/workers';
+import App from './components/App/App';
 import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
 import ErrorBoundary from './hoc/ErrorBoundary';
 
@@ -26,3 +27,5 @@ root.render(
     </Provider>
   </>
 );
+
+startServiceWorker();

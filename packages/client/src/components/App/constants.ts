@@ -82,7 +82,7 @@ export const themes = {
           secondary: {
             color: '#FFFFFF',
             background: '#6BD35A',
-            hoverBackground: 'rgba(107, 211, 90, 0.8)',
+            hoverBackground: 'rgba(107, 211, 90, 0.5)',
           },
         },
       },

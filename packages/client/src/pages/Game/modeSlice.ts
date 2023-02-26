@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { sprites } from 'src/App/constants';
+import { sprites } from 'components/App/constants';
 
 export const modeSlice = createSlice({
   name: 'mode',

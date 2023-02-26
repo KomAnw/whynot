@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import { Route } from 'react-router-dom';
-import { paths } from 'src/App/constants';
+import { paths } from 'src/components/App/constants';
 import WithSuspense from 'src/hoc/WithSuspence';
 
 const { edit, id, newForum, index } = paths.forum;

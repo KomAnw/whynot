@@ -3,8 +3,7 @@ import { useMemo, useRef, useState } from 'react';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
 import { Text } from 'src/design/Text';
 import { Score } from 'pages/Game/controllers/Score/Score';
-import { RootState } from 'src/store/store';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from 'src/hooks/redux';
 import { GameWindowProps } from 'pages/Game/types/types';
 import GameResult from './components/GameResult';
 import { TSizes } from './types/types';
@@ -18,7 +17,7 @@ const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
-  const mode = useSelector((state: RootState) => state.mode.sprite);
+  const mode = useAppSelector(state => state.mode.sprite);
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
@@ -118,7 +117,7 @@ const Game = () => {
 
     addHandlers();
 
-    const sprite: HTMLImageElement = new Image();
+    const sprite = new Image();
 
     sprite.src = mode.sprite;
 
