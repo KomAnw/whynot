@@ -4,7 +4,6 @@ import { BrowserRouter } from 'react-router-dom';
 import MockThemeWrapper from 'src/hoc/MockThemeWrapper';
 import { Provider } from 'react-redux';
 import store from 'src/store';
-import 'jest-styled-components';
 
 describe('Link', () => {
   it('renders <Link /> correctly', () => {
