@@ -32,6 +32,7 @@ export const Avatar = styled.img`
   height: 138px;
   width: 138px;
   border-radius: 50%;
+  cursor: pointer;
 `;
 
 export const Data = styled.div`
