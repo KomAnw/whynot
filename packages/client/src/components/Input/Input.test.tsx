@@ -8,7 +8,7 @@ import store from 'src/store';
 describe('Input', () => {
   it('renders <Input /> correctly', () => {
     const mockValidationRules = {};
-    const mockFn = jest.fn().mockImplementationOnce(() => null);
+    const mockFn = jest.fn();
     const tree = create(
       <Provider store={store}>
         <BrowserRouter>

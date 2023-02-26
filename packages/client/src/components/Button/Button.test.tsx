@@ -6,7 +6,7 @@ import store from 'src/store';
 
 describe('Button', () => {
   it('renders <Button /> correctly', () => {
-    const mockFn = jest.fn(() => null);
+    const mockFn = jest.fn();
     const tree = create(
       <Provider store={store}>
         <MockThemeWrapper>
