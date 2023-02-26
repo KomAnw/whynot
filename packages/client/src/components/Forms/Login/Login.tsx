@@ -9,11 +9,14 @@ import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { formsConsts } from '../consts/formsConsts';
+import { useState } from 'react';
+import { Text } from 'src/design/Text';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
 const { menu, registration } = paths;
 
 export const Login = () => {
+  const [commonError, setCommonError] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -26,11 +29,14 @@ export const Login = () => {
 
   const submitForm: SubmitHandler<TSignInRequest> = async data => {
     try {
-      const response = await login(data);
+      const response = await login(data).unwrap();
 
-      response && navigate(menu);
+      if (response) {
+        setCommonError(false);
+        navigate(menu);
+      }
     } catch (error) {
-      // eslint-disable-next-line no-console
+      setCommonError(true);
       console.log(error);
     }
   };
@@ -53,6 +59,7 @@ export const Login = () => {
         ))}
       </FormBody>
       <FormFooter>
+        {commonError && <Error>Wrong username or password</Error>}
         <Button variant="primary" type="submit">
           LOGIN
         </Button>
@@ -81,8 +88,19 @@ const FormBody = styled('div')`
 `;
 
 const FormFooter = styled('div')`
+  position: relative;
   display: grid;
   justify-items: center;
   gap: 10px;
   margin-top: 45px;
+`;
+
+const Error = styled(Text)`
+  width: max-content;
+  font-size: 25px;
+  color: ${({ theme }) => theme.colors.core.text.error};
+  position: absolute;
+  top: -55px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
