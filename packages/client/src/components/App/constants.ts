@@ -105,7 +105,7 @@ export const themes = {
           primary: '#FFFFFF',
           secondary: '#FFFFFF',
           error: '#FFD600',
-          tertiary: '#6B687D',
+          tertiary: '#5BCDC9',
           quaternary: '#6BD35A',
           quinary: '#FFFFFF',
         },
