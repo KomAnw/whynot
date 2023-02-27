@@ -149,18 +149,18 @@ export const themes = {
 
 export const sprites = [
   {
-    name: 'default',
-    sprite: 'src/assets/images/game/default/sprite.png',
-    background: 'src/assets/images/game/default/background.png',
+    name: 'Doodle',
+    sprite: 'src/assets/images/game/doodle/sprite.png',
+    background: 'src/assets/images/game/doodle/background.png',
   },
   {
-    name: 'mario',
+    name: 'Mario',
     sprite: 'src/assets/images/game/mario/sprite.png',
     background: 'src/assets/images/game/mario/background.png',
   },
   {
-    name: 'gomer',
-    sprite: 'src/assets/images/game/gomer/sprite.png',
-    background: 'src/assets/images/game/gomer/background.png',
+    name: 'Homer',
+    sprite: 'src/assets/images/game/homer/sprite.png',
+    background: 'src/assets/images/game/homer/background.png',
   },
 ] as const;
