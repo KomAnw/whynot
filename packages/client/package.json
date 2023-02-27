@@ -12,7 +12,6 @@
     "test": "jest ./ --passWithNoTests --config=jest.config.js"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "1.9.2",
     "dotenv": "16.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -25,6 +24,7 @@
     "swiper": "9.0.5"
   },
   "devDependencies": {
+    "@reduxjs/toolkit": "1.9.2",
     "@testing-library/react": "13.3.0",
     "@types/jest": "28.1.8",
     "@types/react": "18.0.17",
