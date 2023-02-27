@@ -1,36 +1,24 @@
-import { KeyboardEvent, useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import backgroundImg from 'assets/images/background.png';
-import { fullScreenSwitching } from 'src/utils/fullscreenApi';
 import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
-import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
+import { useAppDispatch } from 'src/hooks/redux';
 
 const Layout = () => {
   const dispatch = useAppDispatch();
-  const fullscreenSwitchOn = useAppSelector(state => state.fullscreen.switchOn);
-  const eventKey = useCallback(
-    (e: KeyboardEvent) => {
-      console.log(e.key);
-      if (e.key === 'f') {
-        fullScreenSwitching();
-        dispatch(switchToFullScreen(!fullscreenSwitchOn));
-      }
-      if (e.key === 'Escape') {
-        dispatch(switchToFullScreen(false));
-        document.exitFullscreen();
-      }
-    },
-    [dispatch, fullscreenSwitchOn]
-  );
+
+  const handler = useCallback(() => {
+    if (!document.fullscreenElement) {
+      dispatch(switchToFullScreen(false));
+    }
+  }, [dispatch]);
 
   useEffect(() => {
-    // @ts-ignore
-    document.addEventListener('keydown', eventKey);
+    document.addEventListener('fullscreenchange', handler);
 
-    // @ts-ignore
-    return () => document.removeEventListener('keydown', eventKey);
-  }, [eventKey]);
+    return () => document.removeEventListener('fullscreenchange', handler);
+  }, [handler]);
 
   return (
     <BackgroundContainer>

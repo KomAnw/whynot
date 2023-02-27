@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { breakpoints, sprites } from 'components/App/constants';
 import { H1 } from 'src/design/H1';
@@ -9,7 +10,6 @@ import { changeMode } from 'pages/Game/modeSlice';
 import Switch from 'components/Switch';
 import { Text } from 'src/design/Text';
 import { changeTheme } from 'src/hoc/ThemeWrapper/themeSlice';
-import { switchToDarkTheme } from 'pages/Settings/darkSlice';
 import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
 import { fullScreenSwitching } from 'src/utils/fullscreenApi';
 
@@ -19,10 +19,12 @@ const { menu } = paths;
 const Settings = () => {
   const dispatch = useAppDispatch();
   const sprite = useAppSelector(state => state.mode.sprite);
-  const darkSwitchOn = useAppSelector(state => state.dark.switchOn);
+  const theme = useAppSelector(state => state.theme.name);
   const fullscreenSwitchOn = useAppSelector(state => state.fullscreen.switchOn);
+  const [isDarkTheme, setIsDarkTheme] = useState(theme === 'other');
 
   const themeHandler = () => dispatch(changeTheme());
+
   const onLeft = () => {
     const currentIndex = sprites.findIndex(item => item.name === sprite.name);
 
@@ -45,8 +47,9 @@ const Settings = () => {
 
   const switchTheme = () => {
     themeHandler();
-    dispatch(switchToDarkTheme(!darkSwitchOn));
+    setIsDarkTheme(!isDarkTheme);
   };
+
   const switchOnFullScreen = () => {
     fullScreenSwitching();
     dispatch(switchToFullScreen(!fullscreenSwitchOn));
@@ -59,7 +62,7 @@ const Settings = () => {
         <Column>
           <Row>
             <Text>Dark theme</Text>
-            <Switch onClick={switchTheme} id="theme" isChecked={darkSwitchOn} />
+            <Switch onClick={switchTheme} id="theme" isChecked={isDarkTheme} />
           </Row>
           <Row>
             <Text>Switch to full screen</Text>
@@ -73,7 +76,6 @@ const Settings = () => {
               ◀︎
             </Button>
             <Img src={sprite.sprite} />
-
             <Button variant="secondary" type="submit" onClick={onRight}>
               ▶︎
             </Button>
