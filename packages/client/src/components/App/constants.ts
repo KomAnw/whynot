@@ -107,7 +107,7 @@ export const themes = {
           error: '#FFD600',
           tertiary: '#6B687D',
           quaternary: '#6BD35A',
-          quinary: '#6C5BC3',
+          quinary: '#FFFFFF',
         },
         link: {
           link: '#FFFFFF',

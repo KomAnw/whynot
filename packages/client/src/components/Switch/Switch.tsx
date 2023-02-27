@@ -1,15 +1,27 @@
 import styled from 'styled-components';
-import { useAppDispatch } from 'src/hooks/redux';
-import { changeTheme } from 'src/hoc/ThemeWrapper/themeSlice';
+import { useEffect, useState } from 'react';
 
-const Switch = () => {
-  const dispatch = useAppDispatch();
-  const themeHandler = () => dispatch(changeTheme());
+export type SwitchProps = {
+  onClick?: () => void;
+  id: string;
+  // isSwitchedOn?: boolean;
+  isChecked?: boolean;
+};
+
+const Switch = ({ onClick, id, isChecked = false }: SwitchProps) => {
+  const [checked, setChecked] = useState(false);
+  const handleChange = () => {
+    setChecked(isChecked);
+  };
+
+  useEffect(() => {
+    handleChange();
+  }, [isChecked]);
 
   return (
     <Container>
-      <Input type="checkbox" id="switch" />
-      <Label htmlFor="switch" onClick={themeHandler} />
+      <Input type="checkbox" id={id} checked={checked} />
+      <Label htmlFor={id} onClick={onClick} />
     </Container>
   );
 };

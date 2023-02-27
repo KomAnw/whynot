@@ -6,6 +6,12 @@ import { Link } from 'components/Link';
 import { Button } from 'components/Button';
 import { useAppDispatch, useAppSelector } from 'src/hooks/redux';
 import { changeMode } from 'pages/Game/modeSlice';
+import Switch from 'components/Switch';
+import { Text } from 'src/design/Text';
+import { changeTheme } from 'src/hoc/ThemeWrapper/themeSlice';
+import { switchToDarkTheme } from 'pages/Settings/darkSlice';
+import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
+import { fullScreenSwitching } from 'src/utils/fullscreenApi';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
@@ -13,6 +19,10 @@ const { menu } = paths;
 const Settings = () => {
   const dispatch = useAppDispatch();
   const sprite = useAppSelector(state => state.mode.sprite);
+  const darkSwitchOn = useAppSelector(state => state.dark.switchOn);
+  const fullscreenSwitchOn = useAppSelector(state => state.fullscreen.switchOn);
+
+  const themeHandler = () => dispatch(changeTheme());
   const onLeft = () => {
     const currentIndex = sprites.findIndex(item => item.name === sprite.name);
 
@@ -33,18 +43,38 @@ const Settings = () => {
     }
   };
 
+  const switchTheme = () => {
+    themeHandler();
+    dispatch(switchToDarkTheme(!darkSwitchOn));
+  };
+  const switchOnFullScreen = () => {
+    fullScreenSwitching();
+    dispatch(switchToFullScreen(!fullscreenSwitchOn));
+  };
+
   return (
     <Wrapper>
       <SettingsComponent>
         <SettingsH1>Settings</SettingsH1>
         <Column>
           <Row>
-            <Button variant="primary" type="submit" onClick={onLeft}>
+            <Text>Dark theme</Text>
+            <Switch onClick={switchTheme} id="theme" isChecked={darkSwitchOn} />
+          </Row>
+          <Row>
+            <Text>Switch to full screen</Text>
+            <Switch onClick={switchOnFullScreen} id="fullscreen" isChecked={fullscreenSwitchOn} />
+          </Row>
+          <Row>
+            <Text>Change mode</Text>
+          </Row>
+          <Row>
+            <Button variant="secondary" type="submit" onClick={onLeft}>
               ◀︎
             </Button>
             <Img src={sprite.sprite} />
 
-            <Button variant="primary" type="submit" onClick={onRight}>
+            <Button variant="secondary" type="submit" onClick={onRight}>
               ▶︎
             </Button>
           </Row>
