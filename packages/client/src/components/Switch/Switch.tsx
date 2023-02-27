@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useCallback, useEffect, useState } from 'react';
 
-export type SwitchProps = {
+type SwitchProps = {
   id: string;
   onClick?: () => void;
   isChecked?: boolean;

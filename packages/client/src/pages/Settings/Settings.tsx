@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 import { breakpoints, sprites } from 'components/App/constants';
 import { H1 } from 'src/design/H1';
@@ -21,7 +20,6 @@ const Settings = () => {
   const sprite = useAppSelector(state => state.mode.sprite);
   const theme = useAppSelector(state => state.theme.name);
   const fullscreenSwitchOn = useAppSelector(state => state.fullscreen.switchOn);
-  const [isDarkTheme, setIsDarkTheme] = useState(theme === 'other');
 
   const themeHandler = () => dispatch(changeTheme());
 
@@ -47,7 +45,6 @@ const Settings = () => {
 
   const switchTheme = () => {
     themeHandler();
-    setIsDarkTheme(!isDarkTheme);
   };
 
   const switchOnFullScreen = () => {
@@ -62,7 +59,7 @@ const Settings = () => {
         <Column>
           <Row>
             <Text>Dark theme</Text>
-            <Switch onClick={switchTheme} id="theme" isChecked={isDarkTheme} />
+            <Switch onClick={switchTheme} id="theme" isChecked={theme === 'other'} />
           </Row>
           <Row>
             <Text>Switch to full screen</Text>
