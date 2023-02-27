@@ -8,17 +8,17 @@ import { useAppDispatch } from 'src/hooks/redux';
 const Layout = () => {
   const dispatch = useAppDispatch();
 
-  const handler = useCallback(() => {
+  const onEscapePressHandler = useCallback(() => {
     if (!document.fullscreenElement) {
       dispatch(switchToFullScreen(false));
     }
   }, [dispatch]);
 
   useEffect(() => {
-    document.addEventListener('fullscreenchange', handler);
+    document.addEventListener('fullscreenchange', onEscapePressHandler);
 
-    return () => document.removeEventListener('fullscreenchange', handler);
-  }, [handler]);
+    return () => document.removeEventListener('fullscreenchange', onEscapePressHandler);
+  }, [onEscapePressHandler]);
 
   return (
     <BackgroundContainer>
