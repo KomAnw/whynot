@@ -1,15 +1,24 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import backgroundImg from 'assets/images/background.png';
-import toggleFullScreen from 'src/utils/fullscreenApi';
+import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
+import { useAppDispatch } from 'src/hooks/redux';
 
 const Layout = () => {
-  useEffect(() => {
-    document.addEventListener('keydown', toggleFullScreen);
+  const dispatch = useAppDispatch();
 
-    return () => document.removeEventListener('keydown', toggleFullScreen);
-  }, []);
+  const onEscapePressHandler = useCallback(() => {
+    if (!document.fullscreenElement) {
+      dispatch(switchToFullScreen(false));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    document.addEventListener('fullscreenchange', onEscapePressHandler);
+
+    return () => document.removeEventListener('fullscreenchange', onEscapePressHandler);
+  }, [onEscapePressHandler]);
 
   return (
     <BackgroundContainer>

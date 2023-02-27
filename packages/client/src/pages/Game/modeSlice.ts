@@ -1,17 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { sprites} from "components/App/constants";
-
-const { default: defaultMode } = sprites;
-const initialState = defaultMode;
+import { sprites } from 'components/App/constants';
 
 export const modeSlice = createSlice({
   name: 'mode',
-  initialState,
+  initialState: { sprite: sprites[0] },
   reducers: {
-    changeMode: state => {
-      console.log(state);
+    changeMode: (state, action) => {
+      state.sprite = action.payload;
     },
   },
 });
+
+export const { changeMode } = modeSlice.actions;
 
 export default modeSlice.reducer;

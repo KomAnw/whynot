@@ -105,9 +105,9 @@ export const themes = {
           primary: '#FFFFFF',
           secondary: '#FFFFFF',
           error: '#FFD600',
-          tertiary: '#6B687D',
+          tertiary: '#5BCDC9',
           quaternary: '#6BD35A',
-          quinary: '#6C5BC3',
+          quinary: '#FFFFFF',
         },
         link: {
           link: '#FFFFFF',
@@ -147,17 +147,20 @@ export const themes = {
   },
 } as const;
 
-export const sprites = {
-  default: {
-    sprite: 'src/assets/images/game/default/sprite.png',
-    background: 'src/assets/images/game/default/background.png',
+export const sprites = [
+  {
+    name: 'Doodle',
+    sprite: 'src/assets/images/game/doodle/sprite.png',
+    background: 'src/assets/images/game/doodle/background.png',
   },
-  mario: {
+  {
+    name: 'Mario',
     sprite: 'src/assets/images/game/mario/sprite.png',
     background: 'src/assets/images/game/mario/background.png',
   },
-  gomer: {
-    sprite: 'src/assets/images/game/gomer/sprite.png',
-    background: 'src/assets/images/game/gomer/background.png',
+  {
+    name: 'Homer',
+    sprite: 'src/assets/images/game/homer/sprite.png',
+    background: 'src/assets/images/game/homer/background.png',
   },
-} as const;
+] as const;
