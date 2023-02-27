@@ -3,6 +3,8 @@ import { useMemo, useRef, useState } from 'react';
 import { useDidMount, useWillUnmount } from 'src/hooks/react';
 import { Text } from 'src/design/Text';
 import { Score } from 'pages/Game/controllers/Score/Score';
+import { useAppSelector } from 'src/hooks/redux';
+import { GameWindowProps } from 'pages/Game/types/types';
 import GameResult from './components/GameResult';
 import { TSizes } from './types/types';
 import { Player } from './controllers/Player/Player';
@@ -15,6 +17,7 @@ const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
+  const mode = useAppSelector(state => state.mode.sprite);
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
@@ -24,10 +27,14 @@ const Game = () => {
 
     if (key === 'ArrowLeft') {
       player.isMovingLeft = true;
+      player.isLookingToLeft = player.isMovingLeft;
+      player.isLookingToRight = false;
     }
 
     if (key === 'ArrowRight') {
       player.isMovingRight = true;
+      player.isLookingToRight = player.isMovingRight;
+      player.isLookingToLeft = false;
     }
   };
 
@@ -110,11 +117,15 @@ const Game = () => {
 
     addHandlers();
 
-    platforms = new Platforms(context, sizes);
+    const sprite = new Image();
 
-    ground = new Ground(context, sizes);
+    sprite.src = mode.sprite;
 
-    player = new Player(context, sizes, platforms, ground);
+    platforms = new Platforms(context, sizes, sprite);
+
+    ground = new Ground(context, sizes, sprite);
+
+    player = new Player(context, sizes, platforms, ground, sprite);
 
     platforms.init();
   };
@@ -140,7 +151,7 @@ const Game = () => {
       {isPopupOpen && (
         <GameResult setIsPopupOpen={setIsPopupOpen} startGameAgain={startGameAgain} score={stateScore} isWon={true} />
       )}
-      <GameWindow>
+      <GameWindow background={mode.background}>
         <TextScore>
           Score: <b> {stateScore} points </b>
         </TextScore>
@@ -150,15 +161,17 @@ const Game = () => {
   );
 };
 
-const GameWindow = styled.div`
+const GameWindow = styled.div<GameWindowProps>`
   border: 1px solid black;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: url(${props => props.background}) top left;
 `;
 
 const TextScore = styled(Text)`
+  color: ${({ theme }) => theme.colors.core.text.secondary};
   text-align: left;
   width: 100%;
 `;

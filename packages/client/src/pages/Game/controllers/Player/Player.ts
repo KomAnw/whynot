@@ -11,6 +11,8 @@ export class Player {
   height = 40;
   isMovingLeft: boolean;
   isMovingRight: boolean;
+  isLookingToLeft: boolean;
+  isLookingToRight: boolean;
   ctx: CanvasRenderingContext2D;
   currentYPosition: number;
   currentXPosition: number;
@@ -19,12 +21,28 @@ export class Player {
   sizes: TSizes;
   platforms: Platforms;
   ground: Ground;
+  sprite: HTMLImageElement;
   isDisplayUp = false;
   isDead = false;
 
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes, platforms: Platforms, ground: Ground) {
+  /**
+   * Sprite clipping
+   */
+  clippingXPosition = 0;
+  clippingYPosition = 121;
+  clippingWidth = 110;
+  clippingHeight = 80;
+  constructor(
+    context: CanvasRenderingContext2D,
+    sizes: TSizes,
+    platforms: Platforms,
+    ground: Ground,
+    sprite: HTMLImageElement
+  ) {
     this.isMovingLeft = false;
     this.isMovingRight = false;
+    this.isLookingToLeft = false;
+    this.isLookingToRight = false;
     this.ctx = context;
     this.currentYPosition = 11;
     this.currentXPosition = 0;
@@ -33,6 +51,7 @@ export class Player {
     this.sizes = sizes;
     this.platforms = platforms;
     this.ground = ground;
+    this.sprite = sprite;
   }
 
   jump() {
@@ -160,18 +179,29 @@ export class Player {
         this.yPosition += this.currentYPosition;
         this.currentYPosition += this.gravity;
 
-        Score.updateScore();
-
         if (!this.isDisplayUp) {
           this.isDisplayUp = true;
         }
       }
+      Score.updateScore();
     }
 
     this.collides();
   }
 
   draw() {
-    this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
+    this.clippingYPosition = this.isLookingToLeft ? 201 : 121;
+    this.clippingYPosition = this.isLookingToRight ? 121 : 201;
+    this.ctx.drawImage(
+      this.sprite,
+      this.clippingXPosition,
+      this.clippingYPosition,
+      this.clippingWidth,
+      this.clippingHeight,
+      this.xPosition,
+      this.yPosition,
+      this.width,
+      this.height
+    );
   }
 }

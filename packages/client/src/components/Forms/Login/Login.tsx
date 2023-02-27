@@ -8,9 +8,9 @@ import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
-import { formsConsts } from '../consts/formsConsts';
 import { useState } from 'react';
 import { Text } from 'src/design/Text';
+import { formsConsts } from '../consts/formsConsts';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
 const { menu, registration } = paths;

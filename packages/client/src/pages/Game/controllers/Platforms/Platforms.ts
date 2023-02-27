@@ -7,16 +7,36 @@ class Platform {
   xPosition: number;
   yPosition: number;
   currentPosition: number;
+  sprite: HTMLImageElement;
 
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number) {
+  /**
+   * Sprite clipping
+   */
+  clippingXPosition = 0;
+  clippingYPosition = 0;
+  clippingWidth = 105;
+  clippingHeight = 31;
+
+  constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number, sprite: HTMLImageElement) {
     this.ctx = context;
     this.xPosition = Math.random() * (sizes.width - this.width);
     this.yPosition = position;
     this.currentPosition = position;
+    this.sprite = sprite;
   }
 
   draw() {
-    this.ctx.fillRect(this.xPosition, this.yPosition, this.width, this.height);
+    this.ctx.drawImage(
+      this.sprite,
+      this.clippingXPosition,
+      this.clippingYPosition,
+      this.clippingWidth,
+      this.clippingHeight,
+      this.xPosition,
+      this.yPosition,
+      this.width,
+      this.height
+    );
   }
 }
 
@@ -26,15 +46,17 @@ export class Platforms {
   platformList: Platform[] = [];
   ctx: CanvasRenderingContext2D;
   sizes: TSizes;
+  sprite: HTMLImageElement;
 
-  constructor(context: CanvasRenderingContext2D, sizes: TSizes) {
+  constructor(context: CanvasRenderingContext2D, sizes: TSizes, sprite: HTMLImageElement) {
     this.ctx = context;
     this.sizes = sizes;
+    this.sprite = sprite;
   }
 
   init() {
     for (let i = 0; i < this.platformCount; i++) {
-      const platform = new Platform(this.ctx, this.sizes, this.position);
+      const platform = new Platform(this.ctx, this.sizes, this.position, this.sprite);
 
       this.position += this.sizes.height / this.platformCount;
 
@@ -49,7 +71,7 @@ export class Platforms {
       }
 
       if (platform.yPosition > this.sizes.height) {
-        this.platformList[index] = new Platform(this.ctx, this.sizes, this.position);
+        this.platformList[index] = new Platform(this.ctx, this.sizes, this.position, this.sprite);
         this.platformList[index].yPosition = platform.yPosition - this.sizes.height;
       }
     });
