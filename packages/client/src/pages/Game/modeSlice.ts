@@ -7,7 +7,7 @@ export const modeSlice = createSlice({
   reducers: {
     changeMode: (state, action) => {
       state.sprite = action.payload;
-    }
+    },
   },
 });
 
