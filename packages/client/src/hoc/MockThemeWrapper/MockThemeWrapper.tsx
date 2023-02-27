@@ -1,11 +1,9 @@
 import { ThemeProvider } from 'styled-components';
-import { useAppSelector } from 'src/hooks/redux';
+import { themes } from 'components/App/constants';
 import { ThemeWrapperProps } from './types';
 
 const MockThemeWrapper = ({ children }: ThemeWrapperProps) => {
-  const mockTheme = useAppSelector(({ mockTheme }) => mockTheme);
-
-  return <ThemeProvider theme={mockTheme}>{children}</ThemeProvider>;
+  return <ThemeProvider theme={themes.default}>{children}</ThemeProvider>;
 };
 
 export default MockThemeWrapper;
