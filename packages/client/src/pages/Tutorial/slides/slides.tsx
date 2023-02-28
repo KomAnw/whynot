@@ -5,7 +5,7 @@ import { SlideHistory, SlideTutorial } from 'src/components/Slide';
 import styled from 'styled-components';
 import { Story, Tutorial } from './constants';
 
-const PlayButton = () => (
+export const PlayButton = () => (
   <Container>
     <StyledLink to={paths.game.index}>
       <Button variant="secondary">Let's play</Button>
