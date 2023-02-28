@@ -12,6 +12,7 @@ const imageRender = (imageCase: string, sprite: string, id?: number) => {
   switch (imageCase) {
     case imageCases.hero:
       return <ImgHero src={sprite} elementId={id!} />;
+
     case imageCases.fairycastle:
       return <Character src="src/assets/images/tutorial/fairycastle.png" elementId={id!} />;
 
@@ -34,11 +35,8 @@ const imageRender = (imageCase: string, sprite: string, id?: number) => {
 export const SlideHistory = ({ imageCase, text, id }: StoryProp) => {
   const sprite = useAppSelector(state => state.mode.sprite);
 
-  console.log(sprite);
-
   return (
     <SlideContainer>
-      {/* {image && <Character src={image} elementId={id} />} */}
       {imageRender(imageCase!, sprite.sprite, id)}
       <StyledText>{text}</StyledText>
     </SlideContainer>
