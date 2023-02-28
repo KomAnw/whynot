@@ -5,6 +5,7 @@ export const imageCases = {
   control: 'control',
   platform1: 'platform1',
   platform2: 'platform2',
+  settings: 'settings',
 }
 export const Story = [
   {
@@ -39,5 +40,6 @@ export const Tutorial = [
   },
   {
     text: `Don't forget to go to the game settings:`,
+    imageCase: 'settings'
   },
 ];

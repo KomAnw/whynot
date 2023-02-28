@@ -4,30 +4,41 @@ import { useAppSelector } from 'src/hooks/redux';
 import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
 import { imageCases } from 'pages/Tutorial/slides/constants';
-import { StoryProp, TutorialProp } from './types';
+import fairycastle from 'src/assets/images/tutorial/fairycastle.png';
+import { SlideDataRenderProps, StoryProp, TutorialProp } from './types';
 
 const { settings } = paths;
 
-const imageRender = (imageCase: string, sprite: string, id?: number) => {
+const slideDataRender = ({ imageCase, sprite, id }: SlideDataRenderProps) => {
   switch (imageCase) {
     case imageCases.hero:
-      return <ImgHero src={sprite} elementId={id!} />;
+      return <ImgHero src={sprite.sprite} elementId={id!} />;
 
     case imageCases.fairycastle:
-      return <Character src="src/assets/images/tutorial/fairycastle.png" elementId={id!} />;
+      return <Character src={fairycastle} elementId={id!} />;
 
     case imageCases.platform1:
-      return <ImgPlatform1 src={sprite} elementId={id!} />;
+      return <ImgPlatform1 src={sprite.sprite} elementId={id!} />;
 
     case imageCases.platform2:
-      return <ImgPlatform2 src={sprite} elementId={id!} />;
+      return <ImgPlatform2 src={sprite.sprite} elementId={id!} />;
 
     case imageCases.control:
       return (
         <Control>
-          <ImgControlLeft src={sprite} />
-          <ImgControlRight src={sprite} />
+          <ImgControlLeft src={sprite.sprite} />
+          <ImgControlRight src={sprite.sprite} />
         </Control>
+      );
+    case imageCases.settings:
+      return (
+        <SettingsSlide>
+          <ImgSprite src={sprite.sprite} />
+          <SlideTutorialStyledText>{sprite.name}</SlideTutorialStyledText>
+          <Link to={settings} variant="size24">
+            Go to Settings
+          </Link>
+        </SettingsSlide>
       );
   }
 };
@@ -37,7 +48,7 @@ export const SlideHistory = ({ imageCase, text, id }: StoryProp) => {
 
   return (
     <SlideContainer>
-      {imageRender(imageCase!, sprite.sprite, id)}
+      {slideDataRender({ imageCase, sprite, id })}
       <StyledText>{text}</StyledText>
     </SlideContainer>
   );
@@ -93,17 +104,7 @@ export const SlideTutorial = ({ imageCase, text }: TutorialProp) => {
   return (
     <SlideTutorialContainer>
       <SlideTutorialStyledText>{text}</SlideTutorialStyledText>
-      {imageCase ? (
-        imageRender(imageCase, sprite.sprite)
-      ) : (
-        <SettingsSlide>
-          <ImgSprite src={sprite.sprite} />
-          <SlideTutorialStyledText>{sprite.name}</SlideTutorialStyledText>
-          <Link to={settings} variant="size24">
-            Go to Settings
-          </Link>
-        </SettingsSlide>
-      )}
+      {slideDataRender({ imageCase, sprite })}
     </SlideTutorialContainer>
   );
 };
