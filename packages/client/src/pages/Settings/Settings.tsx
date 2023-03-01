@@ -133,8 +133,8 @@ const Row = styled.div`
 
 const Img = styled.img`
   object-fit: none;
-  object-position: -30px -121px;
-  width: 85px;
+  object-position: -20px -121px;
+  width: 91px;
   height: 81px;
 `;
 
