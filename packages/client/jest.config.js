@@ -13,4 +13,7 @@ export default {
     '^src(.*)$': '<rootDir>/src$1',
     '^components(.*)$': '<rootDir>/src/components$1',
   },
+  transform: {
+    '.+\\.(css|scss|png|jpg|svg)$': 'jest-transform-stub',
+  },
 };
