@@ -2,7 +2,6 @@
   "name": "client",
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://KomAnw.github.io/whynot/",
   "scripts": {
     "dev": "vite --open",
     "build": "tsc && vite build",
@@ -10,8 +9,7 @@
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
     "format": "prettier --write src",
-    "test": "jest ./ --passWithNoTests --config=jest.config.js",
-    "ghdeploy": "yarn build && gh-pages -d dist"
+    "test": "jest ./ --passWithNoTests --config=jest.config.js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "1.9.2",
@@ -45,7 +43,6 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
-    "gh-pages": "5.0.0",
     "jest": "28",
     "jest-environment-jsdom": "29.0.1",
     "jest-transform-stub": "2.0.0",
