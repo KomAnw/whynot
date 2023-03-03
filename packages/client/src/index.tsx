@@ -11,13 +11,15 @@ import ErrorBoundary from './hoc/ErrorBoundary';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement as HTMLElement);
+// @ts-ignore
+const routerBaseName = process.env.PUBLIC_URL;
 
 root.render(
   <>
     <Normalize />
     <GlobalStyles />
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename={routerBaseName}>
         <ThemeWrapper>
           <ErrorBoundary>
             <App />
