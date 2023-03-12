@@ -10,6 +10,7 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { useState } from 'react';
 import { Text } from 'src/design/Text';
+import { storageClearProfileData } from 'src/utils/storeage/storageApi';
 import { formsConsts } from '../consts/formsConsts';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
@@ -34,6 +35,7 @@ export const Login = () => {
       if (response) {
         setCommonError(false);
         navigate(menu);
+        storageClearProfileData('registrationData');
       }
     } catch (error) {
       setCommonError(true);

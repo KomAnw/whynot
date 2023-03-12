@@ -11,6 +11,9 @@ import { authApi, useGetUserQuery } from 'src/api/auth/auth';
 import { TChangeProfileRequest } from 'src/api/user/models';
 import { useChangeProfileMutation } from 'src/api/user/user';
 import { useDispatch } from 'react-redux';
+import { storageSetItem, storageClearProfileData } from 'src/utils/storeage/storageApi';
+import { useEffect } from 'react';
+import { TProfileData } from 'src/utils/storeage/types';
 
 const profileDateFields = [
   formsConsts.firstName,
@@ -31,12 +34,23 @@ const ProfileData = () => {
   const navigate = useNavigate();
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TChangeProfileRequest>({
     mode: 'all',
     defaultValues: data,
   });
+
+  useEffect(() => {
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const key = window.localStorage.key(i) as TProfileData;
+
+      if (key) {
+        setValue(key, window.localStorage[key]);
+      }
+    }
+  }, []);
 
   const submitForm: SubmitHandler<TChangeProfileRequest> = async data => {
     try {
@@ -45,14 +59,23 @@ const ProfileData = () => {
       dispatch(authApi.util.invalidateTags(['User']));
 
       response && navigate(profile.index);
+      // Clear all data from local storeage, which was added from form.
+      storageClearProfileData('profileData');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
   };
 
+  const saveToLocalStorage = (e: any) => {
+    const name = e.target.getAttribute('name');
+    const { value } = e.target;
+
+    storageSetItem(name, value);
+  };
+
   return (
-    <Form onSubmit={handleSubmit(submitForm)}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={(e: any) => saveToLocalStorage(e)}>
       <H1Style>Profile edit</H1Style>
       <FormBody>
         {profileDateFields.map(({ type, name, placeholder, label, validationRules }) => (

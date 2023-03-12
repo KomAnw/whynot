@@ -9,6 +9,9 @@ import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
 import { useNavigate } from 'react-router-dom';
+import { TRegistrationData } from 'src/utils/storeage/types';
+import { useEffect } from 'react';
+import { storageClearProfileData, storageSetItem } from 'src/utils/storeage/storageApi';
 
 const registrationFields = [
   formsConsts.firstName,
@@ -28,24 +31,43 @@ const Registration = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<TSignUpRequest>({
     mode: 'all',
   });
+
+  useEffect(() => {
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const key = window.localStorage.key(i) as TRegistrationData;
+
+      if (key) {
+        setValue(key, window.localStorage[key]);
+      }
+    }
+  }, []);
 
   const submitForm: SubmitHandler<TSignUpRequest> = async data => {
     try {
       const response = await registration(data);
 
       response && navigate(menu);
+      storageClearProfileData('registrationData');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
   };
 
+  const saveToLocalStorage = (e: any) => {
+    const name = e.target.getAttribute('name');
+    const { value } = e.target;
+
+    storageSetItem(name, value);
+  };
+
   return (
-    <Form onSubmit={handleSubmit(submitForm)}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={(e: any) => saveToLocalStorage(e)}>
       <H1Style> Registration </H1Style>
       <FormBody>
         {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (
