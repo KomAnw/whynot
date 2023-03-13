@@ -1,4 +1,3 @@
-import { FormEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
@@ -41,10 +40,6 @@ const Registration = () => {
     setValueFromLocalStorageToField(registrationFields, setValue);
   });
 
-  const onChangeHandler = (event: FormEvent<HTMLFormElement>) => {
-    saveToLocalStorage(event);
-  };
-
   const submitForm: SubmitHandler<TSignUpRequest> = async data => {
     try {
       const response = await registration(data);
@@ -60,7 +55,7 @@ const Registration = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeHandler}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={saveToLocalStorage}>
       <H1Style> Registration </H1Style>
       <FormBody>
         {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (

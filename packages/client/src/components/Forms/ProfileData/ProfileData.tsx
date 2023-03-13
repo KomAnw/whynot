@@ -1,4 +1,3 @@
-import { FormEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -42,10 +41,6 @@ const ProfileData = () => {
     defaultValues: data,
   });
 
-  const onChangeHandler = (event: FormEvent<HTMLFormElement>) => {
-    saveToLocalStorage(event);
-  };
-
   const submitForm: SubmitHandler<TChangeProfileRequest> = async data => {
     try {
       const response = await userApi(data);
@@ -71,7 +66,7 @@ const ProfileData = () => {
   });
 
   return (
-    <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeHandler}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={saveToLocalStorage}>
       <H1Style>Profile edit</H1Style>
       <FormBody>
         {profileDateFields.map(({ type, name, placeholder, label, validationRules }) => (
