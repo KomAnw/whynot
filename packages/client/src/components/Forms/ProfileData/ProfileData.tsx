@@ -1,5 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
@@ -10,7 +11,8 @@ import { formsConsts } from 'components/Forms/consts/formsConsts';
 import { authApi, useGetUserQuery } from 'src/api/auth/auth';
 import { TChangeProfileRequest } from 'src/api/user/models';
 import { useChangeProfileMutation } from 'src/api/user/user';
-import { useDispatch } from 'react-redux';
+import { saveToLocalStorage, setValueFromLocalStorageToField } from 'src/utils/storage';
+import { useDidMount, useWillUnmount } from 'src/hooks/react';
 
 const profileDateFields = [
   formsConsts.firstName,
@@ -31,6 +33,7 @@ const ProfileData = () => {
   const navigate = useNavigate();
   const {
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<TChangeProfileRequest>({
@@ -44,15 +47,26 @@ const ProfileData = () => {
 
       dispatch(authApi.util.invalidateTags(['User']));
 
-      response && navigate(profile.index);
+      if (response) {
+        navigate(profile.index);
+        localStorage.clear();
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
   };
 
+  useDidMount(() => {
+    setValueFromLocalStorageToField(profileDateFields, setValue);
+  });
+
+  useWillUnmount(() => {
+    localStorage.clear();
+  });
+
   return (
-    <Form onSubmit={handleSubmit(submitForm)}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={saveToLocalStorage}>
       <H1Style>Profile edit</H1Style>
       <FormBody>
         {profileDateFields.map(({ type, name, placeholder, label, validationRules }) => (

@@ -22,7 +22,7 @@ export class Ground {
     this.ctx = context;
     this.width = sizes.width;
     this.yPosition = sizes.height - this.height;
-    this.sprite = sprite
+    this.sprite = sprite;
   }
 
   draw() {

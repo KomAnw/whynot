@@ -9,6 +9,8 @@ import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
 import { useNavigate } from 'react-router-dom';
+import { saveToLocalStorage, setValueFromLocalStorageToField } from 'src/utils/storage';
+import { useDidMount } from 'src/hooks/react';
 
 const registrationFields = [
   formsConsts.firstName,
@@ -28,16 +30,24 @@ const Registration = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<TSignUpRequest>({
     mode: 'all',
+  });
+
+  useDidMount(() => {
+    setValueFromLocalStorageToField(registrationFields, setValue);
   });
 
   const submitForm: SubmitHandler<TSignUpRequest> = async data => {
     try {
       const response = await registration(data);
 
-      response && navigate(menu);
+      if (response) {
+        navigate(menu);
+        localStorage.clear();
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -45,7 +55,7 @@ const Registration = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitForm)}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={saveToLocalStorage}>
       <H1Style> Registration </H1Style>
       <FormBody>
         {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (
