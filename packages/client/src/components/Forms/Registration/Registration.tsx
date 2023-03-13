@@ -11,7 +11,7 @@ import { useSingUpMutation } from 'src/api/auth/auth';
 import { useNavigate } from 'react-router-dom';
 import { TRegistrationData } from 'src/utils/storeage/types';
 import { useEffect } from 'react';
-import { storageClearProfileData, storageSetItem } from 'src/utils/storeage/storageApi';
+import { saveToLocalStorage } from 'src/utils/storeage/storeage';
 
 const registrationFields = [
   formsConsts.firstName,
@@ -52,18 +52,11 @@ const Registration = () => {
       const response = await registration(data);
 
       response && navigate(menu);
-      storageClearProfileData('registrationData');
+      window.localStorage.clear();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
-  };
-
-  const saveToLocalStorage = (e: any) => {
-    const name = e.target.getAttribute('name');
-    const { value } = e.target;
-
-    storageSetItem(name, value);
   };
 
   return (

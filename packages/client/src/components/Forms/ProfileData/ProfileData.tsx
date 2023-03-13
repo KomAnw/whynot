@@ -11,9 +11,9 @@ import { authApi, useGetUserQuery } from 'src/api/auth/auth';
 import { TChangeProfileRequest } from 'src/api/user/models';
 import { useChangeProfileMutation } from 'src/api/user/user';
 import { useDispatch } from 'react-redux';
-import { storageSetItem, storageClearProfileData } from 'src/utils/storeage/storageApi';
 import { useEffect } from 'react';
 import { TProfileData } from 'src/utils/storeage/types';
+import { saveToLocalStorage } from 'src/utils/storeage/storeage';
 
 const profileDateFields = [
   formsConsts.firstName,
@@ -60,18 +60,11 @@ const ProfileData = () => {
 
       response && navigate(profile.index);
       // Clear all data from local storeage, which was added from form.
-      storageClearProfileData('profileData');
+      window.localStorage.clear();
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
-  };
-
-  const saveToLocalStorage = (e: any) => {
-    const name = e.target.getAttribute('name');
-    const { value } = e.target;
-
-    storageSetItem(name, value);
   };
 
   return (
