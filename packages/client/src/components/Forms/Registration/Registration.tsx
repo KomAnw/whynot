@@ -1,3 +1,4 @@
+import { FormEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
@@ -9,9 +10,8 @@ import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
 import { useNavigate } from 'react-router-dom';
-import { TRegistrationData } from 'src/utils/storeage/types';
-import { useEffect } from 'react';
-import { saveToLocalStorage } from 'src/utils/storeage/storeage';
+import { saveToLocalStorage, setValueFromLocalStorageToField } from 'src/utils/storage';
+import { useDidMount } from 'src/hooks/react';
 
 const registrationFields = [
   formsConsts.firstName,
@@ -37,22 +37,22 @@ const Registration = () => {
     mode: 'all',
   });
 
-  useEffect(() => {
-    for (let i = 0; i < window.localStorage.length; i++) {
-      const key = window.localStorage.key(i) as TRegistrationData;
+  useDidMount(() => {
+    setValueFromLocalStorageToField(registrationFields, setValue);
+  });
 
-      if (key) {
-        setValue(key, window.localStorage[key]);
-      }
-    }
-  }, []);
+  const onChangeHandler = (event: FormEvent<HTMLFormElement>) => {
+    saveToLocalStorage(event);
+  };
 
   const submitForm: SubmitHandler<TSignUpRequest> = async data => {
     try {
       const response = await registration(data);
 
-      response && navigate(menu);
-      window.localStorage.clear();
+      if (response) {
+        navigate(menu);
+        localStorage.clear();
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -60,7 +60,7 @@ const Registration = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitForm)} onChange={(e: any) => saveToLocalStorage(e)}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeHandler}>
       <H1Style> Registration </H1Style>
       <FormBody>
         {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (

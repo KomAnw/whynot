@@ -1,5 +1,7 @@
+import { FormEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
@@ -10,10 +12,8 @@ import { formsConsts } from 'components/Forms/consts/formsConsts';
 import { authApi, useGetUserQuery } from 'src/api/auth/auth';
 import { TChangeProfileRequest } from 'src/api/user/models';
 import { useChangeProfileMutation } from 'src/api/user/user';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import { TProfileData } from 'src/utils/storeage/types';
-import { saveToLocalStorage } from 'src/utils/storeage/storeage';
+import { saveToLocalStorage, setValueFromLocalStorageToField } from 'src/utils/storage';
+import { useDidMount, useWillUnmount } from 'src/hooks/react';
 
 const profileDateFields = [
   formsConsts.firstName,
@@ -42,15 +42,9 @@ const ProfileData = () => {
     defaultValues: data,
   });
 
-  useEffect(() => {
-    for (let i = 0; i < window.localStorage.length; i++) {
-      const key = window.localStorage.key(i) as TProfileData;
-
-      if (key) {
-        setValue(key, window.localStorage[key]);
-      }
-    }
-  }, []);
+  const onChangeHandler = (event: FormEvent<HTMLFormElement>) => {
+    saveToLocalStorage(event);
+  };
 
   const submitForm: SubmitHandler<TChangeProfileRequest> = async data => {
     try {
@@ -58,17 +52,26 @@ const ProfileData = () => {
 
       dispatch(authApi.util.invalidateTags(['User']));
 
-      response && navigate(profile.index);
-      // Clear all data from local storeage, which was added from form.
-      window.localStorage.clear();
+      if (response) {
+        navigate(profile.index);
+        localStorage.clear();
+      }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
     }
   };
 
+  useDidMount(() => {
+    setValueFromLocalStorageToField(profileDateFields, setValue);
+  });
+
+  useWillUnmount(() => {
+    localStorage.clear();
+  });
+
   return (
-    <Form onSubmit={handleSubmit(submitForm)} onChange={(e: any) => saveToLocalStorage(e)}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeHandler}>
       <H1Style>Profile edit</H1Style>
       <FormBody>
         {profileDateFields.map(({ type, name, placeholder, label, validationRules }) => (

@@ -34,7 +34,7 @@ export const Login = () => {
       if (response) {
         setCommonError(false);
         navigate(menu);
-        window.localStorage.clear();
+        localStorage.clear();
       }
     } catch (error) {
       setCommonError(true);
