@@ -11,9 +11,13 @@ import { Player } from './controllers/Player/Player';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
 
+let controllerIndex: any = null;
+
 const Game = () => {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [stateScore, setStateScore] = useState(Score.count);
+  const [s, setS] = useState(0);
+
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -50,14 +54,69 @@ const Game = () => {
     }
   };
 
+  const onGamepadHandler = (e: any) => {
+    controllerIndex = e.gamepad.index;
+    console.log('connected');
+  };
+
+  const fn = (controllerIndex): any => {
+    if (controllerIndex !== null) {
+      const gamepad = navigator.getGamepads()[controllerIndex];
+      const leftOrRigthArrow = gamepad.axes[6];
+    // const leftOrRightStick = gamepad.axes[0];
+
+      // console.log(gamepad.axes[6]);
+
+      const stickDeadZone = 0.4;
+
+      // console.log(leftOrRightStick);
+
+      if (leftOrRigthArrow >= stickDeadZone) {
+        player.isMovingRight = true;
+        player.isLookingToRight = player.isMovingRight;
+        player.isLookingToLeft = false;
+      } else if (leftOrRigthArrow <= -stickDeadZone) {
+        player.isMovingLeft = true;
+        player.isLookingToLeft = player.isMovingLeft;
+        player.isLookingToRight = false;
+      }
+
+      if (leftOrRigthArrow === 0) {
+        player.isMovingLeft = false;
+        player.isMovingRight = false;
+      }
+
+      // if (leftOrRightStick >= stickDeadZone) {
+      //   player.isMovingRight = true;
+      //   player.isLookingToRight = player.isMovingRight;
+      //   player.isLookingToLeft = false;
+      // } else if (leftOrRightStick <= -stickDeadZone) {
+      //   player.isMovingLeft = true;
+      //   player.isLookingToLeft = player.isMovingLeft;
+      //   player.isLookingToRight = false;
+      // }
+
+      // if (leftOrRightStick === 0) {
+      //   player.isMovingLeft = false;
+      //   player.isMovingRight = false;
+      // }
+    }
+  };
+  
+
   const addHandlers = () => {
     document.addEventListener('keydown', onKeyDownHandler);
     document.addEventListener('keyup', onKeyUpHandler);
+    window.addEventListener('gamepadconnected', onGamepadHandler);
   };
 
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
+    window.addEventListener('gamepaddisconnected', () => {
+      // controllerIndex = null;
+      console.log('disconnected');
+    });
   };
 
   const canvasInit = () => {
@@ -91,7 +150,7 @@ const Game = () => {
       player.playerMovement();
 
       setStateScore(Score.count);
-
+      fn(controllerIndex);
       requestAnimationFrame(update);
     } else {
       setIsPopupOpen(true);
