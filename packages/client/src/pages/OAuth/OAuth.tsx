@@ -1,6 +1,6 @@
 import Spinner from 'components/Spinner';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useYandexOAuthMutation } from 'src/api/oauth/oauth';
+import { REDIRECT_URL, useYandexOAuthMutation } from 'src/api/oauth/oauth';
 import { useDidMount } from 'src/hooks/react';
 import { paths } from 'components/App/constants';
 
@@ -11,10 +11,10 @@ const OAuth = () => {
   const { search } = useLocation();
   const code = search.split('=')[1];
   const navigate = useNavigate();
-  const oAuthHandler = async (): Promise<void> => {
+  const OAuthHandler = async (): Promise<void> => {
     const response = await OAuthYandexSignIn({
       code,
-      redirect_uri: 'http://localhost:3000/oauth',
+      redirect_uri: REDIRECT_URL,
     });
 
     if (response) {
@@ -23,7 +23,7 @@ const OAuth = () => {
   };
 
   useDidMount(() => {
-    oAuthHandler();
+    OAuthHandler();
   });
 
   return <Spinner />;

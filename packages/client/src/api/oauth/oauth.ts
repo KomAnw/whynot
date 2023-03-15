@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { apiSettings } from 'src/api';
+import { apiSettings, getYandexURL } from 'src/api';
 import { TOAuthData, TServiceId } from './models';
 
 const ROOT_OAUTH_URL = 'oauth';
 
 export const OAUTH_ENDPOINTS = {
-  oauth: `${ROOT_OAUTH_URL}/yandex`,
-  service: `${ROOT_OAUTH_URL}/yandex/service-id`,
+  oauth: getYandexURL(`${ROOT_OAUTH_URL}/yandex`),
+  service: getYandexURL(`${ROOT_OAUTH_URL}/yandex/service-id`),
 };
 
 export const REDIRECT_URL = new URL('http://localhost:3000/oauth').toString();
