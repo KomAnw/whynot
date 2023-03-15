@@ -1,21 +1,17 @@
-import { FormEvent } from 'react';
-import { UseFormSetValue } from 'react-hook-form';
 import { TypeFormsConst } from 'components/Forms/consts/types';
 
-const isPasswordField = (name: string) => /password/i.test(name);
+export const isPasswordField = (name: string) => /password/i.test(name);
 
-export const saveToLocalStorage = (e: FormEvent<HTMLFormElement>) => {
-  const { value, name } = e.target as HTMLInputElement;
+export const saveToLocalStorage = (name: string, value: string) =>
+  value ? localStorage.setItem(name, value) : localStorage.removeItem(name);
 
-  if (!isPasswordField(name)) {
-    localStorage.setItem(name, value);
-  }
-};
+export const getValuesFromLocalStorage = (fields: TypeFormsConst[] = []) =>
+  fields.reduce((acc: Record<string, string>, { name }) => {
+    const value = localStorage.getItem(name);
 
-export const setValueFromLocalStorageToField = (fields: TypeFormsConst[], setValue: UseFormSetValue<any>) => {
-  fields.forEach(({ name: key }) => {
-    const value = localStorage.getItem(key);
+    if (value) {
+      acc[name] = value;
+    }
 
-    value && setValue(key, value);
-  });
-};
+    return acc;
+  }, {});

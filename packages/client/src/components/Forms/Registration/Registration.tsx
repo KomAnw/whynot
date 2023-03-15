@@ -1,3 +1,4 @@
+import { FormEvent } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
@@ -9,8 +10,7 @@ import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
 import { useNavigate } from 'react-router-dom';
-import { saveToLocalStorage, setValueFromLocalStorageToField } from 'src/utils/storage';
-import { useDidMount } from 'src/hooks/react';
+import { getValuesFromLocalStorage, isPasswordField, saveToLocalStorage } from 'src/utils/storage';
 
 const registrationFields = [
   formsConsts.firstName,
@@ -30,15 +30,19 @@ const Registration = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<TSignUpRequest>({
     mode: 'all',
+    defaultValues: getValuesFromLocalStorage(registrationFields),
   });
 
-  useDidMount(() => {
-    setValueFromLocalStorageToField(registrationFields, setValue);
-  });
+  const onChangeHandler = (e: FormEvent<HTMLFormElement>) => {
+    const { name, value } = e.target as HTMLInputElement;
+
+    if (!isPasswordField(name)) {
+      saveToLocalStorage(name, value);
+    }
+  };
 
   const submitForm: SubmitHandler<TSignUpRequest> = async data => {
     try {
@@ -55,7 +59,7 @@ const Registration = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitForm)} onChange={saveToLocalStorage}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeHandler}>
       <H1Style> Registration </H1Style>
       <FormBody>
         {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (
