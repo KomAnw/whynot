@@ -5,11 +5,49 @@ import LeaderboardRow from 'components/LeaderboardRow';
 import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
 import { paths } from 'src/components/App/constants';
 import { Link } from 'components/Link';
+import { useGetUserQuery } from 'src/api/auth/auth';
+import { LEADERBOARD_TEAM_NAME } from 'src/api/leaderboard/models';
+import { useAddMutation, useGetLeaderboardMutation } from 'src/api/leaderboard/leaderboard';
+import { useEffect } from 'react';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 
 const Leaderboard = () => {
+  const [addLeaderQuery] = useAddMutation();
+  const { data: user } = useGetUserQuery();
+
+  useEffect(() => {
+    // todo: delete it
+    const mockScore = 100500;
+
+    // debugger;
+    console.log({
+      data: {
+        user_id: user?.id,
+        first_name: user?.first_name,
+        score: mockScore,
+      },
+      ratingFieldName: 'score',
+      teamName: LEADERBOARD_TEAM_NAME,
+    });
+    addLeaderQuery({
+      data: {
+        user_id: user?.id,
+        first_name: user?.first_name,
+        score: mockScore,
+      },
+      ratingFieldName: 'score',
+      teamName: LEADERBOARD_TEAM_NAME,
+    });
+  }, [user]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const aaa = useGetLeaderboardMutation();
+
+  // eslint-disable-next-line no-debugger
+  debugger;
+
   return (
     <Wrapper>
       <LeaderboardComponent>

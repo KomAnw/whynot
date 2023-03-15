@@ -4,6 +4,7 @@ import { authApi } from 'src/api/auth/auth';
 import themeReducer from 'src/hoc/ThemeWrapper/themeSlice';
 import modeReducer from 'pages/Game/modeSlice';
 import fullscreenReducer from 'pages/Settings/fullscreenSlice';
+import { leaderboardApi } from 'src/api/leaderboard/leaderboard';
 
 const store = configureStore({
   reducer: {
@@ -12,8 +13,10 @@ const store = configureStore({
     fullscreen: fullscreenReducer,
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [leaderboardApi.reducerPath]: leaderboardApi.reducer,
   },
-  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(authApi.middleware, userApi.middleware),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware, leaderboardApi.middleware),
 });
 
 export default store;
