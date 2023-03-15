@@ -5,42 +5,19 @@ import LeaderboardRow from 'components/LeaderboardRow';
 import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
 import { paths } from 'src/components/App/constants';
 import { Link } from 'components/Link';
-import { useGetUserQuery } from 'src/api/auth/auth';
-import { LEADERBOARD_TEAM_NAME } from 'src/api/leaderboard/models';
-import { useAddMutation, useGetTeamLeaderboardQuery } from 'src/api/leaderboard/leaderboard';
-import { useEffect } from 'react';
+import { useGetTeamLeaderboardQuery } from 'src/api/leaderboard/leaderboard';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 
 const Leaderboard = () => {
-  const [addLeaderQuery] = useAddMutation();
-  const { data: user } = useGetUserQuery();
-
   const { data } = useGetTeamLeaderboardQuery({
     ratingFieldName: 'score',
     cursor: 0,
     limit: 10,
   });
 
-  console.log(data)
-
-  // debugger;
-
-  useEffect(() => {
-    // todo: delete it
-    const mockScore = 1;
-
-    addLeaderQuery({
-      data: {
-        user_id: user?.id,
-        first_name: user?.first_name,
-        score: mockScore * 3,
-      },
-      ratingFieldName: 'score',
-      teamName: LEADERBOARD_TEAM_NAME,
-    });
-  }, [user]);
+  console.log(data);
 
   return (
     <Wrapper>

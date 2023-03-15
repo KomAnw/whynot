@@ -171,3 +171,5 @@ export const sprites = [
     background: homerBackground,
   },
 ] as const;
+
+export const LEADERBOARD_TEAM_NAME = 'wn';

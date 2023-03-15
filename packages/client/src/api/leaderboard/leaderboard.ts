@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiSettings } from 'src/api';
-import { LEADERBOARD_TEAM_NAME } from 'src/api/leaderboard/models';
+import { LEADERBOARD_TEAM_NAME} from "components/App/constants";
 
 const ROOT_LEADERBOARD_URL = 'leaderboard';
 
@@ -18,7 +18,7 @@ export const leaderboardApi = createApi({
     ...apiSettings,
   }),
   endpoints: build => ({
-    // todo: переделать
+    // todo: переделать any
     add: build.mutation<any, any>({
       query: payload => {
         return {
@@ -29,7 +29,7 @@ export const leaderboardApi = createApi({
         };
       },
     }),
-    // todo: переделать
+    // todo: переделать any
     getTeamLeaderboard: build.query<any, any>({
       query: payload => {
         return {
