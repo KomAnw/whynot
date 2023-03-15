@@ -66,6 +66,10 @@ const Settings = () => {
             <Switch onClick={switchOnFullScreen} id="fullscreen" isChecked={fullscreenSwitchOn} />
           </Row>
           <Row>
+            <Text>Use your awesome gamepad</Text>
+            <Switch onClick={switchOnFullScreen} id="gamepad" isChecked={fullscreenSwitchOn} />
+          </Row>
+          <Row>
             <Text>Change mode</Text>
           </Row>
           <Row>

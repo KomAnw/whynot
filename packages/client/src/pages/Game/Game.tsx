@@ -11,8 +11,6 @@ import { Player } from './controllers/Player/Player';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
 
-let controllerIndex: any = null;
-
 const Game = () => {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const [stateScore, setStateScore] = useState(Score.count);
@@ -20,6 +18,7 @@ const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
   const mode = useAppSelector(state => state.mode.sprite);
+  const game = useRef(NaN);
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
@@ -52,22 +51,26 @@ const Game = () => {
     }
   };
 
-  const onGamepadHandler = (e: any) => {
-    controllerIndex = e.gamepad.index;
-    console.log('connected');
+  const onDisconnectedGamepadHandler = () => {
+    game.current = NaN;
   };
 
-  const fn = (controllerIndex): any => {
-    if (controllerIndex !== null) {
-      const gamepad = navigator.getGamepads()[controllerIndex];
-      const leftOrRigthArrow = gamepad?.axes[6];
-      const stickDeadZone = 0.4;
+  const onConnectedGamepadHandler = (e: { gamepad: { index: number } }) => {
+    game.current = e.gamepad.index;
+  };
 
-      if (leftOrRigthArrow >= stickDeadZone) {
+  const gamepadController = (gamepadIndex: number) => {
+    console.log(gamepadIndex);
+    if (gamepadIndex !== null) {
+      const gamepad = navigator.getGamepads()[gamepadIndex];
+      const leftOrRigthArrow = gamepad?.axes[6] || 0;
+      const axisThreshold = 0.5;
+
+      if (leftOrRigthArrow >= axisThreshold) {
         player.isMovingRight = true;
         player.isLookingToRight = player.isMovingRight;
         player.isLookingToLeft = false;
-      } else if (leftOrRigthArrow <= -stickDeadZone) {
+      } else if (leftOrRigthArrow <= -axisThreshold) {
         player.isMovingLeft = true;
         player.isLookingToLeft = player.isMovingLeft;
         player.isLookingToRight = false;
@@ -79,21 +82,17 @@ const Game = () => {
       }
     }
   };
-  
 
   const addHandlers = () => {
     document.addEventListener('keydown', onKeyDownHandler);
     document.addEventListener('keyup', onKeyUpHandler);
-    window.addEventListener('gamepadconnected', onGamepadHandler);
+    window.addEventListener('gamepadconnected', onConnectedGamepadHandler);
   };
 
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
-    window.addEventListener('gamepaddisconnected', () => {
-      // controllerIndex = null;
-      console.log('disconnected');
-    });
+    window.addEventListener('gamepaddisconnected', onDisconnectedGamepadHandler);
   };
 
   const canvasInit = () => {
@@ -127,7 +126,9 @@ const Game = () => {
       player.playerMovement();
 
       setStateScore(Score.count);
-      fn(controllerIndex);
+
+      gamepadController(game.current);
+
       requestAnimationFrame(update);
     } else {
       setIsPopupOpen(true);
