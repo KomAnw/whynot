@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const YandexLogo = () => (
-  <svg width="25" height="25" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <Path
       d="M2.04 12c0-5.523 4.476-10 10-10 5.522 0 10 4.477 10 10s-4.478 10-10 10c-5.524 0-10-4.477-10-10z"
       fill="#FC3F1D"
