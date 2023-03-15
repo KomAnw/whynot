@@ -4,6 +4,7 @@ import { Label } from 'src/design/Label';
 import { LeaderboardRowProps, RowProps } from 'components/LeaderboardRow/type';
 
 export const LeaderboardRow = ({ rank, nickname, score, isMine }: LeaderboardRowProps) => {
+  // debugger
   return (
     <Row isMine={isMine}>
       <Item>

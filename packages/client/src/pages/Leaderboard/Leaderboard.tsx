@@ -2,30 +2,35 @@ import styled from 'styled-components';
 import { breakpoints } from 'src/components/App/constants';
 import { H1 } from 'src/design/H1';
 import LeaderboardRow from 'components/LeaderboardRow';
-import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
 import { paths } from 'src/components/App/constants';
 import { Link } from 'components/Link';
 import { useGetTeamLeaderboardQuery } from 'src/api/leaderboard/leaderboard';
+import { useGetUserQuery } from 'src/api/auth/auth';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 
 const Leaderboard = () => {
+  const { data: user } = useGetUserQuery();
   const { data } = useGetTeamLeaderboardQuery({
     ratingFieldName: 'score',
     cursor: 0,
     limit: 10,
   });
 
-  console.log(data);
-
   return (
     <Wrapper>
       <LeaderboardComponent>
         <LeaderboardH1>Leaderboard</LeaderboardH1>
         <Column>
-          {leaderboardConsts.map(({ rank, nickname, score, isMine }) => (
-            <LeaderboardRow key={rank} rank={rank} nickname={nickname} score={score} isMine={isMine} />
+          {data?.map((data, index: number) => (
+            <LeaderboardRow
+              key={index + 1}
+              rank={index + 1}
+              nickname={data.data.first_name}
+              score={data.data.score}
+              isMine={data.data.user_id === user!.id}
+            />
           ))}
         </Column>
         <Link variant="size30" to={menu}>
