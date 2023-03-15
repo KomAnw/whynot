@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiSettings } from 'src/api';
 import { LEADERBOARD_TEAM_NAME } from 'src/api/leaderboard/models';
 
-const ROOT_LEADERBOARD_URL = '/leaderboard';
+const ROOT_LEADERBOARD_URL = 'leaderboard';
 
 export const LEADERBOARD_ENDPOINTS = {
   add: ROOT_LEADERBOARD_URL,
@@ -12,9 +12,8 @@ export const LEADERBOARD_ENDPOINTS = {
 function jsonTextResponseHandler(response: Response) {
   return response.status === 200 ? response.json() : response.text();
 }
-
 export const leaderboardApi = createApi({
-  reducerPath: 'leaderboardAPI',
+  reducerPath: 'leaderboard',
   baseQuery: fetchBaseQuery({
     ...apiSettings,
   }),
@@ -31,31 +30,17 @@ export const leaderboardApi = createApi({
       },
     }),
     // todo: переделать
-
-    /*
-     * getTeamLeaderboard: build.query<any, any>({
-     *   query: payload => {
-     *     return {
-     *       url: LEADERBOARD_ENDPOINTS.getTeam,
-     *       method: 'POST',
-     *       body: payload,
-     *       responseHandler: jsonTextResponseHandler,
-     *     };
-     *   },
-     * }),
-     */
-    getLeaderboard: build.mutation({
-      query: () => ({
-        url: LEADERBOARD_ENDPOINTS.getTeam,
-        method: 'POST',
-        body: {
-          ratingFieldName: 'score',
-          cursor: 0,
-          limit: 100,
-        },
-      }),
+    getTeamLeaderboard: build.query<any, any>({
+      query: payload => {
+        return {
+          url: LEADERBOARD_ENDPOINTS.getTeam,
+          method: 'POST',
+          body: payload,
+          responseHandler: jsonTextResponseHandler,
+        };
+      },
     }),
   }),
 });
 
-export const { useAddMutation, useGetLeaderboardMutation } = leaderboardApi;
+export const { useAddMutation, useGetTeamLeaderboardQuery } = leaderboardApi;

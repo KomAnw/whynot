@@ -16,7 +16,7 @@ const store = configureStore({
     [leaderboardApi.reducerPath]: leaderboardApi.reducer,
   },
   middleware: getDefaultMiddleware =>
-    getDefaultMiddleware().concat(authApi.middleware, userApi.middleware, leaderboardApi.middleware),
+    getDefaultMiddleware().concat(leaderboardApi.middleware, authApi.middleware, userApi.middleware),
 });
 
 export default store;
