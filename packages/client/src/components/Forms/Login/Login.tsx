@@ -11,8 +11,8 @@ import { Link } from 'src/components/Link';
 import { useState } from 'react';
 import { Text } from 'src/design/Text';
 import { Divider } from 'components/Divider';
-import yandexLogo from 'src/assets/yandexLogo.svg';
 import { redirectToOAuthYandex, useLazyGetServiceIdQuery } from 'src/api/oauth/oauth';
+import { YandexLogo, Path } from 'components/Forms/Login/components/YandexLogo';
 import { formsConsts } from '../consts/formsConsts';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
@@ -82,7 +82,7 @@ export const Login = () => {
         <Divider> Or login with </Divider>
         <OAuthButton variant="primary" type="button" onClick={OAuthHandler}>
           <OAuthContent>
-            <OAuthLogo src={yandexLogo} />
+            <YandexLogo />
             Yandex ID
           </OAuthContent>
         </OAuthButton>
@@ -135,12 +135,11 @@ const OAuthButton = styled(Button)`
 
   &:hover {
     background: #fc3f1d;
-  }
-`;
 
-const OAuthLogo = styled('img')`
-  width: 25px;
-  height: 25px;
+    ${Path} {
+      fill: black;
+    }
+  }
 `;
 
 const OAuthContent = styled('div')`
