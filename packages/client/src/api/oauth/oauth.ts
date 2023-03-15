@@ -12,7 +12,14 @@ export const OAUTH_ENDPOINTS = {
 export const REDIRECT_URL = 'http://localhost:3000/oauth';
 
 export const redirectToOAuthYandex = (serviceId: string) => {
-  window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId}&redirect_uri=${REDIRECT_URL}`;
+  const url = new URL('https://oauth.yandex.ru/authorize');
+  const params = new URLSearchParams({
+    response_type: 'code',
+    client_id: serviceId.toString(),
+    redirect_uri: REDIRECT_URL.toString(),
+  });
+
+  window.location.href = `${url}?${params}`;
 };
 
 export const oauthApi = createApi({
