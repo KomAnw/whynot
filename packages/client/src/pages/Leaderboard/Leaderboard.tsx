@@ -18,6 +18,8 @@ const Leaderboard = () => {
     limit: 10,
   });
 
+  console.log(data);
+
   return (
     <Wrapper>
       <LeaderboardComponent>

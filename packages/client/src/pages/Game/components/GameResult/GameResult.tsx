@@ -24,7 +24,7 @@ const GameResult = ({ score, isWon, setIsPopupOpen, startGameAgain }: GameResult
       ratingFieldName: 'score',
       teamName: LEADERBOARD_TEAM_NAME,
     });
-  }, [user]);
+  }, [score]);
 
   return (
     <Portal>
