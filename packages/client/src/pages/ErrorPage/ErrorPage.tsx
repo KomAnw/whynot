@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { Label } from 'src/design/Label';
 import { H3 } from 'src/design/H3';
-import gomer from 'assets/images/gomer500.svg';
+import homer from 'assets/images/homer500.svg';
 
 const { menu } = paths;
 const { mobileM } = breakpoints;
@@ -18,7 +18,7 @@ const ErrorPage = () => {
         <TitleText>Что то пошло не так,</TitleText>
         <TitleText>не переживай</TitleText>
         <Wrapper>
-          <ImageHomer src={gomer} alt="Angry Gomer" />
+          <ImageHomer src={homer} alt="Angry Homer" />
           <BigText>500</BigText>
         </Wrapper>
         <StyledH3 onClick={onclickHandler}>в меню</StyledH3>
