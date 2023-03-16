@@ -98,6 +98,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
   gap: 10px;
 `;
 
@@ -107,7 +108,7 @@ const FormHeader = styled(H1)`
 `;
 
 const FormBody = styled('div')`
-  width: 354px;
+  width: 100%;
 `;
 
 const FormFooter = styled('div')`
