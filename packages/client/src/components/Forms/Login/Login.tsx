@@ -38,6 +38,7 @@ export const Login = () => {
       if (response) {
         setCommonError(false);
         navigate(menu);
+        localStorage.clear();
       }
     } catch (error) {
       setCommonError(true);
