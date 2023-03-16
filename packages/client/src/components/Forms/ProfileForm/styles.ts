@@ -31,8 +31,13 @@ export const Avatar = styled.img`
   margin: 22px 0 0 0;
   height: 138px;
   width: 138px;
+  object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export const Data = styled.div`

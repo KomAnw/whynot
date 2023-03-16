@@ -1,5 +1,5 @@
-import lose from 'assets/images/homer-lose.png';
-import win from 'assets/images/homer-win.png';
+import lose from 'images/common/homer-lose.png';
+import win from 'images/common/homer-win.png';
 import styled from 'styled-components';
 import { paths } from 'src/components/App/constants';
 import { GameOverProps, ImageProps } from 'components/GameOver/types';

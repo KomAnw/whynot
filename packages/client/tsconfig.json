@@ -32,7 +32,7 @@
       "src/*": ["src/*"],
       "components/*": ["src/components/*"],
       "pages/*": ["src/pages/*"],
-      "assets/*": ["src/assets/*"],
+      "images/*": ["public/images/*"]
     },
     "types": ["vite/client", "jest"]
   },
