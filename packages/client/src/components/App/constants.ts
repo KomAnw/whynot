@@ -1,9 +1,9 @@
-import doodleImage from 'src/assets/images/game/doodle/sprite.png';
-import doodleBackground from 'src/assets/images/game/doodle/background.png';
-import marioImage from 'src/assets/images/game/mario/sprite.png';
-import marioBackground from 'src/assets/images/game/mario/background.png';
-import homerImage from 'src/assets/images/game/homer/sprite.png';
-import homerBackground from 'src/assets/images/game/homer/background.png';
+import doodleImage from 'images/game/doodle/sprite.png';
+import doodleBackground from 'images/game/doodle/background.png';
+import marioImage from 'images/game/mario/sprite.png';
+import marioBackground from 'images/game/mario/background.png';
+import homerImage from 'images/game/homer/sprite.png';
+import homerBackground from 'images/game/homer/background.png';
 
 export const paths = {
   welcome: '/',

@@ -8,7 +8,7 @@ import { Link } from 'src/components/Link';
 import { Text } from 'src/design/Text';
 import { useState } from 'react';
 import { LinkText } from 'src/design/LinkText';
-import chatGptSvg from 'assets/images/chatgpt.svg';
+import chatGptSvg from 'images/common/chatgpt.svg';
 import { Typography } from 'src/design/Typography';
 import slides from './slides';
 

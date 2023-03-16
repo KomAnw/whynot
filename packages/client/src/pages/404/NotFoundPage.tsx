@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { H1 } from 'src/design/H1';
 import { breakpoints } from 'src/components/App/constants';
 import { Link } from 'components/Link';
-import img from 'assets/images/gomer404.png';
+import img from 'images/common/gomer404.png';
 
 const { mobileM } = breakpoints;
 
