@@ -1,5 +1,5 @@
 import { Link } from 'src/components/Link';
-import defaultAvatar from 'src/assets/defaultAvatar.svg';
+import defaultAvatar from 'images/common/defaultAvatar.svg';
 import Portal from 'components/Portal';
 import { useCallback, useMemo, useState } from 'react';
 import { useGetUserQuery } from 'src/api/auth/auth';
@@ -34,9 +34,11 @@ const Profile = () => {
             );
           })}
         </Data>
-        {links.map(({ Wrapper, id, ...props }) => (
+        {links.map(({ Wrapper, id, to, variant, children }) => (
           <Wrapper key={id}>
-            <Link {...props} />
+            <Link to={to} variant={variant}>
+              {children}
+            </Link>
           </Wrapper>
         ))}
       </PageStyle>

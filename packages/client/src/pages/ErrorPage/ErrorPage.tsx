@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { Label } from 'src/design/Label';
 import { H3 } from 'src/design/H3';
-import homer from 'assets/images/homer500.svg';
+import homer from 'images/common/homer500.svg';
 
 const { menu } = paths;
 const { mobileM } = breakpoints;
