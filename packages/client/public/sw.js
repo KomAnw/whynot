@@ -46,7 +46,9 @@ async function networkFirst(request) {
   try {
     const response = await fetch(request);
 
-    await cache.put(request, response.clone());
+    if (request.method === 'GET') {
+      await cache.put(request, response.clone());
+    }
 
     return response;
   } catch (e) {
