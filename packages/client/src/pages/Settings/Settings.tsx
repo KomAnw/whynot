@@ -11,6 +11,7 @@ import { Text } from 'src/design/Text';
 import { changeTheme } from 'src/hoc/ThemeWrapper/themeSlice';
 import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
 import { fullScreenSwitching } from 'src/utils/fullscreenApi';
+import { switchToGamepad } from './gamepadSlice';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
@@ -20,6 +21,7 @@ const Settings = () => {
   const sprite = useAppSelector(state => state.mode.sprite);
   const theme = useAppSelector(state => state.theme.name);
   const fullscreenSwitchOn = useAppSelector(state => state.fullscreen.switchOn);
+  const gamepadSwitchOn = useAppSelector(state => state.gamepad.gamepadOn);
 
   const themeHandler = () => dispatch(changeTheme());
 
@@ -52,6 +54,10 @@ const Settings = () => {
     dispatch(switchToFullScreen(!fullscreenSwitchOn));
   };
 
+  const switchOnGamepad = () => {
+    dispatch(switchToGamepad(!gamepadSwitchOn));
+  };
+
   return (
     <Wrapper>
       <SettingsComponent>
@@ -66,8 +72,8 @@ const Settings = () => {
             <Switch onClick={switchOnFullScreen} id="fullscreen" isChecked={fullscreenSwitchOn} />
           </Row>
           <Row>
-            <Text>Use your awesome gamepad</Text>
-            <Switch onClick={switchOnFullScreen} id="gamepad" isChecked={fullscreenSwitchOn} />
+            <Text>Use gamepad</Text>
+            <Switch onClick={switchOnGamepad} id="gamepad" isChecked={gamepadSwitchOn} />
           </Row>
           <Row>
             <Text>Change mode</Text>

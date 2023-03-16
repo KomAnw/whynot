@@ -19,6 +19,8 @@ const Game = () => {
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
   const mode = useAppSelector(state => state.mode.sprite);
   const game = useRef(NaN);
+  const gamepad = useAppSelector(state => state.gamepad.gamepadOn);
+  const isGamepad = useRef(gamepad);
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
@@ -60,8 +62,7 @@ const Game = () => {
   };
 
   const gamepadController = (gamepadIndex: number) => {
-    console.log(gamepadIndex);
-    if (gamepadIndex !== null) {
+    if (isGamepad.current && gamepadIndex !== null) {
       const gamepad = navigator.getGamepads()[gamepadIndex];
       const leftOrRigthArrow = gamepad?.axes[6] || 0;
       const axisThreshold = 0.5;
@@ -76,7 +77,7 @@ const Game = () => {
         player.isLookingToRight = false;
       }
 
-      if (leftOrRigthArrow === 0) {
+      if (leftOrRigthArrow < axisThreshold && leftOrRigthArrow > -axisThreshold) {
         player.isMovingLeft = false;
         player.isMovingRight = false;
       }
