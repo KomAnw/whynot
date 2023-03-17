@@ -8,6 +8,7 @@ import { GameWindowProps } from 'pages/Game/types/types';
 import GameResult from './components/GameResult';
 import { TSizes } from './types/types';
 import { Player } from './controllers/Player/Player';
+import { Gamepad } from './controllers/Gamepad/Gamepad';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
 
@@ -19,11 +20,12 @@ const Game = () => {
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
   const mode = useAppSelector(state => state.mode.sprite);
   const gamepadIndex = useRef<null | number>(null);
-  const gamepad = useAppSelector(state => state.gamepad.gamepadOn);
-  const isGamepad = useRef(gamepad);
+  const gamepadState = useAppSelector(state => state.gamepad.gamepadOn); // вот тут стейт начинает меняться
+// c true на false постоянно, если в настройках включить gamepad
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
+  let gamepad: Gamepad;
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     const { key } = e;
@@ -53,47 +55,19 @@ const Game = () => {
     }
   };
 
-  const onDisconnectedGamepadHandler = () => {
-    gamepadIndex.current = null;
-  };
-
-  const onConnectedGamepadHandler = (e: GamepadEvent) => {
-    gamepadIndex.current = e.gamepad.index;
-  };
-
-  const gamepadController = (gamepadIndex: number) => {
-    if (isGamepad.current && gamepadIndex !== null) {
-      const gamepad = navigator.getGamepads()[gamepadIndex];
-      const leftOrRigthArrow = gamepad?.axes[6] || 0;
-      const axisThreshold = 0.5;
-
-      if (leftOrRigthArrow >= axisThreshold) {
-        player.isMovingRight = true;
-        player.isLookingToRight = player.isMovingRight;
-        player.isLookingToLeft = false;
-      } else if (leftOrRigthArrow <= -axisThreshold) {
-        player.isMovingLeft = true;
-        player.isLookingToLeft = player.isMovingLeft;
-        player.isLookingToRight = false;
-      }
-
-      if (leftOrRigthArrow < axisThreshold && leftOrRigthArrow > -axisThreshold) {
-        player.isMovingLeft = false;
-        player.isMovingRight = false;
-      }
-    }
-  };
+  const onGamepadHandler = (e: GamepadEvent) => {
+    gamepad.onConnectedGamepadHandler(e);
+  }
 
   const addHandlers = () => {
     document.addEventListener('keydown', onKeyDownHandler);
     document.addEventListener('keyup', onKeyUpHandler);
-    window.addEventListener('gamepadconnected', onConnectedGamepadHandler);
+    window.addEventListener('gamepadconnected', onGamepadHandler);
   };
 
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
-    window.removeEventListener('gamepaddisconnected', onDisconnectedGamepadHandler);
   };
 
   const canvasInit = () => {
@@ -128,7 +102,8 @@ const Game = () => {
 
       setStateScore(Score.count);
 
-      gamepadController(gamepadIndex.current as number);
+      gamepad.gamepadController(gamepadIndex.current as number);
+      console.log(gamepadState);
 
       requestAnimationFrame(update);
     } else {
@@ -164,6 +139,8 @@ const Game = () => {
     ground = new Ground(context, sizes, sprite);
 
     player = new Player(context, sizes, platforms, ground, sprite);
+
+    gamepad = new Gamepad(gamepadState, gamepadIndex.current, player);
 
     platforms.init();
   };

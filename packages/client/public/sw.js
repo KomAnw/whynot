@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals, no-return-await */
-const VERSION = '225-113';
+const VERSION = 'v1-225-113';
 const STATIC_CACHE_NAME = `s_app_${VERSION}`;
 const DYNAMIC_CACHE_NAME = `d_app_${VERSION}`;
 
