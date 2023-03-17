@@ -7,9 +7,10 @@ import { profileRoutes } from 'src/pages/Profile';
 import { forumRoutes } from 'src/pages/Forum';
 import Logout from 'src/pages/Logout';
 import AuthRoute from 'src/hoc/AuthRoute';
+import OAuth from 'pages/OAuth/OAuth';
 import { paths } from './constants';
 
-const { login, registration, game, forum, leaderboard, profile, menu, logout, settings, tutorial } = paths;
+const { login, registration, game, forum, leaderboard, profile, menu, logout, settings, tutorial, oauth } = paths;
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route index element={<Welcome />} />
           <Route path={login} element={<SignIn />} />
           <Route path={registration} element={<SignUp />} />
+          <Route path={oauth} element={<OAuth />} />
         </Route>
 
         {/* Приватные */}

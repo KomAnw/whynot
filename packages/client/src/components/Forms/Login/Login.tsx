@@ -10,6 +10,9 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'src/components/Link';
 import { useState } from 'react';
 import { Text } from 'src/design/Text';
+import { Divider } from 'components/Divider';
+import { redirectToOAuthYandex, useLazyGetServiceIdQuery } from 'src/api/oauth/oauth';
+import { YandexLogo, Path } from 'components/Forms/Login/components/YandexLogo';
 import { formsConsts } from '../consts/formsConsts';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
@@ -26,6 +29,7 @@ export const Login = () => {
     mode: 'all',
   });
   const [login] = useSingInMutation();
+  const [getServiceId] = useLazyGetServiceIdQuery();
 
   const submitForm: SubmitHandler<TSignInRequest> = async data => {
     try {
@@ -34,10 +38,23 @@ export const Login = () => {
       if (response) {
         setCommonError(false);
         navigate(menu);
+        localStorage.clear();
       }
     } catch (error) {
       setCommonError(true);
       console.log(error);
+    }
+  };
+
+  const OAuthHandler = async () => {
+    try {
+      const { data } = await getServiceId();
+
+      const serviceId = data?.service_id;
+
+      serviceId && redirectToOAuthYandex(serviceId);
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -63,6 +80,13 @@ export const Login = () => {
         <Button variant="primary" type="submit">
           LOGIN
         </Button>
+        <Divider> Or login with </Divider>
+        <OAuthButton variant="primary" type="button" onClick={OAuthHandler}>
+          <OAuthContent>
+            <YandexLogo />
+            Yandex ID
+          </OAuthContent>
+        </OAuthButton>
         <Link to={registration} variant="size24">
           Registration
         </Link>
@@ -75,6 +99,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100%;
   gap: 10px;
 `;
 
@@ -84,15 +109,17 @@ const FormHeader = styled(H1)`
 `;
 
 const FormBody = styled('div')`
-  width: 354px;
+  width: 100%;
 `;
 
 const FormFooter = styled('div')`
   position: relative;
   display: grid;
   justify-items: center;
-  gap: 10px;
-  margin-top: 45px;
+
+  a:last-child {
+    margin-top: 20px;
+  }
 `;
 
 const Error = styled(Text)`
@@ -103,4 +130,23 @@ const Error = styled(Text)`
   top: -55px;
   left: 50%;
   transform: translateX(-50%);
+`;
+
+const OAuthButton = styled(Button)`
+  background: black;
+
+  &:hover {
+    background: #fc3f1d;
+
+    ${Path} {
+      fill: black;
+    }
+  }
+`;
+
+const OAuthContent = styled('div')`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 `;

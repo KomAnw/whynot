@@ -98,7 +98,7 @@ export const formsConsts = {
   password: {
     type: 'password',
     placeholder: '*****',
-    label: 'Password',
+    label: 'New password',
     name: 'password' as const,
     value: '',
     validationRules: {
@@ -113,7 +113,7 @@ export const formsConsts = {
   confirmPassword: {
     type: 'password',
     placeholder: '*****',
-    label: 'confirm Password',
+    label: 'Confirm new password',
     name: 'confirmPassword' as const,
     validationRules: {
       required: 'Required field',
@@ -127,7 +127,7 @@ export const formsConsts = {
   oldPassword: {
     type: 'password',
     placeholder: '*****',
-    label: 'old Password',
+    label: 'Current password',
     name: 'oldPassword' as const,
     value: '',
     validationRules: {
