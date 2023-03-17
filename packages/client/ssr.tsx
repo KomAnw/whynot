@@ -12,17 +12,17 @@ export function render() {
   const sheet = new ServerStyleSheet();
 
   const html = renderToString(
-    <Provider store={store}>
-      <StaticRouter location="/">
-        <ThemeWrapper>
-          <ErrorBoundary>
-            <StyleSheetManager sheet={sheet.instance}>
+    <StyleSheetManager sheet={sheet.instance}>
+      <Provider store={store}>
+        <StaticRouter location="/">
+          <ThemeWrapper>
+            <ErrorBoundary>
               <App />
-            </StyleSheetManager>
-          </ErrorBoundary>
-        </ThemeWrapper>
-      </StaticRouter>
-    </Provider>
+            </ErrorBoundary>
+          </ThemeWrapper>
+        </StaticRouter>
+      </Provider>
+    </StyleSheetManager>
   );
   const css = sheet.getStyleTags();
 

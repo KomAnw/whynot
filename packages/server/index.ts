@@ -52,8 +52,7 @@ const startServer = async () => {
         ? await developmentConfig(context.dev, originalUrl)
         : await productionConfig(context.prod);
 
-      const styleTag = `<style id="styles">${css}</style>`;
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace(`</head>`, `${styleTag}</head>`);
+      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace(`</head>`, `${css}</head>`);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
