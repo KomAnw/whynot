@@ -18,7 +18,7 @@ const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
   const mode = useAppSelector(state => state.mode.sprite);
-  const game = useRef(NaN);
+  const gamepadIndex = useRef<null | number>(null);
   const gamepad = useAppSelector(state => state.gamepad.gamepadOn);
   const isGamepad = useRef(gamepad);
   let player: Player;
@@ -54,11 +54,11 @@ const Game = () => {
   };
 
   const onDisconnectedGamepadHandler = () => {
-    game.current = NaN;
+    gamepadIndex.current = null;
   };
 
-  const onConnectedGamepadHandler = (e: { gamepad: { index: number } }) => {
-    game.current = e.gamepad.index;
+  const onConnectedGamepadHandler = (e: GamepadEvent) => {
+    gamepadIndex.current = e.gamepad.index;
   };
 
   const gamepadController = (gamepadIndex: number) => {
@@ -93,7 +93,7 @@ const Game = () => {
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
-    window.addEventListener('gamepaddisconnected', onDisconnectedGamepadHandler);
+    window.removeEventListener('gamepaddisconnected', onDisconnectedGamepadHandler);
   };
 
   const canvasInit = () => {
@@ -128,7 +128,7 @@ const Game = () => {
 
       setStateScore(Score.count);
 
-      gamepadController(game.current);
+      gamepadController(gamepadIndex.current as number);
 
       requestAnimationFrame(update);
     } else {
