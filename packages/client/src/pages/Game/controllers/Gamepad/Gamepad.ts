@@ -1,21 +1,25 @@
-import { Player } from '../Player/Player';
+import { type Player } from '../Player/Player';
 
 export class Gamepad {
-  [x: string]: any;
+  gamepadState: boolean;
+  gamepadIndex: number | null;
+  player: Player;
+
   constructor(gamepadState: boolean, gamepadIndex: number | null, player: Player) {
     this.gamepadState = gamepadState;
     this.gamepadIndex = gamepadIndex;
     this.player = player;
   }
-  onDisconnectedGamepadHandler = () => {
+
+  reset() {
     this.gamepadIndex = null;
-  };
+  }
 
-  onConnectedGamepadHandler = (e: GamepadEvent) => {
+  init(e: GamepadEvent) {
     this.gamepadIndex = e.gamepad.index;
-  };
+  }
 
-  gamepadController = (gamepadIndex: number) => {
+  control(gamepadIndex: number) {
     if (this.gamepadState && gamepadIndex !== null) {
       const gamepad = navigator.getGamepads()[gamepadIndex];
       const leftOrRightArrow = gamepad?.axes[6] || 0;
@@ -36,5 +40,5 @@ export class Gamepad {
         this.player.isMovingRight = false;
       }
     }
-  };
+  }
 }

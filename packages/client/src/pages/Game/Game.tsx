@@ -21,7 +21,7 @@ const Game = () => {
   const mode = useAppSelector(state => state.mode.sprite);
   const gamepadIndex = useRef<null | number>(null);
   const gamepadState = useAppSelector(state => state.gamepad.gamepadOn); // вот тут стейт начинает меняться
-// c true на false постоянно, если в настройках включить gamepad
+  // c true на false постоянно, если в настройках включить gamepad
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
@@ -55,19 +55,20 @@ const Game = () => {
     }
   };
 
-  const onGamepadHandler = (e: GamepadEvent) => {
-    gamepad.onConnectedGamepadHandler(e);
-  }
+  const onGamepadConnectedHandler = (e: GamepadEvent) => {
+    gamepad.init(e);
+  };
 
   const addHandlers = () => {
     document.addEventListener('keydown', onKeyDownHandler);
     document.addEventListener('keyup', onKeyUpHandler);
-    window.addEventListener('gamepadconnected', onGamepadHandler);
+    window.addEventListener('gamepadconnected', onGamepadConnectedHandler);
   };
 
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
+    window.removeEventListener('gamepadconnected', onGamepadConnectedHandler);
   };
 
   const canvasInit = () => {
@@ -102,7 +103,10 @@ const Game = () => {
 
       setStateScore(Score.count);
 
-      gamepad.gamepadController(gamepadIndex.current as number);
+      if (gamepadIndex.current) {
+        gamepad.control(gamepadIndex.current);
+      }
+
       console.log(gamepadState);
 
       requestAnimationFrame(update);
@@ -155,6 +159,7 @@ const Game = () => {
 
   useWillUnmount(() => {
     removeHandlers();
+    gamepad.reset();
   });
 
   const startGameAgain = () => {
