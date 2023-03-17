@@ -1,5 +1,4 @@
 import { Link } from 'src/components/Link';
-import defaultAvatar from 'images/common/defaultAvatar.svg';
 import Portal from 'components/Portal';
 import { useCallback, useMemo, useState } from 'react';
 import { useGetUserQuery } from 'src/api/auth/auth';
@@ -9,6 +8,7 @@ import { dataRowData, links, ProfilePopupContext } from './constants';
 import ProfileAvatar from '../ProfileAvatar';
 
 const baseUrlAvatar = `${apiSettings.baseUrl}/resources`;
+const defaultAvatar = '/images/common/defaultAvatar.svg';
 
 const Profile = () => {
   const { data: userData } = useGetUserQuery();

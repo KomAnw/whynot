@@ -18,7 +18,6 @@ export default defineConfig({
       src: path.resolve(__dirname, './src'),
       components: path.resolve(__dirname, './src/components'),
       pages: path.resolve(__dirname, './src/pages'),
-      images: path.resolve(__dirname, './public/images'),
     },
   },
   plugins: [react()],

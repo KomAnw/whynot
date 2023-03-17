@@ -1,13 +1,13 @@
 import { H1 } from 'src/design/H1';
 import styled from 'styled-components';
 import { breakpoints, paths } from 'src/components/App/constants';
-import image from 'images/common/welcome.jpg';
 import { Button } from 'src/components/Button';
 import { Link } from 'react-router-dom';
 import { ButtonVariants } from 'src/components/Button/types';
 import { Children } from 'react';
 
 const { login, registration } = paths;
+const image = '/images/common/welcome.jpg';
 const buttons = [
   {
     variant: 'primary' as ButtonVariants,

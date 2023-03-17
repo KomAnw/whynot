@@ -1,10 +1,3 @@
-import doodleImage from 'images/game/doodle/sprite.png';
-import doodleBackground from 'images/game/doodle/background.png';
-import marioImage from 'images/game/mario/sprite.png';
-import marioBackground from 'images/game/mario/background.png';
-import homerImage from 'images/game/homer/sprite.png';
-import homerBackground from 'images/game/homer/background.png';
-
 export const paths = {
   welcome: '/',
   login: '/login',
@@ -160,17 +153,17 @@ export const themes = {
 export const sprites = [
   {
     name: 'Doodle',
-    sprite: doodleImage,
-    background: doodleBackground,
+    sprite: '/images/game/doodle/sprite.png',
+    background: '/images/game/doodle/background.png',
   },
   {
     name: 'Mario',
-    sprite: marioImage,
-    background: marioBackground,
+    sprite: '/images/game/mario/sprite.png',
+    background: '/images/game/mario/background.png',
   },
   {
     name: 'Homer',
-    sprite: homerImage,
-    background: homerBackground,
+    sprite: '/images/game/homer/sprite.png',
+    background: '/images/game/homer/background.png',
   },
 ] as const;
