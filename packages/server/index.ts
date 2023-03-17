@@ -1,9 +1,10 @@
 import dotenv from 'dotenv';
 import cors from 'cors';
 import express from 'express';
-import { readFileSync } from 'fs';
 import { dirname, resolve } from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
+import { developmentConfig } from './configs/development';
+import { productionConfig } from './configs/production';
 
 // import { createClientAndConnect } from './db';
 
@@ -15,24 +16,15 @@ const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
 const distPath = dirname(require.resolve('client/dist/index.html'));
 const srcPath = dirname(require.resolve('client'));
 const ssrClientPath = require.resolve('client/dist-ssr/client.cjs');
-
-const productionConfig = async (): Promise<[string, Function]> => {
-  const template = readFileSync(resolve(distPath, 'index.html'), 'utf-8');
-
-  const { render } = await import(ssrClientPath);
-
-  return [template, render];
-};
-
-const developmentConfig = async (originalUrl: string): Promise<[string, Function]> => {
-  let template: string;
-
-  template = readFileSync(resolve(srcPath, 'index.html'), 'utf-8');
-  template = await vite!.transformIndexHtml(originalUrl, template);
-
-  const { render } = await vite!.ssrLoadModule(resolve(srcPath, 'ssr.tsx'));
-
-  return [template, render];
+const context = {
+  dev: {
+    vite,
+    srcPath,
+  },
+  prod: {
+    distPath,
+    ssrClientPath,
+  },
 };
 
 const startServer = async () => {
@@ -47,19 +39,20 @@ const startServer = async () => {
       root: srcPath,
       appType: 'custom',
     });
-
+    context.dev.vite = vite;
     app.use(vite.middlewares);
   }
 
-  isDevelopmentMode && app.use('/assets', express.static(resolve(distPath, 'assets')));
+  !isDevelopmentMode && app.use('/assets', express.static(resolve(distPath, 'assets')));
 
   app.use('*', async ({ originalUrl }, res, next) => {
     try {
-      const [template, render] = isDevelopmentMode ? await developmentConfig(originalUrl) : await productionConfig();
+      const { appHtml, css, template } = isDevelopmentMode
+        ? await developmentConfig(context.dev, originalUrl)
+        : await productionConfig(context.prod);
 
-      const appHtml = await render();
-
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      const styleTag = `<style id="styles">${css}</style>`;
+      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace(`</head>`, `${styleTag}</head>`);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {

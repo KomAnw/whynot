@@ -17,7 +17,7 @@ export default defineConfig({
   },
   plugins: [react()],
   build: {
-    // outDir: 'dist-ssr',
+    outDir: 'dist-ssr',
     lib: {
       entry: path.resolve(__dirname, 'ssr.tsx'),
       name: 'client',
