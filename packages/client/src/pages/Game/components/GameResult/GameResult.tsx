@@ -2,7 +2,7 @@ import GameOver from 'src/components/GameOver';
 import Portal from 'components/Portal';
 import { useGetUserQuery } from 'src/api/auth/auth';
 import { useAddMutation } from 'src/api/leaderboard/leaderboard';
-import { LEADERBOARD_TEAM_NAME } from 'components/App/constants';
+import { LEADERBOARD_TEAM_NAME } from 'src/api/leaderboard/leaderboard';
 import { useEffect } from 'react';
 import { GameResultProps } from './types';
 

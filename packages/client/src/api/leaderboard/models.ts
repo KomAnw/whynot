@@ -1,7 +1,3 @@
-export type AddNewLeaderResponse = {
-  reason?: string;
-};
-
 export type LeadersResponse = {
   data: {
     score: number;
