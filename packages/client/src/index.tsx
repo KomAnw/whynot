@@ -9,6 +9,8 @@ import App from './components/App/App';
 import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
 import ErrorBoundary from './hoc/ErrorBoundary';
 
+import.meta.env.MODE !== 'development' && startServiceWorker();
+
 const ReactNode = (
   <>
     <Normalize />
@@ -27,4 +29,3 @@ const ReactNode = (
 const rootElement = document.getElementById('root');
 
 hydrateRoot(rootElement as HTMLElement, ReactNode);
-import.meta.env.MODE !== 'development' && startServiceWorker();
