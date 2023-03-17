@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import cors from 'cors';
 import express from 'express';
-import { dirname, resolve } from 'path';
+import { join, resolve } from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import { developmentConfig } from './configs/development';
 import { productionConfig } from './configs/production';
@@ -13,13 +13,14 @@ dotenv.config();
 
 let vite: ViteDevServer | undefined;
 const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
-const distPath = dirname(require.resolve('client/dist/index.html'));
-const srcPath = dirname(require.resolve('client'));
-const ssrClientPath = require.resolve('client/dist-ssr/client.cjs');
+const nodeModulesPath = resolve(__dirname, '..', 'node_modules');
+const clientPath = join(nodeModulesPath, 'client');
+const distPath = join(clientPath, 'dist');
+const ssrClientPath = join(clientPath, 'dist-ssr', 'client.cjs');
 const context = {
   dev: {
     vite,
-    srcPath,
+    clientPath,
   },
   prod: {
     distPath,
@@ -36,14 +37,14 @@ const startServer = async () => {
   if (isDevelopmentMode) {
     vite = await createViteServer({
       server: { middlewareMode: true },
-      root: srcPath,
+      root: clientPath,
       appType: 'custom',
     });
     context.dev.vite = vite;
     app.use(vite.middlewares);
   }
 
-  !isDevelopmentMode && app.use('/assets', express.static(resolve(distPath, 'assets')));
+  !isDevelopmentMode && app.use(express.static(distPath));
 
   app.use('*', async ({ originalUrl }, res, next) => {
     try {

@@ -1,19 +1,20 @@
 import { readFileSync } from 'fs';
-import { resolve } from 'path';
+import { join, resolve } from 'path';
 import type { ViteDevServer } from 'vite';
 
 type DevelopmentConfigContext = {
   vite: ViteDevServer | undefined;
-  srcPath: string;
+  clientPath: string;
 };
 
-export const developmentConfig = async ({ srcPath, vite }: DevelopmentConfigContext, originalUrl: string) => {
+export const developmentConfig = async ({ clientPath, vite }: DevelopmentConfigContext, originalUrl: string) => {
   let template: string;
+  const htmlPath = join(clientPath, 'index.html');
 
-  template = readFileSync(resolve(srcPath, 'index.html'), 'utf-8');
+  template = readFileSync(htmlPath, 'utf-8');
   template = await vite!.transformIndexHtml(originalUrl, template);
 
-  const { render } = await vite!.ssrLoadModule(resolve(srcPath, 'ssr.tsx'));
+  const { render } = await vite!.ssrLoadModule(resolve(clientPath, 'ssr.tsx'));
   const { html: appHtml, css } = await render();
 
   return {
