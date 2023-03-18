@@ -1,28 +1,25 @@
 import { type Player } from '../Player/Player';
 
+export class GamepadIndex {
+  static index: number | null;
+
+  static init(e: GamepadEvent) {
+    GamepadIndex.index = e.gamepad.index;
+  }
+}
+
 export class Gamepad {
   gamepadState = false;
-  gamepadIndex: number | null;
   player: Player;
 
   constructor(gamepadState: boolean, player: Player) {
     this.gamepadState = gamepadState;
     this.player = player;
-    this.gamepadIndex = null;
-  }
-
-  reset() {
-    this.gamepadIndex = null;
-  }
-
-  init(e: GamepadEvent) {
-    this.gamepadIndex = e.gamepad.index;
   }
 
   control() {
-    console.log(this.gamepadState, this.gamepadIndex);
-    if (this.gamepadState && this.gamepadIndex !== null) {
-      const gamepad = navigator.getGamepads()[this.gamepadIndex];
+    if (this.gamepadState && GamepadIndex.index !== null) {
+      const gamepad = navigator.getGamepads()[GamepadIndex.index];
       const leftOrRightArrow = gamepad?.axes[6] || 0;
       const axisThreshold = 0.5;
 

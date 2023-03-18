@@ -8,7 +8,7 @@ import { GameWindowProps } from 'pages/Game/types/types';
 import GameResult from './components/GameResult';
 import { TSizes } from './types/types';
 import { Player } from './controllers/Player/Player';
-import { Gamepad } from './controllers/Gamepad/Gamepad';
+import { Gamepad, GamepadIndex } from './controllers/Gamepad/Gamepad';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
 
@@ -56,10 +56,7 @@ const Game = () => {
   };
 
   const onGamepadConnectedHandler = (e: GamepadEvent) => {
-
-
-    gamepad.init(e);
-    gamepad.control();
+    GamepadIndex.init(e);
   };
 
   const addHandlers = () => {
@@ -105,7 +102,7 @@ const Game = () => {
       player.playerMovement();
 
       setStateScore(Score.count);
-      
+
       gamepad.control();
 
       frameId.current = requestAnimationFrame(update);
