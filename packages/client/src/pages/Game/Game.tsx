@@ -68,7 +68,7 @@ const Game = () => {
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
-    // window.removeEventListener('gamepadconnected', onGamepadConnectedHandler);
+    window.removeEventListener('gamepadconnected', onGamepadConnectedHandler);
   };
 
   const canvasInit = () => {
