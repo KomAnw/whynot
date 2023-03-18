@@ -18,9 +18,10 @@ const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
+  const frameId = useRef<number | null>(null);
   const mode = useAppSelector(state => state.mode.sprite);
-  const gamepadState = useAppSelector(state => state.gamepad.gamepadOn); // вот тут стейт начинает меняться
-  // c true на false постоянно, если в настройках включить gamepad
+  const gamepadState = useAppSelector(state => state.gamepad.gamepadOn);
+
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
@@ -55,7 +56,12 @@ const Game = () => {
   };
 
   const onGamepadConnectedHandler = (e: GamepadEvent) => {
+    if (gamepad.gamepadIndex !== null) {
+      gamepad.reset();
+    }
+
     gamepad.init(e);
+    gamepad.control();
   };
 
   const addHandlers = () => {
@@ -102,11 +108,16 @@ const Game = () => {
 
       setStateScore(Score.count);
 
-      gamepad.control();
-
-      requestAnimationFrame(update);
+      frameId.current = requestAnimationFrame(update);
     } else {
       setIsPopupOpen(true);
+    }
+  };
+
+  const stopUpdate = () => {
+    if (frameId.current) {
+      cancelAnimationFrame(frameId.current);
+      frameId.current = null;
     }
   };
 
@@ -117,7 +128,7 @@ const Game = () => {
 
     init();
 
-    update();
+    frameId.current = requestAnimationFrame(update);
   };
 
   const init = () => {
@@ -149,12 +160,12 @@ const Game = () => {
 
     init();
 
-    update();
+    frameId.current = requestAnimationFrame(update);
   });
 
   useWillUnmount(() => {
     removeHandlers();
-    gamepad.reset();
+    stopUpdate();
   });
 
   const startGameAgain = () => {

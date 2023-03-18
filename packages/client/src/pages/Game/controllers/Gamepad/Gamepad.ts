@@ -20,8 +20,6 @@ export class Gamepad {
   }
 
   control() {
-    console.log(this.gamepadState);
-    // gamepadIndex лучше проверять на null, т.к. индекс начинается с 0 и в любом случае дает false
     if (this.gamepadState && this.gamepadIndex !== null) {
       const gamepad = navigator.getGamepads()[this.gamepadIndex];
       const leftOrRightArrow = gamepad?.axes[6] || 0;
