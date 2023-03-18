@@ -1,9 +1,9 @@
-import doodleImage from 'src/assets/images/game/doodle/sprite.png';
-import doodleBackground from 'src/assets/images/game/doodle/background.png';
-import marioImage from 'src/assets/images/game/mario/sprite.png';
-import marioBackground from 'src/assets/images/game/mario/background.png';
-import homerImage from 'src/assets/images/game/homer/sprite.png';
-import homerBackground from 'src/assets/images/game/homer/background.png';
+import doodleImage from 'images/game/doodle/sprite.png';
+import doodleBackground from 'images/game/doodle/background.png';
+import marioImage from 'images/game/mario/sprite.png';
+import marioBackground from 'images/game/mario/background.png';
+import homerImage from 'images/game/homer/sprite.png';
+import homerBackground from 'images/game/homer/background.png';
 
 export const paths = {
   welcome: '/',
@@ -32,6 +32,7 @@ export const paths = {
     updateData: 'update/data',
     updatePassword: 'update/password',
   },
+  oauth: '/oauth',
 } as const;
 
 export const breakpoints = {
@@ -48,7 +49,7 @@ export const themes = {
     name: 'default',
     colors: {
       core: {
-        borderMenu: 'transpanent',
+        borderMenu: 'transparent',
         background: {
           primary: '#D9D9D9',
           secondary: '#5BCDC9',
@@ -67,6 +68,7 @@ export const themes = {
           linkHover: '#6457b8b3',
         },
         spinner: '#F2CE0D',
+        divider: '#C8C8C8',
       },
       control: {
         input: {
@@ -121,6 +123,7 @@ export const themes = {
           linkHover: 'rgba(255, 255, 255, 0.8)',
         },
         spinner: '#F2CE0D',
+        divider: '#C8C8C8',
       },
       control: {
         input: {

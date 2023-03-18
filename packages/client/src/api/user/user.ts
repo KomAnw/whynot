@@ -1,14 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { apiSettings } from 'src/api';
+import { apiSettings, getYandexURL } from 'src/api';
 import { TChangeProfileRequest, TPasswordRequest } from 'src/api/user/models';
 import { TUser } from '../auth/models';
 
 const ROOT_USER_URL = 'user';
 
 export const USER_ENDPOINTS = {
-  profile: `${ROOT_USER_URL}/profile`,
-  avatar: `${ROOT_USER_URL}/profile/avatar`,
-  password: `${ROOT_USER_URL}/password`,
+  profile: getYandexURL(`${ROOT_USER_URL}/profile`),
+  avatar: getYandexURL(`${ROOT_USER_URL}/profile/avatar`),
+  password: getYandexURL(`${ROOT_USER_URL}/password`),
 };
 export const userApi = createApi({
   reducerPath: 'user',

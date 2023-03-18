@@ -28,4 +28,4 @@ root.render(
   </>
 );
 
-// startServiceWorker();
+import.meta.env.MODE !== 'development' && startServiceWorker();
