@@ -1,21 +1,41 @@
 import styled from 'styled-components';
-import { breakpoints } from 'src/components/App/constants';
+import { breakpoints, paths } from 'src/components/App/constants';
 import { H1 } from 'src/design/H1';
 import LeaderboardRow from 'components/LeaderboardRow';
-import { paths } from 'src/components/App/constants';
 import { Link } from 'components/Link';
-import { useGetTeamLeaderboardQuery } from 'src/api/leaderboard/leaderboard';
+import { useGetTeamLeaderboardMutation } from 'src/api/leaderboard/leaderboard';
 import { useGetUserQuery } from 'src/api/auth/auth';
+import { useDidMount } from 'src/hooks/react';
+import { useState } from 'react';
+import { LeadersResponse } from 'src/api/leaderboard/models';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 
 const Leaderboard = () => {
   const { data: user } = useGetUserQuery();
-  const { data } = useGetTeamLeaderboardQuery({
-    ratingFieldName: 'score',
-    cursor: 0,
-    limit: 10,
+  const [GetTeamLeaderboard] = useGetTeamLeaderboardMutation();
+  const [data, setData] = useState<LeadersResponse[]>([]);
+
+  const GetTeamLeaderboardHandler = async () => {
+    try {
+      const response = await GetTeamLeaderboard({
+        ratingFieldName: 'score',
+        cursor: 0,
+        limit: 10,
+      });
+
+      if (response) {
+        setData(response.data);
+        console.log(response);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useDidMount(() => {
+    GetTeamLeaderboardHandler().then();
   });
 
   return (
