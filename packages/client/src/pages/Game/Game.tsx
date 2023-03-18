@@ -56,9 +56,9 @@ const Game = () => {
   };
 
   const onGamepadConnectedHandler = (e: GamepadEvent) => {
-    if (gamepad.gamepadIndex !== null) {
-      gamepad.reset();
-    }
+    // if (gamepad.gamepadIndex !== null) {
+    //   gamepad.reset();
+    // }
 
     gamepad.init(e);
     gamepad.control();
@@ -73,7 +73,7 @@ const Game = () => {
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
-    window.removeEventListener('gamepadconnected', onGamepadConnectedHandler);
+    // window.removeEventListener('gamepadconnected', onGamepadConnectedHandler);
   };
 
   const canvasInit = () => {
@@ -107,6 +107,8 @@ const Game = () => {
       player.playerMovement();
 
       setStateScore(Score.count);
+      
+      gamepad.control();
 
       frameId.current = requestAnimationFrame(update);
     } else {

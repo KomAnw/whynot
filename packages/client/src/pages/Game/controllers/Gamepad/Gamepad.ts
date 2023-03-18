@@ -20,6 +20,7 @@ export class Gamepad {
   }
 
   control() {
+    console.log(this.gamepadState, this.gamepadIndex);
     if (this.gamepadState && this.gamepadIndex !== null) {
       const gamepad = navigator.getGamepads()[this.gamepadIndex];
       const leftOrRightArrow = gamepad?.axes[6] || 0;
