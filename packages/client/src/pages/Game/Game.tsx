@@ -56,9 +56,7 @@ const Game = () => {
   };
 
   const onGamepadConnectedHandler = (e: GamepadEvent) => {
-    // if (gamepad.gamepadIndex !== null) {
-    //   gamepad.reset();
-    // }
+
 
     gamepad.init(e);
     gamepad.control();
