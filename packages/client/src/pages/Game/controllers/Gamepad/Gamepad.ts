@@ -1,14 +1,14 @@
 import { type Player } from '../Player/Player';
 
 export class Gamepad {
-  gamepadState: boolean;
+  gamepadState = false;
   gamepadIndex: number | null;
   player: Player;
 
-  constructor(gamepadState: boolean, gamepadIndex: number | null, player: Player) {
+  constructor(gamepadState: boolean, player: Player) {
     this.gamepadState = gamepadState;
-    this.gamepadIndex = gamepadIndex;
     this.player = player;
+    this.gamepadIndex = null;
   }
 
   reset() {
@@ -19,9 +19,9 @@ export class Gamepad {
     this.gamepadIndex = e.gamepad.index;
   }
 
-  control(gamepadIndex: number) {
-    if (this.gamepadState && gamepadIndex !== null) {
-      const gamepad = navigator.getGamepads()[gamepadIndex];
+  control() {
+    if (this.gamepadState && this.gamepadIndex) {
+      const gamepad = navigator.getGamepads()[this.gamepadIndex];
       const leftOrRightArrow = gamepad?.axes[6] || 0;
       const axisThreshold = 0.5;
 

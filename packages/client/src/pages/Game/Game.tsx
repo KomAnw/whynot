@@ -19,7 +19,6 @@ const Game = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
   const mode = useAppSelector(state => state.mode.sprite);
-  const gamepadIndex = useRef<null | number>(null);
   const gamepadState = useAppSelector(state => state.gamepad.gamepadOn); // вот тут стейт начинает меняться
   // c true на false постоянно, если в настройках включить gamepad
   let player: Player;
@@ -103,11 +102,7 @@ const Game = () => {
 
       setStateScore(Score.count);
 
-      if (gamepadIndex.current) {
-        gamepad.control(gamepadIndex.current);
-      }
-
-      console.log(gamepadState);
+      gamepad.control();
 
       requestAnimationFrame(update);
     } else {
@@ -144,7 +139,7 @@ const Game = () => {
 
     player = new Player(context, sizes, platforms, ground, sprite);
 
-    gamepad = new Gamepad(gamepadState, gamepadIndex.current, player);
+    gamepad = new Gamepad(gamepadState, player);
 
     platforms.init();
   };
