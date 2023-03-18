@@ -7,18 +7,16 @@ import { GameResultProps } from './types';
 
 const GameResult = ({ score, isWon, setIsPopupOpen, startGameAgain }: GameResultProps) => {
   const onClick = () => {
+    addLeaderHandler().then();
     setIsPopupOpen(false);
     startGameAgain();
-    addLeaderHandler().then();
   };
   const [addLeaderQuery] = useLazyAddQuery();
-  const addLeaderHandler = async () => {
+  const { data: user } = useGetUserQuery();
+  const addLeaderHandler = async (): Promise<void> => {
     try {
-      const { data: user } = await useGetUserQuery();
-
       await addLeaderQuery({
         data: {
-          // todo: исправить типизацию
           user_id: user!.id,
           first_name: user!.first_name,
           score,

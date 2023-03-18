@@ -1,4 +1,6 @@
-export type LeadersResponse = {
+export type LeadersResponse = Leader[];
+
+export type Leader = {
   data: {
     score: number;
     user_id: number;
@@ -6,7 +8,7 @@ export type LeadersResponse = {
   };
 };
 
-export type LeaderboardNewLeaderRequest = LeadersResponse & {
+export type LeaderboardNewLeaderRequest = Leader & {
   ratingFieldName: string;
   teamName: string;
 };

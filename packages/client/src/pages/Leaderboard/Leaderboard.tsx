@@ -7,7 +7,7 @@ import { useGetTeamLeaderboardMutation } from 'src/api/leaderboard/leaderboard';
 import { useGetUserQuery } from 'src/api/auth/auth';
 import { useDidMount } from 'src/hooks/react';
 import { useState } from 'react';
-import { LeadersResponse } from 'src/api/leaderboard/models';
+import { Leader } from 'src/api/leaderboard/models';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
@@ -15,19 +15,18 @@ const { menu } = paths;
 const Leaderboard = () => {
   const { data: user } = useGetUserQuery();
   const [GetTeamLeaderboard] = useGetTeamLeaderboardMutation();
-  const [data, setData] = useState<LeadersResponse[]>([]);
+  const [data, setData] = useState<Array<Leader>>([]);
 
   const GetTeamLeaderboardHandler = async () => {
     try {
-      const response = await GetTeamLeaderboard({
+      const leaders = await GetTeamLeaderboard({
         ratingFieldName: 'score',
         cursor: 0,
         limit: 10,
-      });
+      }).unwrap();
 
-      if (response) {
-        setData(response.data);
-        console.log(response);
+      if (leaders) {
+        setData(leaders);
       }
     } catch (err) {
       console.error(err);

@@ -27,7 +27,7 @@ export const leaderboardApi = createApi({
         };
       },
     }),
-    getTeamLeaderboard: build.mutation<LeadersResponse[], LeaderboardRequest>({
+    getTeamLeaderboard: build.mutation<LeadersResponse, LeaderboardRequest>({
       query: payload => {
         return {
           url: LEADERBOARD_ENDPOINTS.getTeam,
