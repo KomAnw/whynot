@@ -1,7 +1,7 @@
 import { type Player } from '../Player/Player';
 
 export class GamepadIndex {
-  static index: number | null;
+  static index: number | null = null;
 
   static init(e: GamepadEvent) {
     GamepadIndex.index = e.gamepad.index;
