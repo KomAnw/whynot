@@ -59,16 +59,16 @@ const Game = () => {
     GamepadIndex.init(e);
   };
 
-  const addHandlers = () => {
-    document.addEventListener('keydown', onKeyDownHandler);
-    document.addEventListener('keyup', onKeyUpHandler);
-    window.addEventListener('gamepadconnected', onGamepadConnectedHandler);
-  };
-
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
     window.removeEventListener('gamepadconnected', onGamepadConnectedHandler);
+  };
+
+  const addHandlers = () => {
+    document.addEventListener('keydown', onKeyDownHandler);
+    document.addEventListener('keyup', onKeyUpHandler);
+    window.addEventListener('gamepadconnected', onGamepadConnectedHandler);
   };
 
   const canvasInit = () => {
@@ -123,9 +123,7 @@ const Game = () => {
 
     Score.resetScore();
 
-    init();
-
-    frameId.current = requestAnimationFrame(update);
+    stopUpdate();
   };
 
   const init = () => {
@@ -152,6 +150,14 @@ const Game = () => {
     platforms.init();
   };
 
+  const startGameAgain = () => {
+    reset();
+
+    init();
+
+    frameId.current = requestAnimationFrame(update);
+  };
+
   useDidMount(() => {
     canvasInit();
 
@@ -161,13 +167,8 @@ const Game = () => {
   });
 
   useWillUnmount(() => {
-    removeHandlers();
-    stopUpdate();
-  });
-
-  const startGameAgain = () => {
     reset();
-  };
+  });
 
   return (
     <>
