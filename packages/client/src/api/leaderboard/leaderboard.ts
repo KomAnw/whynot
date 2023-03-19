@@ -17,7 +17,7 @@ export const leaderboardApi = createApi({
     ...apiSettings,
   }),
   endpoints: build => ({
-    add: build.query<string, LeaderboardNewLeaderRequest>({
+    add: build.mutation<string, LeaderboardNewLeaderRequest>({
       query: payload => {
         return {
           url: LEADERBOARD_ENDPOINTS.add,
@@ -39,4 +39,4 @@ export const leaderboardApi = createApi({
   }),
 });
 
-export const { useLazyAddQuery, useGetTeamLeaderboardMutation } = leaderboardApi;
+export const { useAddMutation, useGetTeamLeaderboardMutation } = leaderboardApi;
