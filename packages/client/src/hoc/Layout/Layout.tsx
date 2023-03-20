@@ -22,11 +22,9 @@ const Layout = () => {
   }, [onEscapePressHandler]);
 
   return (
-    <div>
-      <BackgroundContainer>
-        <Outlet />
-      </BackgroundContainer>
-    </div>
+    <BackgroundContainer>
+      <Outlet />
+    </BackgroundContainer>
   );
 };
 

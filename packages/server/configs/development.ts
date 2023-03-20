@@ -15,7 +15,7 @@ export const developmentConfig = async ({ clientPath, vite }: DevelopmentConfigC
   template = await vite!.transformIndexHtml(originalUrl, template);
 
   const { render } = await vite!.ssrLoadModule(resolve(clientPath, 'ssr.tsx'));
-  const { html: appHtml, css } = await render();
+  const { html: appHtml, css } = await render(originalUrl);
 
   return {
     appHtml,
