@@ -5,6 +5,7 @@ import { oauthApi } from 'src/api/oauth/oauth';
 import themeReducer from 'src/hoc/ThemeWrapper/themeSlice';
 import modeReducer from 'pages/Game/modeSlice';
 import fullscreenReducer from 'pages/Settings/fullscreenSlice';
+import gamepadReducer from 'pages/Settings/gamepadSlice';
 import { leaderboardApi } from 'src/api/leaderboard/leaderboard';
 
 const store = configureStore({
@@ -12,6 +13,7 @@ const store = configureStore({
     theme: themeReducer,
     mode: modeReducer,
     fullscreen: fullscreenReducer,
+    gamepad: gamepadReducer,
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [oauthApi.reducerPath]: oauthApi.reducer,
