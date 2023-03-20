@@ -34,7 +34,7 @@ const Leaderboard = () => {
   };
 
   useDidMount(() => {
-    GetTeamLeaderboardHandler().then();
+    GetTeamLeaderboardHandler();
   });
 
   return (
