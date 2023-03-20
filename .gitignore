@@ -3,6 +3,7 @@ node_modules/
 .idea
 .vscode
 dist
+dist-ssr
 tmp
 package-lock.json
 .DS_Store

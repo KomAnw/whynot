@@ -1,4 +1,4 @@
-import { createRoot } from 'react-dom/client';
+import { hydrateRoot } from 'react-dom/client';
 import store from 'src/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
@@ -9,10 +9,9 @@ import App from './components/App/App';
 import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
 import ErrorBoundary from './hoc/ErrorBoundary';
 
-const rootElement = document.getElementById('root');
-const root = createRoot(rootElement as HTMLElement);
+import.meta.env.MODE !== 'development' && startServiceWorker();
 
-root.render(
+const ReactNode = (
   <>
     <Normalize />
     <GlobalStyles />
@@ -27,5 +26,6 @@ root.render(
     </Provider>
   </>
 );
+const rootElement = document.getElementById('root');
 
-import.meta.env.MODE !== 'development' && startServiceWorker();
+hydrateRoot(rootElement as HTMLElement, ReactNode);

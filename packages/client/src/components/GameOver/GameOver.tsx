@@ -1,5 +1,3 @@
-import lose from 'images/common/homer-lose.png';
-import win from 'images/common/homer-win.png';
 import styled from 'styled-components';
 import { paths } from 'src/components/App/constants';
 import { GameOverProps, ImageProps } from 'components/GameOver/types';
@@ -10,6 +8,8 @@ import { Link } from 'react-router-dom';
 import { Button } from 'components/Button';
 
 const { menu } = paths;
+const lose = '/images/common/homer-lose.png';
+const win = '/images/common/homer-win.png';
 
 const Buttons = ({ onClick }: Pick<ButtonComponent, 'onClick'>) => {
   return (

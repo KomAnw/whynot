@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import backgroundImg from 'images/common/background.png';
 import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
 import { useAppDispatch } from 'src/hooks/redux';
+
+const backgroundImg = '/images/common/background.png';
 
 const Layout = () => {
   const dispatch = useAppDispatch();
@@ -21,9 +22,11 @@ const Layout = () => {
   }, [onEscapePressHandler]);
 
   return (
-    <BackgroundContainer>
-      <Outlet />
-    </BackgroundContainer>
+    <div>
+      <BackgroundContainer>
+        <Outlet />
+      </BackgroundContainer>
+    </div>
   );
 };
 

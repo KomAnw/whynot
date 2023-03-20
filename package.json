@@ -10,7 +10,9 @@
     "test": "lerna run test",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "preview": "lerna run preview"
+    "preview": "lerna run preview",
+    "dev:ssr": "lerna run build  --scope=client && lerna run build:ssr  --scope=client && lerna run build --scope=server && lerna run preview:dev --scope=server",
+    "build:ssr": "lerna run build  --scope=client && lerna run build:ssr  --scope=client && lerna run build --scope=server && lerna run preview --scope=server"
   },
   "license": "MIT",
   "workspaces": [

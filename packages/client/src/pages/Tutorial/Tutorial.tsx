@@ -8,11 +8,11 @@ import { Link } from 'src/components/Link';
 import { Text } from 'src/design/Text';
 import { useState } from 'react';
 import { LinkText } from 'src/design/LinkText';
-import chatGptSvg from 'images/common/chatgpt.svg';
 import { Typography } from 'src/design/Typography';
 import slides from './slides';
 
 const { menu } = paths;
+const chatGptSvg = '/images/common/chatgpt.svg';
 
 const Tutorial = () => {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);

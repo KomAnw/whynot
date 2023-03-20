@@ -7,22 +7,26 @@ dotenv.config();
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  server: {
-    port: Number(process.env.CLIENT_PORT) || 3000,
-  },
-  define: {
-    __SERVER_PORT__: process.env.SERVER_PORT,
-  },
   resolve: {
     alias: {
       src: path.resolve(__dirname, './src'),
       components: path.resolve(__dirname, './src/components'),
       pages: path.resolve(__dirname, './src/pages'),
+      assets: path.resolve(__dirname, './src/assets'),
     },
   },
   plugins: [react()],
   build: {
-    outDir: 'dist',
-    sourcemap: true,
+    outDir: 'dist-ssr',
+    lib: {
+      entry: path.resolve(__dirname, 'ssr.tsx'),
+      name: 'client',
+      formats: ['cjs'],
+    },
+    rollupOptions: {
+      output: {
+        dir: 'dist-ssr',
+      },
+    },
   },
 });
