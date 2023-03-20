@@ -48,4 +48,5 @@ const Footer = styled('div')`
   display: grid;
   margin: 10px 0 12px 0;
   justify-items: center;
+  border-top: 2px solid #6457b8;
 `;

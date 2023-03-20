@@ -55,11 +55,10 @@ const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<
   background-color: ${({ theme }) => theme.colors.control.input.background};
   border: none;
   color: ${({ theme }) => theme.colors.control.input.color};
-
+  font-weight: 700;
   &::placeholder {
     color: ${({ theme }) => theme.colors.control.input.placeHolder};
-    font-size: 20px;
-    font-weight: 500;
+    font-weight: 400;
   }
 `;
 
@@ -67,6 +66,6 @@ const Button = styled('button')`
   border: 0;
   width: 26px;
   height: 26px;
-  background: url(/public/images/forum/icon3.svg) no-repeat;
+  background: url(/images/forum/icon3.svg) no-repeat;
   background-size: cover;
 `;
