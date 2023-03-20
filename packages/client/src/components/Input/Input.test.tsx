@@ -3,7 +3,7 @@ import { create } from 'react-test-renderer';
 import MockThemeWrapper from 'src/hoc/MockThemeWrapper';
 
 describe('Input', () => {
-  it('renders <Input /> correctly', () => {
+  it('renders <ForumPostsInput /> correctly', () => {
     const mockValidationRules = {};
     const mockFn = jest.fn();
     const tree = create(

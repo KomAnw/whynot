@@ -21,9 +21,7 @@ export const paths = {
   },
   forum: {
     index: '/forum/posts',
-    newForum: 'new',
-    id: ':postId',
-    edit: 'edit',
+    id: '/forum/posts/:id',
   },
   menu: '/menu',
   settings: '/settings',
