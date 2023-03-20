@@ -1,22 +1,55 @@
 import styled from 'styled-components';
-import { breakpoints } from 'src/components/App/constants';
+import { breakpoints, paths } from 'src/components/App/constants';
 import { H1 } from 'src/design/H1';
 import LeaderboardRow from 'components/LeaderboardRow';
-import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
-import { paths } from 'src/components/App/constants';
 import { Link } from 'components/Link';
+import { useGetTeamLeaderboardMutation } from 'src/api/leaderboard/leaderboard';
+import { useGetUserQuery } from 'src/api/auth/auth';
+import { useDidMount } from 'src/hooks/react';
+import { useState } from 'react';
+import { Leader } from 'src/api/leaderboard/models';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 
 const Leaderboard = () => {
+  const { data: user } = useGetUserQuery();
+  const [GetTeamLeaderboard] = useGetTeamLeaderboardMutation();
+  const [data, setData] = useState<Array<Leader>>([]);
+
+  const GetTeamLeaderboardHandler = async () => {
+    try {
+      const leaders = await GetTeamLeaderboard({
+        ratingFieldName: 'score',
+        cursor: 0,
+        limit: 10,
+      }).unwrap();
+
+      if (leaders) {
+        setData(leaders);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useDidMount(() => {
+    GetTeamLeaderboardHandler();
+  });
+
   return (
     <Wrapper>
       <LeaderboardComponent>
         <LeaderboardH1>Leaderboard</LeaderboardH1>
         <Column>
-          {leaderboardConsts.map(({ rank, nickname, score, isMine }) => (
-            <LeaderboardRow key={rank} rank={rank} nickname={nickname} score={score} isMine={isMine} />
+          {data?.map((data, index: number) => (
+            <LeaderboardRow
+              key={index + 1}
+              rank={index + 1}
+              nickname={data.data.first_name}
+              score={data.data.score}
+              isMine={data.data.user_id === user!.id}
+            />
           ))}
         </Column>
         <Link variant="size30" to={menu}>

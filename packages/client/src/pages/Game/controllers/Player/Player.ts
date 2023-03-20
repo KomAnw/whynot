@@ -1,6 +1,6 @@
 import { TSizes } from 'pages/Game/types/types';
-import { Ground } from 'pages/Game/controllers/Ground/Ground';
-import { Platforms } from 'pages/Game/controllers/Platforms/Platforms';
+import { type Ground } from 'pages/Game/controllers/Ground/Ground';
+import { type Platforms } from 'pages/Game/controllers/Platforms/Platforms';
 import { Score } from 'pages/Game/controllers/Score/Score';
 
 export class Player {

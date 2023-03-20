@@ -1,7 +1,7 @@
 export type LeaderboardRowProps = {
-  rank: string;
+  rank: number;
   nickname: string;
-  score: string;
+  score: number;
   isMine?: boolean;
 };
 
