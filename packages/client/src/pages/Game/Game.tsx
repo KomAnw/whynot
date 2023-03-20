@@ -8,6 +8,7 @@ import { GameWindowProps } from 'pages/Game/types/types';
 import GameResult from './components/GameResult';
 import { TSizes } from './types/types';
 import { Player } from './controllers/Player/Player';
+import { Gamepad, GamepadIndex } from './controllers/Gamepad/Gamepad';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
 
@@ -17,10 +18,14 @@ const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
+  const frameId = useRef<number | null>(null);
   const mode = useAppSelector(state => state.mode.sprite);
+  const gamepadState = useAppSelector(state => state.gamepad.gamepadOn);
+
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
+  let gamepad: Gamepad;
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     const { key } = e;
@@ -50,14 +55,20 @@ const Game = () => {
     }
   };
 
-  const addHandlers = () => {
-    document.addEventListener('keydown', onKeyDownHandler);
-    document.addEventListener('keyup', onKeyUpHandler);
+  const onGamepadConnectedHandler = (e: GamepadEvent) => {
+    GamepadIndex.init(e);
   };
 
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
+    window.removeEventListener('gamepadconnected', onGamepadConnectedHandler);
+  };
+
+  const addHandlers = () => {
+    document.addEventListener('keydown', onKeyDownHandler);
+    document.addEventListener('keyup', onKeyUpHandler);
+    window.addEventListener('gamepadconnected', onGamepadConnectedHandler);
   };
 
   const canvasInit = () => {
@@ -92,9 +103,18 @@ const Game = () => {
 
       setStateScore(Score.count);
 
-      requestAnimationFrame(update);
+      gamepad.control();
+
+      frameId.current = requestAnimationFrame(update);
     } else {
       setIsPopupOpen(true);
+    }
+  };
+
+  const stopUpdate = () => {
+    if (frameId.current) {
+      cancelAnimationFrame(frameId.current);
+      frameId.current = null;
     }
   };
 
@@ -103,9 +123,7 @@ const Game = () => {
 
     Score.resetScore();
 
-    init();
-
-    update();
+    stopUpdate();
   };
 
   const init = () => {
@@ -127,7 +145,17 @@ const Game = () => {
 
     player = new Player(context, sizes, platforms, ground, sprite);
 
+    gamepad = new Gamepad(gamepadState, player);
+
     platforms.init();
+  };
+
+  const startGameAgain = () => {
+    reset();
+
+    init();
+
+    frameId.current = requestAnimationFrame(update);
   };
 
   useDidMount(() => {
@@ -135,16 +163,12 @@ const Game = () => {
 
     init();
 
-    update();
+    frameId.current = requestAnimationFrame(update);
   });
 
   useWillUnmount(() => {
-    removeHandlers();
-  });
-
-  const startGameAgain = () => {
     reset();
-  };
+  });
 
   return (
     <>
