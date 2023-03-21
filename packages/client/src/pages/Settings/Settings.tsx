@@ -101,6 +101,7 @@ export default Settings;
 
 const Wrapper = styled.div`
   height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,21 +111,23 @@ const SettingsComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
-  height: 720px;
-  padding: 12px 47px 12px 47px;
+  height: 636px;
+  padding: 12px 20px;
   box-shadow: 0 0 6px ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
+
   @media (max-width: ${mobileM}) {
     width: 354px;
-    height: 636px;
   }
 `;
 
-const SettingsH1 = styled(H1)`
-  font-size: 48px;
-  line-height: 54px;
+export const SettingsH1 = styled(H1)`
+  height: 45px;
+  margin: 14px 0 0 0;
+  display: grid;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
 const Column = styled.div`
@@ -139,6 +142,7 @@ const Row = styled.div`
   margin: 10px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const Img = styled.img`
