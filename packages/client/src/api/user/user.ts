@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { apiSettings, getYandexURL } from 'src/api';
-import { TChangeProfileRequest, TPasswordRequest } from 'src/api/user/models';
-import { TUser } from '../auth/models';
+import { apiSettings, getYandexURL } from '../../../src/api';
+import type { TChangeProfileRequest, TPasswordRequest } from '../../../src/api/user/models';
+import type { TUser } from '../auth/models';
 
 const ROOT_USER_URL = 'user';
 

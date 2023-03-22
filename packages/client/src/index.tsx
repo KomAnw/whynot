@@ -1,5 +1,5 @@
 import { hydrateRoot } from 'react-dom/client';
-import store from 'src/store';
+// import store from 'src/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Normalize } from 'styled-normalize';
@@ -8,8 +8,13 @@ import { startServiceWorker } from 'src/utils/workers';
 import App from './components/App/App';
 import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
 import ErrorBoundary from './hoc/ErrorBoundary';
+import createStore from './store';
 
 import.meta.env.MODE !== 'development' && startServiceWorker();
+
+const store = createStore(window.__PRELOADED_STATE__);
+
+delete window.__PRELOADED_STATE__;
 
 const ReactNode = (
   <>
