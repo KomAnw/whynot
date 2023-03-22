@@ -1,4 +1,6 @@
-import { configureStore, PreloadedState } from '@reduxjs/toolkit';
+import { configureStore} from '@reduxjs/toolkit';
+import type { TSprite } from '../../src/pages/Game/types/types';
+import type { Theme } from '../../src/hoc/ThemeWrapper/types';
 import { userApi } from '../../src/api/user/user';
 import { authApi } from '../../src/api/auth/auth';
 import { oauthApi } from '../../src/api/oauth/oauth';
@@ -8,13 +10,15 @@ import fullscreenReducer from '../pages/Settings/fullscreenSlice';
 import gamepadReducer from '../pages/Settings/gamepadSlice';
 import { leaderboardApi } from '../../src/api/leaderboard/leaderboard';
 
+export type TPreloadedState = { theme: Theme; mode: { sprite: TSprite } };
+
 /**
  * Функция createStore для SSR.
  * Использует preloadedState в качестве значений по умолчанию.
  *
  * @param preloadedState состояния по умолчанию для theme и mode.
  */
-export default function createStore(preloadedState?: PreloadedState<any>) {
+export default function createStore(preloadedState?: TPreloadedState) {
   return configureStore({
     reducer: {
       theme: themeReducer,
@@ -42,11 +46,11 @@ export default function createStore(preloadedState?: PreloadedState<any>) {
 export type CreateStore = typeof createStore;
 export type Store = ReturnType<CreateStore>;
 
-let store: Store;
+// let store: Store;
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<Store['getState']>;
 
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = Store['dispatch'];
 
 // export type RootState = ReturnType<any>;
 
