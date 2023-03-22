@@ -60,6 +60,8 @@ export const themes = {
           tertiary: '#6B687D',
           quaternary: '#000000',
           quinary: '#000000',
+          sextuple: '#0E752B',
+          septenary: '#6B687D',
         },
         link: {
           link: '#6457B8',
@@ -115,6 +117,8 @@ export const themes = {
           tertiary: '#5BCDC9',
           quaternary: '#6BD35A',
           quinary: '#FFFFFF',
+          sextuple: '#FFFFFF',
+          septenary: '#FFFFFF',
         },
         link: {
           link: '#FFFFFF',

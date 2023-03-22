@@ -21,6 +21,8 @@ export type Theme = {
         tertiary: string;
         quaternary: string;
         quinary: string;
+        sextuple: string;
+        septenary: string;
       };
       link: {
         link: string;
