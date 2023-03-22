@@ -41,17 +41,9 @@ export default function createStore(preloadedState?: TPreloadedState) {
   });
 }
 
-// export default store;
-
 export type CreateStore = typeof createStore;
 export type Store = ReturnType<CreateStore>;
-
-// let store: Store;
 
 export type RootState = ReturnType<Store['getState']>;
 
 export type AppDispatch = Store['dispatch'];
-
-// export type RootState = ReturnType<any>;
-
-// export type AppDispatch = any;
