@@ -40,9 +40,6 @@ const Form = styled('form')`
   grid-template-rows: auto;
   grid-column-gap: 10px;
   align-items: center;
-  margin: 0;
-  padding: 0;
-  border: 0;
 `;
 
 const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`

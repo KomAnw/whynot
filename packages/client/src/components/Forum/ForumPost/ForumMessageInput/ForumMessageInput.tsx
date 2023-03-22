@@ -25,8 +25,14 @@ const ForumMessageInput = () => {
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
-      <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPosts')} />
-      <Button type="submit" />
+      <Header>
+        <Title>Кому:</Title>
+        <Direction>Всем</Direction>
+      </Header>
+      <Footer>
+        <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPosts')} />
+        <Button type="submit" />
+      </Footer>
     </Form>
   );
 };
@@ -36,13 +42,42 @@ export default ForumMessageInput;
 const Form = styled('form')`
   display: grid;
   width: 100%;
-  grid-template-columns: auto max-content;
+  height: 100%;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto;
+`;
+
+const Header = styled('div')`
+  display: grid;
+  grid-template-columns: auto auto;
   grid-template-rows: auto;
+  justify-content: start;
+`;
+
+const Title = styled('div')`
+  margin-left: 32px;
+  display: grid;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: ${({ theme }) => theme.colors.core.text.primary};
+`;
+
+const Direction = styled('div')`
+  margin-left: 5px;
+  display: grid;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 20px;
+  color: ${({ theme }) => theme.colors.core.text.quaternary};
+`;
+
+const Footer = styled('div')`
+  display: grid;
+  grid-template-columns: auto max-content;
+  grid-template-rows: 36px;
   grid-column-gap: 10px;
   align-items: center;
-  margin: 0;
-  padding: 0;
-  border: 0;
 `;
 
 const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`
@@ -50,7 +85,7 @@ const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<
   border-radius: 18px;
   padding-left: 26px;
   width: 100%;
-  height: 36px;
+  height: 100%;
   outline: none;
   background-color: ${({ theme }) => theme.colors.control.input.background};
   border: none;

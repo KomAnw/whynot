@@ -5,7 +5,7 @@ export const demoMessage = [
     author: { id: 1, first_name: 'Иван', second_name: 'Karlson' },
     post_id: 1,
     message_main_id: 0,
-    emoji: [],
+    emojis: [],
     text: 'Если нажать два раза прыжок, то взлетишь',
   },
   {
@@ -14,7 +14,7 @@ export const demoMessage = [
     author: { id: 2, first_name: 'Митя', second_name: 'Ликупер' },
     post_id: 1,
     message_main_id: 1,
-    emoji: [{ id: 1, author_id: [1] }],
+    emojis: [{ id: 1, author_id: [1] }],
     text: 'Ты все врешь, я только как не нажимал, не чего не получается',
   },
   {
@@ -23,7 +23,7 @@ export const demoMessage = [
     author: { id: 1, first_name: 'Иван', second_name: 'Karlson' },
     post_id: 1,
     message_main_id: 0,
-    emoji: [],
+    emojis: [],
     text: 'Если нажать два раза прыжок, то взлетишь',
   },
   {
@@ -32,9 +32,9 @@ export const demoMessage = [
     author: { id: 1, first_name: 'Ivan', second_name: 'Karlson' },
     post_id: 1,
     message_main_id: 1,
-    emoji: [
-      { id: 1, authorID: [1, 2] },
-      { id: 2, authorID: [1] },
+    emojis: [
+      { id: 1, author_id: [1, 2] },
+      { id: 2, author_id: [1] },
     ],
     text: 'Значит ты рукожоп, у меня все норм',
   },

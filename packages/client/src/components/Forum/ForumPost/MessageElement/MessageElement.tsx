@@ -1,17 +1,24 @@
 import styled, { css } from 'styled-components';
+import React from 'react';
 import { H1 } from 'src/design/H1';
 import EmojiBox from 'components/Forum/ForumPost/MessageElement/EmojiBox';
+import { TMessage, TEmoji } from 'components/Forum/types';
+import MenuEmojis from 'components/Forum/ForumPost/MenuEmojis';
+import { useState } from 'react';
+import { TimeFormatting } from 'components/Forum/ForumPost/utils/TimeFormatting';
 
 // eslint-disable-next-line camelcase
-const MessageElement = ({ author, text, data, message_main_id, emoji }: any) => {
-  const time = new Date(data);
-  const DataAndTime = `${time.getDay()}.${time.getMonth() + 1}.${time.getFullYear()} 
-  ${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+const MessageElement = ({ author, text, data, message_main_id, emojis }: TMessage) => {
+  const [isOpenMenuEmojis, setIsOpenMenuEmojis] = useState(false);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    setIsOpenMenuEmojis(!isOpenMenuEmojis);
+  };
 
   const emojiBox =
-    // eslint-disable-next-line max-len
-    emoji.length !== 0 &&
-    emoji.map((item: any, index: number) => <EmojiBox id={item.id} num={0} key={author.id + index} />);
+    emojis.length !== 0 &&
+    emojis.map((item: TEmoji, index: number) => <EmojiBox id={item.id} num={0} key={author.id + index} />);
 
   return (
     // eslint-disable-next-line camelcase
@@ -20,13 +27,15 @@ const MessageElement = ({ author, text, data, message_main_id, emoji }: any) => 
         <Author>
           {author.first_name} {author.second_name}
         </Author>
-        <Time>{DataAndTime}</Time>
+        <Time>{TimeFormatting(data)}</Time>
       </Header>
       <Message>{text}</Message>
       <Footer>
         {/* eslint-disable-next-line camelcase */}
         {message_main_id === 0 ? <ButtonAnswer>Ответ</ButtonAnswer> : <></>}
-        <ButtonEmoji />
+        <ButtonEmoji onClick={handleClick}>
+          <MenuEmojis isOpenMenuEmojis={isOpenMenuEmojis} setIsOpenMenuEmojis={setIsOpenMenuEmojis} />
+        </ButtonEmoji>
         <Emoji>{emojiBox}</Emoji>
       </Footer>
     </Containers>
@@ -38,7 +47,6 @@ export default MessageElement;
 const Containers = styled.div<{ elementId: number }>`
   display: grid;
   grid-auto-flow: row;
-  margin: 0;
   ${({ elementId }) =>
     elementId === 0
       ? css`
@@ -50,7 +58,6 @@ const Containers = styled.div<{ elementId: number }>`
 `;
 
 const Header = styled.div`
-  margin: 0;
   display: grid;
   grid-template-columns: auto auto;
   grid-column-gap: 10px;
@@ -59,14 +66,12 @@ const Header = styled.div`
 `;
 
 const Author = styled(H1)`
-  margin: 0;
   font-size: 20px;
   line-height: 22px;
   color: ${({ theme }) => theme.colors.core.text.quaternary};
 `;
 
 const Time = styled(H1)`
-  margin: 0;
   font-weight: 400;
   font-size: 20px;
   line-height: 22px;
@@ -75,7 +80,6 @@ const Time = styled(H1)`
 
 const Message = styled(H1)`
   display: grid;
-  margin: 0;
   font-weight: 400;
   font-size: 20px;
   line-height: 22px;
@@ -83,7 +87,6 @@ const Message = styled(H1)`
 `;
 
 const Footer = styled.div`
-  margin: 0;
   display: grid;
   grid-auto-flow: column;
   grid-column-gap: 10px;
@@ -92,14 +95,15 @@ const Footer = styled.div`
 `;
 
 const ButtonAnswer = styled(H1)`
-  margin: 0;
   font-weight: 700;
   font-size: 16px;
   line-height: 18px;
   color: ${({ theme }) => theme.colors.core.text.sextuple};
 `;
 
-const ButtonEmoji = styled('button')`
+const ButtonEmoji = styled.div`
+  cursor: pointer;
+  position: relative;
   border: 0;
   width: 18px;
   height: 18px;

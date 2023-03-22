@@ -7,30 +7,9 @@ import ForumMessageInput from 'components/Forum/ForumPost/ForumMessageInput';
 import iconMessage from 'images/forum/icon2.svg';
 import { demoMessage, demoPost } from 'components/Forum/ForumPost/demoData';
 import MessageElement from 'components/Forum/ForumPost/MessageElement';
+import { SortMessage } from 'components/Forum/ForumPost/utils/SortMessage';
 
 const { forum } = paths;
-
-function sortMessage(messages: any) {
-  const arrMessageSort: any = [];
-
-  const filterList = (messages: any, id: number) => messages.filter((item: any) => item.message_main_id === id);
-  const sortTime = (messages: any) => {
-    return messages.sort((a: any, b: any) => {
-      const timeA = new Date(a.data);
-      const timeB = new Date(b.data);
-
-      if (timeA > timeB) return 1;
-      if (timeA === timeB) return 0;
-      if (timeA < timeB) return -1;
-    });
-  };
-
-  sortTime(filterList(messages, 0)).forEach((item: any) =>
-    arrMessageSort.push(item, ...sortTime(filterList(demoMessage, item.id)))
-  );
-
-  return arrMessageSort;
-}
 
 const ForumPost = () => {
   return (
@@ -41,7 +20,7 @@ const ForumPost = () => {
         <Title>{demoPost.title}</Title>
       </Post>
       <Main>
-        {sortMessage(demoMessage).map((item: any) => (
+        {SortMessage(demoMessage).map((item: any) => (
           <MessageElement {...item} key={item.id} />
         ))}
       </Main>
@@ -89,9 +68,7 @@ const Post = styled('div')`
   padding: 5px 0;
 `;
 
-const Icon = styled.img`
-  margin: 0;
-`;
+const Icon = styled.img``;
 
 const Title = styled(H1)`
   font-size: 22px;
@@ -116,10 +93,9 @@ const Main = styled('div')`
 const Footer = styled('div')`
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: 36px 34px;
+  grid-template-rows: 56px 34px;
   grid-row-gap: 10px;
-  margin: 0;
-  padding: 20px 12px 10px 12px;
+  padding: 0 12px 10px 12px;
   justify-items: center;
   border-top: 2px solid #6457b8;
 `;

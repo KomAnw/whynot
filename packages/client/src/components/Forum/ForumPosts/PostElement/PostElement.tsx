@@ -5,10 +5,11 @@ import { Text } from 'src/design/Text';
 import { breakpoints } from 'src/components/App/constants';
 import { Link } from 'src/components/Link';
 import { paths } from 'components/App/constants';
+import { TPost } from 'components/Forum/types';
 
 const { forum } = paths;
 
-const PostElement = ({ id, author, title }: any) => {
+const PostElement = ({ id, author, title }: TPost) => {
   return (
     <Containers>
       <Title>
@@ -31,7 +32,7 @@ const Containers = styled('div')`
   display: grid;
   grid-template-columns: auto auto;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
-  border-top: 2px solid #6457b8;
+  border-top: 2px solid ${({ theme }) => theme.colors.core.text.primary};
   padding: 8px 6px;
   @media (max-width: ${breakpoints.mobileM}) {
     grid-template-columns: auto;
@@ -52,7 +53,7 @@ const Title = styled(H1)`
   text-align: left;
 `;
 
-const ContainerAuthor = styled(Text)`
+const ContainerAuthor = styled('div')`
   display: grid;
   grid-template-columns: auto auto;
   justify-content: start;

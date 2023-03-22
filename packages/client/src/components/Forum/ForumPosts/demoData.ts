@@ -38,25 +38,25 @@ export const demoData = [
   {
     id: 7,
     data: '2020-01-02T20:22:22.000Z',
-    author: { id: 1, c: 'Ivan', second_name: 'Karlson' },
+    author: { id: 1, first_name: 'Ivan', second_name: 'Karlson' },
     title: 'Это новый лайвхак. Как обойти правила в этой игре, и все выиграть',
   },
   {
-    id: 7,
+    id: 8,
     data: '2020-01-02T20:22:22.000Z',
-    author: { id: 1, c: 'Ivan', second_name: 'Karlson' },
+    author: { id: 1, first_name: 'Ivan', second_name: 'Karlson' },
     title: 'Это новый лайвхак. Как обойти правила в этой игре, и все выиграть',
   },
   {
-    id: 7,
+    id: 9,
     data: '2020-01-02T20:22:22.000Z',
-    author: { id: 1, c: 'Ivan', second_name: 'Karlson' },
+    author: { id: 1, first_name: 'Ivan', second_name: 'Karlson' },
     title: 'Это новый лайвхак. Как обойти правила в этой игре, и все выиграть',
   },
   {
-    id: 7,
+    id: 10,
     data: '2020-01-02T20:22:22.000Z',
-    author: { id: 1, c: 'Ivan', second_name: 'Karlson' },
+    author: { id: 1, first_name: 'Ivan', second_name: 'Karlson' },
     title: 'Это новый лайвхак. Как обойти правила в этой игре, и все выиграть',
   },
 ];

@@ -6,6 +6,7 @@ import { breakpoints } from 'src/components/App/constants';
 import ForumPostsInput from 'components/Forum/ForumPosts/ForumPostsInput';
 import PostElement from 'components/Forum/ForumPosts/PostElement';
 import { demoData } from 'components/Forum/ForumPosts/demoData';
+import { TPost } from 'components/Forum/types';
 
 const { menu } = paths;
 
@@ -14,7 +15,7 @@ const ForumPosts = () => {
     <Containers>
       <H1Style>Forum</H1Style>
       <Main>
-        {demoData.map(item => (
+        {demoData.map((item: TPost) => (
           <PostElement {...item} key={item.id} />
         ))}
       </Main>
@@ -54,7 +55,7 @@ const Main = styled('div')`
   display: grid;
   margin: 27px 12px 0 12px;
   overflow-y: auto;
-  height: 438px;
+  height: 502px;
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -65,7 +66,7 @@ const Main = styled('div')`
     background-color: #6457b8;
   }
   @media (max-width: ${breakpoints.mobileM}) {
-    height: 502px;
+    height: 438px;
   }
 `;
 
