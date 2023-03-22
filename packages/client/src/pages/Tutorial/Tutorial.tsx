@@ -21,7 +21,7 @@ const Tutorial = () => {
   return (
     <OuterContainer>
       <InnerContainer>
-        {slideNumber < 4 ? <StyedH1>Story:</StyedH1> : <StyedH1>Tutorial:</StyedH1>}
+        <StyledH1>{slideNumber < 4 ? "Story" : "Tutorial" }</StyledH1>
         <Swiper
           spaceBetween={20}
           slidesPerView={1}
@@ -80,7 +80,7 @@ const InnerContainer = styled('div')`
   }
 `;
 
-const StyedH1 = styled(H1)`
+const StyledH1 = styled(H1)`
   text-align: center;
   margin-bottom: 20px;
 `;
@@ -89,10 +89,6 @@ const Back = styled(Text)`
   margin-top: 10px;
   text-align: center;
   user-select: none;
-
-  ${Link}:hover {
-    text-decoration: underline;
-  }
 `;
 
 const NavigationButtons = styled('div')`
