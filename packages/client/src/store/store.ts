@@ -1,4 +1,4 @@
-import { configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import type { TSprite } from '../../src/pages/Game/types/types';
 import type { Theme } from '../../src/hoc/ThemeWrapper/types';
 import { userApi } from '../../src/api/user/user';
