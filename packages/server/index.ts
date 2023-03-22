@@ -124,6 +124,24 @@ export const themes = {
   },
 } as const;
 
+export const sprites = [
+  {
+    name: 'Doodle',
+    sprite: '/images/game/doodle/sprite.png',
+    background: '/images/game/doodle/background.png',
+  },
+  {
+    name: 'Mario',
+    sprite: '/images/game/mario/sprite.png',
+    background: '/images/game/mario/background.png',
+  },
+  {
+    name: 'Homer',
+    sprite: '/images/game/homer/sprite.png',
+    background: '/images/game/homer/background.png',
+  },
+] as const;
+
 // import { createClientAndConnect } from './db';
 
 // createClientAndConnect();
@@ -163,7 +181,24 @@ const startServer = async () => {
   }
 
   // todo: доделать для production
-  const ssrModule = await vite!.ssrLoadModule(path.resolve(clientPath, 'ssr.tsx') as string);
+  let ssrModule;
+
+  /**
+   * Загрузка createStore из ssr.tsx в зависимости от режима: development или production.
+   *
+   * Режим DevelopmentMode:
+   *   Загрузка с помощью vite.
+   *   - ssrLoadModule автоматически преобразует исходный код ESM для использования в Node.js!.
+   *   Модули ECMAScript (ESM) — это спецификация для использования модулей в Интернете.
+   *
+   * Режим ProductionMode:
+   *    Импорт напряму из dist-ssr.
+   */
+  if (isDevelopmentMode) {
+    ssrModule = await vite!.ssrLoadModule(path.resolve(clientPath, 'ssr.tsx') as string);
+  } else {
+    ssrModule = await import(ssrClientPath);
+  }
   const { createStore } = ssrModule;
 
   // todo: переделать
@@ -171,7 +206,7 @@ const startServer = async () => {
   // Тема по умолчанию
   const { other: defaultTheme } = themes;
   const initialState = defaultTheme;
-  const preloadedState = { theme: initialState}
+  const preloadedState = { theme: initialState, mode: { sprite: sprites[2] } };
 
   console.log(preloadedState);
 
