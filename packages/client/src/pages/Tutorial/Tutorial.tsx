@@ -21,7 +21,7 @@ const Tutorial = () => {
   return (
     <OuterContainer>
       <InnerContainer>
-        {slideNumber < 4 ? <StyledH1>Story:</StyledH1> : <StyledH1>Tutorial:</StyledH1>}
+        <StyledH1>{slideNumber < 4 ? "Story" : "Tutorial" }</StyledH1>
         <Swiper
           spaceBetween={20}
           slidesPerView={1}
