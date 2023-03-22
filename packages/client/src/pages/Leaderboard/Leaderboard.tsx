@@ -15,19 +15,17 @@ const { menu } = paths;
 const Leaderboard = () => {
   const { data: user } = useGetUserQuery();
   const [GetTeamLeaderboard] = useGetTeamLeaderboardMutation();
-  const [data, setData] = useState<Array<Leader>>([]);
+  const [leaders, setLeaders] = useState<Array<Leader>>([]);
 
   const GetTeamLeaderboardHandler = async () => {
     try {
-      const leaders = await GetTeamLeaderboard({
+      const data = await GetTeamLeaderboard({
         ratingFieldName: 'score',
         cursor: 0,
         limit: 10,
       }).unwrap();
 
-      if (leaders) {
-        setData(leaders);
-      }
+      setLeaders(data);
     } catch (err) {
       console.error(err);
     }
@@ -42,13 +40,13 @@ const Leaderboard = () => {
       <LeaderboardComponent>
         <LeaderboardH1>Leaderboard</LeaderboardH1>
         <Column>
-          {data?.map((data, index: number) => (
+          {leaders?.map(({ data: leader }, index: number) => (
             <LeaderboardRow
-              key={index + 1}
+              key={leader.user_id}
               rank={index + 1}
-              nickname={data.data.first_name}
-              score={data.data.score}
-              isMine={data.data.user_id === user!.id}
+              nickname={leader.first_name}
+              score={leader.score}
+              isMine={leader.user_id === user!.id}
             />
           ))}
         </Column>
@@ -64,6 +62,7 @@ export default Leaderboard;
 
 const Wrapper = styled.div`
   height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,26 +72,32 @@ const LeaderboardComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
-  height: 720px;
-  padding: 12px 47px 12px 47px;
+  height: 636px;
+  padding: 0 20px 10px;
   box-shadow: 0 0 6px ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
+
   @media (max-width: ${mobileM}) {
     width: 354px;
-    height: 636px;
   }
 `;
 
-const LeaderboardH1 = styled(H1)`
-  font-size: 48px;
-  line-height: 54px;
+export const LeaderboardH1 = styled(H1)`
+  height: 45px;
+  margin: 14px 0 0 0;
+  display: grid;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
 const Column = styled.ul`
-  width: 100%;
+  width: 380px;
   height: 100%;
   padding: 0;
   margin: 0;
+
+  @media (max-width: ${mobileM}) {
+    width: 300px;
+  }
 `;
