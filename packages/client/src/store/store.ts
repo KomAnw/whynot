@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import type { TSprite } from '../../src/pages/Game/types/types';
-import type { Theme } from '../../src/hoc/ThemeWrapper/types';
+import type { TPreloadedState } from '../../src/store/types';
 import { userApi } from '../../src/api/user/user';
 import { authApi } from '../../src/api/auth/auth';
 import { oauthApi } from '../../src/api/oauth/oauth';
@@ -9,8 +8,6 @@ import modeReducer from '../pages/Game/modeSlice';
 import fullscreenReducer from '../pages/Settings/fullscreenSlice';
 import gamepadReducer from '../pages/Settings/gamepadSlice';
 import { leaderboardApi } from '../../src/api/leaderboard/leaderboard';
-
-export type TPreloadedState = { theme: Theme; mode: { sprite: TSprite } };
 
 /**
  * Функция createStore для SSR.
