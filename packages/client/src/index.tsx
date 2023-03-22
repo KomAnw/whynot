@@ -1,5 +1,4 @@
 import { hydrateRoot } from 'react-dom/client';
-// import store from 'src/store';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Normalize } from 'styled-normalize';

@@ -6,7 +6,6 @@ import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import App from './src/components/App/App';
 import ErrorBoundary from './src/hoc/ErrorBoundary';
 import ThemeWrapper from './src/hoc/ThemeWrapper/ThemeWrapper';
-// import store from './src/store';
 import createStore from './src/store';
 
 export { createStore };
