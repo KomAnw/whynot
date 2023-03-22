@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import dotenv from 'dotenv';
 import path from 'path';
+import basicSsl from '@vitejs/plugin-basic-ssl';
 
 dotenv.config();
 
@@ -9,6 +10,7 @@ dotenv.config();
 export default defineConfig({
   server: {
     port: Number(process.env.CLIENT_PORT) || 3000,
+    https: true,
   },
   define: {
     __SERVER_PORT__: process.env.SERVER_PORT,
@@ -20,7 +22,7 @@ export default defineConfig({
       pages: path.resolve(__dirname, './src/pages'),
     },
   },
-  plugins: [react()],
+  plugins: [react(), basicSsl()],
   build: {
     outDir: 'dist',
     sourcemap: true,
