@@ -4,10 +4,10 @@ import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
 import { breakpoints } from 'src/components/App/constants';
 import ForumMessageInput from 'components/Forum/ForumPost/ForumMessageInput';
-import iconMessage from 'images/forum/icon2.svg';
 import { demoMessage, demoPost } from 'components/Forum/ForumPost/demoData';
 import MessageElement from 'components/Forum/ForumPost/MessageElement';
 import { SortMessage } from 'components/Forum/ForumPost/utils/SortMessage';
+import { IconPost } from 'components/Forum/components/IconPost';
 
 const { forum } = paths;
 
@@ -16,7 +16,7 @@ const ForumPost = () => {
     <Containers>
       <H1Style>Forum</H1Style>
       <Post>
-        <Icon src={iconMessage} alt="icon message" />
+        <IconPost />
         <Title>{demoPost.title}</Title>
       </Post>
       <Main>
@@ -62,13 +62,15 @@ const Post = styled('div')`
   grid-template-columns: auto auto;
   grid-column-gap: 10px;
   align-items: center;
-  border-top: 2px solid #6457b8;
-  border-bottom: 2px solid #6457b8;
+  justify-content: start;
+  border-top: 2px solid ${({ theme }) => theme.colors.core.text.primary};
+  border-bottom: 2px solid ${({ theme }) => theme.colors.core.text.primary};
   margin: 27px 12px 0 12px;
   padding: 5px 0;
+  path {
+    stroke: ${({ theme }) => theme.colors.core.text.primary};
+  }
 `;
-
-const Icon = styled.img``;
 
 const Title = styled(H1)`
   font-size: 22px;
@@ -79,6 +81,8 @@ const Main = styled('div')`
   display: grid;
   margin: 12px 12px 0 12px;
   overflow-y: auto;
+  height: 450px;
+  align-content: start;
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -87,6 +91,9 @@ const Main = styled('div')`
   }
   &::-webkit-scrollbar-thumb {
     background-color: #6457b8;
+  }
+  @media (max-width: ${breakpoints.mobileM}) {
+    height: 386px;
   }
 `;
 
@@ -97,5 +104,5 @@ const Footer = styled('div')`
   grid-row-gap: 10px;
   padding: 0 12px 10px 12px;
   justify-items: center;
-  border-top: 2px solid #6457b8;
+  border-top: 2px solid ${({ theme }) => theme.colors.core.text.primary};
 `;

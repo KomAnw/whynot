@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { InputHTMLAttributes } from 'react';
 import { LinkText } from 'src/design/LinkText';
+import { IconButtonSend } from 'components/Forum/components/IconButtonSend';
 
 export type TInputPost = {
   inputPosts: string;
@@ -26,7 +27,9 @@ const ForumPostsInput = () => {
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
       <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPosts')} />
-      <Button type="submit" />
+      <Button type="submit">
+        <IconButtonSend />
+      </Button>
     </Form>
   );
 };
@@ -63,6 +66,8 @@ const Button = styled('button')`
   border: 0;
   width: 26px;
   height: 26px;
-  background: url(/images/forum/icon3.svg) no-repeat;
-  background-size: cover;
+  background-color: ${({ theme }) => theme.colors.core.background.primary};
+  path {
+    stroke: ${({ theme }) => theme.colors.core.text.primary};
+  }
 `;

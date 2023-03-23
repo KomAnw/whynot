@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { InputHTMLAttributes } from 'react';
 import { LinkText } from 'src/design/LinkText';
+import { IconButtonSend } from 'components/Forum/components/IconButtonSend';
+import { H1 } from 'src/design/H1';
 
 export type TInputPost = {
   inputPosts: string;
@@ -31,7 +33,9 @@ const ForumMessageInput = () => {
       </Header>
       <Footer>
         <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPosts')} />
-        <Button type="submit" />
+        <Button type="submit">
+          <IconButtonSend />
+        </Button>
       </Footer>
     </Form>
   );
@@ -54,7 +58,7 @@ const Header = styled('div')`
   justify-content: start;
 `;
 
-const Title = styled('div')`
+const Title = styled(H1)`
   margin-left: 32px;
   display: grid;
   font-weight: 400;
@@ -63,7 +67,7 @@ const Title = styled('div')`
   color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
-const Direction = styled('div')`
+const Direction = styled(H1)`
   margin-left: 5px;
   display: grid;
   font-weight: 400;
@@ -101,6 +105,8 @@ const Button = styled('button')`
   border: 0;
   width: 26px;
   height: 26px;
-  background: url(/images/forum/icon3.svg) no-repeat;
-  background-size: cover;
+  background-color: ${({ theme }) => theme.colors.core.background.primary};
+  path {
+    stroke: ${({ theme }) => theme.colors.core.text.primary};
+  }
 `;

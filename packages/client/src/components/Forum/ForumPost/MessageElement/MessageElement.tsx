@@ -6,6 +6,7 @@ import { TMessage, TEmoji } from 'components/Forum/types';
 import MenuEmojis from 'components/Forum/ForumPost/MenuEmojis';
 import { useState } from 'react';
 import { TimeFormatting } from 'components/Forum/ForumPost/utils/TimeFormatting';
+import { IconButtonEmoji } from 'components/Forum/components/IconButtonEmoji';
 
 // eslint-disable-next-line camelcase
 const MessageElement = ({ author, text, data, message_main_id, emojis }: TMessage) => {
@@ -34,6 +35,7 @@ const MessageElement = ({ author, text, data, message_main_id, emojis }: TMessag
         {/* eslint-disable-next-line camelcase */}
         {message_main_id === 0 ? <ButtonAnswer>Ответ</ButtonAnswer> : <></>}
         <ButtonEmoji onClick={handleClick}>
+          <IconButtonEmoji />
           <MenuEmojis isOpenMenuEmojis={isOpenMenuEmojis} setIsOpenMenuEmojis={setIsOpenMenuEmojis} />
         </ButtonEmoji>
         <Emoji>{emojiBox}</Emoji>
@@ -107,8 +109,13 @@ const ButtonEmoji = styled.div`
   border: 0;
   width: 18px;
   height: 18px;
-  background: url(/images/forum/icon1.svg) no-repeat;
-  background-size: cover;
+  background-color: ${({ theme }) => theme.colors.core.background.primary};
+  path {
+    stroke: ${({ theme }) => theme.colors.core.text.primary};
+  }
+  rect {
+    stroke: ${({ theme }) => theme.colors.core.text.primary};
+  }
 `;
 
 const Emoji = styled.div`

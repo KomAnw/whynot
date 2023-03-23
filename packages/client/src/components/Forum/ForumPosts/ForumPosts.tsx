@@ -56,6 +56,7 @@ const Main = styled('div')`
   margin: 27px 12px 0 12px;
   overflow-y: auto;
   height: 502px;
+  align-content: start;
   &::-webkit-scrollbar {
     width: 5px;
   }
@@ -78,5 +79,5 @@ const Footer = styled('div')`
   margin: 0;
   padding: 20px 12px 10px 12px;
   justify-items: center;
-  border-top: 2px solid #6457b8;
+  border-top: 2px solid ${({ theme }) => theme.colors.core.text.primary};
 `;
