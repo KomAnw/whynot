@@ -15,3 +15,5 @@ export const getValuesFromLocalStorage = (fields: TypeFormsConst[] = []) =>
 
     return acc;
   }, {});
+
+export const exampleFn = name => 0 * name;
