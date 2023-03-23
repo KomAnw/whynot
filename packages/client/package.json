@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
+    "tsc": "tsc",
     "build": "tsc && vite build --config vite.config.ts",
     "build:ssr": "tsc && vite build --config ssr.config.ts",
     "preview": "vite preview",
