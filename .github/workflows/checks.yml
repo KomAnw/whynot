@@ -19,9 +19,11 @@ jobs:
         run: yarn
       - name: Initialize
         run: yarn lerna bootstrap
+      - name: Typescript
+        run: tsc
       - name: Lint
         run: yarn lint
       - name: Test
         run: yarn test
-      - name: Typescript
-        run: tsc
+
+
