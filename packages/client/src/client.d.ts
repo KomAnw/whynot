@@ -1,4 +1,4 @@
-import { TPreloadedState } from 'src/store/store';
+import type { TPreloadedState } from 'src/store/store';
 /**
  * Необходимо расширим глобальный тип Window,
  * чтобы мы могли обращаться к новому глобальному свойству

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ButtonComponent, ButtonProps } from './types';
+import type { ButtonComponent, ButtonProps } from './types';
 
 export const Button = styled(
   ({ type, variant = 'primary', children, onSubmit, onClick, className }: ButtonComponent) => {

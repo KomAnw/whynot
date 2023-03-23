@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { paths } from 'src/components/App/constants';
-import { GameOverProps, ImageProps } from 'components/GameOver/types';
+import type { GameOverProps, ImageProps } from 'components/GameOver/types';
 import { H1 } from 'src/design/H1';
 import { Text } from 'src/design/Text';
-import { ButtonComponent } from 'components/Button/types';
+import type { ButtonComponent } from 'components/Button/types';
 import { Link } from 'react-router-dom';
 import { Button } from 'components/Button';
 

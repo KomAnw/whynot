@@ -1,12 +1,11 @@
-import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom/server';
 import { Provider } from 'react-redux';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
-import App from './src/components/App/App';
-import ErrorBoundary from './src/hoc/ErrorBoundary';
-import ThemeWrapper from './src/hoc/ThemeWrapper/ThemeWrapper';
-import createStore from './src/store';
+import App from 'components/App/App';
+import ErrorBoundary from './hoc/ErrorBoundary';
+import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
+import createStore from './store';
 
 export { createStore };
 

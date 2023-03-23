@@ -1,4 +1,5 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'src/components/Input';
 import { Button } from 'src/components/Button';
@@ -8,7 +9,7 @@ import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { useChangePasswordMutation } from 'src/api/user/user';
 import { useNavigate } from 'react-router-dom';
-import { TPasswordNewRequest } from './types';
+import type { TPasswordNewRequest } from './types';
 
 const { password, confirmPassword, oldPassword } = formsConsts;
 const { profile } = paths;

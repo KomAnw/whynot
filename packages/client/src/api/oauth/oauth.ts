@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { apiSettings, getYandexURL } from '../../../src/api';
+import { apiSettings, getYandexURL } from 'src/api';
 import type { TOAuthData, TServiceId } from './models';
 
 const ROOT_OAUTH_URL = 'oauth';

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { TSprite } from '../../../src/pages/Game/types/types';
-import { sprites } from '../../../src/components/App/constants';
+import type { TSprite } from 'src/pages/Game/types/types';
+import { sprites } from 'src/components/App/constants';
 
 export const modeSlice = createSlice({
   name: 'mode',

@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { TSignInRequest } from 'src/api/auth/models';
+import type { TSignInRequest } from 'src/api/auth/models';
 import { useNavigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useSingInMutation } from 'src/api/auth/auth';
 import { paths } from 'src/components/App/constants';
 import { Input } from 'components/Input';

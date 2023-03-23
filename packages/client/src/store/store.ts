@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import type { TPreloadedState } from '../../src/store/types';
-import { userApi } from '../../src/api/user/user';
-import { authApi } from '../../src/api/auth/auth';
-import { oauthApi } from '../../src/api/oauth/oauth';
-import themeReducer from '../../src/hoc/ThemeWrapper/themeSlice';
-import modeReducer from '../pages/Game/modeSlice';
-import fullscreenReducer from '../pages/Settings/fullscreenSlice';
-import gamepadReducer from '../pages/Settings/gamepadSlice';
-import { leaderboardApi } from '../../src/api/leaderboard/leaderboard';
+import type { TPreloadedState } from 'src/store/types';
+import { userApi } from 'src/api/user/user';
+import { authApi } from 'src/api/auth/auth';
+import { oauthApi } from 'src/api/oauth/oauth';
+import themeReducer from 'src/hoc/ThemeWrapper/themeSlice';
+import { leaderboardApi } from 'src/api/leaderboard/leaderboard';
+import modeReducer from 'pages/Game/modeSlice';
+import fullscreenReducer from 'pages/Settings/fullscreenSlice';
+import gamepadReducer from 'pages/Settings/gamepadSlice';
 
 /**
  * Функция createStore для SSR.

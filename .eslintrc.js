@@ -20,7 +20,7 @@ module.exports = {
     ecmaVersion: 11,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
+  plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks', 'import'],
   rules: {
     'import/extensions': 0,
     eqeqeq: [1, 'always'],
@@ -66,7 +66,13 @@ module.exports = {
     'import/newline-after-import': 1,
     'import/no-named-as-default-member': 0,
     'import/namespace': 0,
-    'import/named': 0,
+    'import/named': 'warn',
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      {
+        prefer: 'type-imports',
+      },
+    ],
     'jsx-a11y/anchor-is-valid': 0,
     'jsx-a11y/click-events-have-key-events': 0,
     'jsx-a11y/no-static-element-interactions': 0,
@@ -160,5 +166,12 @@ module.exports = {
         bracketSameLine: true,
       },
     ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
   },
 };

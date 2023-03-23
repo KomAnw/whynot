@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DividerProps } from 'components/Divider/types';
+import type { DividerProps } from 'components/Divider/types';
 import { Text } from 'src/design/Text';
 
 export const Divider = ({ children }: DividerProps) => {

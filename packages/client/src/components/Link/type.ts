@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export type sizeType = 'size20' | 'size24' | 'size30' | 'size40';
 

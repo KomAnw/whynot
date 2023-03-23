@@ -7,7 +7,7 @@ import { useGetTeamLeaderboardMutation } from 'src/api/leaderboard/leaderboard';
 import { useGetUserQuery } from 'src/api/auth/auth';
 import { useDidMount } from 'src/hooks/react';
 import { useState } from 'react';
-import { Leader } from 'src/api/leaderboard/models';
+import type { Leader } from 'src/api/leaderboard/models';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;

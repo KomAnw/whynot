@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Typography } from 'src/design/Typography';
 import { Label } from 'src/design/Label';
-import { LeaderboardRowProps, RowProps } from 'components/LeaderboardRow/type';
+import type { LeaderboardRowProps, RowProps } from 'components/LeaderboardRow/type';
 
 export const LeaderboardRow = ({ rank, nickname, score, isMine }: LeaderboardRowProps) => {
   return (

@@ -1,4 +1,4 @@
-import { TypeFormsConst } from 'components/Forms/consts/types';
+import type { TypeFormsConst } from 'components/Forms/consts/types';
 
 export const isPasswordField = (name: string) => /password/i.test(name);
 
