@@ -8,13 +8,13 @@ import ErrorBoundary from './src/hoc/ErrorBoundary';
 import ThemeWrapper from './src/hoc/ThemeWrapper/ThemeWrapper';
 import store from './src/store';
 
-export function render() {
+export function render(url: string) {
   const sheet = new ServerStyleSheet();
 
   const html = renderToString(
     <StyleSheetManager sheet={sheet.instance}>
       <Provider store={store}>
-        <StaticRouter location="/">
+        <StaticRouter location={url}>
           <ThemeWrapper>
             <ErrorBoundary>
               <App />

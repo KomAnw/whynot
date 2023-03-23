@@ -50,7 +50,7 @@ const startServer = async () => {
     try {
       const { appHtml, css, template } = isDevelopmentMode
         ? await developmentConfig(context.dev, originalUrl)
-        : await productionConfig(context.prod);
+        : await productionConfig(context.prod, originalUrl);
 
       const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace(`</head>`, `${css}</head>`);
 
