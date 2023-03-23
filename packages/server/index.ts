@@ -33,14 +33,14 @@ const context = {
 const startServer = async () => {
   const app = express();
   const port = Number(process.env.SERVER_PORT) || 3001;
-  const key = readFileSync(path.join(__dirname, './public/key.pem'), 'utf8');
-  const cert = readFileSync(path.join(__dirname, './public/cert.pem'), 'utf8');
+  const certificate = readFileSync(path.resolve('certificate', 'certificate.pem'), 'utf8');
+  const key = readFileSync(path.resolve('certificate', 'key.pem'), 'utf8');
 
   app.use(cors());
 
   if (isDevelopmentMode) {
     vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: { middlewareMode: true, https: { cert: certificate, key } },
       root: clientPath,
       appType: 'custom',
     });
@@ -66,8 +66,8 @@ const startServer = async () => {
   });
 
   if (isDevelopmentMode) {
-    https.createServer({ key, cert }, app).listen(port, '127.0.0.1', () => {
-      console.info(`https://localhost:${port}`);
+    https.createServer({ key, cert: certificate }, app).listen(port, () => {
+      console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
     });
   } else {
     app.listen(port, () => {
