@@ -26,5 +26,7 @@ export function render(url: string) {
   );
   const css = sheet.getStyleTags();
 
+  sheet.seal();
+
   return { html, css };
 }
