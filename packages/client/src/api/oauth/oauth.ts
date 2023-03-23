@@ -9,7 +9,7 @@ export const OAUTH_ENDPOINTS = {
   service: getYandexURL(`${ROOT_OAUTH_URL}/yandex/service-id`),
 };
 
-export const REDIRECT_URL = new URL('http://localhost:3000/oauth').toString();
+export const REDIRECT_URL = new URL('https://localhost:3000/oauth').toString();
 
 export const redirectToOAuthYandex = (serviceId: string) => {
   const url = new URL('https://oauth.yandex.ru/authorize');

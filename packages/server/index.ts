@@ -2,11 +2,11 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import express from 'express';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import { developmentConfig } from './configs/development';
-import { productionConfig } from './configs/production';
 import https from 'https';
 import path, { join, resolve } from 'path';
 import { readFileSync } from 'node:fs';
+import { productionConfig } from './configs/production';
+import { developmentConfig } from './configs/development';
 
 // import { createClientAndConnect } from './db';
 
@@ -33,8 +33,8 @@ const context = {
 const startServer = async () => {
   const app = express();
   const port = Number(process.env.SERVER_PORT) || 3001;
-  const key = readFileSync(path.join(__dirname, './key.pem'), 'utf8');
-  const cert = readFileSync(path.join(__dirname, './cert.pem'), 'utf8');
+  const key = readFileSync(path.join(__dirname, './public/key.pem'), 'utf8');
+  const cert = readFileSync(path.join(__dirname, './public/cert.pem'), 'utf8');
 
   app.use(cors());
 
@@ -66,18 +66,14 @@ const startServer = async () => {
   });
 
   if (isDevelopmentMode) {
-    https.createServer({ key, cert }, app).listen(port + 1, '127.0.0.1', () => {
-    console.info(`https://localhost:${port + 1}`);
-  });
+    https.createServer({ key, cert }, app).listen(port, '127.0.0.1', () => {
+      console.info(`https://localhost:${port}`);
+    });
   } else {
-      app.listen(port, () => {
-    console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
-  });
+    app.listen(port, () => {
+      console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
+    });
   }
-
-  
-
-
 };
 
 startServer();
