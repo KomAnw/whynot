@@ -20,7 +20,7 @@ jobs:
       - name: Initialize
         run: yarn lerna bootstrap
       - name: Typescript
-        run: tsc
+        run: yarn tsc
       - name: Lint
         run: yarn lint
       - name: Test
