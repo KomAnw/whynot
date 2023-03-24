@@ -3,16 +3,17 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
 import { breakpoints } from 'components/App/constants';
-import ForumMessageInput from 'pages/Forum/pages/ForumMessages/components/ForumMessageInput';
-import { demoMessage, demoPost } from 'pages/Forum/pages/ForumMessages/demoData';
-import MessageElement from 'pages/Forum/pages/ForumMessages/components/MessageElement';
-import { SortMessage } from 'pages/Forum/pages/ForumMessages/utils/sortMessage';
+import MessageInput from 'pages/Forum/pages/FormPost/components/MessageInput';
+import { demoMessage, demoPost } from 'pages/Forum/pages/FormPost/demoData';
+import MessageElement from 'pages/Forum/pages/FormPost/components/MessageElement';
+import { sortMessage } from 'pages/Forum/pages/FormPost/utils/sortMessage';
 import { IconPost } from 'pages/Forum/components/IconPost';
 import { TMessage } from 'pages/Forum/pages/types';
+import { Text } from 'src/design/Text';
 
 const { forum } = paths;
 
-const ForumMessages = () => {
+const FormPost = () => {
   return (
     <PageContainer>
       <Component>
@@ -22,12 +23,12 @@ const ForumMessages = () => {
           <NamePost>{demoPost.title}</NamePost>
         </TitlePost>
         <Main>
-          {SortMessage(demoMessage).map((item: TMessage) => (
+          {sortMessage(demoMessage).map((item: TMessage) => (
             <MessageElement {...item} key={item.id} />
           ))}
         </Main>
         <Footer>
-          <ForumMessageInput />
+          <MessageInput />
           <Link to={forum.index} variant="size30">
             back
           </Link>
@@ -37,11 +38,10 @@ const ForumMessages = () => {
   );
 };
 
-export default ForumMessages;
+export default FormPost;
 
 export const PageContainer = styled('div')`
   height: 100vh;
-  width: 100vw;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -81,16 +81,17 @@ const TitlePost = styled('div')`
   }
 `;
 
-const NamePost = styled(H1)`
+const NamePost = styled(Text)`
+  font-weight: 700;
   font-size: 22px;
   line-height: 25px;
 `;
 
 const Main = styled('div')`
   display: grid;
-  margin: 12px 12px 0 12px;
+  margin: 12px;
   overflow-y: auto;
-  height: 450px;
+  height: auto;
   align-content: start;
   &::-webkit-scrollbar {
     width: 5px;
@@ -102,7 +103,7 @@ const Main = styled('div')`
     background-color: ${({ theme }) => theme.colors.core.text.primary};
   }
   @media (max-width: ${breakpoints.mobileM}) {
-    height: 386px;
+    height: auto;
   }
 `;
 

@@ -1,26 +1,26 @@
 export type TAuthor = {
   id: number;
-  first_name: string;
-  second_name: string;
+  firstName: string;
+  secondName: string;
 };
 
 export type TEmoji = {
   id: number;
-  author_id: number[];
+  authorId: number[];
 };
 
 export type TMessage = {
   id: number;
-  data: string;
+  date: string;
   author: TAuthor;
-  message_main_id: number;
+  messageMainId: number;
   emojis: TEmoji[];
   text: string;
 };
 
 export type TPost = {
   id: number;
-  data: string;
+  date: string;
   author: TAuthor;
   title: string;
 };

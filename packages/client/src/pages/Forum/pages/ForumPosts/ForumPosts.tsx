@@ -3,7 +3,7 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
 import { breakpoints } from 'components/App/constants';
-import ForumPostsInput from 'pages/Forum/pages/ForumPosts/components/ForumPostsInput';
+import PostsInput from 'pages/Forum/pages/ForumPosts/components/PostsInput';
 import PostElement from 'pages/Forum/pages/ForumPosts/components/PostElement';
 import { demoData } from 'pages/Forum/pages/ForumPosts/demoData';
 import { TPost } from 'pages/Forum/pages/types';
@@ -16,12 +16,12 @@ const ForumPosts = () => {
       <Component>
         <Title>Forum</Title>
         <Main>
-          {demoData.map((item: TPost) => (
+          {demoData?.map((item: TPost) => (
             <PostElement {...item} key={item.id} />
           ))}
         </Main>
         <Footer>
-          <ForumPostsInput />
+          <PostsInput />
           <Link to={menu} variant="size30">
             back
           </Link>
@@ -35,7 +35,6 @@ export default ForumPosts;
 
 export const PageContainer = styled('div')`
   height: 100vh;
-  width: 100vw;
   display: grid;
   align-items: center;
   justify-items: center;
@@ -61,9 +60,9 @@ const Title = styled(H1)`
 
 const Main = styled('div')`
   display: grid;
-  margin: 27px 12px 0 12px;
+  margin: 27px 12px 12px;
   overflow-y: auto;
-  height: 502px;
+  height: auto;
   align-content: start;
   &::-webkit-scrollbar {
     width: 5px;
@@ -75,7 +74,7 @@ const Main = styled('div')`
     background-color: ${({ theme }) => theme.colors.core.text.primary};
   }
   @media (max-width: ${breakpoints.mobileM}) {
-    height: 438px;
+    height: auto;
   }
 `;
 

@@ -1,39 +1,33 @@
 import styled from 'styled-components';
-import React from 'react';
-import { H1 } from 'src/design/H1';
-import EmojiBox from 'pages/Forum/pages/ForumMessages/components/MessageElement/EmojiBox';
+import EmojiBox from 'pages/Forum/pages/FormPost/components/MessageElement/EmojiBox';
 import { TMessage, TEmoji } from 'pages/Forum/pages/types';
-import MenuEmojis from 'pages/Forum/pages/ForumMessages/components/MenuEmojis';
+import MenuEmojis from 'pages/Forum/pages/FormPost/components/MenuEmojis';
 import { useState } from 'react';
 import { IconButtonEmoji } from 'pages/Forum/components/IconButtonEmoji';
+import { Text } from 'src/design/Text';
 
-// eslint-disable-next-line camelcase
-const MessageElement = ({ author, text, data = '', message_main_id, emojis }: TMessage) => {
+const MessageElement = ({ author, text, date, messageMainId, emojis }: TMessage) => {
   const [isOpenMenuEmojis, setIsOpenMenuEmojis] = useState(false);
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
+  const handleClick = () => {
     setIsOpenMenuEmojis(!isOpenMenuEmojis);
   };
 
-  const emojiBox =
-    emojis.length !== 0 &&
-    emojis.map((item: TEmoji, index: number) => <EmojiBox id={item.id} num={0} key={author.id + index} />);
+  const emojiBox = emojis?.map((item: TEmoji, index: number) => (
+    <EmojiBox id={item.id} num={10} key={author.id + index} />
+  ));
 
   return (
-    // eslint-disable-next-line camelcase
-    <Container elementId={message_main_id!}>
+    <Container elementId={messageMainId!}>
       <Header>
         <Author>
-          {author.first_name} {author.second_name}
+          {author.firstName} {author.secondName}
         </Author>
-        <Time>{new Date(data).toLocaleString()}</Time>
+        <Time>{new Date(date).toLocaleString()}</Time>
       </Header>
       <Message>{text}</Message>
       <Footer>
-        {/* eslint-disable-next-line camelcase */}
-        {message_main_id === 0 ? <ButtonAnswer>Ответ</ButtonAnswer> : null}
+        {messageMainId === 0 ? <ButtonAnswer>Ответ</ButtonAnswer> : null}
         <ButtonEmoji onClick={handleClick}>
           <IconButtonEmoji />
           {isOpenMenuEmojis && <MenuEmojis setIsOpenMenuEmojis={setIsOpenMenuEmojis} />}
@@ -60,20 +54,21 @@ const Header = styled('div')`
   align-items: center;
 `;
 
-const Author = styled(H1)`
+const Author = styled(Text)`
+  font-weight: 700;
   font-size: 20px;
   line-height: 22px;
   color: ${({ theme }) => theme.colors.core.text.quaternary};
 `;
 
-const Time = styled(H1)`
+const Time = styled(Text)`
   font-weight: 400;
   font-size: 20px;
   line-height: 22px;
   color: ${({ theme }) => theme.colors.core.text.tertiary};
 `;
 
-const Message = styled(H1)`
+const Message = styled(Text)`
   display: grid;
   font-weight: 400;
   font-size: 20px;
@@ -89,7 +84,7 @@ const Footer = styled('div')`
   align-items: center;
 `;
 
-const ButtonAnswer = styled(H1)`
+const ButtonAnswer = styled(Text)`
   font-weight: 700;
   font-size: 16px;
   line-height: 18px;

@@ -3,13 +3,13 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { InputHTMLAttributes } from 'react';
 import { LinkText } from 'src/design/LinkText';
 import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
-import { H1 } from 'src/design/H1';
+import { Text } from 'src/design/Text';
 
 export type TInputPost = {
   inputPosts: string;
 };
 
-const ForumMessageInput = () => {
+const MessageInput = () => {
   const { resetField, register, handleSubmit } = useForm<TInputPost>({
     mode: 'all',
   });
@@ -17,10 +17,8 @@ const ForumMessageInput = () => {
   const submitForm: SubmitHandler<TInputPost> = async data => {
     try {
       resetField('inputPosts');
-      // eslint-disable-next-line no-console
       console.log(data);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
@@ -41,35 +39,28 @@ const ForumMessageInput = () => {
   );
 };
 
-export default ForumMessageInput;
+export default MessageInput;
 
 const Form = styled('form')`
   display: grid;
   width: 100%;
-  height: 100%;
-  grid-template-columns: auto;
   grid-template-rows: auto auto;
 `;
 
 const Header = styled('div')`
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-template-rows: auto;
-  justify-content: start;
+  display: flex;
 `;
 
-const Title = styled(H1)`
+const Title = styled(Text)`
   margin-left: 32px;
-  display: grid;
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
   color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
-const Direction = styled(H1)`
+const Direction = styled(Text)`
   margin-left: 5px;
-  display: grid;
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
@@ -77,10 +68,10 @@ const Direction = styled(H1)`
 `;
 
 const Footer = styled('div')`
-  display: grid;
-  grid-template-columns: auto max-content;
-  grid-template-rows: 36px;
-  grid-column-gap: 10px;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  height: 36px;
   align-items: center;
 `;
 

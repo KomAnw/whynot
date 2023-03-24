@@ -19,7 +19,7 @@ const PostElement = ({ id, author, title }: TPost) => {
       <ContainerAuthor>
         <NameAuthor>Author:</NameAuthor>
         <Author>
-          {author.first_name} {author.second_name}
+          {author.firstName} {author.secondName}
         </Author>
       </ContainerAuthor>
     </Container>
@@ -31,6 +31,7 @@ export default PostElement;
 const Container = styled('div')`
   display: grid;
   grid-template-columns: auto auto;
+  justify-content: space-between;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
   border-top: 2px solid ${({ theme }) => theme.colors.core.text.primary};
   padding: 8px 6px;
@@ -42,9 +43,7 @@ const Container = styled('div')`
 const Title = styled(H1)`
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: auto;
   grid-column-gap: 10px;
-  padding: 0;
   font-size: 22px;
   line-height: 25px;
   text-align: left;

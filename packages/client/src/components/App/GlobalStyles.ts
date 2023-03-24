@@ -8,10 +8,12 @@ export const GlobalStyles = createGlobalStyle`
       src: local('Handjet Regular'), local('Handjet-Regular'),
           url('/fonts/Handjet.woff2') format('woff2'),
           url('/fonts/Handjet.woff') format('truetype');
+      font-display: block;
   }
   body * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
   }
 `;

@@ -1,15 +1,14 @@
 import { TMessage } from 'pages/Forum/pages/types';
-import { demoMessage } from 'pages/Forum/pages/ForumMessages/demoData';
 
-export function SortMessage(messages: TMessage[]) {
-  const arrMessageSort: any = [];
+export function sortMessage(messages: TMessage[]) {
+  const arrMessageSort: TMessage[] = [];
 
   const filterList = (messages: TMessage[], id: number) =>
-    messages.filter((item: TMessage) => item.message_main_id === id);
+    messages.filter((item: TMessage) => item.messageMainId === id);
   const sortTime = (messages: TMessage[]) => {
     return messages.sort((a: TMessage, b: TMessage): number => {
-      const timeA = new Date(a.data);
-      const timeB = new Date(b.data);
+      const timeA = new Date(a.date);
+      const timeB = new Date(b.date);
 
       if (timeA > timeB) return 1;
       if (timeA < timeB) return -1;
@@ -19,7 +18,7 @@ export function SortMessage(messages: TMessage[]) {
   };
 
   sortTime(filterList(messages, 0)).forEach((item: TMessage) =>
-    arrMessageSort.push(item, ...sortTime(filterList(demoMessage, item.id)))
+    arrMessageSort.push(item, ...sortTime(filterList(messages, item.id)))
   );
 
   return arrMessageSort;
