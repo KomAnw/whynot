@@ -1,4 +1,4 @@
-import { TMessage } from 'pages/Forum/pages/types';
+import type { TMessage } from 'pages/Forum/pages/types';
 import { demoMessage } from 'pages/Forum/pages/ForumMessages/demoData';
 
 export function SortMessage(messages: TMessage[]) {

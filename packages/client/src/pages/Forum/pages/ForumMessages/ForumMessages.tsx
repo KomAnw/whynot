@@ -8,7 +8,7 @@ import { demoMessage, demoPost } from 'pages/Forum/pages/ForumMessages/demoData'
 import MessageElement from 'pages/Forum/pages/ForumMessages/components/MessageElement';
 import { SortMessage } from 'pages/Forum/pages/ForumMessages/utils/sortMessage';
 import { IconPost } from 'pages/Forum/components/IconPost';
-import { TMessage } from 'pages/Forum/pages/types';
+import type { TMessage } from 'pages/Forum/pages/types';
 
 const { forum } = paths;
 

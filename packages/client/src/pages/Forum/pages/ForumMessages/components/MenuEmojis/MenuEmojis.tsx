@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TMenuEmojis } from 'pages/Forum/pages/types';
+import type { TMenuEmojis } from 'pages/Forum/pages/types';
 import { EmojiLinkIcon, listEmoji } from 'pages/Forum/pages/ForumMessages/utils/emojiLinkIcon';
 import React from 'react';
 
