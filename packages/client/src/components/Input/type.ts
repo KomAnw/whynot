@@ -9,4 +9,5 @@ export type InputProps = {
   label: string;
   placeholder: string;
   errorMessage?: string;
+  className?: string;
 };

@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import type { InputHTMLAttributes } from 'react';
-import { LinkText } from 'src/design/LinkText';
+/*
+ * import type { InputHTMLAttributes } from 'react';
+ * import { LinkText } from 'src/design/LinkText';
+ */
 import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
 import { Text } from 'src/design/Text';
+import { Input } from 'src/components/Input';
+import { InputStyled } from 'src/components/Input/Input';
 
 export type TInputPost = {
   inputPosts: string;
@@ -31,7 +35,15 @@ const MessageInput = () => {
         <Direction>Всем</Direction>
       </Header>
       <Footer>
-        <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPosts')} />
+        <RestyledInput
+          label=""
+          name="input"
+          placeholder="Создать новую тему"
+          register={register}
+          type=""
+          validationRules={{}}
+        />
+        {/* <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPosts')} /> */}
         <Button type="submit">
           <IconButtonSend />
         </Button>
@@ -76,22 +88,31 @@ const Footer = styled('div')`
   align-items: center;
 `;
 
-const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`
-  box-sizing: border-box;
-  border-radius: 18px;
-  padding-left: 26px;
-  width: 100%;
-  height: 100%;
-  outline: none;
-  background-color: ${({ theme }) => theme.colors.control.input.backgroundSecondary};
-  border: none;
-  color: ${({ theme }) => theme.colors.control.input.color};
-  font-weight: 700;
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.control.input.placeHolderSecondary};
-    font-weight: 400;
+const RestyledInput = styled(Input)`
+  /* export any styled component inside input from input */
+  ${InputStyled} {
+    background: red;
   }
 `;
+
+/*
+ * const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`
+ *   box-sizing: border-box;
+ *   border-radius: 18px;
+ *   padding-left: 26px;
+ *   width: 100%;
+ *   height: 100%;
+ *   outline: none;
+ *   background-color: ${({ theme }) => theme.colors.control.input.backgroundSecondary};
+ *   border: none;
+ *   color: ${({ theme }) => theme.colors.control.input.color};
+ *   font-weight: 700;
+ *   &::placeholder {
+ *     color: ${({ theme }) => theme.colors.control.input.placeHolderSecondary};
+ *     font-weight: 400;
+ *   }
+ * `;
+ */
 
 const Button = styled('button')`
   border: 0;
