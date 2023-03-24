@@ -10,6 +10,7 @@
     "dev": "lerna run dev",
     "test": "lerna run test",
     "lint": "lerna run lint",
+    "lint:fix": "lerna run lint:fix",
     "format": "lerna run format",
     "preview": "lerna run preview",
     "create:link": "cd packages/client && yarn link && cd ../server && yarn link client && cd ../../",

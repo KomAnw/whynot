@@ -9,6 +9,7 @@ import fullscreenReducer from 'pages/Settings/fullscreenSlice';
 import gamepadReducer from 'pages/Settings/gamepadSlice';
 
 const preloadedState = globalThis.__PRELOADED_STATE__;
+
 const store = configureStore({
   reducer: {
     theme: themeReducer,
