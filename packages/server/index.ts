@@ -6,6 +6,7 @@ import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import { developmentConfig } from './configs/development';
 import { productionConfig } from './configs/production';
 import { state } from './state';
+import { connectPostgresDB } from './database/postgres';
 
 dotenv.config();
 
@@ -26,7 +27,10 @@ const context = {
   },
 };
 
+// connectPostgresDB();
+
 const startServer = async () => {
+  await connectPostgresDB();
   const app = express();
   const port = Number(process.env.SERVER_PORT) || 3001;
 
