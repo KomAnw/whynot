@@ -4,12 +4,14 @@ import { H1 } from 'src/design/H1';
 import { LinkText } from 'src/design/LinkText';
 import { Button } from 'src/components/Button';
 import Portal from 'components/Portal';
-import { InputHTMLAttributes, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { InputHTMLAttributes } from 'react';
+import { useState } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { breakpoints } from 'src/components/App/constants';
 import { useDispatch } from 'react-redux';
 import { authApi } from 'src/api/auth/auth';
-import { AvatarData, ProfileAvatarProps } from './types';
+import type { AvatarData, ProfileAvatarProps } from './types';
 
 const ProfileAvatar = ({ setIsPopupOpen }: ProfileAvatarProps) => {
   const [avatar] = useChangeAvatarMutation();
@@ -81,6 +83,7 @@ const ButtonX = styled.button`
   position: absolute;
   top: 10px;
   right: 10px;
+  font-family: Arial, serif;
   color: ${({ theme }) => theme.colors.core.text.primary};
   font-size: 20px;
   border: 0;

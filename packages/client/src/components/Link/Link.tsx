@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Link as ReactLink } from 'react-router-dom';
-import { propsLink, propsLinkStyle } from 'components/Link/type';
+import type { propsLink, propsLinkStyle } from 'components/Link/type';
 
 const styleProps = {
   size20: { fontSize: '20px', lineHeight: '22px' },

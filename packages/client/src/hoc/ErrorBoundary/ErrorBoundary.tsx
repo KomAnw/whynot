@@ -1,7 +1,8 @@
-import { Component, ErrorInfo } from 'react';
+import type { ErrorInfo } from 'react';
+import { Component } from 'react';
 import { ErrorPage } from 'src/pages';
 import { BackgroundContainer } from '../Layout/Layout';
-import { Props, State } from './types';
+import type { Props, State } from './types';
 
 class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiSettings, getYandexURL } from 'src/api';
-import { LeaderboardNewLeaderRequest, LeaderboardRequest, LeadersResponse } from 'src/api/leaderboard/models';
+import type { LeaderboardNewLeaderRequest, LeaderboardRequest, LeadersResponse } from 'src/api/leaderboard/models';
 
 const ROOT_LEADERBOARD_URL = 'leaderboard';
 

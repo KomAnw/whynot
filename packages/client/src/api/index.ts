@@ -1,5 +1,5 @@
+import type { FetchBaseQueryArgs } from '@reduxjs/toolkit/dist/query/fetchBaseQuery';
 import 'src/utils/globalPolyfill';
-import { FetchBaseQueryArgs } from '@reduxjs/toolkit/dist/query/fetchBaseQuery';
 import _fetch from 'isomorphic-fetch';
 
 const getBaseURL = (baseURL: string) => new URL('', baseURL).href;

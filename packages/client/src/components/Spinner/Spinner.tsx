@@ -1,7 +1,7 @@
 import styled, { withTheme } from 'styled-components';
 import ClipLoader from 'react-spinners/ClimbingBoxLoader';
 import { H3 } from 'src/design/H3';
-import { Theme } from 'src/hoc/ThemeWrapper/types';
+import type { Theme } from 'src/hoc/ThemeWrapper/types';
 
 type SpinnerProps = {
   theme: Theme;

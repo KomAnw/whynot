@@ -1,4 +1,4 @@
-import { TUser } from '../auth/models';
+import type { TUser } from '../auth/models';
 
 export type TPasswordRequest = {
   oldPassword: string;
