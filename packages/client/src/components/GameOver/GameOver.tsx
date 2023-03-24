@@ -1,40 +1,25 @@
-import lose from 'images/common/homer-lose.png';
-import win from 'images/common/homer-win.png';
 import styled from 'styled-components';
 import { paths } from 'src/components/App/constants';
 import { GameOverProps, ImageProps } from 'components/GameOver/types';
 import { H1 } from 'src/design/H1';
 import { Text } from 'src/design/Text';
-import { ButtonComponent, ButtonVariants } from 'components/Button/types';
+import { ButtonComponent } from 'components/Button/types';
 import { Link } from 'react-router-dom';
 import { Button } from 'components/Button';
 
-const { menu, game } = paths;
-
-const buttons = [
-  {
-    variant: 'primary' as ButtonVariants,
-    to: menu,
-    text: 'Menu',
-  },
-  {
-    variant: 'secondary' as ButtonVariants,
-    to: game.index,
-    text: 'Play',
-    action: 'onClick',
-  },
-];
+const { menu } = paths;
+const lose = '/images/common/homer-lose.png';
+const win = '/images/common/homer-win.png';
 
 const Buttons = ({ onClick }: Pick<ButtonComponent, 'onClick'>) => {
   return (
     <ButtonsContainer>
-      {buttons.map(({ variant, text, to }) => (
-        <Link to={to} key={text}>
-          <Button variant={variant} onClick={onClick}>
-            {text}
-          </Button>
-        </Link>
-      ))}
+      <Link to={menu}>
+        <Button variant="primary">Menu</Button>
+      </Link>
+      <Button variant="secondary" onClick={onClick}>
+        Play
+      </Button>
     </ButtonsContainer>
   );
 };

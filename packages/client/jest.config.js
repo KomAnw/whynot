@@ -11,7 +11,6 @@ export default {
   },
   moduleNameMapper: {
     '^src(.*)$': '<rootDir>/src$1',
-    '^images(.*)$': '<rootDir>/public/images$1',
     '^components(.*)$': '<rootDir>/src/components$1',
   },
   transform: {

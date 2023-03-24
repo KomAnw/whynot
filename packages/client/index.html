@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/src/index.css" />
     <link rel="preload" href="/fonts/Handjet.woff" as="font" type="font/woff" crossorigin />
     <link rel="preload" href="/fonts/Handjet.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
@@ -9,7 +10,7 @@
     <title>WhyNot?</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--ssr-outlet--></div>
     <div id="portal"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
