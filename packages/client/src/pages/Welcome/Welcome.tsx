@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { Button } from 'src/components/Button';
 import { Link } from 'react-router-dom';
-import { ButtonVariants } from 'src/components/Button/types';
+import type { ButtonVariants } from 'src/components/Button/types';
 import { Children } from 'react';
 
 const { login, registration } = paths;

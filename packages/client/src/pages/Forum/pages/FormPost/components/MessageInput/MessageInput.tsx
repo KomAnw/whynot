@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { InputHTMLAttributes } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import type { InputHTMLAttributes } from 'react';
 import { LinkText } from 'src/design/LinkText';
 import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
 import { Text } from 'src/design/Text';

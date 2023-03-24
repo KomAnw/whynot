@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { PortalProps } from './types';
+import type { PortalProps } from './types';
 
 export const Portal = ({ children }: PortalProps) => {
   const portal = document.getElementById('portal')!;

@@ -1,4 +1,5 @@
-import { ComponentType, Suspense } from 'react';
+import type { ComponentType } from 'react';
+import { Suspense } from 'react';
 import Spinner from 'src/components/Spinner';
 
 function WithSuspense<P extends object>(WrappedComponent: ComponentType<P>) {

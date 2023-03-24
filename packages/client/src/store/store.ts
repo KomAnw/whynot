@@ -3,10 +3,12 @@ import { userApi } from 'src/api/user/user';
 import { authApi } from 'src/api/auth/auth';
 import { oauthApi } from 'src/api/oauth/oauth';
 import themeReducer from 'src/hoc/ThemeWrapper/themeSlice';
+import { leaderboardApi } from 'src/api/leaderboard/leaderboard';
 import modeReducer from 'pages/Game/modeSlice';
 import fullscreenReducer from 'pages/Settings/fullscreenSlice';
 import gamepadReducer from 'pages/Settings/gamepadSlice';
-import { leaderboardApi } from 'src/api/leaderboard/leaderboard';
+
+const preloadedState = globalThis.__PRELOADED_STATE__;
 
 const store = configureStore({
   reducer: {
@@ -26,10 +28,11 @@ const store = configureStore({
       userApi.middleware,
       oauthApi.middleware
     ),
+  preloadedState,
 });
 
+delete globalThis.__PRELOADED_STATE__;
+
 export default store;
-
 export type RootState = ReturnType<typeof store.getState>;
-
 export type AppDispatch = typeof store.dispatch;

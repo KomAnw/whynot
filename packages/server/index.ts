@@ -5,10 +5,8 @@ import { join, resolve } from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import { developmentConfig } from './configs/development';
 import { productionConfig } from './configs/production';
+import { state } from './state';
 
-// import { createClientAndConnect } from './db';
-
-// createClientAndConnect();
 dotenv.config();
 
 let vite: ViteDevServer | undefined;
@@ -51,8 +49,11 @@ const startServer = async () => {
       const { appHtml, css, template } = isDevelopmentMode
         ? await developmentConfig(context.dev, originalUrl)
         : await productionConfig(context.prod, originalUrl);
-
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml).replace(`</head>`, `${css}</head>`);
+      const stateMarkup = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(state)}</script>`;
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace(`<!--styles-->`, css)
+        .replace('<!--preloadedState-->', stateMarkup);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {

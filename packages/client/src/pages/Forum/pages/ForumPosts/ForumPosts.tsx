@@ -6,7 +6,7 @@ import { breakpoints } from 'components/App/constants';
 import PostsInput from 'pages/Forum/pages/ForumPosts/components/PostsInput';
 import PostElement from 'pages/Forum/pages/ForumPosts/components/PostElement';
 import { demoData } from 'pages/Forum/pages/ForumPosts/demoData';
-import { TPost } from 'pages/Forum/pages/types';
+import type { TPost } from 'pages/Forum/pages/types';
 
 const { menu } = paths;
 

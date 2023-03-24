@@ -33,7 +33,8 @@
       "components/*": ["src/components/*"],
       "pages/*": ["src/pages/*"]
     },
-    "types": ["vite/client", "jest"]
+    "types": ["node", "vite/client", "jest"],
+    "typeRoots": ["src/client.d.ts"]
   },
   "include": ["src"],
   "exclude": ["node_modules"],

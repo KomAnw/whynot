@@ -4,7 +4,7 @@ import { Text } from 'src/design/Text';
 import { breakpoints } from 'components/App/constants';
 import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
-import { TPost } from 'pages/Forum/pages/types';
+import type { TPost } from 'pages/Forum/pages/types';
 import { IconPost } from 'pages/Forum/components/IconPost';
 
 const { forum } = paths;
