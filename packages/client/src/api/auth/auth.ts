@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { apiSettings, getYandexURL } from 'src/api';
-import { TSignInRequest, TSignUpResponse, TSignUpRequest, TUser } from 'src/api/auth/models';
+import type { TSignInRequest, TSignUpResponse, TSignUpRequest, TUser } from 'src/api/auth/models';
 
 const ROOT_AUTH_URL = 'auth';
 

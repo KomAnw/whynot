@@ -6,3 +6,9 @@ export type TSizes = {
 export type GameWindowProps = {
   background: string;
 };
+
+export type TSprite = {
+  name: string;
+  sprite: string;
+  background: string;
+};

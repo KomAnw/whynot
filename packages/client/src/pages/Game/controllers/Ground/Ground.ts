@@ -1,4 +1,4 @@
-import { TSizes } from 'pages/Game/types/types';
+import type { TSizes } from 'pages/Game/types/types';
 
 export class Ground {
   sizes: TSizes;

@@ -4,7 +4,7 @@ import { useGetUserQuery } from 'src/api/auth/auth';
 import { useAddMutation } from 'src/api/leaderboard/leaderboard';
 import { LEADERBOARD_TEAM_NAME } from 'src/api/leaderboard/leaderboard';
 import { useDidMount } from 'src/hooks/react';
-import { GameResultProps } from './types';
+import type { GameResultProps } from './types';
 
 const GameResult = ({ score, isWon, setIsPopupOpen, startGameAgain }: GameResultProps) => {
   const [addLeader] = useAddMutation();

@@ -1,5 +1,6 @@
-import { FormEvent } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { FormEvent } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
@@ -7,7 +8,7 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
-import { TSignUpRequest } from 'src/api/auth/models';
+import type { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
 import { useNavigate } from 'react-router-dom';
 import { getValuesFromLocalStorage, isPasswordField, saveToLocalStorage } from 'src/utils/storage';
