@@ -4,6 +4,5 @@ node_modules/
 .vscode
 dist/
 dist-srr/
-dist-ssr
 tmp
 client.d.ts
