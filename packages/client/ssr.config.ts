@@ -12,14 +12,13 @@ export default defineConfig({
       src: path.resolve(__dirname, './src'),
       components: path.resolve(__dirname, './src/components'),
       pages: path.resolve(__dirname, './src/pages'),
-      assets: path.resolve(__dirname, './src/assets'),
     },
   },
   plugins: [react()],
   build: {
     outDir: 'dist-ssr',
     lib: {
-      entry: path.resolve(__dirname, 'ssr.tsx'),
+      entry: path.resolve(__dirname, 'src/ssr.tsx'),
       name: 'client',
       formats: ['cjs'],
     },

@@ -5,17 +5,15 @@ import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 import App from 'components/App/App';
 import ErrorBoundary from './hoc/ErrorBoundary';
 import ThemeWrapper from './hoc/ThemeWrapper/ThemeWrapper';
-import createStore from './store';
+import store from './store';
 
-export { createStore };
-
-export function render(store) {
+export function render(url: string) {
   const sheet = new ServerStyleSheet();
 
   const html = renderToString(
     <StyleSheetManager sheet={sheet.instance}>
       <Provider store={store}>
-        <StaticRouter location="/">
+        <StaticRouter location={url}>
           <ThemeWrapper>
             <ErrorBoundary>
               <App />
@@ -26,6 +24,8 @@ export function render(store) {
     </StyleSheetManager>
   );
   const css = sheet.getStyleTags();
+
+  sheet.seal();
 
   return { html, css };
 }

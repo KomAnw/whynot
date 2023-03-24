@@ -3,11 +3,9 @@ import cors from 'cors';
 import express from 'express';
 import { join, resolve } from 'path';
 import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import path from 'path';
-import type { Store } from 'client/src/store/store';
 import { developmentConfig } from './configs/development';
 import { productionConfig } from './configs/production';
-import { preloadedState } from './preloaded-state';
+import { state } from './state';
 
 dotenv.config();
 
@@ -44,39 +42,18 @@ const startServer = async () => {
     app.use(vite.middlewares);
   }
 
-  let ssrModule;
-
-  /**
-   * Загрузка createStore из ssr.tsx в зависимости от режима: development или production.
-   *
-   * Режим DevelopmentMode:
-   *   Загрузка с помощью vite.
-   *   - ssrLoadModule автоматически преобразует исходный код ESM для использования в Node.js!.
-   *   Модули ECMAScript (ESM) — это спецификация для использования модулей в Интернете.
-   *
-   * Режим ProductionMode:
-   *    Импорт напряму из dist-ssr.
-   */
-  if (isDevelopmentMode) {
-    ssrModule = await vite!.ssrLoadModule(path.resolve(clientPath, 'ssr.tsx') as string);
-  } else {
-    ssrModule = await import(ssrClientPath);
-  }
-  const { createStore } = ssrModule;
-
-  const store: Store = createStore(preloadedState);
-
   !isDevelopmentMode && app.use(express.static(distPath));
 
   app.use('*', async ({ originalUrl }, res, next) => {
     try {
       const { appHtml, css, template } = isDevelopmentMode
-        ? await developmentConfig(context.dev, originalUrl, store)
-        : await productionConfig(context.prod, store);
-
-      const stateMarkup = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(store.getState())}</script>`;
-
-      const html = template.replace(`<!--ssr-outlet-->`, stateMarkup + appHtml).replace(`</head>`, `${css}</head>`);
+        ? await developmentConfig(context.dev, originalUrl)
+        : await productionConfig(context.prod, originalUrl);
+      const stateMarkup = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(state)}</script>`;
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace(`<!--styles-->`, css)
+        .replace('<!--preloadedState-->', stateMarkup);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {

@@ -5,7 +5,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['/dist'],
+  ignorePatterns: ['**/dist/**', '**/dist-ssr/**'],
   extends: [
     'airbnb',
     'eslint:recommended',
