@@ -1,5 +1,5 @@
-import { TMessage } from 'components/Forum/types';
-import { demoMessage } from 'components/Forum/ForumPost/demoData';
+import { TMessage } from 'pages/Forum/pages/types';
+import { demoMessage } from 'pages/Forum/pages/ForumMessages/demoData';
 
 export function SortMessage(messages: TMessage[]) {
   const arrMessageSort: any = [];

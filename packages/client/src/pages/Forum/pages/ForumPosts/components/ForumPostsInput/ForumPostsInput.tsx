@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { InputHTMLAttributes } from 'react';
 import { LinkText } from 'src/design/LinkText';
-import { IconButtonSend } from 'components/Forum/components/IconButtonSend';
+import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
 
 export type TInputPost = {
-  inputPosts: string;
+  inputPost: string;
 };
 
 const ForumPostsInput = () => {
@@ -15,7 +15,7 @@ const ForumPostsInput = () => {
 
   const submitForm: SubmitHandler<TInputPost> = async data => {
     try {
-      resetField('inputPosts');
+      resetField('inputPost');
       // eslint-disable-next-line no-console
       console.log(data);
     } catch (error) {
@@ -26,7 +26,7 @@ const ForumPostsInput = () => {
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
-      <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPosts')} />
+      <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPost')} />
       <Button type="submit">
         <IconButtonSend />
       </Button>
@@ -52,12 +52,12 @@ const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<
   width: 100%;
   height: 36px;
   outline: none;
-  background-color: ${({ theme }) => theme.colors.control.input.background};
+  background-color: ${({ theme }) => theme.colors.control.input.backgroundSecondary};
   border: none;
   color: ${({ theme }) => theme.colors.control.input.color};
   font-weight: 700;
   &::placeholder {
-    color: ${({ theme }) => theme.colors.control.input.placeHolder};
+    color: ${({ theme }) => theme.colors.control.input.placeHolderSecondary};
     font-weight: 400;
   }
 `;
@@ -67,7 +67,11 @@ const Button = styled('button')`
   width: 26px;
   height: 26px;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
+  cursor: pointer;
   path {
     stroke: ${({ theme }) => theme.colors.core.text.primary};
+  }
+  &:hover {
+    opacity: 0.7;
   }
 `;

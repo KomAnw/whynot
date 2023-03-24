@@ -22,7 +22,6 @@ export type Theme = {
         quaternary: string;
         quinary: string;
         sextuple: string;
-        septenary: string;
       };
       link: {
         link: string;
@@ -35,8 +34,10 @@ export type Theme = {
       input: {
         color: string;
         background: string;
+        backgroundSecondary: string;
         label: string;
         placeHolder: string;
+        placeHolderSecondary: string;
       };
       toggle: {
         control: string;

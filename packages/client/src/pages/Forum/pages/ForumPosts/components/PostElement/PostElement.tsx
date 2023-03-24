@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 import { H1 } from 'src/design/H1';
-import iconMessage from 'images/forum/icon2.svg';
 import { Text } from 'src/design/Text';
-import { breakpoints } from 'src/components/App/constants';
-import { Link } from 'src/components/Link';
+import { breakpoints } from 'components/App/constants';
+import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
-import { TPost } from 'components/Forum/types';
+import { TPost } from 'pages/Forum/pages/types';
+import { IconPost } from 'pages/Forum/components/IconPost';
 
 const { forum } = paths;
 
 const PostElement = ({ id, author, title }: TPost) => {
   return (
-    <Containers>
+    <Container>
       <Title>
-        <Icon src={iconMessage} alt="icon message" />
+        <IconPost />
         <Link to={`${forum.index}/${id}`}>{title}</Link>
       </Title>
       <ContainerAuthor>
@@ -22,13 +22,13 @@ const PostElement = ({ id, author, title }: TPost) => {
           {author.first_name} {author.second_name}
         </Author>
       </ContainerAuthor>
-    </Containers>
+    </Container>
   );
 };
 
 export default PostElement;
 
-const Containers = styled('div')`
+const Container = styled('div')`
   display: grid;
   grid-template-columns: auto auto;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
@@ -39,18 +39,18 @@ const Containers = styled('div')`
   }
 `;
 
-const Icon = styled.img`
-  margin: 0 10px 0 0;
-`;
-
 const Title = styled(H1)`
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: auto;
+  grid-column-gap: 10px;
   padding: 0;
   font-size: 22px;
   line-height: 25px;
   text-align: left;
+  path {
+    stroke: ${({ theme }) => theme.colors.core.text.primary};
+  }
 `;
 
 const ContainerAuthor = styled('div')`

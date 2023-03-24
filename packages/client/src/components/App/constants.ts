@@ -61,7 +61,6 @@ export const themes = {
           quaternary: '#000000',
           quinary: '#000000',
           sextuple: '#0E752B',
-          septenary: '#6B687D',
         },
         link: {
           link: '#6457B8',
@@ -74,8 +73,10 @@ export const themes = {
         input: {
           color: '#000000',
           background: '#ABCDCE',
+          backgroundSecondary: '#ABCDCE',
           label: '#6C5BC3',
           placeHolder: '#6B687D',
+          placeHolderSecondary: '#6B687D',
         },
         toggle: {
           control: '#FFFFFF',
@@ -117,8 +118,7 @@ export const themes = {
           tertiary: '#5BCDC9',
           quaternary: '#6BD35A',
           quinary: '#FFFFFF',
-          sextuple: '#FFFFFF',
-          septenary: '#FFFFFF',
+          sextuple: '#FFD600',
         },
         link: {
           link: '#FFFFFF',
@@ -131,8 +131,10 @@ export const themes = {
         input: {
           color: '#6C5BC3',
           background: '#FFFFFF',
+          backgroundSecondary: '#C1CDF7',
           label: '#6C5BC3',
           placeHolder: '#FFFFFF',
+          placeHolderSecondary: '#6C5BC3',
         },
         toggle: {
           control: '#FFFFFF',

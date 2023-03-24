@@ -1,5 +1,3 @@
-import React from 'react';
-
 export type TAuthor = {
   id: number;
   first_name: string;
@@ -28,6 +26,5 @@ export type TPost = {
 };
 
 export type TMenuEmojis = {
-  isOpenMenuEmojis: boolean;
-  setIsOpenMenuEmojis: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpenMenuEmojis: (value: boolean) => void;
 };

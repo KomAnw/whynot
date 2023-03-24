@@ -4,12 +4,12 @@ import { paths } from 'src/components/App/constants';
 import WithSuspense from 'src/hoc/WithSuspence';
 
 const { id, index } = paths.forum;
-const Forum = WithSuspense(lazy(() => import('./pages/Forum/Forum')));
-const Post = WithSuspense(lazy(() => import('./pages/Post/Post')));
+const ForumPosts = WithSuspense(lazy(() => import('./pages/ForumPosts/ForumPosts')));
+const ForumMessages = WithSuspense(lazy(() => import('./pages/ForumMessages/ForumMessages')));
 
 export const routes = [
-  <Route index element={<Forum />} key={index} />,
+  <Route index element={<ForumPosts />} key={index} />,
   <Route path={id} key={id}>
-    <Route index element={<Post />} />
+    <Route index element={<ForumMessages />} />
   </Route>,
 ];

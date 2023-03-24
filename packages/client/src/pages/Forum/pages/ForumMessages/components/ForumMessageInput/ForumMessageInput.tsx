@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { InputHTMLAttributes } from 'react';
 import { LinkText } from 'src/design/LinkText';
-import { IconButtonSend } from 'components/Forum/components/IconButtonSend';
+import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
 import { H1 } from 'src/design/H1';
 
 export type TInputPost = {
@@ -91,12 +91,12 @@ const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<
   width: 100%;
   height: 100%;
   outline: none;
-  background-color: ${({ theme }) => theme.colors.control.input.background};
+  background-color: ${({ theme }) => theme.colors.control.input.backgroundSecondary};
   border: none;
   color: ${({ theme }) => theme.colors.control.input.color};
   font-weight: 700;
   &::placeholder {
-    color: ${({ theme }) => theme.colors.control.input.placeHolder};
+    color: ${({ theme }) => theme.colors.control.input.placeHolderSecondary};
     font-weight: 400;
   }
 `;
@@ -106,7 +106,11 @@ const Button = styled('button')`
   width: 26px;
   height: 26px;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
+  cursor: pointer;
   path {
     stroke: ${({ theme }) => theme.colors.core.text.primary};
+  }
+  &:hover {
+    opacity: 0.7;
   }
 `;

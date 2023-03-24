@@ -34,7 +34,7 @@ export const demoData = [
     data: '2020-01-02T19:22:22.000Z',
     author: { id: 1, first_name: 'Ivan', second_name: 'Karlson' },
     title: 'Это новый лайвхак. Как обойти правила в этой игре, и все выиграть',
-  },
+  } /*
   {
     id: 7,
     data: '2020-01-02T20:22:22.000Z',
@@ -59,4 +59,5 @@ export const demoData = [
     author: { id: 1, first_name: 'Ivan', second_name: 'Karlson' },
     title: 'Это новый лайвхак. Как обойти правила в этой игре, и все выиграть',
   },
+  */,
 ];
