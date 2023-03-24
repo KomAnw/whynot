@@ -3,17 +3,13 @@ import Portal from 'components/Portal';
 import { useGetUserQuery } from 'src/api/auth/auth';
 import { useAddMutation } from 'src/api/leaderboard/leaderboard';
 import { LEADERBOARD_TEAM_NAME } from 'src/api/leaderboard/leaderboard';
-import { GameResultProps } from './types';
+import { useDidMount } from 'src/hooks/react';
+import type { GameResultProps } from './types';
 
 const GameResult = ({ score, isWon, setIsPopupOpen, startGameAgain }: GameResultProps) => {
-  const onClick = () => {
-    addLeaderHandler();
-    setIsPopupOpen(false);
-    startGameAgain();
-  };
   const [addLeader] = useAddMutation();
   const { data: user } = useGetUserQuery();
-  const addLeaderHandler = async (): Promise<void> => {
+  const addLeaderHandler = async () => {
     try {
       await addLeader({
         data: {
@@ -28,6 +24,15 @@ const GameResult = ({ score, isWon, setIsPopupOpen, startGameAgain }: GameResult
       console.log(e);
     }
   };
+
+  const onClick = () => {
+    setIsPopupOpen(false);
+    startGameAgain();
+  };
+
+  useDidMount(() => {
+    addLeaderHandler();
+  });
 
   return (
     <Portal>

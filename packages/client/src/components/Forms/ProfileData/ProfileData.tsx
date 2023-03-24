@@ -1,5 +1,6 @@
-import { FormEvent } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { FormEvent } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -10,7 +11,7 @@ import { Link } from 'src/components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'components/Forms/consts/formsConsts';
 import { authApi, useGetUserQuery } from 'src/api/auth/auth';
-import { TChangeProfileRequest } from 'src/api/user/models';
+import type { TChangeProfileRequest } from 'src/api/user/models';
 import { useChangeProfileMutation } from 'src/api/user/user';
 import { getValuesFromLocalStorage, isPasswordField, saveToLocalStorage } from 'src/utils/storage';
 import { useWillUnmount } from 'src/hooks/react';

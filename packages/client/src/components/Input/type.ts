@@ -1,5 +1,5 @@
-import { HTMLInputTypeAttribute } from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import type { HTMLInputTypeAttribute } from 'react';
+import type { UseFormRegister } from 'react-hook-form';
 
 export type InputProps = {
   name: string;

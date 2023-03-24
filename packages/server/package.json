@@ -4,6 +4,7 @@
   "description": "",
   "scripts": {
     "build": "rimraf dist && tsc --p ./tsconfig.prod.json",
+    "tsc": "tsc",
     "preview": "node ./dist/index.js",
     "preview:dev": "node ./dist/index.js --NODE_ENV=development",
     "dev": "cross-env NODE_ENV=development nodemon index.ts",

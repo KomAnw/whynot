@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LeaderboardRowProps, RowProps } from 'components/LeaderboardRow/type';
+import type { LeaderboardRowProps, RowProps } from 'components/LeaderboardRow/type';
 import { ListText } from 'src/design/ListText';
 
 export const LeaderboardRow = ({ rank, nickname, score, isMine }: LeaderboardRowProps) => {
@@ -23,7 +23,6 @@ const Row = styled(ListText)<RowProps>`
   background-color: ${({ theme, isMine }) =>
     isMine ? theme.colors.core.background.tertiary : theme.colors.core.background.secondary};
   color: ${({ theme }) => theme.colors.core.text.quaternary};
-  }
 `;
 
 const UserInfo = styled.div`
