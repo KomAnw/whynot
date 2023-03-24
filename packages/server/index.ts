@@ -7,8 +7,9 @@ import { developmentConfig } from './configs/development';
 import { productionConfig } from './configs/production';
 import { state } from './state';
 import { connectPostgresDB } from './database/postgres';
+import { findFile } from './utils/findFile';
 
-dotenv.config();
+dotenv.config({ path: findFile('.env') });
 
 let vite: ViteDevServer | undefined;
 const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
@@ -26,8 +27,6 @@ const context = {
     ssrClientPath,
   },
 };
-
-// connectPostgresDB();
 
 const startServer = async () => {
   await connectPostgresDB();
