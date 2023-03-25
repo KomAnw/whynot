@@ -35,4 +35,13 @@ export const BackgroundContainer = styled('div')`
   width: 100vw;
   background: url(${backgroundImg}) no-repeat;
   background-size: cover;
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+  *::-webkit-scrollbar {
+    background-color: ${({ theme }) => theme.colors.core.divider};
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.core.text.primary};
+  }
 `;

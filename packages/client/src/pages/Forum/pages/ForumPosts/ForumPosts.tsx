@@ -64,15 +64,6 @@ const Main = styled('div')`
   overflow-y: auto;
   height: auto;
   align-content: start;
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar {
-    background-color: ${({ theme }) => theme.colors.core.divider};
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.core.text.primary};
-  }
   @media (max-width: ${breakpoints.mobileM}) {
     height: auto;
   }

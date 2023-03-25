@@ -8,7 +8,6 @@ import { demoMessage, demoPost } from 'pages/Forum/pages/FormPost/demoData';
 import MessageElement from 'pages/Forum/pages/FormPost/components/MessageElement';
 import { sortMessage } from 'pages/Forum/pages/FormPost/utils/sortMessage';
 import { IconPost } from 'pages/Forum/components/IconPost';
-import { TMessage } from 'pages/Forum/pages/types';
 import { Text } from 'src/design/Text';
 
 const { forum } = paths;
@@ -23,7 +22,7 @@ const FormPost = () => {
           <NamePost>{demoPost.title}</NamePost>
         </TitlePost>
         <Main>
-          {sortMessage(demoMessage).map((item: TMessage) => (
+          {sortMessage(demoMessage).map(item => (
             <MessageElement {...item} key={item.id} />
           ))}
         </Main>
@@ -93,15 +92,6 @@ const Main = styled('div')`
   overflow-y: auto;
   height: auto;
   align-content: start;
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-  &::-webkit-scrollbar {
-    background-color: ${({ theme }) => theme.colors.core.divider};
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.core.text.primary};
-  }
   @media (max-width: ${breakpoints.mobileM}) {
     height: auto;
   }
@@ -111,7 +101,7 @@ const Footer = styled('div')`
   display: grid;
   grid-auto-flow: row;
   grid-row-gap: 10px;
-  padding: 0 12px 10px 12px;
+  padding: 0 12px 10px;
   justify-items: center;
   border-top: 2px solid ${({ theme }) => theme.colors.core.text.primary};
 `;

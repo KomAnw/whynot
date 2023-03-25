@@ -29,7 +29,7 @@ const InputContainer = styled.div`
   font-style: normal;
 `;
 
-const ValidationText = styled(Label)`
+export const ValidationText = styled(Label)`
   margin: 0 auto;
   height: 20px;
   display: block;
@@ -37,7 +37,7 @@ const ValidationText = styled(Label)`
   color: ${({ theme }) => theme.colors.core.text.error};
 `;
 
-const LabelStyled = styled(Label)`
+export const LabelStyled = styled(Label)`
   height: 20px;
   margin: 0;
   display: block;

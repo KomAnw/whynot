@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { InputHTMLAttributes } from 'react';
-import { Text } from 'src/design/Text';
+import { useForm } from 'react-hook-form';
 import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
+import { Input } from 'components/Input';
+import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/Input';
 
 export type TInputPost = {
   inputPost: string;
@@ -13,20 +13,25 @@ const PostsInput = () => {
     mode: 'all',
   });
 
-  const submitForm: SubmitHandler<TInputPost> = async data => {
+  const submitForm = async (data: TInputPost) => {
     try {
       resetField('inputPost');
-      // eslint-disable-next-line no-console
       console.log(data);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
 
   return (
     <Form onSubmit={handleSubmit(submitForm)}>
-      <InputStyled type="text" placeholder="Создать новую тему" {...register('inputPost')} />
+      <RestyledInput
+        label=""
+        name="inputPosts"
+        placeholder="Создать новую тему"
+        register={register}
+        type="text"
+        validationRules={{}}
+      />
       <Button type="submit">
         <IconButtonSend />
       </Button>
@@ -43,22 +48,20 @@ const Form = styled('form')`
   align-items: center;
 `;
 
-const InputStyled = styled(Text).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`
-  box-sizing: border-box;
-  border-radius: 18px;
-  padding-left: 26px;
-  width: 100%;
-  height: 36px;
-  outline: none;
-  background-color: ${({ theme }) => theme.colors.control.input.backgroundSecondary};
-  border: none;
-  color: ${({ theme }) => theme.colors.control.input.color};
-  font-weight: 700;
-  font-size: 24px;
-  line-height: 27px;
-  &::placeholder {
-    color: ${({ theme }) => theme.colors.control.input.placeHolderSecondary};
-    font-weight: 400;
+const RestyledInput = styled(Input)`
+  ${InputStyled} {
+    border-radius: 18px;
+    height: 36px;
+    background-color: ${({ theme }) => theme.colors.control.input.backgroundSecondary};
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.control.input.placeHolderSecondary};
+    }
+  }
+  ${LabelStyled} {
+    display: none;
+  }
+  ${ValidationText} {
+    display: none;
   }
 `;
 
