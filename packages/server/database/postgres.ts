@@ -21,6 +21,9 @@ export const sequelize = new Sequelize(clientPostgresDB);
 export const connectPostgresDB = async () => {
   try {
     await import('../models/mockModel');
+    await import('../models/modeModel');
+    await import('../models/themeModel');
+    await import('../models/userModel');
     await sequelize.authenticate();
     await sequelize.sync();
     console.log('Successfull connection to DB!');
