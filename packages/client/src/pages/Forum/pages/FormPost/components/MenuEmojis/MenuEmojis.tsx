@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TMenuEmojis } from 'pages/Forum/pages/types';
+import type { TMenuEmojis } from 'pages/Forum/pages/types';
 import { emojiLinkIcon, listEmoji } from 'pages/Forum/pages/FormPost/utils/emojiLinkIcon';
 
 const MenuEmojis = ({ setIsOpenMenuEmojis }: TMenuEmojis) => {

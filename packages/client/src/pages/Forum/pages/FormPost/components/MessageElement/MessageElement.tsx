@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import EmojiBox from 'pages/Forum/pages/FormPost/components/MessageElement/EmojiBox';
-import { TMessage, TEmoji } from 'pages/Forum/pages/types';
+import type { TMessage, TEmoji } from 'pages/Forum/pages/types';
 import MenuEmojis from 'pages/Forum/pages/FormPost/components/MenuEmojis';
 import { useState } from 'react';
 import { IconButtonEmoji } from 'pages/Forum/components/IconButtonEmoji';

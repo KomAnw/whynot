@@ -1,4 +1,4 @@
-import { TMessage } from 'pages/Forum/pages/types';
+import type { TMessage } from 'pages/Forum/pages/types';
 
 export function sortMessage(messages: TMessage[]) {
   const arrMessageSort: TMessage[] = [];
