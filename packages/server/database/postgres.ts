@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 import type { SequelizeOptions } from 'sequelize-typescript';
 import { Sequelize } from 'sequelize-typescript';
 import { findFile } from '../utils/findFile';
@@ -21,11 +21,11 @@ export const sequelize = new Sequelize(clientPostgresDB);
 export const connectPostgresDB = async () => {
   try {
     await import('../models/mockModel');
-    await import('../models/modeModel');
-    await import('../models/themeModel');
-    await import('../models/userModel');
+    await import('../models/models');
     await sequelize.authenticate();
-    await sequelize.sync();
+
+    // Alarm! { force: true } adds a DROP TABLE IF EXISTS before trying to create the table
+    await sequelize.sync({ force: true });
     console.log('Successfull connection to DB!');
   } catch (e) {
     console.error('Connection fail:', e);
