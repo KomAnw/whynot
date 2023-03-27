@@ -7,6 +7,7 @@ import { leaderboardApi } from 'src/api/leaderboard/leaderboard';
 import modeReducer from 'pages/Game/modeSlice';
 import fullscreenReducer from 'pages/Settings/fullscreenSlice';
 import gamepadReducer from 'pages/Settings/gamepadSlice';
+import soundReducer from 'pages/Settings/soundSlice';
 
 const preloadedState = globalThis.__PRELOADED_STATE__;
 
@@ -16,6 +17,7 @@ const store = configureStore({
     mode: modeReducer,
     fullscreen: fullscreenReducer,
     gamepad: gamepadReducer,
+    sound: soundReducer,
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [oauthApi.reducerPath]: oauthApi.reducer,

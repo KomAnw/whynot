@@ -11,6 +11,7 @@ import { Text } from 'src/design/Text';
 import { changeTheme } from 'src/hoc/ThemeWrapper/themeSlice';
 import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
 import { fullScreenSwitching } from 'src/utils/fullscreenApi';
+import { soundSwitchOn } from 'pages/Settings/soundSlice';
 import { switchToGamepad } from './gamepadSlice';
 
 const { mobileM } = breakpoints;
@@ -22,6 +23,7 @@ const Settings = () => {
   const theme = useAppSelector(state => state.theme.name);
   const fullscreenSwitchOn = useAppSelector(state => state.fullscreen.switchOn);
   const gamepadSwitchOn = useAppSelector(state => state.gamepad.gamepadOn);
+  const soundOn = useAppSelector(state => state.sound.soundOn);
 
   const themeHandler = () => dispatch(changeTheme());
 
@@ -58,6 +60,10 @@ const Settings = () => {
     dispatch(switchToGamepad(!gamepadSwitchOn));
   };
 
+  const switchOnSound = () => {
+    dispatch(soundSwitchOn(!soundOn));
+  };
+
   return (
     <Wrapper>
       <SettingsComponent>
@@ -74,6 +80,10 @@ const Settings = () => {
           <Row>
             <Text>Use gamepad</Text>
             <Switch onClick={switchOnGamepad} id="gamepad" isChecked={gamepadSwitchOn} />
+          </Row>
+          <Row>
+            <Text>Sound on</Text>
+            <Switch onClick={switchOnSound} id="sound" isChecked={soundOn} />
           </Row>
           <Row>
             <Text>Change mode</Text>
