@@ -22,7 +22,7 @@ const Game = () => {
   const mode = useAppSelector(state => state.mode.sprite);
   const gamepadState = useAppSelector(state => state.gamepad.gamepadOn);
   const soundSwitchOn = useAppSelector(state => state.sound.soundOn);
-  const sound = '../../public/media/sound.mp3';
+  const soundPath = '../../public/media/sound.mp3';
 
   let player: Player;
   let platforms: Platforms;
@@ -129,9 +129,9 @@ const Game = () => {
   };
 
   const init = () => {
-    const sound: HTMLMediaElement = document.getElementById('sound') as HTMLMediaElement;
+    const soundElement: HTMLMediaElement = document.getElementById('sound') as HTMLMediaElement;
 
-    soundSwitchOn ? sound.play() : sound.pause();
+    soundSwitchOn ? soundElement.play() : soundElement.pause();
     const context = canvasContextRef.current;
 
     if (!context) {
@@ -187,7 +187,7 @@ const Game = () => {
         <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
       </GameWindow>
       <audio id="sound">
-        <source src={sound} type="audio/mp3" />
+        <source src={soundPath} type="audio/mp3" />
       </audio>
     </>
   );
