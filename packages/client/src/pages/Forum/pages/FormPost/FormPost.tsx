@@ -39,7 +39,7 @@ const FormPost = () => {
 
 export default FormPost;
 
-export const PageContainer = styled('div')`
+const PageContainer = styled('div')`
   height: 100vh;
   display: grid;
   align-items: center;
