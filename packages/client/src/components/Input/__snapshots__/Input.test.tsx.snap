@@ -2,20 +2,20 @@
 
 exports[`Input renders <Input /> correctly 1`] = `
 <div
-  className="sc-hLBbgP fSaKOA"
+  className="sc-eDvSVe jOcgQw sc-hLBbgP"
 >
   <p
-    className="sc-bcXHqe sc-gswNZR sc-jSUZER bZdROF gQyYxG vyFDV"
+    className="sc-bcXHqe sc-gswNZR sc-gKPRtg bZdROF gQyYxG feiruF"
   >
     label
   </p>
   <input
-    className="sc-bcXHqe sc-dkrFOg sc-gKPRtg bZdROF idXDLE iKNuxn"
+    className="sc-bcXHqe sc-dkrFOg sc-iBYQkv bZdROF idXDLE haJkzM"
     placeholder="placeholder"
     type="input"
   />
   <p
-    className="sc-bcXHqe sc-gswNZR sc-eDvSVe bZdROF gQyYxG iGQJyy"
+    className="sc-bcXHqe sc-gswNZR sc-jSUZER bZdROF gQyYxG gurojQ"
   />
 </div>
 `;
