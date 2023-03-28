@@ -7,15 +7,17 @@ import { breakpoints } from 'src/components/App/constants';
 
 const { mobileM } = breakpoints;
 
-export const Input = ({ name, type, label, errorMessage, placeholder, validationRules, register }: InputProps) => {
-  return (
-    <InputContainer>
-      <LabelStyled>{label}</LabelStyled>
-      <InputStyled type={type} placeholder={placeholder} {...register(name, { ...validationRules })} />
-      <ValidationText>{errorMessage}</ValidationText>
-    </InputContainer>
-  );
-};
+export const Input = styled(
+  ({ name, type, label, errorMessage, placeholder, validationRules, register, className }: InputProps) => {
+    return (
+      <InputContainer className={className}>
+        <LabelStyled>{label}</LabelStyled>
+        <InputStyled type={type} placeholder={placeholder} {...register(name, { ...validationRules })} />
+        <ValidationText>{errorMessage}</ValidationText>
+      </InputContainer>
+    );
+  }
+)``;
 
 const InputContainer = styled.div`
   display: flex;
@@ -27,7 +29,7 @@ const InputContainer = styled.div`
   font-style: normal;
 `;
 
-const ValidationText = styled(Label)`
+export const ValidationText = styled(Label)`
   margin: 0 auto;
   height: 20px;
   display: block;
@@ -35,7 +37,7 @@ const ValidationText = styled(Label)`
   color: ${({ theme }) => theme.colors.core.text.error};
 `;
 
-const LabelStyled = styled(Label)`
+export const LabelStyled = styled(Label)`
   height: 20px;
   margin: 0;
   display: block;
@@ -43,7 +45,7 @@ const LabelStyled = styled(Label)`
   color: ${({ theme }) => theme.colors.control.input.label};
 `;
 
-const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`
+export const InputStyled = styled(LinkText).attrs({ as: 'input' })<InputHTMLAttributes<HTMLInputElement>>`
   box-sizing: border-box;
   border-radius: 5px;
   padding-left: 26px;
