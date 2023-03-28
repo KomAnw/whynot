@@ -20,7 +20,6 @@ export const sequelize = new Sequelize(clientPostgresDB);
 
 export const connectPostgresDB = async () => {
   try {
-    await import('../models/mockModel');
     await import('../models/models');
     await sequelize.authenticate();
 
