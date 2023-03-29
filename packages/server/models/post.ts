@@ -4,12 +4,23 @@ import type { ModelAttributes } from 'sequelize/types';
 import { sequelize } from '../database/postgres';
 
 type TPost = {
-  name: string;
+  text: string;
+  author_id: number;
+  date: Date;
 };
 
-const PostModel: ModelAttributes<Model, TPost> = {
-  name: {
-    type: DataTypes.STRING,
+export const PostModel: ModelAttributes<Model, TPost> = {
+  text: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  author_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  date: {
+    type: DataTypes.DATE,
+    allowNull: false,
   },
 };
 
