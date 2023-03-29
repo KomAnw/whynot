@@ -11,6 +11,7 @@ import { Player } from './controllers/Player/Player';
 import { Gamepad, GamepadIndex } from './controllers/Gamepad/Gamepad';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
+import { Spring } from "pages/Game/controllers/Spring/Spring";
 
 const Game = () => {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
@@ -28,6 +29,7 @@ const Game = () => {
   let platforms: Platforms;
   let ground: Ground;
   let gamepad: Gamepad;
+  let spring: Spring;
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     const { key } = e;
@@ -93,6 +95,9 @@ const Game = () => {
     if (!player.isDead) {
       canvasClearFrame();
 
+      // todo: доделать
+      player.calculateSpringActions();
+
       player.calculatePlayerActions();
 
       platforms.draw();
@@ -148,7 +153,9 @@ const Game = () => {
 
     ground = new Ground(context, sizes, sprite);
 
-    player = new Player(context, sizes, platforms, ground, sprite);
+    spring = new Spring(context, sprite);
+
+    player = new Player(context, sizes, platforms, ground, sprite, spring);
 
     gamepad = new Gamepad(gamepadState, player);
 

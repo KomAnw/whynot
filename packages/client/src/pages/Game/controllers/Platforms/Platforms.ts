@@ -17,6 +17,10 @@ class Platform {
   clippingWidth = 105;
   clippingHeight = 31;
 
+  // todo: добавить другие типы платформ (2,3,4)
+  types = [1];
+  type = this.types[Math.floor(Math.random() * this.types.length)];
+
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number, sprite: HTMLImageElement) {
     this.ctx = context;
     this.xPosition = Math.random() * (sizes.width - this.width);
