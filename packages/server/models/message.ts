@@ -1,3 +1,4 @@
+/*
 import { DataTypes, Deferrable } from 'sequelize';
 import { sequelize } from '../database/postgres';
 import { Post } from './post';
@@ -30,3 +31,4 @@ export const Message = sequelize.define('Message', {
     allowNull: false,
   },
 });
+*/

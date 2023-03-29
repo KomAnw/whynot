@@ -1,23 +1,16 @@
 import { DataTypes } from 'sequelize';
+import { Column, Model } from 'sequelize-typescript';
+import { Table } from 'sequelize-typescript';
 import { sequelize } from '../database/postgres';
+interface PersonAttributes {
+  name: string;
+}
 
-export const Post = sequelize.define('Post', {
-  id: {
-    type: DataTypes.NUMBER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  text: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  author_id: {
-    type: DataTypes.NUMBER,
-    allowNull: false,
-  },
-  data: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-});
+
+@Table
+export class Person extends Model<PersonAttributes, PersonAttributes> {
+  @Column
+  declare name: string;
+}
+
+Person.init({ name: { type: DataTypes.STRING } }, {tableName: 'person', sequelize})
