@@ -10,4 +10,5 @@ connectPostgresDB();
 export const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
 export const isProductionMode = process.argv.includes('--NODE_ENV=production');
 export const PORT = Number(process.env.SERVER_PORT) || 3001;
+
 export default app;

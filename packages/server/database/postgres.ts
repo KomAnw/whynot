@@ -1,5 +1,4 @@
 import * as dotenv from 'dotenv';
-import type { SequelizeOptions } from 'sequelize-typescript';
 import { Sequelize } from 'sequelize';
 import { findFile } from '../utils/findFile';
 
@@ -7,7 +6,18 @@ dotenv.config({ path: findFile('.env') });
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, HOST } = process.env;
 
-const clientPostgresDB: SequelizeOptions = {
+type Dialect = 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle';
+
+type TSequelizeOptions = {
+  database?: string;
+  username?: string;
+  password?: string;
+  host?: string;
+  port?: number;
+  dialect?: Dialect;
+};
+
+const clientPostgresDB: TSequelizeOptions = {
   database: POSTGRES_DB,
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
@@ -17,12 +27,10 @@ const clientPostgresDB: SequelizeOptions = {
 };
 
 export const sequelize = new Sequelize(clientPostgresDB);
-
 export const connectPostgresDB = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
-    await sequelize.models.Person.create({name: 'Artem' });
     console.log('Successfully connection to DB!');
   } catch (e) {
     console.error('Connection fail:', e);
