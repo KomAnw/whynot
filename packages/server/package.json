@@ -7,6 +7,7 @@
     "tsc": "tsc",
     "preview": "node ./dist/src/server.js --NODE_ENV=production",
     "preview:dev": "node ./dist/src/server.js --NODE_ENV=development",
+    "my": "yarn run build && yarn run preview:dev",
     "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
@@ -14,11 +15,13 @@
     "test": "jest . --passWithNoTests"
   },
   "dependencies": {
+    "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "16.0.2",
     "eslint-config-prettier": "8.5.0",
     "express": "4.18.1",
+    "http-proxy-middleware": "2.0.6",
     "pg": "8.8.0",
     "prettier": "2.7.1"
   },

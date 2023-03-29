@@ -1,12 +1,12 @@
 import { Link } from 'src/components/Link';
 import { useState } from 'react';
 import { useGetUserQuery } from 'src/api/auth/auth';
-import { apiSettings } from 'src/api';
+import { yandexApiSettings } from 'src/api';
 import { Avatar, Data, DataLabel, DataRow, DataValue, PageStyle, TextH1 } from './styles';
 import { dataRowData, links } from './constants';
 import ProfileAvatar from '../ProfileAvatar';
 
-const baseUrlAvatar = `${apiSettings.baseUrl}/resources`;
+const baseUrlAvatar = `${yandexApiSettings.baseUrl}/resources`;
 const defaultAvatar = '/images/common/defaultAvatar.svg';
 
 const Profile = () => {

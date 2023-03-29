@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
-import { apiSettings, getYandexURL } from 'src/api';
+import { yandexApiSettings } from 'src/api';
+import { getYandexURL } from 'src/api/common/utils/apiUtilts';
 import type { TOAuthData, TServiceId } from './models';
 
 const ROOT_OAUTH_URL = 'oauth';
@@ -25,7 +26,7 @@ export const redirectToOAuthYandex = (serviceId: string) => {
 export const oauthApi = createApi({
   reducerPath: 'oauth',
   baseQuery: fetchBaseQuery({
-    ...apiSettings,
+    ...yandexApiSettings,
   }),
   endpoints: build => ({
     getServiceId: build.query<TServiceId, void>({
