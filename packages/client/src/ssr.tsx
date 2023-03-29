@@ -11,6 +11,7 @@ import { GlobalStyles } from './components/App/GlobalStyles';
 
 export function render(url: string) {
   const sheet = new ServerStyleSheet();
+
   const AppNode = () => (
     <>
       <Normalize />

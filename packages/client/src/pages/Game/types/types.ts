@@ -11,4 +11,8 @@ export type TSprite = {
   name: string;
   sprite: string;
   background: string;
+  gameOverImage: {
+    win: string;
+    lose: string;
+  };
 };
