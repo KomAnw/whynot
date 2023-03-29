@@ -1,10 +1,9 @@
 import { Link } from 'src/components/Link';
-import Portal from 'components/Portal';
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useGetUserQuery } from 'src/api/auth/auth';
 import { apiSettings } from 'src/api';
 import { Avatar, Data, DataLabel, DataRow, DataValue, PageStyle, TextH1 } from './styles';
-import { dataRowData, links, ProfilePopupContext } from './constants';
+import { dataRowData, links } from './constants';
 import ProfileAvatar from '../ProfileAvatar';
 
 const baseUrlAvatar = `${apiSettings.baseUrl}/resources`;
@@ -12,16 +11,14 @@ const defaultAvatar = '/images/common/defaultAvatar.svg';
 
 const Profile = () => {
   const { data: userData } = useGetUserQuery();
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const userAvatar = userData?.avatar && baseUrlAvatar + userData.avatar;
-  const openPopup = useCallback(() => setIsOpenPopup(!isOpenPopup), [isOpenPopup]);
-  const contextValue = useMemo(() => ({ changeState: openPopup }), [openPopup]);
 
   return (
     <>
       <PageStyle>
         <TextH1>Profile</TextH1>
-        <Avatar src={userAvatar || defaultAvatar} onClick={() => openPopup()} />
+        <Avatar src={userAvatar || defaultAvatar} onClick={() => setIsPopupOpen(true)} />
         <Data>
           {dataRowData.map(({ name, label }) => {
             const value = (userData && userData[name]) || '';
@@ -42,13 +39,7 @@ const Profile = () => {
           </Wrapper>
         ))}
       </PageStyle>
-      {isOpenPopup && (
-        <Portal>
-          <ProfilePopupContext.Provider value={contextValue}>
-            <ProfileAvatar />
-          </ProfilePopupContext.Provider>
-        </Portal>
-      )}
+      {isPopupOpen && <ProfileAvatar setIsPopupOpen={setIsPopupOpen} />}
     </>
   );
 };
