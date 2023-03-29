@@ -1,13 +1,13 @@
-import { DataTypes } from 'sequelize';
-import { sequelize } from '../database/postgres';
+// import { DataType, Model } from 'sequelize-typescript';
+// import { sequelize } from '../database/postgres';
 
-export const User = sequelize.define(
-  'user',
-  {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    user_id: { type: DataTypes.INTEGER, unique: true },
-    theme: { type: DataTypes.STRING, defaultValue: 'default' },
-    mode: { type: DataTypes.STRING, defaultValue: 'Doodle' },
-  },
-  { timestamps: false }
-);
+// export class Theme extends Model {}
+
+// Theme.init(
+//   {
+//     user_id: { type: DataType.INTEGER, allowNull: false, unique: true },
+//     theme: { type: DataType.ENUM('default', 'other'), defaultValue: 'default' },
+//     mode: { type: DataType.ENUM('Doodle', 'Mario', 'Homer'), defaultValue: 'Doodle' },
+//   },
+//   { sequelize, timestamps: false, modelName: 'theme' }
+// );
