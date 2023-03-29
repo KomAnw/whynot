@@ -97,8 +97,6 @@ export class Player {
       }
     });
 
-    // todo: доделать
-
     // Springs
     if (
       this.currentYPosition > 0 &&
