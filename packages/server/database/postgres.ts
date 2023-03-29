@@ -5,6 +5,10 @@ import type { Dialect } from 'sequelize';
 import { DataTypes, Model } from 'sequelize';
 import { findFile } from '../utils/findFile';
 
+const ts = [AutoIncrement, Column, DataType, PrimaryKey, Table];
+
+console.log(ts);
+
 dotenv.config({ path: findFile('.env') });
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, HOST, DIALECT } = process.env;
