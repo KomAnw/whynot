@@ -1,13 +1,13 @@
 import * as dotenv from 'dotenv';
-import type { SequelizeOptions } from 'sequelize-typescript';
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize';
+import type { Options } from 'sequelize';
 import { findFile } from '../utils/findFile';
 
 dotenv.config({ path: findFile('.env') });
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, HOST } = process.env;
 
-const clientPostgresDB: SequelizeOptions = {
+const clientPostgresDB: Options = {
   database: POSTGRES_DB,
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
@@ -17,12 +17,11 @@ const clientPostgresDB: SequelizeOptions = {
 };
 
 export const sequelize = new Sequelize(clientPostgresDB);
-
 export const connectPostgresDB = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync();
-    console.log('Successfull connection to DB!');
+    await sequelize.sync({ force: true });
+    console.log('Successfully connection to DB!');
   } catch (e) {
     console.error('Connection fail:', e);
   }
