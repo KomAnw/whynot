@@ -11,7 +11,7 @@ import { Player } from './controllers/Player/Player';
 import { Gamepad, GamepadIndex } from './controllers/Gamepad/Gamepad';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
-import { Spring } from "pages/Game/controllers/Spring/Spring";
+import { Spring } from 'pages/Game/controllers/Spring/Spring';
 
 const Game = () => {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
@@ -95,10 +95,13 @@ const Game = () => {
     if (!player.isDead) {
       canvasClearFrame();
 
-      // todo: доделать
+      platforms.calculateHorizontalMovement();
+
       player.calculateSpringActions();
 
       player.calculatePlayerActions();
+
+      setStateScore(Score.count);
 
       platforms.draw();
 
@@ -107,8 +110,6 @@ const Game = () => {
       ground.draw();
 
       player.playerMovement();
-
-      setStateScore(Score.count);
 
       gamepad.control();
 
