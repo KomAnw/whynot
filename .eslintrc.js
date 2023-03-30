@@ -166,6 +166,7 @@ module.exports = {
         bracketSameLine: true,
       },
     ],
+    'jsx-a11y/media-has-caption': 0,
   },
   settings: {
     'import/resolver': {

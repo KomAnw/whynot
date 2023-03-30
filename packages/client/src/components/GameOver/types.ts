@@ -4,4 +4,6 @@ export type GameOverProps = {
   onClick?: () => void;
 };
 
-export type ImageProps = Pick<GameOverProps, 'isWon'>;
+export type ImageProps = {
+  img: string;
+};
