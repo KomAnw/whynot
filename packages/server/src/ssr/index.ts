@@ -22,6 +22,7 @@ export const startSSR = async () => {
 
   app.use('*', async ({ originalUrl }, res, next) => {
     globalThis.__PRELOADED_STATE__ = state;
+
     try {
       const { appHtml, css, template } = isDevelopmentMode
         ? await developmentConfig(originalUrl, vite!)

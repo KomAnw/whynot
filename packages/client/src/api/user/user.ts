@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { apiSettings, getYandexURL } from 'src/api';
+import { yandexApiSettings } from 'src/api';
 import type { TChangeProfileRequest, TPasswordRequest } from 'src/api/user/models';
+import { getYandexURL } from 'src/api/common/utils/apiUtilts';
 import type { TUser } from '../auth/models';
 
 const ROOT_USER_URL = 'user';
@@ -13,7 +14,7 @@ export const USER_ENDPOINTS = {
 export const userApi = createApi({
   reducerPath: 'user',
   baseQuery: fetchBaseQuery({
-    ...apiSettings,
+    ...yandexApiSettings,
   }),
   endpoints: build => ({
     changeProfile: build.mutation<TUser, TChangeProfileRequest>({
