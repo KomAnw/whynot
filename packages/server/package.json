@@ -7,7 +7,6 @@
     "tsc": "tsc",
     "preview": "node ./dist/src/server.js --NODE_ENV=production",
     "preview:dev": "node ./dist/src/server.js --NODE_ENV=development",
-    "my": "yarn run build && yarn run preview:dev",
     "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
