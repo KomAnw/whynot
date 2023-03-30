@@ -1,47 +1,51 @@
-import type { Model } from 'sequelize';
-import { DataTypes, Deferrable } from 'sequelize';
-import type { ModelAttributes } from 'sequelize/types';
+import { Model, DataTypes, Deferrable } from 'sequelize';
+import type { InferAttributes, InferCreationAttributes } from 'sequelize';
 import { sequelize } from '../database/postgres';
-import { Post } from './post';
+import { PostModel } from './post';
 
-type TMessage = {
-  text: string;
-  author_id: number;
-  post_id: number;
-  date: Date;
-  main_message_id: number;
-  emojis: number[][];
-};
+class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Message, { omit: 'id' }>> {
+  declare id?: number;
+  declare text: string;
+  declare authorId: number;
+  declare postId: number;
+  declare date: Date;
+  declare mainMessageId: number | null;
+  declare emojis: number[][] | null;
+}
 
-const MessageModel: ModelAttributes<Model, TMessage> = {
-  text: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-  author_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  post_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: Post,
-      key: 'id',
-      deferrable: Deferrable.NOT(),
+export const MessageModel = Message.init(
+  {
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    authorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    postId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: PostModel,
+        key: 'id',
+        deferrable: Deferrable.NOT(),
+      },
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    mainMessageId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    emojis: {
+      type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.INTEGER)),
+      allowNull: true,
     },
   },
-  date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-  main_message_id: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  emojis: {
-    type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.INTEGER)),
-    allowNull: true,
-  },
-};
-
-export const Message = sequelize.define('Message', MessageModel, { timestamps: false });
+  {
+    sequelize,
+    tableName: 'Messages',
+  }
+);

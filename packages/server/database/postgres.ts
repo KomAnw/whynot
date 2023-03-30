@@ -1,23 +1,13 @@
 import * as dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
+import type { Options } from 'sequelize';
 import { findFile } from '../utils/findFile';
 
 dotenv.config({ path: findFile('.env') });
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, HOST } = process.env;
 
-type Dialect = 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle';
-
-type TSequelizeOptions = {
-  database?: string;
-  username?: string;
-  password?: string;
-  host?: string;
-  port?: number;
-  dialect?: Dialect;
-};
-
-const clientPostgresDB: TSequelizeOptions = {
+const clientPostgresDB: Options = {
   database: POSTGRES_DB,
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,

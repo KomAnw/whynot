@@ -1,27 +1,31 @@
-import type { Model } from 'sequelize';
-import { DataTypes } from 'sequelize';
-import type { ModelAttributes } from 'sequelize/types';
+import { Model, DataTypes } from 'sequelize';
+import type { InferAttributes, InferCreationAttributes } from 'sequelize';
 import { sequelize } from '../database/postgres';
 
-type TPost = {
-  text: string;
-  author_id: number;
-  date: Date;
-};
+class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post, { omit: 'id' }>> {
+  declare id?: number;
+  declare text: string;
+  declare authorId: number;
+  declare date: Date;
+}
 
-export const PostModel: ModelAttributes<Model, TPost> = {
-  text: {
-    type: DataTypes.TEXT,
-    allowNull: false,
+export const PostModel = Post.init(
+  {
+    text: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    authorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
   },
-  author_id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-  },
-  date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
-};
-
-export const Post = sequelize.define('Post', PostModel, { timestamps: false });
+  {
+    sequelize,
+    tableName: 'Posts',
+  }
+);
