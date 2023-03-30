@@ -1,17 +1,18 @@
-/*
- * import { DataType, Model } from 'sequelize-typescript';
- * import { sequelize } from '../database/postgres';
- */
+import type { Model } from 'sequelize';
+import { DataTypes } from 'sequelize';
+import type { ModelAttributes } from 'sequelize/types';
+import { sequelize } from '../database/postgres';
 
-// export class Theme extends Model {}
+type TTheme = {
+  user_id: number;
+  theme: string;
+  mode: string;
+};
 
-/*
- * Theme.init(
- *   {
- *     user_id: { type: DataType.INTEGER, allowNull: false, unique: true },
- *     theme: { type: DataType.ENUM('default', 'other'), defaultValue: 'default' },
- *     mode: { type: DataType.ENUM('Doodle', 'Mario', 'Homer'), defaultValue: 'Doodle' },
- *   },
- *   { sequelize, timestamps: false, modelName: 'theme' }
- * );
- */
+export const ThemeModel: ModelAttributes<Model, TTheme> = {
+  user_id: { type: DataTypes.INTEGER, unique: true },
+  theme: { type: DataTypes.ENUM('default', 'other'), defaultValue: 'default' },
+  mode: { type: DataTypes.ENUM('Doodle', 'Homer, "Mario'), defaultValue: 'Doodle' },
+};
+
+export const Theme = sequelize.define('theme', ThemeModel, { timestamps: false });

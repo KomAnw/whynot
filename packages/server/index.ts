@@ -8,6 +8,7 @@ import { productionConfig } from './configs/production';
 import { state } from './state';
 import { connectPostgresDB } from './database/postgres';
 import { findFile } from './utils/findFile';
+import { Theme } from './models/models';
 
 dotenv.config({ path: findFile('.env') });
 
@@ -30,6 +31,7 @@ const context = {
 
 const startServer = async () => {
   await connectPostgresDB();
+  await Theme.create({ user_id: 2 });
   const app = express();
   const port = Number(process.env.SERVER_PORT) || 3001;
 
