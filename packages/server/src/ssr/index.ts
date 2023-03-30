@@ -20,17 +20,8 @@ export const startSSR = async () => {
     app.use(vite!.middlewares);
   }
 
-  app.use('*', async ({ originalUrl, cookies }, res, next) => {
-    // Надо обсудить
-    const getUser = await fetch('http://localhost:3001/api/v2/auth/user', {
-      credentials: 'include',
-      headers: {
-        Cookie: `authCookie=${cookies.authCookie}; uuid=${cookies.uuid}`,
-      },
-    });
-    const user = await getUser.json();
-
-    globalThis.__PRELOADED_STATE__ = user?.id ? { ...state } : state;
+  app.use('*', async ({ originalUrl }, res, next) => {
+    globalThis.__PRELOADED_STATE__ = state;
 
     try {
       const { appHtml, css, template } = isDevelopmentMode
