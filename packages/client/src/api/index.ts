@@ -1,14 +1,15 @@
 import type { FetchBaseQueryArgs } from '@reduxjs/toolkit/dist/query/fetchBaseQuery';
 import 'src/utils/globalPolyfill';
 import _fetch from 'isomorphic-fetch';
+import { YANDEX_API_URL } from 'src/api/common/consts/apiConsts';
 
-const getBaseURL = (baseURL: string) => new URL('', baseURL).href;
-
-export const getYandexURL = (url: string) => new URL(url, getBaseURL('https://ya-praktikum.tech/api/v2/')).href;
-
-export const apiSettings: FetchBaseQueryArgs = {
-  baseUrl: getBaseURL('https://ya-praktikum.tech/api/v2'),
+const apiSettings: FetchBaseQueryArgs = {
   fetchFn: _fetch,
   credentials: 'include',
   timeout: 5000,
+};
+
+export const yandexApiSettings: FetchBaseQueryArgs = {
+  ...apiSettings,
+  baseUrl: YANDEX_API_URL,
 };

@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv'
+import * as dotenv from 'dotenv';
 import type { SequelizeOptions } from 'sequelize-typescript';
 import { Sequelize } from 'sequelize-typescript';
 import { findFile } from '../utils/findFile';
