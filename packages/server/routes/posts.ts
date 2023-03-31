@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
-import { postPost } from '../controllers/posts';
+import { getPosts, postPost } from '../controllers/posts';
 
 export const router = Router();
 
@@ -15,3 +15,5 @@ router.post(
   }),
   postPost
 );
+
+router.get('/', getPosts);

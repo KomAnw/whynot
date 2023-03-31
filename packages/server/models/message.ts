@@ -46,6 +46,7 @@ export const MessageModel = Message.init(
   },
   {
     sequelize,
+    timestamps: false,
     tableName: 'Messages',
   }
 );
