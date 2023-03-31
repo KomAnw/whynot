@@ -4,14 +4,14 @@ import { sequelize } from '../database/postgres';
 
 export class Theme extends Model<InferAttributes<Theme>, InferCreationAttributes<Theme, { omit: 'id' }>> {
   declare id?: number;
-  declare user_id: number;
+  declare userId: number;
   declare theme: 'default' | 'other';
   declare mode: 'Doodle' | 'Homer' | 'Mario';
 }
 
 export const ThemeModel = Theme.init(
   {
-    user_id: { type: DataTypes.INTEGER, unique: true },
+    userId: { type: DataTypes.INTEGER, unique: true },
     theme: { type: DataTypes.ENUM('default', 'other'), defaultValue: 'default' },
     mode: { type: DataTypes.ENUM('Doodle', 'Homer', 'Mario'), defaultValue: 'Doodle' },
   },

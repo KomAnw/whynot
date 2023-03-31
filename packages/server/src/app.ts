@@ -3,6 +3,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { connectPostgresDB } from '../database/postgres';
+import router from '../routes/themeRouter';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(
 );
 
 connectPostgresDB();
+app.use('/api', router);
 
 export const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
 export const isProductionMode = process.argv.includes('--NODE_ENV=production');
