@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { apiSettings, getYandexURL } from 'src/api';
+import { yandexApiSettings } from 'src/api';
 import type { LeaderboardNewLeaderRequest, LeaderboardRequest, LeadersResponse } from 'src/api/leaderboard/models';
+import { getYandexURL } from 'src/api/common/utils/apiUtilts';
 
 const ROOT_LEADERBOARD_URL = 'leaderboard';
 
@@ -14,7 +15,7 @@ export const LEADERBOARD_ENDPOINTS = {
 export const leaderboardApi = createApi({
   reducerPath: 'leaderboard',
   baseQuery: fetchBaseQuery({
-    ...apiSettings,
+    ...yandexApiSettings,
   }),
   endpoints: build => ({
     add: build.mutation<string, LeaderboardNewLeaderRequest>({

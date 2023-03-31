@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
-import type { Options } from 'sequelize';
 import { Sequelize } from 'sequelize';
+import type { Options } from 'sequelize';
 import { findFile } from '../utils/findFile';
 
 dotenv.config({ path: findFile('.env') });
@@ -17,12 +17,11 @@ const clientPostgresDB: Options = {
 };
 
 export const sequelize = new Sequelize(clientPostgresDB);
-
 export const connectPostgresDB = async () => {
   try {
     await sequelize.authenticate();
     await sequelize.sync({ force: true });
-    console.log('Successfull connection to DB!');
+    console.log('Successfully connection to DB!');
   } catch (e) {
     console.error('Connection fail:', e);
   }
