@@ -5,9 +5,9 @@ const authMiddleware = ({ cookies }: Request, res: Response, next: NextFunction)
 
   if (!authCookie || !uuid) {
     res.status(401).json({ message: 'Unauthorized user' });
+  } else {
+    next();
   }
-
-  next();
 };
 
 export default authMiddleware;
