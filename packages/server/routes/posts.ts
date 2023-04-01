@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
-import { getPosts, postPost } from '../controllers/posts';
+import { getPosts, postPost, getPostById } from '../controllers/posts';
 
 export const router = Router();
 
@@ -14,6 +14,16 @@ router.post(
     }),
   }),
   postPost
+);
+
+router.get(
+  '/:id',
+  celebrate({
+    params: Joi.object().keys({
+      id: Joi.string().required(),
+    }),
+  }),
+  getPostById
 );
 
 router.get('/', getPosts);

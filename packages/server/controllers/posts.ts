@@ -23,3 +23,15 @@ export const getPosts = (_req: Request, res: Response, next: NextFunction) => {
     return next(e);
   }
 };
+
+export const getPostById = (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+
+    PostModel.findOne({ where: { id: Number(id) } }).then(data => {
+      res.status(201).send(data);
+    });
+  } catch (e) {
+    return next(e);
+  }
+};
