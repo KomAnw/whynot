@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import { cors, cookieParser, proxy, helmet, rateLimit } from '../middlewares';
 import { findFile } from '../utils/findFile';
+import { connectPostgresDB } from '../database/postgres';
 
 const middlewares = [cors, cookieParser, helmet, rateLimit];
 
@@ -15,7 +16,7 @@ app.use(middlewares);
 
 app.use('/api/v2/*', proxy);
 
-// connectPostgresDB();
+connectPostgresDB();
 
 export const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
 export const isProductionMode = process.argv.includes('--NODE_ENV=production');
