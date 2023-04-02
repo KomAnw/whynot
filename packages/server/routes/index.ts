@@ -1,8 +1,6 @@
 import { Router } from 'express';
-import themeRouter from './themeRouter';
+import { routerTheme } from './theme';
 
-const router = new (Router as any)();
+export const routerApi = Router();
 
-router.use('/theme', themeRouter);
-
-export default router;
+routerApi.use('/theme', routerTheme);
