@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { routerMessage } from './messages';
-import errorBadRequest from '../middlewares/error';
+import notFoundMiddleware from '../middlewares/notFoundMiddleware';
 
 export const routerApi = Router();
 
 routerApi.use('/messages', routerMessage);
 
-routerApi.use('/', errorBadRequest);
+routerApi.use('/', notFoundMiddleware);

@@ -15,8 +15,8 @@ export const getMessages = async (req: IRequestGetAllMessageByIdPost, res: Respo
   const data = await MessageModel.findAll({ where: { postId: Number(postId) }, raw: true });
 
   if (data && data.length) {
-    res.status(201).send(sortMessage(data));
+    res.status(200).send(sortMessage(data));
   } else {
-    res.status(404).json({ message: 'Bad Request' });
+    res.status(404).json({ message: 'Not Found' });
   }
 };
