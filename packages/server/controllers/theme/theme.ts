@@ -7,7 +7,7 @@ export const postTheme = async (req: IRequestPostTheme, res: Response) => {
 
   const data = await ThemeModel.create({ userId, theme, mode });
 
-  res.status(201).send(data.dataValues);
+  res.status(200).send(data.dataValues);
 };
 
 export const getTheme = async (req: IRequestGetTheme, res: Response) => {
@@ -16,8 +16,8 @@ export const getTheme = async (req: IRequestGetTheme, res: Response) => {
   const data = await ThemeModel.findOne({ where: { userId: Number(id) } });
 
   if (data) {
-    res.status(201).send(data);
+    res.status(200).send(data);
   } else {
-    res.status(404).json({ message: 'Bad Request' });
+    res.status(404).json({ message: 'Not Found' });
   }
 };
