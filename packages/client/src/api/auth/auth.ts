@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { apiSettings, getYandexURL } from 'src/api';
+import { yandexApiSettings } from 'src/api';
 import type { TSignInRequest, TSignUpResponse, TSignUpRequest, TUser } from 'src/api/auth/models';
+import { getYandexURL } from 'src/api/common/utils/apiUtilts';
 
 const ROOT_AUTH_URL = 'auth';
 
@@ -13,7 +14,7 @@ export const AUTH_ENDPOINTS = {
 export const authApi = createApi({
   reducerPath: 'auth',
   baseQuery: fetchBaseQuery({
-    ...apiSettings,
+    ...yandexApiSettings,
   }),
   tagTypes: ['User'],
   endpoints: build => ({
