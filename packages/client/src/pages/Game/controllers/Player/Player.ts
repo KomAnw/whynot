@@ -97,7 +97,9 @@ export class Player {
       }
     });
 
-    // Springs
+    /**
+     * Springs
+     */
     if (
       this.currentYPosition > 0 &&
       this.spring.state === 0 &&
@@ -213,7 +215,6 @@ export class Player {
   calculateSpringActions() {
     const p = this.platforms.platformList[0];
 
-    // todo: проверить для других типов
     if (p.type === 1 || p.type === 2) {
       this.spring.xPosition = p.xPosition + p.width / 2 - this.spring.width / 2;
       this.spring.yPosition = p.yPosition - p.height - 10;
