@@ -7,13 +7,13 @@ export const postPost = async (req: IRequestPostPost, res: Response) => {
 
   const data = await PostModel.create({ text, authorId, date });
 
-  res.status(201).send(data.dataValues);
+  res.status(200).send(data.dataValues);
 };
 
 export const getPosts = async (_req: Request, res: Response) => {
   const data = await PostModel.findAll();
 
-  res.status(201).send(data);
+  res.status(200).send(data);
 };
 
 export const getPostById = async (req: IRequestGetPostById, res: Response) => {
@@ -22,8 +22,8 @@ export const getPostById = async (req: IRequestGetPostById, res: Response) => {
   const data = await PostModel.findOne({ where: { id: Number(id) } });
 
   if (data) {
-    res.status(201).send(data);
+    res.status(200).send(data);
   } else {
-    res.status(404).json({ message: 'Bad Request' });
+    res.status(404).json({ message: 'Not Found' });
   }
 };

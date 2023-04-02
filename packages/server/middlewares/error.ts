@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 
-const errorBadRequest = (_req: Request, res: Response) => {
-  res.status(404).json({ message: 'Bad Request' });
+const notFoundMiddleware = (_req: Request, res: Response) => {
+  res.status(404).json({ message: 'Not Found' });
 };
 
-export default errorBadRequest;
+export default notFoundMiddleware;
