@@ -85,7 +85,9 @@ export class Player {
    * Registration jumps out of platforms.
    */
   collides() {
-    // Platforms
+    /**
+     * Platforms
+     */
     this.platforms.platformList.forEach(p => {
       if (
         this.currentYPosition > 0 &&
@@ -95,19 +97,21 @@ export class Player {
         this.yPosition + this.height > p.yPosition &&
         this.yPosition + this.height < p.yPosition + p.height
       ) {
-        if (p.type === 3 && p.flag === 0) {
-          p.flag = 1;
+        if (p.type === 3 && !p.isBroken) {
+          p.isBroken = true;
           this.platforms.jumpCount = 0;
         } else if (p.type === 4 && p.state === 0) {
           this.jump();
           p.state = 1;
-        } else if (p.flag != 1) {
+        } else if (!p.isBroken) {
           this.jump();
         }
       }
     });
 
-    // Springs
+    /**
+     * Springs
+     */
     if (
       this.currentYPosition > 0 &&
       this.spring.state === 0 &&

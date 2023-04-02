@@ -1,7 +1,14 @@
 import type { TSizes } from 'pages/Game/types/types';
 import { Score } from 'pages/Game/controllers/Score/Score';
 
-export class NeighboringBrokenPlatforms {
+const Types = {
+  Normal: 1,
+  Moving: 2,
+  Breakable: 3,
+  Vanishable: 4,
+};
+
+class NeighboringBrokenPlatforms {
   static count = 0;
   static updateCount() {
     NeighboringBrokenPlatforms.count++;
@@ -21,7 +28,7 @@ class Platform {
   currentXPosition: number;
   sprite: HTMLImageElement;
 
-  flag = 0;
+  isBroken = false;
   state = 0;
 
   /**
@@ -55,12 +62,62 @@ class Platform {
      * should be shown at what score
      */
 
-    if (score >= 1000) this.types = [2, 3, 3, 3, 4, 4, 4, 4];
-    else if (score >= 500 && score < 1000) this.types = [1, 1, 1, 2, 2, 3, 3, 4, 4, 4, 4];
-    else if (score >= 200 && score < 500) this.types = [1, 1, 1, 2, 2, 2, 2, 3];
-    else if (score >= 100 && score < 200) this.types = [1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3];
-    else if (score >= 50 && score < 100) this.types = [1, 1, 1, 1, 2, 2];
-    else this.types = [1];
+    if (score >= 1000) {
+      this.types = [
+        Types.Moving,
+        Types.Breakable,
+        Types.Breakable,
+        Types.Breakable,
+        Types.Vanishable,
+        Types.Vanishable,
+        Types.Vanishable,
+        Types.Vanishable,
+      ];
+    } else if (score >= 500 && score < 1000) {
+      this.types = [
+        Types.Normal,
+        Types.Normal,
+        Types.Normal,
+        Types.Moving,
+        Types.Moving,
+        Types.Breakable,
+        Types.Breakable,
+        Types.Vanishable,
+      ];
+    } else if (score >= 200 && score < 500) {
+      this.types = [
+        Types.Normal,
+        Types.Normal,
+        Types.Normal,
+        Types.Moving,
+        Types.Moving,
+        Types.Moving,
+        Types.Moving,
+        Types.Breakable,
+      ];
+    } else if (score >= 100 && score < 200) {
+      this.types = [
+        Types.Normal,
+        Types.Normal,
+        Types.Normal,
+        Types.Normal,
+        Types.Moving,
+        Types.Moving,
+        Types.Breakable,
+        Types.Breakable,
+      ];
+    } else if (score >= 50 && score < 100) {
+      this.types = [
+        Types.Normal,
+        Types.Normal,
+        Types.Normal,
+        Types.Normal,
+        Types.Moving,
+        Types.Moving,
+        Types.Moving,
+        Types.Moving,
+      ];
+    } else this.types = [Types.Normal];
 
     this.type = this.types[Math.floor(Math.random() * this.types.length)];
 
@@ -79,12 +136,12 @@ class Platform {
   }
 
   draw() {
-    if (this.type === 1) this.clippingYPosition = 0;
-    else if (this.type === 2) this.clippingYPosition = 61;
-    else if (this.type === 3 && this.flag === 0) this.clippingYPosition = 31;
-    else if (this.type === 3 && this.flag === 1) this.clippingYPosition = 1000;
-    else if (this.type === 4 && this.state === 0) this.clippingYPosition = 90;
-    else if (this.type === 4 && this.state === 1) this.clippingYPosition = 1000;
+    if (this.type === Types.Normal) this.clippingYPosition = 0;
+    else if (this.type === Types.Moving) this.clippingYPosition = 61;
+    else if (this.type === Types.Breakable && !this.isBroken) this.clippingYPosition = 31;
+    else if (this.type === Types.Breakable && this.isBroken) this.clippingYPosition = 1000;
+    else if (this.type === Types.Vanishable && this.state === 0) this.clippingYPosition = 90;
+    else if (this.type === Types.Vanishable && this.state === 1) this.clippingYPosition = 1000;
 
     this.ctx.drawImage(
       this.sprite,
@@ -148,7 +205,7 @@ export class Platforms {
         p.xPosition += p.currentXPosition;
       }
 
-      if (p.flag === 1 && !this.subs.appearance && this.jumpCount === 0) {
+      if (p.isBroken && !this.subs.appearance && this.jumpCount === 0) {
         this.subs.xPosition = p.xPosition;
         this.subs.yPosition = p.yPosition;
         this.subs.appearance = true;
@@ -176,7 +233,7 @@ export class Platforms {
   }
 }
 
-export class PlatformBrokenSubstitute {
+class PlatformBrokenSubstitute {
   ctx: CanvasRenderingContext2D;
   height = 30;
   width = 70;
