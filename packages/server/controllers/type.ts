@@ -6,6 +6,10 @@ type IPost = {
   date: Date;
 };
 
-export interface requestPosts extends Request {
+export interface IRequestPostPost extends Request {
   body: IPost;
+}
+
+export interface IRequestGetPostById extends Request {
+  params: { id: string };
 }
