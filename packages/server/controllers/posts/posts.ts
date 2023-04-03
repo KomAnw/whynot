@@ -3,9 +3,7 @@ import { PostModel } from '../../models/post';
 import type { IRequestPostPost, IRequestGetPostById } from '../type';
 
 export const postPost = async (req: IRequestPostPost, res: Response) => {
-  const { text, authorId, date } = req.body;
-
-  const data = await PostModel.create({ text, authorId, date });
+  const data = await PostModel.create({ ...req.body });
 
   res.status(201).send(data.dataValues);
 };

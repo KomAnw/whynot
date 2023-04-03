@@ -10,6 +10,7 @@ router.post(
     body: Joi.object().keys({
       text: Joi.string().required().min(1),
       authorId: Joi.number().required(),
+      login: Joi.string().required(),
       date: Joi.date(),
     }),
   }),

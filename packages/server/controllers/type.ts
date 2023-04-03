@@ -1,31 +1,17 @@
 import type { Request } from 'express';
 import type { EMode, ETheme } from '../models/theme';
-
-type IMessage = {
-  text: string;
-  authorId: number;
-  postId: number;
-  date: Date;
-  mainMessageId: number | null;
-  emojis: number[][] | null;
-};
+import type { Message } from '../models/message';
+import type { Post } from '../models/post';
 
 export interface IRequestPostMessage extends Request {
-  body: IMessage;
+  body: Message;
 }
 
 export interface IRequestGetAllMessageByIdPost extends Request {
   query: { postId: string };
 }
-
-type IPost = {
-  text: string;
-  authorId: number;
-  date: Date;
-};
-
 export interface IRequestPostPost extends Request {
-  body: IPost;
+  body: Post;
 }
 
 export interface IRequestGetPostById extends Request {
