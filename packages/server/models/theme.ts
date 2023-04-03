@@ -2,12 +2,12 @@ import { Model, DataTypes } from 'sequelize';
 import type { InferAttributes, InferCreationAttributes } from 'sequelize';
 import { sequelize } from '../database/postgres';
 
-enum ETheme {
+export enum ETheme {
   DEFAULT = 'default',
   OTHER = 'other',
 }
 
-enum EMode {
+export enum EMode {
   DOODLE = 'Doodle',
   HOMER = 'Homer',
   MARIO = 'Mario',
