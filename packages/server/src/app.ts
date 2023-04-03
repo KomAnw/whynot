@@ -4,7 +4,6 @@ import { cors, cookieParser, proxy, helmet, rateLimit, bodyParserMiddleware, err
 import { findFile } from '../utils/findFile';
 import { routerApi } from '../routes';
 import { connectPostgresDB } from '../database/postgres';
-import { routerApi } from '../routes';
 
 const middlewares = [cors, cookieParser, helmet, rateLimit, bodyParserMiddleware];
 
@@ -19,7 +18,6 @@ app.use(middlewares);
 app.use('/api/v2/*', proxy);
 
 connectPostgresDB();
-app.use('/api', routerApi);
 
 export const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
 export const isProductionMode = process.argv.includes('--NODE_ENV=production');
