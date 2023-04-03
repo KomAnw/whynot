@@ -7,7 +7,7 @@ export const postPost = async (req: IRequestPostPost, res: Response) => {
 
   const data = await PostModel.create({ text, authorId, date });
 
-  res.status(200).send(data.dataValues);
+  res.status(201).send(data.dataValues);
 };
 
 export const getPosts = async (_req: Request, res: Response) => {
