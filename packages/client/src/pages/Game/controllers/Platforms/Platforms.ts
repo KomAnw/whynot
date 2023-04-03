@@ -39,8 +39,8 @@ class Platform {
   clippingWidth = 105;
   clippingHeight = 31;
 
-  types: Array<number>;
-  type: number;
+  types = [1];
+  type = this.types[Math.floor(Math.random() * this.types.length)];
 
   constructor(context: CanvasRenderingContext2D, sizes: TSizes, position: number, sprite: HTMLImageElement) {
     this.ctx = context;

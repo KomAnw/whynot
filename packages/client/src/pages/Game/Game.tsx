@@ -5,13 +5,13 @@ import { Text } from 'src/design/Text';
 import { Score } from 'pages/Game/controllers/Score/Score';
 import { useAppSelector } from 'src/hooks/redux';
 import type { GameWindowProps } from 'pages/Game/types/types';
+import { Spring } from 'pages/Game/controllers/Spring/Spring';
 import GameResult from './components/GameResult';
 import type { TSizes } from './types/types';
 import { Player } from './controllers/Player/Player';
 import { Gamepad, GamepadIndex } from './controllers/Gamepad/Gamepad';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
-import { Spring } from 'pages/Game/controllers/Spring/Spring';
 
 const Game = () => {
   const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);

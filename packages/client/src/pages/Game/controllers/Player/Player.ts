@@ -63,7 +63,7 @@ export class Player {
   }
 
   jumpHigh() {
-    this.currentYPosition = -15;
+    this.currentYPosition = -16;
   }
 
   playerMovement() {
