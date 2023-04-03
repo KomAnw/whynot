@@ -9,9 +9,12 @@ export const postMessage = async (req: IRequestPostMessage, res: Response) => {
   res.status(201).send(data.dataValues);
 };
 
-export const postMessageEmoji = async (_req: IRequestPostMessageEmoji, res: Response) => {
+export const postMessageEmoji = async (req: IRequestPostMessageEmoji, res: Response) => {
+  const { messageId, emojiId, authorId } = req.body;
+  const message = await MessageModel.findOne({ where: { id: Number(messageId) } });
 
-  res.status(201);
+  res.status(200).send(message);
+  console.log(message, messageId, emojiId, authorId);
 };
 
 export const getMessages = async (req: IRequestGetAllMessageByIdPost, res: Response) => {
