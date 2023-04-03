@@ -26,6 +26,7 @@ export const PostModel = Post.init(
   },
   {
     sequelize,
+    timestamps: false,
     tableName: 'Posts',
   }
 );

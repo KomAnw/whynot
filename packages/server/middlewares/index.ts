@@ -3,8 +3,10 @@ import cookieParserMiddleware from 'cookie-parser';
 import rateLimitMiddleware from 'express-rate-limit';
 import helmetMiddleware from 'helmet';
 import corsMiddleware from 'cors';
+import bodyParser from 'body-parser';
 import * as crypto from 'crypto';
 import { createProxyMiddleware } from 'http-proxy-middleware';
+import { errors } from 'celebrate';
 
 const cookieParser: RequestHandler = cookieParserMiddleware();
 
@@ -44,4 +46,12 @@ const helmet = helmetMiddleware({
   },
 });
 
-export { cookieParser, proxy, cors, auth, rateLimit, helmet };
+const bodyParserMiddleware = bodyParser.json();
+
+const notFoundMiddleware = (_req: Request, res: Response) => {
+  res.status(404).json({ message: 'Not Found' });
+};
+
+const errorCelebrate = errors();
+
+export { cookieParser, proxy, cors, auth, rateLimit, helmet, bodyParserMiddleware, notFoundMiddleware, errorCelebrate };

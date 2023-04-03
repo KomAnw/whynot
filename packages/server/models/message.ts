@@ -3,7 +3,7 @@ import type { InferAttributes, InferCreationAttributes } from 'sequelize';
 import { sequelize } from '../database/postgres';
 import { PostModel } from './post';
 
-class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Message, { omit: 'id' }>> {
+export class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Message, { omit: 'id' }>> {
   declare id?: number;
   declare text: string;
   declare authorId: number;
@@ -46,6 +46,7 @@ export const MessageModel = Message.init(
   },
   {
     sequelize,
+    timestamps: false,
     tableName: 'Messages',
   }
 );

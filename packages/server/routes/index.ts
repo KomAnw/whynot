@@ -1,6 +1,12 @@
 import { Router } from 'express';
-import { routerTheme } from './theme';
+import { routerMessage } from './messages';
+import { routerPost } from './posts';
+import { notFoundMiddleware } from '../middlewares';
 
 export const routerApi = Router();
 
-routerApi.use('/theme', routerTheme);
+routerApi.use('/messages', routerMessage);
+
+routerApi.use('/posts', routerPost);
+
+routerApi.use('/', notFoundMiddleware);
