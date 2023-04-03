@@ -2,6 +2,7 @@ import type { TSizes } from 'pages/Game/types/types';
 import { type Ground } from 'pages/Game/controllers/Ground/Ground';
 import { type Platforms } from 'pages/Game/controllers/Platforms/Platforms';
 import { Score } from 'pages/Game/controllers/Score/Score';
+import type { Spring } from 'pages/Game/controllers/Spring/Spring';
 
 export class Player {
   maxSpeed = 8;
@@ -22,6 +23,7 @@ export class Player {
   platforms: Platforms;
   ground: Ground;
   sprite: HTMLImageElement;
+  spring: Spring;
   isDisplayUp = false;
   isDead = false;
 
@@ -37,7 +39,8 @@ export class Player {
     sizes: TSizes,
     platforms: Platforms,
     ground: Ground,
-    sprite: HTMLImageElement
+    sprite: HTMLImageElement,
+    spring: Spring
   ) {
     this.isMovingLeft = false;
     this.isMovingRight = false;
@@ -52,10 +55,15 @@ export class Player {
     this.platforms = platforms;
     this.ground = ground;
     this.sprite = sprite;
+    this.spring = spring;
   }
 
   jump() {
     this.currentYPosition = this.jumpHeight;
+  }
+
+  jumpHigh() {
+    this.currentYPosition = -16;
   }
 
   playerMovement() {
@@ -77,17 +85,44 @@ export class Player {
    * Registration jumps out of platforms.
    */
   collides() {
-    this.platforms.platformList.forEach(platform => {
+    /**
+     * Platforms
+     */
+    this.platforms.platformList.forEach(p => {
       if (
         this.currentYPosition > 0 &&
-        this.xPosition + 15 < platform.xPosition + platform.width &&
-        this.xPosition + this.width - 15 > platform.xPosition &&
-        this.yPosition + this.height > platform.yPosition &&
-        this.yPosition + this.height < platform.yPosition + platform.height
+        p.state === 0 &&
+        this.xPosition + 15 < p.xPosition + p.width &&
+        this.xPosition + this.width - 15 > p.xPosition &&
+        this.yPosition + this.height > p.yPosition &&
+        this.yPosition + this.height < p.yPosition + p.height
       ) {
-        this.jump();
+        if (p.type === 3 && !p.isBroken) {
+          p.isBroken = true;
+          this.platforms.jumpCount = 0;
+        } else if (p.type === 4 && p.state === 0) {
+          this.jump();
+          p.state = 1;
+        } else if (!p.isBroken) {
+          this.jump();
+        }
       }
     });
+
+    /**
+     * Springs
+     */
+    if (
+      this.currentYPosition > 0 &&
+      this.spring.state === 0 &&
+      this.xPosition + 15 < this.spring.xPosition + this.spring.width &&
+      this.xPosition + this.width - 15 > this.spring.xPosition &&
+      this.yPosition + this.height > this.spring.yPosition &&
+      this.yPosition + this.height < this.spring.yPosition + this.spring.height
+    ) {
+      this.spring.state = 1;
+      this.jumpHigh();
+    }
   }
 
   gameOver() {
@@ -170,7 +205,7 @@ export class Player {
       this.yPosition += this.currentYPosition;
       this.currentYPosition += this.gravity;
     } else {
-      this.platforms.calculate(this.currentYPosition);
+      this.platforms.calculateVerticalMovement(this.currentYPosition);
 
       this.ground.yPosition -= this.currentYPosition;
       this.currentYPosition += this.gravity;
@@ -187,6 +222,22 @@ export class Player {
     }
 
     this.collides();
+  }
+
+  calculateSpringActions() {
+    const p = this.platforms.platformList[0];
+
+    if (p.type === 1 || p.type === 2) {
+      this.spring.xPosition = p.xPosition + p.width / 2 - this.spring.width / 2;
+      this.spring.yPosition = p.yPosition - p.height - 10;
+
+      if (this.spring.yPosition > this.sizes.height / 1.1) this.spring.state = 0;
+
+      this.spring.draw();
+    } else {
+      this.spring.xPosition = 0 - this.spring.width;
+      this.spring.yPosition = 0 - this.spring.height;
+    }
   }
 
   draw() {
