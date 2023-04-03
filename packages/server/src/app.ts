@@ -1,30 +1,27 @@
-import cors from 'cors';
 import express from 'express';
-import cookieParser from 'cookie-parser';
-import { createProxyMiddleware } from 'http-proxy-middleware';
+import * as dotenv from 'dotenv';
+import { cors, cookieParser, proxy, helmet, rateLimit } from '../middlewares';
+import { findFile } from '../utils/findFile';
 import { connectPostgresDB } from '../database/postgres';
 import { routerApi } from '../routes';
 
+const middlewares = [cors, cookieParser, helmet, rateLimit];
+
+dotenv.config({ path: findFile('.env') });
+
+const { SERVER_PORT } = process.env;
+
 const app = express();
 
-app.use(cors());
-app.use(cookieParser());
-app.use(
-  '/api/v2',
-  createProxyMiddleware({
-    changeOrigin: true,
-    target: 'https://ya-praktikum.tech',
-    cookieDomainRewrite: {
-      '*': '',
-    },
-  })
-);
+app.use(middlewares);
+
+app.use('/api/v2/*', proxy);
 
 connectPostgresDB();
 app.use('/api', routerApi);
 
 export const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
 export const isProductionMode = process.argv.includes('--NODE_ENV=production');
-export const PORT = Number(process.env.SERVER_PORT) || 3001;
+export const PORT = Number(SERVER_PORT) || 3001;
 
 export default app;

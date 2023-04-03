@@ -147,7 +147,7 @@ module.exports = {
     'import/no-absolute-path': 0,
     'no-underscore-dangle': 0,
     'no-constructor-return': 1,
-    'max-classes-per-file': [1, 2],
+    'max-classes-per-file': [1, 4],
     'no-restricted-syntax': 0,
     'no-prototype-builtins': 0,
     'no-continue': 0,
