@@ -1,5 +1,5 @@
 import type { Response } from 'express';
-import type { IRequestGetAllMessageByIdPost, IRequestPostMessage } from '../type';
+import type { IRequestGetAllMessageByIdPost, IRequestPostMessage, IRequestPostMessageEmoji } from '../type';
 import { MessageModel } from '../../models/message';
 import { sortMessage } from '../utils/sortMessages';
 
@@ -7,6 +7,11 @@ export const postMessage = async (req: IRequestPostMessage, res: Response) => {
   const data = await MessageModel.create({ ...req.body });
 
   res.status(201).send(data.dataValues);
+};
+
+export const postMessageEmoji = async (_req: IRequestPostMessageEmoji, res: Response) => {
+
+  res.status(201);
 };
 
 export const getMessages = async (req: IRequestGetAllMessageByIdPost, res: Response) => {

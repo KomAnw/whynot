@@ -20,6 +20,18 @@ router.post(
   postMessage
 );
 
+router.post(
+  '/emoji',
+  celebrate({
+    body: Joi.object().keys({
+      messageId: Joi.number().required(),
+      emojiId: Joi.number().required(),
+      authorId: Joi.number().required(),
+    }),
+  }),
+  postMessageEmoji
+);
+
 router.get(
   '/',
   celebrate({

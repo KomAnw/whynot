@@ -7,6 +7,14 @@ export interface IRequestPostMessage extends Request {
   body: Message;
 }
 
+export interface IRequestPostMessageEmoji extends Request {
+  body: {
+    messageId: string;
+    emojiId: string;
+    authorId: string;
+  };
+}
+
 export interface IRequestGetAllMessageByIdPost extends Request {
   query: { postId: string };
 }
