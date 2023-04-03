@@ -1,7 +1,6 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
-import { errors } from 'celebrate';
-import { cors, cookieParser, proxy, helmet, rateLimit, bodyParserMiddleware } from '../middlewares';
+import { cors, cookieParser, proxy, helmet, rateLimit, bodyParserMiddleware, errorCelebrate } from '../middlewares';
 import { findFile } from '../utils/findFile';
 import { routerApi } from '../routes';
 import { connectPostgresDB } from '../database/postgres';
@@ -25,6 +24,6 @@ export const isProductionMode = process.argv.includes('--NODE_ENV=production');
 export const PORT = Number(SERVER_PORT) || 3001;
 
 app.use('/api', routerApi);
-app.use(errors());
+app.use(errorCelebrate);
 
 export default app;

@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { routerMessage } from './messages';
-import notFoundMiddleware from '../middlewares/notFoundMiddleware';
+import { notFoundMiddleware } from '../middlewares';
 
 export const routerApi = Router();
 

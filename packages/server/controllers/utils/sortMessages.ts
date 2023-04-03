@@ -4,13 +4,7 @@ export function sortMessage(messages: Message[]) {
   const arrMessageSort: Message[] = [];
 
   const filterList = (messages: Message[], id: number | null | undefined) => {
-    let sortId: number;
-
-    if (id === 0 || id === null || id === undefined) {
-      sortId = 0;
-    } else {
-      sortId = id;
-    }
+    const sortId = id ?? 0;
 
     return messages.filter((item: Message) => item.mainMessageId === sortId);
   };
