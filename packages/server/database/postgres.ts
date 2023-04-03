@@ -20,7 +20,7 @@ export const sequelize = new Sequelize(clientPostgresDB);
 export const connectPostgresDB = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync();
+    await sequelize.sync({ force: true });
     console.log('Successfully connection to DB!');
   } catch (e) {
     console.error('Connection fail:', e);

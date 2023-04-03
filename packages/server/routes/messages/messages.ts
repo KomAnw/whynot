@@ -11,6 +11,7 @@ router.post(
       text: Joi.string().required().min(1),
       authorId: Joi.number().required(),
       postId: Joi.number().required(),
+      authorFullName: Joi.string().required(),
       date: Joi.date().required(),
       mainMessageId: Joi.number().required(),
       emojis: Joi.array().required(),

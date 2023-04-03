@@ -7,6 +7,7 @@ export class Message extends Model<InferAttributes<Message>, InferCreationAttrib
   declare id?: number;
   declare text: string;
   declare authorId: number;
+  declare authorFullName: string;
   declare postId: number;
   declare date: Date;
   declare mainMessageId: number | null;
@@ -21,6 +22,10 @@ export const MessageModel = Message.init(
     },
     authorId: {
       type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    authorFullName: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     postId: {
