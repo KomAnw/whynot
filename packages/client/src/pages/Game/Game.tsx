@@ -5,6 +5,7 @@ import { Text } from 'src/design/Text';
 import { Score } from 'pages/Game/controllers/Score/Score';
 import { useAppSelector } from 'src/hooks/redux';
 import type { GameWindowProps } from 'pages/Game/types/types';
+import { Spring } from 'pages/Game/controllers/Spring/Spring';
 import GameResult from './components/GameResult';
 import type { TSizes } from './types/types';
 import { Player } from './controllers/Player/Player';
@@ -28,6 +29,7 @@ const Game = () => {
   let platforms: Platforms;
   let ground: Ground;
   let gamepad: Gamepad;
+  let spring: Spring;
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     const { key } = e;
@@ -93,6 +95,8 @@ const Game = () => {
     if (!player.isDead) {
       canvasClearFrame();
 
+      player.calculateSpringActions();
+
       player.calculatePlayerActions();
 
       platforms.draw();
@@ -148,7 +152,9 @@ const Game = () => {
 
     ground = new Ground(context, sizes, sprite);
 
-    player = new Player(context, sizes, platforms, ground, sprite);
+    spring = new Spring(context, sprite);
+
+    player = new Player(context, sizes, platforms, ground, sprite, spring);
 
     gamepad = new Gamepad(gamepadState, player);
 
