@@ -3,6 +3,7 @@ import cookieParserMiddleware from 'cookie-parser';
 import rateLimitMiddleware from 'express-rate-limit';
 import helmetMiddleware from 'helmet';
 import corsMiddleware from 'cors';
+import bodyParser from 'body-parser';
 import * as crypto from 'crypto';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
@@ -44,4 +45,6 @@ const helmet = helmetMiddleware({
   },
 });
 
-export { cookieParser, proxy, cors, auth, rateLimit, helmet };
+const bodyParserMiddleware = bodyParser.json();
+
+export { cookieParser, proxy, cors, auth, rateLimit, helmet, bodyParserMiddleware };
