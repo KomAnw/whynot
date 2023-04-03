@@ -95,9 +95,13 @@ const Game = () => {
     if (!player.isDead) {
       canvasClearFrame();
 
+      platforms.calculateHorizontalMovement();
+
       player.calculateSpringActions();
 
       player.calculatePlayerActions();
+
+      setStateScore(Score.count);
 
       platforms.draw();
 
@@ -106,8 +110,6 @@ const Game = () => {
       ground.draw();
 
       player.playerMovement();
-
-      setStateScore(Score.count);
 
       gamepad.control();
 

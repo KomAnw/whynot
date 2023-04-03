@@ -85,15 +85,27 @@ export class Player {
    * Registration jumps out of platforms.
    */
   collides() {
-    this.platforms.platformList.forEach(platform => {
+    /**
+     * Platforms
+     */
+    this.platforms.platformList.forEach(p => {
       if (
         this.currentYPosition > 0 &&
-        this.xPosition + 15 < platform.xPosition + platform.width &&
-        this.xPosition + this.width - 15 > platform.xPosition &&
-        this.yPosition + this.height > platform.yPosition &&
-        this.yPosition + this.height < platform.yPosition + platform.height
+        p.state === 0 &&
+        this.xPosition + 15 < p.xPosition + p.width &&
+        this.xPosition + this.width - 15 > p.xPosition &&
+        this.yPosition + this.height > p.yPosition &&
+        this.yPosition + this.height < p.yPosition + p.height
       ) {
-        this.jump();
+        if (p.type === 3 && !p.isBroken) {
+          p.isBroken = true;
+          this.platforms.jumpCount = 0;
+        } else if (p.type === 4 && p.state === 0) {
+          this.jump();
+          p.state = 1;
+        } else if (!p.isBroken) {
+          this.jump();
+        }
       }
     });
 
@@ -193,7 +205,7 @@ export class Player {
       this.yPosition += this.currentYPosition;
       this.currentYPosition += this.gravity;
     } else {
-      this.platforms.calculate(this.currentYPosition);
+      this.platforms.calculateVerticalMovement(this.currentYPosition);
 
       this.ground.yPosition -= this.currentYPosition;
       this.currentYPosition += this.gravity;
