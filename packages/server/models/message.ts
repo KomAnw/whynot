@@ -10,8 +10,8 @@ export class Message extends Model<InferAttributes<Message>, InferCreationAttrib
   declare login: string;
   declare postId: number;
   declare date: Date;
-  declare mainMessageId: number | null;
-  declare emojis: number[][] | null;
+  declare mainMessageId: number;
+  declare emojis: JSON[];
 }
 
 export const MessageModel = Message.init(
@@ -42,11 +42,11 @@ export const MessageModel = Message.init(
     },
     mainMessageId: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
     },
     emojis: {
-      type: DataTypes.ARRAY(DataTypes.ARRAY(DataTypes.INTEGER)),
-      allowNull: true,
+      type: DataTypes.ARRAY(DataTypes.JSONB),
+      allowNull: false,
     },
   },
   {

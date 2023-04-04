@@ -1,5 +1,5 @@
 import type { Response } from 'express';
-import type { IRequestGetAllMessageByIdPost, IRequestPostMessage, IRequestPostMessageEmoji } from '../type';
+import type { IRequestGetAllMessageByIdPost, IRequestPostMessage, IRequestPostMessageEmoji, TEmoji } from '../type';
 import { MessageModel } from '../../models/message';
 import { sortMessage } from '../utils/sortMessages';
 
@@ -10,11 +10,35 @@ export const postMessage = async (req: IRequestPostMessage, res: Response) => {
 };
 
 export const postMessageEmoji = async (req: IRequestPostMessageEmoji, res: Response) => {
-  const { messageId, emojiId, authorId } = req.body;
-  const message = await MessageModel.findOne({ where: { id: Number(messageId) } });
+  const postId = Number(req.body.postId);
+  const messageId = Number(req.body.messageId);
+  const emojiId = Number(req.body.emojiId);
+  const authorId = Number(req.body.authorId);
 
-  res.status(200).send(message);
-  console.log(message, messageId, emojiId, authorId);
+  const message = await MessageModel.findOne({ where: { id: messageId } });
+
+  if (message) {
+    let emojis: TEmoji[] | undefined = message.emojis as unknown as TEmoji[] | undefined;
+
+    if (emojis) {
+      const emojiIndex = emojis.findIndex((item: TEmoji) => item.id === emojiId);
+
+      if (emojiIndex !== -1) {
+        !emojis[emojiIndex].authorId.includes(authorId) && emojis[emojiIndex].authorId.push(authorId);
+      } else {
+        emojis.push({ id: emojiId, authorId: [authorId] });
+      }
+    } else {
+      emojis = [{ id: emojiId, authorId: [authorId] }];
+    }
+
+    await MessageModel.update({ emojis: emojis as unknown as JSON[] }, { where: { id: messageId } });
+    const data = await MessageModel.findAll({ where: { postId }, raw: true });
+
+    res.status(200).send(data);
+  } else {
+    res.status(404).json({ message: 'Not Found' });
+  }
 };
 
 export const getMessages = async (req: IRequestGetAllMessageByIdPost, res: Response) => {

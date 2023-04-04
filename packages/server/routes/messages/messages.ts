@@ -8,6 +8,7 @@ router.post(
   '/emoji',
   celebrate({
     body: Joi.object().keys({
+      postId: Joi.number().required(),
       messageId: Joi.number().required(),
       emojiId: Joi.number().required(),
       authorId: Joi.number().required(),
