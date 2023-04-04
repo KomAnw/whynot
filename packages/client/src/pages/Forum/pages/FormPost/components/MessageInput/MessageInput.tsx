@@ -5,6 +5,7 @@ import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
 import { Text } from 'src/design/Text';
 import { Input } from 'src/components/Input';
 import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/Input';
+import { logger } from 'src/utils/logger';
 
 export type TInputPost = {
   inputPosts: string;
@@ -18,9 +19,9 @@ const MessageInput = () => {
   const submitForm: SubmitHandler<TInputPost> = async data => {
     try {
       resetField('inputPosts');
-      console.log(data);
+      logger(data);
     } catch (error) {
-      console.log(error);
+      logger(data, 'error');
     }
   };
 

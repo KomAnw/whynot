@@ -15,6 +15,7 @@ import type { TChangeProfileRequest } from 'src/api/user/models';
 import { useChangeProfileMutation } from 'src/api/user/user';
 import { getValuesFromLocalStorage, isPasswordField, saveToLocalStorage } from 'src/utils/storage';
 import { useWillUnmount } from 'src/hooks/react';
+import { logger } from 'src/utils/logger';
 
 const profileDateFields = [
   formsConsts.firstName,
@@ -53,8 +54,7 @@ const ProfileData = () => {
         localStorage.clear();
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger(error, 'error');
     }
   };
 

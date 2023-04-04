@@ -9,6 +9,7 @@ import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { useChangePasswordMutation } from 'src/api/user/user';
 import { useNavigate } from 'react-router-dom';
+import { logger } from 'src/utils/logger';
 import type { TPasswordNewRequest } from './types';
 
 const { password, confirmPassword, oldPassword } = formsConsts;
@@ -34,8 +35,7 @@ const ProfilePassword = () => {
 
       response && navigate(profile.index);
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger(error, 'error');
     }
   };
 
