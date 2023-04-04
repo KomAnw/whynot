@@ -128,7 +128,7 @@ const Error = styled(Text)`
   font-size: 25px;
   color: ${({ theme }) => theme.colors.core.text.error};
   position: absolute;
-  top: -55px;
+  top: -37px;
   left: 50%;
   transform: translateX(-50%);
 `;

@@ -89,13 +89,13 @@ const Settings = () => {
             <Text>Change mode</Text>
           </Row>
           <Row>
-            <Button variant="secondary" type="submit" onClick={onLeft}>
+            <RestyledButton variant="secondary" type="submit" onClick={onLeft}>
               ◀︎
-            </Button>
+            </RestyledButton>
             <Img src={sprite.sprite} />
-            <Button variant="secondary" type="submit" onClick={onRight}>
+            <RestyledButton variant="secondary" type="submit" onClick={onRight}>
               ▶︎
-            </Button>
+            </RestyledButton>
           </Row>
           <NameMode>{sprite.name}</NameMode>
         </Column>
@@ -153,6 +153,10 @@ const Row = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const RestyledButton = styled(Button)`
+  width: 100px;
 `;
 
 const Img = styled.img`
