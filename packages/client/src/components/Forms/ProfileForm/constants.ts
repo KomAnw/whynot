@@ -18,5 +18,5 @@ export const dataRowData = [
 export const links = [
   { id: 1, to: updateData, variant: 'size24' as const, children: 'Edit data', Wrapper: TextLink },
   { id: 2, to: updatePassword, variant: 'size24' as const, children: 'Edit password', Wrapper: TextLink },
-  { id: 3, to: menu, variant: 'size20' as const, children: 'Back', Wrapper: TextLinkBack },
+  { id: 3, to: menu, variant: 'size24' as const, children: 'Back to menu', Wrapper: TextLinkBack },
 ];
