@@ -150,6 +150,7 @@ const Column = styled.div`
 
 const Row = styled.div`
   margin: 10px;
+  gap: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
