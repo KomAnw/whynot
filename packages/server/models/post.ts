@@ -6,7 +6,7 @@ export class Post extends Model<InferAttributes<Post>, InferCreationAttributes<P
   declare id?: number;
   declare text: string;
   declare authorId: number;
-  declare authorFullName: string;
+  declare login: string;
   declare date: Date;
 }
 
@@ -20,7 +20,7 @@ export const PostModel = Post.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    authorFullName: {
+    login: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

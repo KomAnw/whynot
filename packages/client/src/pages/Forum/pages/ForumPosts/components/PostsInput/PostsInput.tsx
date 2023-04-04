@@ -3,9 +3,10 @@ import { useForm } from 'react-hook-form';
 import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
 import { Input } from 'components/Input';
 import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/Input';
+import { logger } from 'src/utils/logger';
 
 export type TInputPost = {
-  inputPost: string;
+  inputPosts: string;
 };
 
 const PostsInput = () => {
@@ -15,10 +16,10 @@ const PostsInput = () => {
 
   const submitForm = async (data: TInputPost) => {
     try {
-      resetField('inputPost');
-      console.log(data);
+      resetField('inputPosts');
+      logger(data);
     } catch (error) {
-      console.log(error);
+      logger(error, 'error');
     }
   };
 
