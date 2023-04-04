@@ -5,9 +5,10 @@ import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
 import { Text } from 'src/design/Text';
 import { Input } from 'src/components/Input';
 import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/Input';
+import { logger } from 'src/utils/logger';
 
 export type TInputPost = {
-  inputPosts: string;
+  inputPost: string;
 };
 
 const MessageInput = () => {
@@ -17,10 +18,10 @@ const MessageInput = () => {
 
   const submitForm: SubmitHandler<TInputPost> = async data => {
     try {
-      resetField('inputPosts');
-      console.log(data);
+      resetField('inputPost');
+      logger(data);
     } catch (error) {
-      console.log(error);
+      logger(data, 'error');
     }
   };
 
@@ -33,7 +34,7 @@ const MessageInput = () => {
       <Footer>
         <RestyledInput
           label=""
-          name="inputPosts"
+          name="inputPost"
           placeholder="Создать новую тему"
           register={register}
           type="text"

@@ -21,7 +21,7 @@ connectPostgresDB();
 
 export const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
 export const isProductionMode = process.argv.includes('--NODE_ENV=production');
-export const PORT = Number(SERVER_PORT) || 3001;
+export const PORT = Number(SERVER_PORT) || 3000;
 
 app.use(bodyParserMiddleware);
 app.use('/api', routerApi);

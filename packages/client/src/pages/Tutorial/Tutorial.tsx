@@ -95,12 +95,13 @@ const NavigationButtons = styled('div')`
   display: grid;
   grid-template-columns: repeat(2, max-content);
   justify-content: space-between;
-  cursor: pointer;
 `;
 
 const NavButton = styled(LinkText)`
   user-select: none;
   transition: all 0.25s ease;
+  cursor: pointer;
+
   &:hover {
     scale: calc(1.1);
   }

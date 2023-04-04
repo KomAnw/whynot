@@ -62,8 +62,9 @@ const InnerContainer = styled('div')`
   height: max-content;
   margin: 0 auto;
   background: ${({ theme }) => theme.colors.core.background.primary};
-  padding: 24px 90px;
+  padding: 24px 28px;
   border-radius: 20px;
+  text-align: center;
 
   @media (max-width: ${breakpoints.mobileM}) {
     padding: 12px 14px;
@@ -76,6 +77,7 @@ const ButtonsContainer = styled('div')`
   justify-content: center;
   gap: 48px;
   margin-top: 18px;
+
   @media (max-width: ${breakpoints.mobileM}) {
     gap: 18px;
     margin-top: 15px;
@@ -96,9 +98,6 @@ const Image = styled('img')`
   background-size: cover;
   background-position: center;
   width: 100%;
-  height: 540px;
-
-  @media (max-width: ${breakpoints.mobileM}) {
-    height: 482px;
-  }
+  height: 482px;
+  border-radius: 20px;
 `;

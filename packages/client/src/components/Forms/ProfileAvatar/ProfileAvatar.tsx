@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 import { breakpoints } from 'src/components/App/constants';
 import { useDispatch } from 'react-redux';
 import { authApi } from 'src/api/auth/auth';
+import { logger } from 'src/utils/logger';
 import type { AvatarData, ProfileAvatarProps } from './types';
 
 const ProfileAvatar = ({ setIsPopupOpen }: ProfileAvatarProps) => {
@@ -37,8 +38,7 @@ const ProfileAvatar = ({ setIsPopupOpen }: ProfileAvatarProps) => {
       dispatch(authApi.util.invalidateTags(['User']));
       response && closePopup();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger(error, 'error');
     }
   };
 

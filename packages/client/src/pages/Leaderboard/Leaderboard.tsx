@@ -8,6 +8,7 @@ import { useGetUserQuery } from 'src/api/auth/auth';
 import { useDidMount } from 'src/hooks/react';
 import { useState } from 'react';
 import type { Leader } from 'src/api/leaderboard/models';
+import { logger } from 'src/utils/logger';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
@@ -27,7 +28,7 @@ const Leaderboard = () => {
 
       setLeaders(data);
     } catch (err) {
-      console.error(err);
+      logger(err, 'error');
     }
   };
 

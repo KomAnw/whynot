@@ -14,6 +14,7 @@ import { Text } from 'src/design/Text';
 import { Divider } from 'components/Divider';
 import { redirectToOAuthYandex, useLazyGetServiceIdQuery } from 'src/api/oauth/oauth';
 import { YandexLogo, Path } from 'components/Forms/Login/components/YandexLogo';
+import { logger } from 'src/utils/logger';
 import { formsConsts } from '../consts/formsConsts';
 
 const registrationFields = [formsConsts.login, formsConsts.password];
@@ -43,7 +44,7 @@ export const Login = () => {
       }
     } catch (error) {
       setCommonError(true);
-      console.log(error);
+      logger(error, 'error');
     }
   };
 
@@ -54,8 +55,8 @@ export const Login = () => {
       const serviceId = data?.service_id;
 
       serviceId && redirectToOAuthYandex(serviceId);
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      logger(error, 'error');
     }
   };
 
@@ -128,7 +129,7 @@ const Error = styled(Text)`
   font-size: 25px;
   color: ${({ theme }) => theme.colors.core.text.error};
   position: absolute;
-  top: -55px;
+  top: -37px;
   left: 50%;
   transform: translateX(-50%);
 `;
