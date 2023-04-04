@@ -6,7 +6,7 @@ import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/I
 import { logger } from 'src/utils/logger';
 
 export type TInputPost = {
-  inputPost: string;
+  inputPosts: string;
 };
 
 const PostsInput = () => {
@@ -16,7 +16,7 @@ const PostsInput = () => {
 
   const submitForm = async (data: TInputPost) => {
     try {
-      resetField('inputPost');
+      resetField('inputPosts');
       logger(data);
     } catch (error) {
       logger(error, 'error');

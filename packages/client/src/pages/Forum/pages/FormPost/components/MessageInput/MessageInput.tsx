@@ -8,7 +8,7 @@ import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/I
 import { logger } from 'src/utils/logger';
 
 export type TInputPost = {
-  inputPosts: string;
+  inputPost: string;
 };
 
 const MessageInput = () => {
@@ -18,7 +18,7 @@ const MessageInput = () => {
 
   const submitForm: SubmitHandler<TInputPost> = async data => {
     try {
-      resetField('inputPosts');
+      resetField('inputPost');
       logger(data);
     } catch (error) {
       logger(data, 'error');
@@ -34,7 +34,7 @@ const MessageInput = () => {
       <Footer>
         <RestyledInput
           label=""
-          name="inputPosts"
+          name="inputPost"
           placeholder="Создать новую тему"
           register={register}
           type="text"
