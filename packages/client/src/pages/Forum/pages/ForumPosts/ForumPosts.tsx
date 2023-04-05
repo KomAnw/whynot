@@ -23,7 +23,7 @@ const ForumPosts = () => {
         <Footer>
           <PostsInput />
           <Link to={menu} variant="size30">
-            back
+            Back to menu
           </Link>
         </Footer>
       </Component>

@@ -12,6 +12,7 @@ import type { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
 import { useNavigate } from 'react-router-dom';
 import { getValuesFromLocalStorage, isPasswordField, saveToLocalStorage } from 'src/utils/storage';
+import { logger } from 'src/utils/logger';
 
 const registrationFields = [
   formsConsts.firstName,
@@ -54,8 +55,7 @@ const Registration = () => {
         localStorage.clear();
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger(error, 'error');
     }
   };
 

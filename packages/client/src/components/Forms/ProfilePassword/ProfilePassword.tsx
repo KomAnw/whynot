@@ -9,6 +9,7 @@ import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
 import { useChangePasswordMutation } from 'src/api/user/user';
 import { useNavigate } from 'react-router-dom';
+import { logger } from 'src/utils/logger';
 import type { TPasswordNewRequest } from './types';
 
 const { password, confirmPassword, oldPassword } = formsConsts;
@@ -34,8 +35,7 @@ const ProfilePassword = () => {
 
       response && navigate(profile.index);
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger(error, 'error');
     }
   };
 
@@ -88,8 +88,8 @@ const ProfilePassword = () => {
         <Button variant="primary" type="submit">
           Apply
         </Button>
-        <Link to={profile.index} variant="size20">
-          Back
+        <Link to={profile.index} variant="size24">
+          Back to profile
         </Link>
       </FormFooter>
     </Form>
@@ -101,12 +101,13 @@ export default ProfilePassword;
 const H1Style = styled(H1)`
   height: 45px;
   text-align: center;
-  margin: 0 0 12px 0;
+  margin-bottom: 12px;
 `;
 
 const FormBody = styled('div')`
   width: 354px;
   flex-grow: 1;
+
   @media (max-width: ${mobileM}) {
     width: 330px;
   }
@@ -116,9 +117,8 @@ const FormFooter = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   flex-shrink: 0;
-  margin: 27px auto 0;
 `;
 
 const Form = styled('form')`
@@ -132,6 +132,7 @@ const Form = styled('form')`
   background-color: ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
   padding: 12px 24px;
+
   @media (max-width: ${mobileM}) {
     padding: 12px;
   }

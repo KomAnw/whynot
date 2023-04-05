@@ -18,10 +18,10 @@ router.post(
 );
 
 router.get(
-  '/:id',
+  '/:postId',
   celebrate({
     params: Joi.object().keys({
-      id: Joi.string().required(),
+      postId: Joi.string().required(),
     }),
   }),
   getPostById

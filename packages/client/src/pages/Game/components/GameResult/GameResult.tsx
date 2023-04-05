@@ -4,6 +4,7 @@ import { useGetUserQuery } from 'src/api/auth/auth';
 import { useAddMutation } from 'src/api/leaderboard/leaderboard';
 import { LEADERBOARD_TEAM_NAME } from 'src/api/leaderboard/leaderboard';
 import { useDidMount } from 'src/hooks/react';
+import { logger } from 'src/utils/logger';
 import type { GameResultProps } from './types';
 
 const GameResult = ({ score, isWon, setIsPopupOpen, startGameAgain }: GameResultProps) => {
@@ -21,7 +22,7 @@ const GameResult = ({ score, isWon, setIsPopupOpen, startGameAgain }: GameResult
         teamName: LEADERBOARD_TEAM_NAME,
       });
     } catch (e) {
-      console.log(e);
+      logger(e, 'error');
     }
   };
 

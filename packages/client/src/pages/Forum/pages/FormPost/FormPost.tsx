@@ -29,7 +29,7 @@ const FormPost = () => {
         <Footer>
           <MessageInput />
           <Link to={forum.index} variant="size30">
-            back
+            Back to posts
           </Link>
         </Footer>
       </Component>
