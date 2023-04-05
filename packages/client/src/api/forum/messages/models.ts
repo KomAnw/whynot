@@ -5,10 +5,17 @@ export type TMessage = {
   login: string;
   postId: number;
   date: Date;
-  mainMessageId: number | null;
-  emojis: number[][] | null;
+  mainMessageId: number;
+  emojis: JSON[];
 };
 
 export type TGetMessagesByPostIdResponse = TMessage[];
 
 export type TPostMessageRequest = TMessage;
+
+export type TPostEmojiRequest = {
+  postId: string;
+  messageId: string;
+  emojiId: string;
+  authorId: string;
+}
