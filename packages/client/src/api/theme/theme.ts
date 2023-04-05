@@ -1,20 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { backendAPISettings } from 'src/api';
+import { backendAPISettings } from 'src/api';
 import type { Theme, ThemeRequest } from 'src/api/theme/models';
-import { getURL } from 'src/api/common/utils/apiUtilts';
+import { getBackendURL } from 'src/api/common/utils/apiUtilts';
 
 const ROOT_THEME_URL = 'theme';
 
 export const THEME_ENDPOINTS = {
-  add: getURL(ROOT_THEME_URL),
-  update: getURL(ROOT_THEME_URL),
-  get: getURL(ROOT_THEME_URL),
+  add: getBackendURL(ROOT_THEME_URL),
+  update: getBackendURL(ROOT_THEME_URL),
+  get: getBackendURL(ROOT_THEME_URL),
 };
 
 export const themeApi = createApi({
   reducerPath: 'theme',
   baseQuery: fetchBaseQuery({
-    // ...backendAPISettings,
+    ...backendAPISettings,
   }),
   endpoints: build => ({
     addTheme: build.mutation<string, ThemeRequest>({

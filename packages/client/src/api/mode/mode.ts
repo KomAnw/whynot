@@ -1,20 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { backendAPISettings } from 'src/api';
+import { backendAPISettings } from 'src/api';
 import type { Mode, ModeRequest } from 'src/api/mode/models';
-import { getURL } from 'src/api/common/utils/apiUtilts';
+import { getBackendURL } from 'src/api/common/utils/apiUtilts';
 
 const ROOT_MODE_URL = 'mode';
 
 export const MODE_ENDPOINTS = {
-  add: getURL(ROOT_MODE_URL),
-  update: getURL(ROOT_MODE_URL),
-  get: getURL(ROOT_MODE_URL),
+  add: getBackendURL(ROOT_MODE_URL),
+  update: getBackendURL(ROOT_MODE_URL),
+  get: getBackendURL(ROOT_MODE_URL),
 };
 
 export const modeApi = createApi({
   reducerPath: 'mode',
   baseQuery: fetchBaseQuery({
-    // ...backendAPISettings,
+    ...backendAPISettings,
   }),
   endpoints: build => ({
     addMode: build.mutation<string, ModeRequest>({
