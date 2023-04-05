@@ -9,13 +9,9 @@ export type TMessage = {
   emojis: JSON[];
 };
 
-export type TGetMessagesByPostIdResponse = TMessage[];
-
-export type TPostMessageRequest = TMessage;
-
 export type TPostEmojiRequest = {
   postId: string;
   messageId: string;
   emojiId: string;
   authorId: string;
-}
+};

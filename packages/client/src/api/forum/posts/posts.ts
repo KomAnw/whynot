@@ -1,7 +1,7 @@
 import { getBackendURL } from 'src/api/common/utils/apiUtilts';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { backendAPISettings } from 'src/api';
-import type {TGetPostsResponse, TPostByIdResponse,  TPostPostRequest} from "src/api/forum/posts/models";
+import type { TPost } from 'src/api/forum/posts/models';
 
 const ROOT_POSTS_URL = 'posts';
 
@@ -16,13 +16,13 @@ export const postsApi = createApi({
     ...backendAPISettings,
   }),
   endpoints: build => ({
-    getPosts: build.query<TGetPostsResponse, void>({
+    getPosts: build.query<TPost[], void>({
       query: () => ({ url: POSTS_ENDPOINTS.getPosts, method: 'GET' }),
     }),
-    getPostById: build.query<TPostByIdResponse, number>({
+    getPostById: build.query<TPost, number>({
       query: id => ({ url: `${POSTS_ENDPOINTS.getPosts}/${id}`, method: 'GET' }),
     }),
-    postPost: build.mutation<string, TPostPostRequest>({
+    postPost: build.mutation<string, TPost>({
       query: data => ({ url: POSTS_ENDPOINTS.getPosts, method: 'POST', body: data }),
     }),
   }),
