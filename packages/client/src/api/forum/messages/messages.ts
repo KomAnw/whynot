@@ -17,7 +17,7 @@ export const messagesApi = createApi({
   }),
   endpoints: build => ({
     getMessagesByPostId: build.query<TGetMessagesByPostIdResponse, number>({
-      query: postId => ({ url: `${MESSAGES_ENDPOINTS.getMessagesByPostId}/${postId}`, method: 'GET' }),
+      query: postId => ({ url: `${MESSAGES_ENDPOINTS.getMessagesByPostId}?postId=${postId}`, method: 'GET' }),
     }),
     postMessage: build.mutation<string, TPostMessageRequest>({
       query: data => ({ url: MESSAGES_ENDPOINTS.postMessage, method: 'POST', body: data }),
