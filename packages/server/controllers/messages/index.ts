@@ -1,1 +1,1 @@
-export { postMessage, getMessages } from './messages';
+export { postMessage, getMessages, postMessageEmoji } from './messages';

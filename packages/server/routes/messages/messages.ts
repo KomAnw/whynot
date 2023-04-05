@@ -1,8 +1,21 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
-import { getMessages, postMessage } from '../../controllers/messages';
+import { getMessages, postMessage, postMessageEmoji } from '../../controllers/messages';
 
 export const router = Router();
+
+router.post(
+  '/emoji',
+  celebrate({
+    body: Joi.object().keys({
+      postId: Joi.number().required(),
+      messageId: Joi.number().required(),
+      emojiId: Joi.number().required(),
+      authorId: Joi.number().required(),
+    }),
+  }),
+  postMessageEmoji
+);
 
 router.post(
   '/',

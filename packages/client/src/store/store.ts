@@ -3,6 +3,7 @@ import { userApi } from 'src/api/user/user';
 import { authApi } from 'src/api/auth/auth';
 import { oauthApi } from 'src/api/oauth/oauth';
 import { postsApi } from 'src/api/forum/posts/posts';
+import { messagesApi } from 'src/api/forum/messages/messages';
 import themeReducer from 'src/hoc/ThemeWrapper/themeSlice';
 import { leaderboardApi } from 'src/api/leaderboard/leaderboard';
 import modeReducer from 'pages/Game/modeSlice';
@@ -24,6 +25,7 @@ const store = configureStore({
     [oauthApi.reducerPath]: oauthApi.reducer,
     [leaderboardApi.reducerPath]: leaderboardApi.reducer,
     [postsApi.reducerPath]: postsApi.reducer,
+    [messagesApi.reducerPath]: messagesApi.reducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat(
@@ -31,7 +33,8 @@ const store = configureStore({
       authApi.middleware,
       userApi.middleware,
       oauthApi.middleware,
-      postsApi.middleware
+      postsApi.middleware,
+      messagesApi.middleware
     ),
   preloadedState,
 });
