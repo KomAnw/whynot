@@ -18,21 +18,20 @@ export const postMessageEmoji = async (req: IRequestPostMessageEmoji, res: Respo
   const message = await MessageModel.findOne({ where: { id: messageId } });
 
   if (message) {
-    let emojis: TEmoji[] | undefined = message.emojis as unknown as TEmoji[] | undefined;
+    const emojis = (message.emojis.length
+      ? message.emojis
+      : [{ id: emojiId, authorId: [authorId] }]) as unknown as TEmoji[];
 
     if (emojis) {
       const emojiIndex = emojis.findIndex((item: TEmoji) => item.id === emojiId);
 
-      if (emojiIndex !== -1) {
-        !emojis[emojiIndex].authorId.includes(authorId) && emojis[emojiIndex].authorId.push(authorId);
-      } else {
-        emojis.push({ id: emojiId, authorId: [authorId] });
-      }
-    } else {
-      emojis = [{ id: emojiId, authorId: [authorId] }];
+      emojiIndex !== -1
+        ? !emojis[emojiIndex].authorId.includes(authorId) && emojis[emojiIndex].authorId.push(authorId)
+        : emojis.push({ id: emojiId, authorId: [authorId] });
     }
 
     await MessageModel.update({ emojis: emojis as unknown as JSON[] }, { where: { id: messageId } });
+
     const data = await MessageModel.findAll({ where: { postId }, raw: true });
 
     res.status(200).send(data);
