@@ -30,7 +30,7 @@ export const startSSR = async () => {
         : await productionConfig(originalUrl);
 
       const stateMarkup = `<script>window.__PRELOADED_STATE__ = ${JSON.stringify(state)}</script>`;
-      const scriptWithNonce = `<script nonce=${nonce}`;
+      const scriptWithNonce = `<script nonce="${nonce}"`;
 
       const html = template
         .replace(`<!--ssr-outlet-->`, appHtml)

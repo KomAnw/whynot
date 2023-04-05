@@ -1,5 +1,6 @@
 import type { Request } from 'express';
-import type { EMode, ETheme } from '../models/theme';
+import type { ETheme } from '../models/theme';
+import type { EMode } from '../models/mode';
 import type { Message } from '../models/message';
 import type { Post } from '../models/post';
 

@@ -3,11 +3,19 @@ import { ThemeModel } from '../../models/theme';
 import type { IRequestPostTheme, IRequestGetTheme } from '../type';
 
 export const postTheme = async (req: IRequestPostTheme, res: Response) => {
-  const { userId, theme, mode } = req.body;
+  const { userId, theme } = req.body;
 
-  const data = await ThemeModel.create({ userId, theme, mode });
+  const data = await ThemeModel.create({ userId, theme });
 
   res.status(200).send(data.dataValues);
+};
+
+export const putTheme = async (req: IRequestPostTheme, res: Response) => {
+  const { userId, theme } = req.body;
+
+  const data = await ThemeModel.update({ userId, theme }, { where: { userId } });
+
+  res.status(200).send(data);
 };
 
 export const getTheme = async (req: IRequestGetTheme, res: Response) => {
