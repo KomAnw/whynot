@@ -21,7 +21,6 @@ router.post(
 );
 
 router.get(
-  // todo: проверить (было path '/')
   '/',
   celebrate({
     query: Joi.object().keys({
