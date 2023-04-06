@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
-import { getMode, postMode, putMode } from '../../controllers/mode/mode';
+import { getMode, postMode } from '../../controllers/mode/mode';
 
 export const router = Router();
 
@@ -13,17 +13,6 @@ router.post(
     }),
   }),
   postMode
-);
-
-router.put(
-  '/',
-  celebrate({
-    body: Joi.object().keys({
-      userId: Joi.number().required(),
-      mode: Joi.string(),
-    }),
-  }),
-  putMode
 );
 
 router.get(

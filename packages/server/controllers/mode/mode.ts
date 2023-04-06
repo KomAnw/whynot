@@ -5,17 +5,17 @@ import type { IRequestPostTheme, IRequestGetTheme } from '../type';
 export const postMode = async (req: IRequestPostTheme, res: Response) => {
   const { userId, mode } = req.body;
 
-  const data = await ModeModel.create({ userId, mode });
+  const user = await ModeModel.findOne({ where: { userId } });
 
-  res.status(200).send(data.dataValues);
-};
+  if (user) {
+    const data = await ModeModel.update({ userId, mode }, { where: { userId } });
 
-export const putMode = async (req: IRequestPostTheme, res: Response) => {
-  const { userId, mode } = req.body;
+    res.status(200).send(data);
+  } else {
+    const data = await ModeModel.create({ userId, mode });
 
-  const data = await ModeModel.update({ userId, mode }, { where: { userId } });
-
-  res.status(200).send(data);
+    res.status(200).send(data.dataValues);
+  }
 };
 
 export const getMode = async (req: IRequestGetTheme, res: Response) => {

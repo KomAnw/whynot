@@ -6,9 +6,7 @@ import { getBackendURL } from 'src/api/common/utils/apiUtilts';
 const ROOT_MODE_URL = 'mode';
 
 export const MODE_ENDPOINTS = {
-  add: getBackendURL(ROOT_MODE_URL),
-  update: getBackendURL(ROOT_MODE_URL),
-  get: getBackendURL(ROOT_MODE_URL),
+  end: getBackendURL(ROOT_MODE_URL),
 };
 
 export const modeApi = createApi({
@@ -20,7 +18,7 @@ export const modeApi = createApi({
     addMode: build.mutation<string, ModeRequest>({
       query: payload => {
         return {
-          url: MODE_ENDPOINTS.add,
+          url: MODE_ENDPOINTS.end,
           method: 'POST',
           body: payload,
           responseHandler: 'text',
@@ -30,7 +28,7 @@ export const modeApi = createApi({
     updateMode: build.mutation<string, ModeRequest>({
       query: payload => {
         return {
-          url: MODE_ENDPOINTS.update,
+          url: MODE_ENDPOINTS.end,
           method: 'PUT',
           body: payload,
           responseHandler: 'text',
@@ -39,7 +37,7 @@ export const modeApi = createApi({
     }),
     getMode: build.query<Mode, number>({
       query: userId => ({
-        url: `${MODE_ENDPOINTS.get}/${userId}`,
+        url: `${MODE_ENDPOINTS.end}/${userId}`,
         method: 'GET',
       }),
     }),
