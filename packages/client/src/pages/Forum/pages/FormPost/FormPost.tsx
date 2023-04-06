@@ -4,22 +4,46 @@ import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
 import { breakpoints } from 'components/App/constants';
 import MessageInput from 'pages/Forum/pages/FormPost/components/MessageInput';
-import { demoMessage, demoPost } from 'pages/Forum/pages/FormPost/demoData';
+import { demoMessage } from 'pages/Forum/pages/FormPost/demoData';
 import MessageElement from 'pages/Forum/pages/FormPost/components/MessageElement';
 import { sortMessage } from 'pages/Forum/pages/FormPost/utils/sortMessage';
 import { IconPost } from 'pages/Forum/components/IconPost';
 import { Text } from 'src/design/Text';
+import { useGetPostByIdMutation } from 'src/api/forum/posts/posts';
+import { useState } from 'react';
+import type { TPost } from 'src/api/forum/posts/models';
+import { logger } from 'src/utils/logger';
+import { useDidMount } from 'src/hooks/react';
 
 const { forum } = paths;
 
 const FormPost = () => {
+  const postId = Number(window.location.pathname.split('/').pop());
+
+  const [GetPostById] = useGetPostByIdMutation();
+  const [post, setPost] = useState<TPost>();
+
+  const GetPostHandler = async () => {
+    try {
+      const data = await GetPostById(postId).unwrap();
+
+      setPost(data);
+    } catch (err) {
+      logger(err, 'error');
+    }
+  };
+
+  useDidMount(() => {
+    GetPostHandler();
+  });
+
   return (
     <PageContainer>
       <Component>
         <Title>Forum</Title>
         <TitlePost>
           <IconPost />
-          <NamePost>{demoPost.title}</NamePost>
+          <NamePost>{post && post.text}</NamePost>
         </TitlePost>
         <Main>
           {sortMessage(demoMessage).map(item => (

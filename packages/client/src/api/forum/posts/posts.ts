@@ -19,7 +19,7 @@ export const postsApi = createApi({
     getPosts: build.query<TPost[], void>({
       query: () => ({ url: POSTS_ENDPOINTS.getPosts, method: 'GET' }),
     }),
-    getPostById: build.query<TPost, number>({
+    getPostById: build.mutation<TPost, number>({
       query: id => ({ url: `${POSTS_ENDPOINTS.getPosts}/${id}`, method: 'GET' }),
     }),
     postPost: build.mutation<string, TPost>({
@@ -28,4 +28,4 @@ export const postsApi = createApi({
   }),
 });
 
-export const { useGetPostsQuery, useGetPostByIdQuery, usePostPostMutation } = postsApi;
+export const { useGetPostsQuery, useGetPostByIdMutation, usePostPostMutation } = postsApi;
