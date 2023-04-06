@@ -15,9 +15,9 @@ export const getPosts = async (_req: Request, res: Response) => {
 };
 
 export const getPostById = async (req: IRequestGetPostById, res: Response) => {
-  const { id } = req.params;
+  const { postId } = req.params;
 
-  const data = await PostModel.findOne({ where: { id: Number(id) } });
+  const data = await PostModel.findOne({ where: { id: Number(postId) } });
 
   if (data) {
     res.status(200).send(data);

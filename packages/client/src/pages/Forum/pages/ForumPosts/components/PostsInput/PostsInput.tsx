@@ -1,23 +1,39 @@
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
+import { useDispatch } from 'react-redux';
 import { Input } from 'components/Input';
 import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/Input';
 import { logger } from 'src/utils/logger';
+import { postsApi, usePostPostMutation } from 'src/api/forum/posts/posts';
+import { useGetUserQuery } from 'src/api/auth/auth';
 
 export type TInputPost = {
   inputPosts: string;
 };
 
 const PostsInput = () => {
+  const dispatch = useDispatch();
+  const { data: dataUser } = useGetUserQuery();
+  const [postApi] = usePostPostMutation();
+
   const { resetField, register, handleSubmit } = useForm<TInputPost>({
     mode: 'all',
   });
 
-  const submitForm = async (data: TInputPost) => {
+  const submitForm = async (dataPost: TInputPost) => {
     try {
+      if (dataUser) {
+        await postApi({
+          text: dataPost.inputPosts,
+          authorId: dataUser.id,
+          login: dataUser.login,
+          date: new Date(),
+        });
+
+        dispatch(postsApi.util.invalidateTags(['Posts']));
+      }
       resetField('inputPosts');
-      logger(data);
     } catch (error) {
       logger(error, 'error');
     }
