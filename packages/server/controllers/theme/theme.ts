@@ -8,9 +8,9 @@ export const postTheme = async (req: IRequestPostTheme, res: Response) => {
   const user = await ThemeModel.findOne({ where: { userId } });
 
   if (user) {
-    const data = await ThemeModel.update({ userId, theme }, { where: { userId } });
+    const data = await ThemeModel.update({ userId, theme }, { where: { userId }, returning: true });
 
-    res.status(200).send(data);
+    res.status(200).send(...data[1]);
   } else {
     const data = await ThemeModel.create({ userId, theme });
 

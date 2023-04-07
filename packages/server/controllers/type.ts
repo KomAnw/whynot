@@ -35,6 +35,10 @@ export interface IRequestGetPostById extends Request {
 type ITheme = {
   userId: number;
   theme: ETheme;
+};
+
+type IMode = {
+  userId: number;
   mode: EMode;
 };
 
@@ -43,5 +47,13 @@ export interface IRequestPostTheme extends Request {
 }
 
 export interface IRequestGetTheme extends Request {
+  params: { id: string };
+}
+
+export interface IRequestPostMode extends Request {
+  body: IMode;
+}
+
+export interface IRequestGetMode extends Request {
   params: { id: string };
 }
