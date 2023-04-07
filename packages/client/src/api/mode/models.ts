@@ -1,4 +1,4 @@
-type TMode = 'Doodle' | 'Mario' | 'Homer';
+export type TMode = 'Doodle' | 'Mario' | 'Homer';
 
 export type ModeRequest = {
   userId: number;
