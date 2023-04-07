@@ -12,12 +12,15 @@ import { changeTheme } from 'src/hoc/ThemeWrapper/themeSlice';
 import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
 import { fullScreenSwitching } from 'src/utils/fullscreenApi';
 import { soundSwitchOn } from 'pages/Settings/soundSlice';
+import { updateTheme } from 'src/api/theme/theme';
+import { useGetUserQuery } from 'src/api/auth/auth';
 import { switchToGamepad } from './gamepadSlice';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 
 const Settings = () => {
+  const { data: user } = useGetUserQuery();
   const dispatch = useAppDispatch();
   const sprite = useAppSelector(state => state.mode.sprite);
   const theme = useAppSelector(state => state.theme.name);
@@ -25,7 +28,16 @@ const Settings = () => {
   const gamepadSwitchOn = useAppSelector(state => state.gamepad.gamepadOn);
   const soundOn = useAppSelector(state => state.sound.soundOn);
 
-  const themeHandler = () => dispatch(changeTheme());
+  const themeHandler = async () => {
+    dispatch(changeTheme());
+
+    if (user?.id) {
+      await updateTheme({
+        theme: theme === 'default' ? 'other' : 'default',
+        userId: user.id,
+      });
+    }
+  };
 
   const onLeft = () => {
     const currentIndex = sprites.findIndex(item => item.name === sprite.name);

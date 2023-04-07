@@ -10,11 +10,13 @@ export const postTheme = async (req: IRequestPostTheme, res: Response) => {
   if (user) {
     const data = await ThemeModel.update({ userId, theme }, { where: { userId }, returning: true });
 
-    res.status(200).send(...data[1]);
+    if (data) {
+      res.status(201).json({ message: 'Theme successfully changed' });
+    }
   } else {
     const data = await ThemeModel.create({ userId, theme });
 
-    res.status(200).send(data.dataValues);
+    res.status(201).send(data.dataValues);
   }
 };
 
@@ -24,7 +26,7 @@ export const getTheme = async (req: IRequestGetTheme, res: Response) => {
   const data = await ThemeModel.findOne({ where: { userId: Number(id) } });
 
   if (data) {
-    res.status(200).send(data);
+    res.status(200).json({ theme: data.theme });
   } else {
     res.status(404).json({ message: 'Not Found' });
   }

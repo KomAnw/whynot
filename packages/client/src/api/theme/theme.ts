@@ -1,49 +1,46 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { backendAPISettings } from 'src/api';
-import type { Theme, ThemeRequest } from 'src/api/theme/models';
 import { getBackendURL } from 'src/api/common/utils/apiUtilts';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import type { ThemeRequest } from 'src/api/theme/models';
+import { logger } from 'src/utils/logger';
+import type { ThemeResponse } from 'src/api/theme/models';
 
 const ROOT_THEME_URL = 'theme';
 
 export const THEME_ENDPOINTS = {
-  add: getBackendURL(ROOT_THEME_URL),
   update: getBackendURL(ROOT_THEME_URL),
   get: getBackendURL(ROOT_THEME_URL),
 };
 
-export const themeApi = createApi({
-  reducerPath: 'theme',
-  baseQuery: fetchBaseQuery({
-    ...backendAPISettings,
-  }),
-  endpoints: build => ({
-    addTheme: build.mutation<string, ThemeRequest>({
-      query: payload => {
-        return {
-          url: THEME_ENDPOINTS.add,
-          method: 'POST',
-          body: payload,
-          responseHandler: 'text',
-        };
+export const getTheme = createAsyncThunk('theme/get', async (userId: number) => {
+  try {
+    const response = await fetch(`${THEME_ENDPOINTS.get}/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    }),
-    updateTheme: build.mutation<string, ThemeRequest>({
-      query: payload => {
-        return {
-          url: THEME_ENDPOINTS.update,
-          method: 'PUT',
-          body: payload,
-          responseHandler: 'text',
-        };
-      },
-    }),
-    getTheme: build.query<Theme, number>({
-      query: userId => ({
-        url: `${THEME_ENDPOINTS.get}/${userId}`,
-        method: 'GET',
-      }),
-    }),
-  }),
+      credentials: backendAPISettings.credentials,
+    });
+
+    const { theme }: ThemeResponse = await response.json();
+
+    return theme;
+  } catch (e) {
+    logger(`Failed to get theme: ${e}`, 'error');
+  }
 });
 
-export const { useAddThemeMutation, useUpdateThemeMutation, useGetThemeQuery } = themeApi;
+export const updateTheme = async (data: ThemeRequest) => {
+  try {
+    await fetch(THEME_ENDPOINTS.update, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: backendAPISettings.credentials,
+      body: JSON.stringify(data),
+    });
+  } catch (e) {
+    logger(`Failed to update theme: ${e}`, 'error');
+  }
+};

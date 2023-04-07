@@ -1,5 +1,15 @@
-import { defaultTheme } from './theme';
+import { themes } from './theme';
 import { defaultSprite } from './mode';
+import type { ETheme } from '../../../models/theme';
 
-// Состояние по умолчанию для store.
-export const state = { theme: defaultTheme, mode: { sprite: defaultSprite } };
+/**
+ * Начальное состояние для неавторизованных пользователей.
+ */
+export const initialState = { theme: themes.default, mode: { sprite: defaultSprite } };
+
+/**
+ * Функция получения темы для авторизованных пользователей.
+ */
+export const getUserState = (themeName: ETheme) => {
+  return { theme: themes[themeName], mode: { sprite: defaultSprite } };
+};

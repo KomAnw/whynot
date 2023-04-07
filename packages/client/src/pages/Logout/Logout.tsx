@@ -4,6 +4,7 @@ import { authApi, useLogoutMutation } from 'src/api/auth/auth';
 import { paths } from 'src/components/App/constants';
 import Spinner from 'src/components/Spinner';
 import { useAppDispatch } from 'src/hooks/redux';
+import { changeToInitialTheme } from 'src/hoc/ThemeWrapper/themeSlice';
 
 const { welcome, errorPage } = paths;
 
@@ -18,6 +19,7 @@ const Logout = () => {
       .catch(() => navigate(errorPage))
       .finally(() => {
         dispatch(authApi.util.resetApiState());
+        dispatch(changeToInitialTheme());
         navigate(welcome);
       });
   }, [dispatch, logout, navigate]);
