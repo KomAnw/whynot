@@ -14,6 +14,8 @@ import { fullScreenSwitching } from 'src/utils/fullscreenApi';
 import { soundSwitchOn } from 'pages/Settings/soundSlice';
 import { updateTheme } from 'src/api/theme/theme';
 import { useGetUserQuery } from 'src/api/auth/auth';
+import { updateMode } from 'src/api/mode/mode';
+import type { TSprite } from 'pages/Game/types/types';
 import { switchToGamepad } from './gamepadSlice';
 
 const { mobileM } = breakpoints;
@@ -39,28 +41,33 @@ const Settings = () => {
     }
   };
 
-  const onLeft = () => {
+  const modeHandler = async (direction: 'left' | 'right') => {
     const currentIndex = sprites.findIndex(item => item.name === sprite.name);
 
-    if (currentIndex === 0) {
-      dispatch(changeMode(sprites[sprites.length - 1]));
-    } else {
-      dispatch(changeMode(sprites[currentIndex - 1]));
+    if (user?.id) {
+      let currentSprite: TSprite = sprites[0];
+
+      if (direction === 'left') {
+        currentSprite = currentIndex === 0 ? sprites[sprites.length - 1] : sprites[currentIndex - 1];
+      } else if (direction === 'right') {
+        currentSprite = currentIndex === sprites.length - 1 ? sprites[0] : sprites[currentIndex + 1];
+      }
+
+      dispatch(changeMode(currentSprite));
+
+      await updateMode({
+        userId: user.id,
+        mode: currentSprite.name,
+      });
     }
+  };
+
+  const onLeft = () => {
+    modeHandler('left');
   };
 
   const onRight = () => {
-    const currentIndex = sprites.findIndex(item => item.name === sprite.name);
-
-    if (currentIndex === sprites.length - 1) {
-      dispatch(changeMode(sprites[0]));
-    } else {
-      dispatch(changeMode(sprites[currentIndex + 1]));
-    }
-  };
-
-  const switchTheme = () => {
-    themeHandler();
+    modeHandler('right');
   };
 
   const switchOnFullScreen = () => {
@@ -83,7 +90,7 @@ const Settings = () => {
         <Column>
           <Row>
             <Text>Dark theme</Text>
-            <Switch onClick={switchTheme} id="theme" isChecked={theme === 'other'} />
+            <Switch onClick={themeHandler} id="theme" isChecked={theme === 'other'} />
           </Row>
           <Row>
             <Text>Switch to full screen</Text>

@@ -5,6 +5,7 @@ import { paths } from 'src/components/App/constants';
 import Spinner from 'src/components/Spinner';
 import { useAppDispatch } from 'src/hooks/redux';
 import { changeToInitialTheme } from 'src/hoc/ThemeWrapper/themeSlice';
+import { changeToInitialMode } from 'pages/Game/modeSlice';
 
 const { welcome, errorPage } = paths;
 
@@ -20,6 +21,7 @@ const Logout = () => {
       .finally(() => {
         dispatch(authApi.util.resetApiState());
         dispatch(changeToInitialTheme());
+        dispatch(changeToInitialMode());
         navigate(welcome);
       });
   }, [dispatch, logout, navigate]);

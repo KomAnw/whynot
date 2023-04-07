@@ -16,7 +16,7 @@ export const postTheme = async (req: IRequestPostTheme, res: Response) => {
   } else {
     const data = await ThemeModel.create({ userId, theme });
 
-    res.status(201).send(data.dataValues);
+    res.status(201).json({ theme: data.dataValues.theme });
   }
 };
 

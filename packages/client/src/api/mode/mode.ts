@@ -1,47 +1,43 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { backendAPISettings } from 'src/api';
-import type { Mode, ModeRequest } from 'src/api/mode/models';
 import { getBackendURL } from 'src/api/common/utils/apiUtilts';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { logger } from 'src/utils/logger';
+import type { ModeRequest } from 'src/api/mode/models';
 
 const ROOT_MODE_URL = 'mode';
 
 export const MODE_ENDPOINTS = {
-  end: getBackendURL(ROOT_MODE_URL),
+  update: getBackendURL(ROOT_MODE_URL),
+  get: getBackendURL(ROOT_MODE_URL),
 };
 
-export const modeApi = createApi({
-  reducerPath: 'mode',
-  baseQuery: fetchBaseQuery({
-    ...backendAPISettings,
-  }),
-  endpoints: build => ({
-    addMode: build.mutation<string, ModeRequest>({
-      query: payload => {
-        return {
-          url: MODE_ENDPOINTS.end,
-          method: 'POST',
-          body: payload,
-          responseHandler: 'text',
-        };
+export const getMode = createAsyncThunk('mode/get', async (userId: number) => {
+  try {
+    const response = await fetch(`${MODE_ENDPOINTS.get}/${userId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
       },
-    }),
-    updateMode: build.mutation<string, ModeRequest>({
-      query: payload => {
-        return {
-          url: MODE_ENDPOINTS.end,
-          method: 'PUT',
-          body: payload,
-          responseHandler: 'text',
-        };
-      },
-    }),
-    getMode: build.query<Mode, number>({
-      query: userId => ({
-        url: `${MODE_ENDPOINTS.end}/${userId}`,
-        method: 'GET',
-      }),
-    }),
-  }),
+      credentials: backendAPISettings.credentials,
+    });
+
+    await response.json();
+  } catch (e) {
+    logger(`Failed to get mode: ${e}`, 'error');
+  }
 });
 
-export const { useAddModeMutation, useUpdateModeMutation, useGetModeQuery } = modeApi;
+export const updateMode = async (data: ModeRequest) => {
+  try {
+    await fetch(MODE_ENDPOINTS.update, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: backendAPISettings.credentials,
+      body: JSON.stringify(data),
+    });
+  } catch (e) {
+    logger(`Failed to update mode: ${e}`, 'error');
+  }
+};

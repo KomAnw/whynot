@@ -4,6 +4,7 @@ import { paths } from 'src/components/App/constants';
 import Spinner from 'src/components/Spinner';
 import { useAppDispatch } from 'src/hooks/redux';
 import { getTheme } from 'src/api/theme/theme';
+import { getMode } from 'src/api/mode/mode';
 
 const { welcome } = paths;
 
@@ -17,6 +18,7 @@ const PrivateRoute = () => {
 
   if (data) {
     dispatch(getTheme(data.id));
+    dispatch(getMode(data.id));
   }
 
   return data ? <Outlet /> : <Navigate to={welcome} replace={true} />;
