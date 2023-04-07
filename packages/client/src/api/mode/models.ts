@@ -1,13 +1,8 @@
-export type ModeResponse = Mode[];
-
-export type Mode = {
-  data: {
-    userId: number;
-    mode: string;
-  };
-};
+type TMode = 'Doodle' | 'Mario' | 'Homer';
 
 export type ModeRequest = {
   userId: number;
-  mode: string;
+  mode: TMode;
 };
+
+export type ModeResponse = ModeRequest;

@@ -18,7 +18,7 @@ export const modeSlice = createSlice({
   },
   extraReducers: builder => {
     builder.addCase(getMode.fulfilled, (state, action) => {
-      const { mode: currentMode } = action.payload;
+      const currentMode = action.payload;
       const mode = sprites.find(item => item.name === currentMode);
 
       if (mode) {

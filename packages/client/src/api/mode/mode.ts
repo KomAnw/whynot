@@ -2,7 +2,7 @@ import { backendAPISettings } from 'src/api';
 import { getBackendURL } from 'src/api/common/utils/apiUtilts';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { logger } from 'src/utils/logger';
-import type { ModeRequest } from 'src/api/mode/models';
+import type { ModeRequest, ModeResponse } from 'src/api/mode/models';
 
 const ROOT_MODE_URL = 'mode';
 
@@ -21,7 +21,9 @@ export const getMode = createAsyncThunk('mode/get', async (userId: number) => {
       credentials: backendAPISettings.credentials,
     });
 
-    await response.json();
+    const { mode }: ModeResponse = await response.json();
+
+    return mode;
   } catch (e) {
     logger(`Failed to get mode: ${e}`, 'error');
   }
