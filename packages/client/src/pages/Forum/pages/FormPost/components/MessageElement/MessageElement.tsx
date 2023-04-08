@@ -1,38 +1,45 @@
 import styled from 'styled-components';
 import EmojiBox from 'pages/Forum/pages/FormPost/components/MessageElement/EmojiBox';
-import type { TMessage, TEmoji } from 'pages/Forum/pages/types';
+import type { TEmoji } from 'src/api/forum/messages/models';
 import MenuEmojis from 'pages/Forum/pages/FormPost/components/MenuEmojis';
 import { useState } from 'react';
 import { IconButtonEmoji } from 'pages/Forum/components/IconButtonEmoji';
 import { Text } from 'src/design/Text';
+import type { TMessageProps } from 'pages/Forum/pages/types';
 
-const MessageElement = ({ author, text, date, messageMainId, emojis }: TMessage) => {
+const MessageElement = (props: TMessageProps) => {
+  const { id, authorId, text, login, date, mainMessageId, emojis, addEmoji, addMainMessage } = props;
   const [isOpenMenuEmojis, setIsOpenMenuEmojis] = useState(false);
 
-  const handleClick = () => {
+  const handleClickButtonEmoji = () => {
     setIsOpenMenuEmojis(!isOpenMenuEmojis);
   };
 
-  const emojiBox = emojis?.map((item: TEmoji, index: number) => (
-    <EmojiBox id={item.id} num={10} key={author.id + index} />
-  ));
+  const handleClickButtonAnswer = () => {
+    addMainMessage({ id, login });
+  };
 
   return (
-    <Container elementId={messageMainId!}>
+    <Container elementId={mainMessageId!}>
       <Header>
-        <Author>
-          {author.firstName} {author.secondName}
-        </Author>
+        <Author>{login}</Author>
         <Time>{new Date(date).toLocaleString()}</Time>
       </Header>
       <Message>{text}</Message>
       <Footer>
-        {messageMainId === 0 ? <ButtonAnswer>Ответ</ButtonAnswer> : null}
-        <ButtonEmoji onClick={handleClick}>
+        {mainMessageId === 0 ? <ButtonAnswer onClick={handleClickButtonAnswer}>Ответ</ButtonAnswer> : null}
+        <ButtonEmoji onClick={handleClickButtonEmoji}>
           <IconButtonEmoji />
-          {isOpenMenuEmojis && <MenuEmojis setIsOpenMenuEmojis={setIsOpenMenuEmojis} />}
+          {isOpenMenuEmojis && (
+            <MenuEmojis
+              messageId={id}
+              authorId={authorId}
+              setIsOpenMenuEmojis={setIsOpenMenuEmojis}
+              addEmoji={addEmoji}
+            />
+          )}
         </ButtonEmoji>
-        <Emoji>{emojiBox}</Emoji>
+        <Emoji>{emojis && emojis.map((item: TEmoji) => <EmojiBox {...item} key={item.id} />)}</Emoji>
       </Footer>
     </Container>
   );
@@ -70,7 +77,7 @@ const Time = styled(Text)`
 
 const Message = styled(Text)`
   display: grid;
-  font-weight: 400;
+  font-weight: 700;
   font-size: 20px;
   line-height: 22px;
   color: ${({ theme }) => theme.colors.core.text.primary};

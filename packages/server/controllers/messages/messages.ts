@@ -32,7 +32,7 @@ export const postMessageEmoji = async (req: IRequestPostMessageEmoji, res: Respo
 
     await MessageModel.update({ emojis: emojis as unknown as JSON[] }, { where: { id: messageId } });
 
-    const data = await MessageModel.findAll({ where: { postId }, raw: true });
+    const data = await MessageModel.findAll({ where: { id: Number(postId) }, raw: true });
 
     res.status(200).send(data);
   } else {

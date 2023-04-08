@@ -1,17 +1,13 @@
 import styled from 'styled-components';
 import { emojiLinkIcon } from 'pages/Forum/pages/FormPost/utils/emojiLinkIcon';
 import { Text } from 'src/design/Text';
+import type { TEmoji } from 'src/api/forum/messages/models';
 
-type TEmojiBox = {
-  id: number;
-  num: number;
-};
-
-const EmojiBox = ({ id, num }: TEmojiBox) => {
+const EmojiBox = ({ id, authorId }: TEmoji) => {
   return (
     <Container>
       <Emoji src={`${emojiLinkIcon(id)}`} />
-      <Number>{num}</Number>
+      <Number>{authorId.length}</Number>
     </Container>
   );
 };

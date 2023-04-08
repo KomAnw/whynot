@@ -6,12 +6,19 @@ export type TMessage = {
   postId: number;
   date: Date;
   mainMessageId: number;
-  emojis: JSON[];
+  emojis: TEmoji[];
 };
 
+export type TMessageWithID = Omit<TMessage, 'id'> & { id: number };
+
 export type TPostEmojiRequest = {
-  postId: string;
-  messageId: string;
-  emojiId: string;
-  authorId: string;
+  postId: number;
+  messageId: number;
+  emojiId: number;
+  authorId: number;
+};
+
+export type TEmoji = {
+  id: number;
+  authorId: number[];
 };

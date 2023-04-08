@@ -1,9 +1,13 @@
 import styled from 'styled-components';
+import type { MouseEvent } from 'react';
 import type { TMenuEmojis } from 'pages/Forum/pages/types';
 import { emojiLinkIcon, listEmoji } from 'pages/Forum/pages/FormPost/utils/emojiLinkIcon';
 
-const MenuEmojis = ({ setIsOpenMenuEmojis }: TMenuEmojis) => {
-  const handleClick = () => {
+const MenuEmojis = ({ setIsOpenMenuEmojis, messageId, authorId, addEmoji }: TMenuEmojis) => {
+  const handleClick = async (event: MouseEvent<HTMLImageElement>) => {
+    const target = event.target as HTMLImageElement;
+
+    addEmoji({ messageId, authorId, emojiId: Number(target.dataset.id) });
     setIsOpenMenuEmojis(false);
   };
 
@@ -29,7 +33,7 @@ const Container = styled('div')`
   height: 26px;
   width: 74px;
   border-radius: 6px;
-  background: ${({ theme }) => theme.colors.control.input.backgroundSecondary};
+  background-color: ${({ theme }) => theme.colors.control.input.background};
 `;
 
 const Emoji = styled('img')`

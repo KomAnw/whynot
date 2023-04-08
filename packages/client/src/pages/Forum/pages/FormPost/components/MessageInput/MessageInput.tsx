@@ -1,25 +1,40 @@
 import styled from 'styled-components';
-import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
 import { Text } from 'src/design/Text';
 import { Input } from 'src/components/Input';
 import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/Input';
 import { logger } from 'src/utils/logger';
+import { useGetUserQuery } from 'src/api/auth/auth';
+import { usePostMessageMutation } from 'src/api/forum/messages/messages';
+import type { TInputMessage, TMessageInputProps } from 'pages/Forum/pages/types';
 
-export type TInputPost = {
-  inputPost: string;
-};
+const postId = Number(window.location.pathname.split('/').pop());
 
-const MessageInput = () => {
-  const { resetField, register, handleSubmit } = useForm<TInputPost>({
+const MessageInput = ({ refreshPage, mainMessage, resetMainMessage }: TMessageInputProps) => {
+  const { data: dataUser } = useGetUserQuery();
+  const [GetMessage] = usePostMessageMutation();
+
+  const { resetField, register, handleSubmit } = useForm<TInputMessage>({
     mode: 'all',
   });
 
-  const submitForm: SubmitHandler<TInputPost> = async data => {
+  const submitForm = async (data: TInputMessage) => {
     try {
-      resetField('inputPost');
-      logger(data);
+      if (dataUser) {
+        await GetMessage({
+          text: data.inputMessage,
+          authorId: dataUser.id,
+          postId,
+          login: dataUser.login,
+          date: new Date(),
+          mainMessageId: mainMessage.id,
+          emojis: [],
+        });
+      }
+      resetField('inputMessage');
+      resetMainMessage();
+      refreshPage();
     } catch (error) {
       logger(data, 'error');
     }
@@ -29,13 +44,13 @@ const MessageInput = () => {
     <Form onSubmit={handleSubmit(submitForm)}>
       <Header>
         <Title>Кому:</Title>
-        <Direction>Всем</Direction>
+        <Direction>{mainMessage.id === 0 ? 'Всем' : mainMessage.login}</Direction>
       </Header>
       <Footer>
         <RestyledInput
           label=""
-          name="inputPost"
-          placeholder="Создать новую тему"
+          name="inputMessage"
+          placeholder="Напишите сообщение"
           register={register}
           type="text"
           validationRules={{}}
