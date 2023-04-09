@@ -18,7 +18,6 @@ import { useGetUserQuery } from 'src/api/auth/auth';
 import { useState } from 'react';
 import type { THandleAddEmoji, TMainMessage } from 'pages/Forum/pages/types';
 import { logger } from 'src/utils/logger';
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const { forum } = paths;
@@ -28,7 +27,7 @@ const ForumPost = () => {
   const postId = Number(params.id);
   const { data: dataUser } = useGetUserQuery();
   const { data: dataPost } = useGetPostByIdQuery(postId);
-  const { data: dataMessages, refetch } = useGetMessagesByPostIdQuery(postId);
+  const { data: dataMessages } = useGetMessagesByPostIdQuery(postId, { refetchOnMountOrArgChange: true });
   const [getPostEmoji] = usePostEmojiMutation();
   const [mainMessage, setMainMessage] = useState<TMainMessage>({ id: 0, login: '' });
 
@@ -49,10 +48,6 @@ const ForumPost = () => {
   const handleResetMainMessage = () => {
     setMainMessage({ id: 0, login: '' });
   };
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
 
   return (
     <PageContainer>
