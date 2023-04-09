@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import { Emoji, Container } from 'src/pages/Forum/pages/ForumPost/components/MenuEmojis/style';
 import type { MouseEvent } from 'react';
 import type { TMenuEmojis } from 'pages/Forum/pages/types';
-import { emojiLinkIcon, listEmoji } from 'pages/Forum/pages/FormPost/utils/emojiLinkIcon';
+import { emojiLinkIcon, listEmoji } from 'pages/Forum/pages/ForumPost/utils/emojiLinkIcon';
 
 const MenuEmojis = ({ setIsOpenMenuEmojis, messageId, authorId, addEmoji }: TMenuEmojis) => {
   const handleClick = async (event: MouseEvent<HTMLImageElement>) => {
@@ -21,21 +21,3 @@ const MenuEmojis = ({ setIsOpenMenuEmojis, messageId, authorId, addEmoji }: TMen
 };
 
 export default MenuEmojis;
-
-const Container = styled('div')`
-  display: flex;
-  gap: 5px;
-  padding: 0 5px;
-  align-items: center;
-  position: absolute;
-  bottom: 18px;
-  left: 18px;
-  height: 26px;
-  width: 74px;
-  border-radius: 6px;
-  background-color: ${({ theme }) => theme.colors.control.input.background};
-`;
-
-const Emoji = styled('img')`
-  cursor: pointer;
-`;

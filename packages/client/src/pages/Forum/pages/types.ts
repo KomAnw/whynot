@@ -1,4 +1,4 @@
-import type { TMessageWithID } from 'src/api/forum/messages/models';
+import type { TMessage } from 'src/api/forum/messages/models';
 
 export type TAuthor = {
   id: number;
@@ -14,18 +14,16 @@ export type TPost = {
 };
 
 export type THandleAddEmoji = { messageId: number; authorId: number; emojiId: number };
-type TAddEmoji = (value: THandleAddEmoji) => void;
 export type TMainMessage = { id: number; login: string };
-type TAddMainMessage = (value: TMainMessage) => void;
 
-export type TMessageProps = TMessageWithID & {
-  addEmoji: TAddEmoji;
-  addMainMessage: TAddMainMessage;
+export type TMessageProps = TMessage & {
+  addEmoji: (value: THandleAddEmoji) => void;
+  addMainMessage: (value: TMainMessage) => void;
 };
 
 export type TMenuEmojis = {
   setIsOpenMenuEmojis: (value: boolean) => void;
-  addEmoji: TAddEmoji;
+  addEmoji: (value: THandleAddEmoji) => void;
   messageId: number;
   authorId: number;
 };
@@ -35,7 +33,6 @@ export type TInputMessage = {
 };
 
 export type TMessageInputProps = {
-  refreshPage: (value: void) => void;
   mainMessage: TMainMessage;
-  resetMainMessage: (value: void) => void;
+  resetMainMessage: () => void;
 };

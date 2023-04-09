@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getBackendURL } from 'src/api/common/utils/apiUtilts';
 import { backendAPISettings } from 'src/api';
 import type { TPostEmojiRequest } from 'src/api/forum/messages/models';
-import type { TMessage, TMessageWithID } from 'src/api/forum/messages/models';
+import type { TMessage, TCreateMessage } from 'src/api/forum/messages/models';
 
 const ROOT_MESSAGES_URL = 'messages';
 
@@ -17,17 +17,21 @@ export const messagesApi = createApi({
   baseQuery: fetchBaseQuery({
     ...backendAPISettings,
   }),
+  tagTypes: ['Messages'],
   endpoints: build => ({
-    getMessagesByPostId: build.mutation<TMessageWithID[], number>({
+    getMessagesByPostId: build.query<TMessage[], number>({
       query: postId => ({ url: `${MESSAGES_ENDPOINTS.getMessagesByPostId}?postId=${postId}`, method: 'GET' }),
+      providesTags: ['Messages'],
     }),
-    postMessage: build.mutation<TMessageWithID, TMessage>({
+    postMessage: build.mutation<TMessage, TCreateMessage>({
       query: data => ({ url: MESSAGES_ENDPOINTS.postMessage, method: 'POST', body: data }),
+      invalidatesTags: ['Messages'],
     }),
-    postEmoji: build.mutation<TMessageWithID, TPostEmojiRequest>({
+    postEmoji: build.mutation<TMessage, TPostEmojiRequest>({
       query: data => ({ url: MESSAGES_ENDPOINTS.postEmoji, method: 'POST', body: data }),
+      invalidatesTags: ['Messages'],
     }),
   }),
 });
 
-export const { useGetMessagesByPostIdMutation, usePostMessageMutation, usePostEmojiMutation } = messagesApi;
+export const { useGetMessagesByPostIdQuery, usePostMessageMutation, usePostEmojiMutation } = messagesApi;
