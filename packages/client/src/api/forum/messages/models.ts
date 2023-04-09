@@ -1,4 +1,4 @@
-export type TMessage = {
+export type TCreateMessage = {
   id?: number;
   text: string;
   authorId: number;
@@ -6,12 +6,28 @@ export type TMessage = {
   postId: number;
   date: Date;
   mainMessageId: number;
-  emojis: JSON[];
+  emojis: TEmoji[];
+};
+
+export type TMessage = {
+  id: number;
+  text: string;
+  authorId: number;
+  login: string;
+  postId: number;
+  date: Date;
+  mainMessageId: number;
+  emojis: TEmoji[];
 };
 
 export type TPostEmojiRequest = {
-  postId: string;
-  messageId: string;
-  emojiId: string;
-  authorId: string;
+  postId: number;
+  messageId: number;
+  emojiId: number;
+  authorId: number;
+};
+
+export type TEmoji = {
+  id: number;
+  authorId: number[];
 };
