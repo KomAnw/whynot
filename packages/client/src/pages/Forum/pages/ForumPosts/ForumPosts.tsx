@@ -7,16 +7,11 @@ import PostsInput from 'pages/Forum/pages/ForumPosts/components/PostsInput';
 import PostElement from 'pages/Forum/pages/ForumPosts/components/PostElement';
 import type { TPost } from 'src/api/forum/posts/models';
 import { useGetPostsQuery } from 'src/api/forum/posts/posts';
-import { useEffect } from 'react';
 
 const { menu } = paths;
 
 const ForumPosts = () => {
-  const { data, refetch } = useGetPostsQuery();
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
+  const { data } = useGetPostsQuery(undefined, { refetchOnMountOrArgChange: true });
 
   return (
     <PageContainer>
