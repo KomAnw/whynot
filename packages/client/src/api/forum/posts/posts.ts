@@ -15,15 +15,18 @@ export const postsApi = createApi({
   baseQuery: fetchBaseQuery({
     ...backendAPISettings,
   }),
+  tagTypes: ['Posts'],
   endpoints: build => ({
     getPosts: build.query<TPost[], void>({
       query: () => ({ url: POSTS_ENDPOINTS.getPosts, method: 'GET' }),
+      providesTags: ['Posts'],
     }),
     getPostById: build.query<TPost, number>({
       query: id => ({ url: `${POSTS_ENDPOINTS.getPosts}/${id}`, method: 'GET' }),
     }),
     postPost: build.mutation<string, TPost>({
       query: data => ({ url: POSTS_ENDPOINTS.getPosts, method: 'POST', body: data }),
+      invalidatesTags: ['Posts'],
     }),
   }),
 });

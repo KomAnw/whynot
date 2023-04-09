@@ -29,7 +29,7 @@ export interface IRequestPostPost extends Request {
 }
 
 export interface IRequestGetPostById extends Request {
-  params: { id: string };
+  params: { postId: string };
 }
 
 type ITheme = {

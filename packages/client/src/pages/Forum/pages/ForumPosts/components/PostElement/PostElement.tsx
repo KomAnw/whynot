@@ -4,23 +4,21 @@ import { Text } from 'src/design/Text';
 import { breakpoints } from 'components/App/constants';
 import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
-import type { TPost } from 'pages/Forum/pages/types';
+import type { TPost } from 'src/api/forum/posts/models';
 import { IconPost } from 'pages/Forum/components/IconPost';
 
 const { forum } = paths;
 
-const PostElement = ({ id, author, title }: TPost) => {
+const PostElement = ({ id, text, login }: TPost) => {
   return (
     <Container>
       <Title>
         <IconPost />
-        <Link to={`${forum.index}/${id}`}>{title}</Link>
+        <Link to={`${forum.index}/${id}`}>{text}</Link>
       </Title>
       <ContainerAuthor>
         <NameAuthor>Author:</NameAuthor>
-        <Author>
-          {author.firstName} {author.secondName}
-        </Author>
+        <Author>{login}</Author>
       </ContainerAuthor>
     </Container>
   );
