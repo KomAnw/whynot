@@ -26,6 +26,7 @@ export const postsApi = createApi({
     }),
     postPost: build.mutation<string, TPost>({
       query: data => ({ url: POSTS_ENDPOINTS.getPosts, method: 'POST', body: data }),
+      invalidatesTags: ['Posts'],
     }),
   }),
 });

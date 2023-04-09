@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { IconButtonSend } from 'pages/Forum/components/IconButtonSend';
-import { useDispatch } from 'react-redux';
 import { Input } from 'components/Input';
 import { InputStyled, ValidationText, LabelStyled } from 'src/components/Input/Input';
 import { logger } from 'src/utils/logger';
-import { postsApi, usePostPostMutation } from 'src/api/forum/posts/posts';
+import { usePostPostMutation } from 'src/api/forum/posts/posts';
 import { useGetUserQuery } from 'src/api/auth/auth';
 
 export type TInputPost = {
@@ -13,7 +12,6 @@ export type TInputPost = {
 };
 
 const PostsInput = () => {
-  const dispatch = useDispatch();
   const { data: dataUser } = useGetUserQuery();
   const [postApi] = usePostPostMutation();
 
@@ -30,8 +28,6 @@ const PostsInput = () => {
           login: dataUser.login,
           date: new Date(),
         });
-
-        dispatch(postsApi.util.invalidateTags(['Posts']));
       }
       resetField('inputPosts');
     } catch (error) {
