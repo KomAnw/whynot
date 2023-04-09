@@ -13,10 +13,11 @@ import { logger } from 'src/utils/logger';
 import { useGetUserQuery } from 'src/api/auth/auth';
 import { usePostMessageMutation } from 'src/api/forum/messages/messages';
 import type { TInputMessage, TMessageInputProps } from 'pages/Forum/pages/types';
-
-const postId = Number(window.location.pathname.split('/').pop());
+import { useParams } from 'react-router-dom';
 
 const MessageInput = ({ mainMessage, resetMainMessage }: TMessageInputProps) => {
+  const params = useParams();
+  const postId = Number(params.id);
   const { data: dataUser } = useGetUserQuery();
   const [GetMessage] = usePostMessageMutation();
 
