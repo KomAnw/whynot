@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { celebrate, Joi } from 'celebrate';
-import { getTheme, postTheme } from '../../controllers/theme/theme';
+import { getMode, postMode } from '../../controllers/mode/mode';
 
 export const router = Router();
 
@@ -9,10 +9,10 @@ router.post(
   celebrate({
     body: Joi.object().keys({
       userId: Joi.number().required(),
-      theme: Joi.string(),
+      mode: Joi.string(),
     }),
   }),
-  postTheme
+  postMode
 );
 
 router.get(
@@ -22,5 +22,5 @@ router.get(
       id: Joi.string().required(),
     }),
   }),
-  getTheme
+  getMode
 );

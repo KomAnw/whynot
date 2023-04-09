@@ -1,5 +1,13 @@
-import { defaultTheme } from './theme';
-import { defaultSprite } from './mode';
+import { themes } from './theme';
+import { sprites } from './mode';
+import { ETheme } from '../../../models/theme';
+import { EMode } from '../../../models/mode';
 
-// Состояние по умолчанию для store.
-export const state = { theme: defaultTheme, mode: { sprite: defaultSprite } };
+/**
+ * Функция получения темы и мода пользователя.
+ */
+export const getUserState = (themeName = ETheme.DEFAULT, modeName = EMode.DOODLE) => {
+  const userMode = sprites.find(item => item.name === modeName);
+
+  return { theme: themes[themeName], mode: { sprite: userMode } };
+};

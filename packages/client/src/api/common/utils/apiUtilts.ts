@@ -1,4 +1,4 @@
-import {BACKEND_API_URL, YANDEX_API_URL} from 'src/api/common/consts/apiConsts';
+import { BACKEND_API_URL, YANDEX_API_URL } from 'src/api/common/consts/apiConsts';
 
 export const getBaseURL = (baseURL: string) => new URL('', baseURL).href;
 
