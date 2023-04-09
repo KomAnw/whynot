@@ -22,11 +22,7 @@ const ForumPosts = () => {
     <PageContainer>
       <Component>
         <Title>Forum</Title>
-        <Main>
-          {data?.map((item: TPost) => (
-            <PostElement {...item} key={item.id} />
-          ))}
-        </Main>
+        <Main>{data && data.map((item: TPost) => <PostElement {...item} key={item.id} />)}</Main>
         <Footer>
           <PostsInput />
           <Link to={menu} variant="size30">
