@@ -36,7 +36,7 @@ const MessageElement = (props: TMessageProps) => {
       </Header>
       <Message>{text}</Message>
       <Footer>
-        {mainMessageId === 0 ? <ButtonAnswer onClick={handleClickButtonAnswer}>Ответ</ButtonAnswer> : null}
+        {mainMessageId && <ButtonAnswer onClick={handleClickButtonAnswer}>Ответ</ButtonAnswer>}
         <ButtonEmoji onClick={handleClickButtonEmoji}>
           <IconButtonEmoji />
           {isOpenMenuEmojis && (

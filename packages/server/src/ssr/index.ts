@@ -28,13 +28,8 @@ export const startSSR = async () => {
 
   app.use('*', async ({ originalUrl, cookies }, res, next) => {
     const userId = await getUserId(cookies);
-    let userTheme = ETheme.DEFAULT;
-    let userMode = EMode.DOODLE;
-
-    if (userId) {
-      userTheme = (await getUserTheme(userId)) || ETheme.DEFAULT;
-      userMode = (await getUserMode(userId)) || EMode.DOODLE;
-    }
+    const userTheme = (await getUserTheme(userId)) || ETheme.DEFAULT;
+    const userMode = (await getUserMode(userId)) || EMode.DOODLE;
 
     const state = getUserState(userTheme, userMode);
 

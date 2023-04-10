@@ -19,7 +19,7 @@ const MessageInput = ({ mainMessage, resetMainMessage }: TMessageInputProps) => 
   const params = useParams();
   const postId = Number(params.id);
   const { data: dataUser } = useGetUserQuery();
-  const [GetMessage] = usePostMessageMutation();
+  const [getMessage] = usePostMessageMutation();
 
   const { resetField, register, handleSubmit } = useForm<TInputMessage>({
     mode: 'all',
@@ -28,7 +28,7 @@ const MessageInput = ({ mainMessage, resetMainMessage }: TMessageInputProps) => 
   const submitForm = async (data: TInputMessage) => {
     try {
       if (dataUser) {
-        await GetMessage({
+        await getMessage({
           text: data.inputMessage,
           authorId: dataUser.id,
           postId,
