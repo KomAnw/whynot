@@ -23,18 +23,19 @@ import { useParams } from 'react-router-dom';
 const { forum } = paths;
 
 const ForumPost = () => {
+  const initialMainMessage = { id: 0, login: '' };
   const params = useParams();
   const postId = Number(params.id);
   const { data: dataUser } = useGetUserQuery();
   const { data: dataPost } = useGetPostByIdQuery(postId);
   const { data: dataMessages } = useGetMessagesByPostIdQuery(postId, { refetchOnMountOrArgChange: true });
-  const [getPostEmoji] = usePostEmojiMutation();
-  const [mainMessage, setMainMessage] = useState<TMainMessage>({ id: 0, login: '' });
+  const [getForumPostEmoji] = usePostEmojiMutation();
+  const [mainMessage, setMainMessage] = useState<TMainMessage>(initialMainMessage);
 
   const handleAddEmoji = async ({ messageId, authorId, emojiId }: THandleAddEmoji) => {
     try {
       if (dataUser && dataUser?.id !== authorId) {
-        await getPostEmoji({ postId, messageId, authorId: dataUser.id, emojiId }).unwrap();
+        await getForumPostEmoji({ postId, messageId, authorId: dataUser.id, emojiId }).unwrap();
       }
     } catch (err) {
       logger(err, 'error');
@@ -46,7 +47,7 @@ const ForumPost = () => {
   };
 
   const handleResetMainMessage = () => {
-    setMainMessage({ id: 0, login: '' });
+    setMainMessage(initialMainMessage);
   };
 
   return (

@@ -5,7 +5,7 @@ import type { TEmoji } from 'src/api/forum/messages/models';
 const EmojiBox = ({ id, authorId }: TEmoji) => {
   return (
     <Container>
-      <Emoji src={`${emojiLinkIcon(id)}`} />
+      <Emoji src={emojiLinkIcon(id)} />
       <Number>{authorId.length}</Number>
     </Container>
   );
