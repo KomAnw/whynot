@@ -10,7 +10,6 @@ router.post(
     body: Joi.object().keys({
       userId: Joi.number().required(),
       theme: Joi.string(),
-      mode: Joi.string(),
     }),
   }),
   postTheme

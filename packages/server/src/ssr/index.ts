@@ -3,8 +3,13 @@ import { createServer as createViteServer, type ViteDevServer } from 'vite';
 import app, { isDevelopmentMode } from '../app';
 import { developmentConfig } from './configs/development';
 import { productionConfig } from './configs/production';
-import { state } from './state';
+import { getUserState } from './state';
 import { nonce } from '../../middlewares';
+import { getUserId } from './utils/getUserId';
+import { getUserTheme } from './utils/getUserTheme';
+import { getUserMode } from './utils/getUserMode';
+import { ETheme } from '../../models/theme';
+import { EMode } from '../../models/mode';
 
 let vite: ViteDevServer | undefined;
 const nodeModulesPath = join(__dirname, '../../../', 'node_modules');
@@ -21,7 +26,13 @@ export const startSSR = async () => {
     app.use(vite!.middlewares);
   }
 
-  app.use('*', async ({ originalUrl }, res, next) => {
+  app.use('*', async ({ originalUrl, cookies }, res, next) => {
+    const userId = await getUserId(cookies);
+    const userTheme = (await getUserTheme(userId)) || ETheme.DEFAULT;
+    const userMode = (await getUserMode(userId)) || EMode.DOODLE;
+
+    const state = getUserState(userTheme, userMode);
+
     globalThis.__PRELOADED_STATE__ = state;
 
     try {

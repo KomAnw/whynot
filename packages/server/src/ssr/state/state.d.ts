@@ -1,8 +1,10 @@
 /* eslint-disable no-var, vars-on-top */
-import type { state } from './index';
+import type { getUserState } from './index';
+
+type TState = ReturnType<typeof getUserState>;
 
 export {};
 
 declare global {
-  var __PRELOADED_STATE__: typeof state;
+  var __PRELOADED_STATE__: TState;
 }

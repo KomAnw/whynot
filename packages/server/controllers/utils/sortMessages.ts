@@ -11,11 +11,8 @@ export function sortMessage(messages: Message[]) {
 
   const sortTime = (messages: Message[]) => {
     return messages.sort((a: Message, b: Message): number => {
-      const timeA = new Date(a.date);
-      const timeB = new Date(b.date);
-
-      if (timeA > timeB) return 1;
-      if (timeA < timeB) return -1;
+      if (a.date > b.date) return 1;
+      if (a.date < b.date) return -1;
 
       return 0;
     });

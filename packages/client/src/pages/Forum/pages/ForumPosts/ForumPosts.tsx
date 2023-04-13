@@ -5,21 +5,19 @@ import { paths } from 'components/App/constants';
 import { breakpoints } from 'components/App/constants';
 import PostsInput from 'pages/Forum/pages/ForumPosts/components/PostsInput';
 import PostElement from 'pages/Forum/pages/ForumPosts/components/PostElement';
-import { demoData } from 'pages/Forum/pages/ForumPosts/demoData';
-import type { TPost } from 'pages/Forum/pages/types';
+import type { TPost } from 'src/api/forum/posts/models';
+import { useGetPostsQuery } from 'src/api/forum/posts/posts';
 
 const { menu } = paths;
 
 const ForumPosts = () => {
+  const { data } = useGetPostsQuery(undefined, { refetchOnMountOrArgChange: true });
+
   return (
     <PageContainer>
       <Component>
         <Title>Forum</Title>
-        <Main>
-          {demoData?.map((item: TPost) => (
-            <PostElement {...item} key={item.id} />
-          ))}
-        </Main>
+        <Main>{data && data.map((item: TPost) => <PostElement {...item} key={item.id} />)}</Main>
         <Footer>
           <PostsInput />
           <Link to={menu} variant="size30">
