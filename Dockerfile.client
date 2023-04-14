@@ -15,7 +15,15 @@ RUN yarn --frozen-lockfile
 
 COPY . .
 
-RUN yarn lerna run docker:client
+RUN rm -rf /app/packages/server/dist/
+
+RUN yarn bootstrap --scope=client
+
+RUN yarn build --scope=client
+
+RUN yarn build:ssr:client
+
+RUN yarn run link --scope=client
 
 
 # production stage
