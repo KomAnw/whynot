@@ -3,12 +3,11 @@ import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 import app, { isProductionMode, isDockerBuild } from '../../app';
 
-const nodeModulesPath = join(__dirname, '../../../../', 'node_modules');
+const rootDir = '../../../../';
+const nodeModulesPath = join(__dirname, rootDir, 'node_modules');
 const clientPath = join(nodeModulesPath, 'client');
-const distPath = isDockerBuild ? join(__dirname, '../../../../', 'client-dist') : join(clientPath, 'dist');
-const ssrClientPath = isDockerBuild
-  ? join(__dirname, '../../../../', 'dist-ssr')
-  : join(clientPath, 'dist-ssr', 'client.cjs');
+const distPath = isDockerBuild ? join(__dirname, rootDir, 'client-dist') : join(clientPath, 'dist');
+const ssrClientPath = isDockerBuild ? join(__dirname, rootDir, 'dist-ssr') : join(clientPath, 'dist-ssr', 'client.cjs');
 
 isProductionMode && app.use(express.static(distPath));
 
