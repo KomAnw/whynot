@@ -1,20 +1,23 @@
 ARG NODE_VERSION=16
 ARG SERVER_PORT=3000
 
+# base stage
 FROM node:$NODE_VERSION-buster as base
 
 WORKDIR /app
 
+# builder stage
 FROM base as builder
 
-COPY package.json yarn.lock ./
+COPY package.json yarn.lock
 
 RUN yarn --frozen-lockfile
 
 COPY . .
 
-RUN yarn lerna run docker:server
+RUN yarn docker:server
 
+# production stage
 FROM node:$NODE_VERSION-buster-slim as production
 
 WORKDIR /app
