@@ -17,7 +17,7 @@
     "create:link": "cd packages/client && yarn link && cd ../server && yarn link client && cd ../../",
     "dev:ssr": "yarn create:link && lerna run build  --scope=client && lerna run build:ssr  --scope=client && lerna run build --scope=server && lerna run preview:dev --scope=server",
     "build:ssr": "yarn create:link && lerna run build  --scope=client && lerna run build:ssr  --scope=client && lerna run build --scope=server && lerna run preview --scope=server",
-    "docker:client": "yarn run bootstrap --scope=client && yarn run build --scope=client && yarn run build:ssr:client && yarn run link --scope=client",
+    "docker:client": "yarn run bootstrap --scope=client && yarn run build --scope=client && yarn run build:ssr:client",
     "docker:server": "yarn run bootstrap --scope=server && yarn run build --scope=server"
   },
   "license": "MIT",
