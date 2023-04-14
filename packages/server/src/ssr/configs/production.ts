@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
 import app, { isProductionMode, isDockerBuild } from '../../app';
 
-const rootDir = '../../../../';
+const rootDir = isDockerBuild ? '../../../' : '../../../../';
 const nodeModulesPath = join(__dirname, rootDir, 'node_modules');
 const clientPath = join(nodeModulesPath, 'client');
 const distPath = isDockerBuild ? join(__dirname, rootDir, 'client-dist') : join(clientPath, 'dist');
