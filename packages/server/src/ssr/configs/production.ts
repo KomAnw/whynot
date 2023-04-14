@@ -1,12 +1,14 @@
 import express from 'express';
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
-import app, { isProductionMode } from '../../app';
+import app, { isProductionMode, isDockerBuild } from '../../app';
 
 const nodeModulesPath = join(__dirname, '../../../../', 'node_modules');
 const clientPath = join(nodeModulesPath, 'client');
-const distPath = join(clientPath, 'dist');
-const ssrClientPath = join(clientPath, 'dist-ssr', 'client.cjs');
+const distPath = isDockerBuild ? join(__dirname, '../../../../', 'client-dist') : join(clientPath, 'dist');
+const ssrClientPath = isDockerBuild
+  ? join(__dirname, '../../../../', 'dist-ssr')
+  : join(clientPath, 'dist-ssr', 'client.cjs');
 
 isProductionMode && app.use(express.static(distPath));
 
