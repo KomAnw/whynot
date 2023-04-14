@@ -3,20 +3,28 @@ ARG CLIENT_PORT=3001
 
 # base stage
 FROM node:$NODE_VERSION-buster as base
+
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn --frozen-lockfile
 
 # builder stage
 FROM base as builder
+
+COPY package.json yarn.lock
+
+RUN yarn --frozen-lockfile
+
 COPY . .
+
 RUN yarn lerna run docker:client
+
 
 # production stage
 FROM nginx:latest as production
+
 WORKDIR /app
 
 COPY --from=builder /app/packages/client/dist/ /app/dist
+
 COPY --from=builder /app/packages/client/dist-ssr/ /app/dist-ssr
 
 EXPOSE $CLIENT_PORT

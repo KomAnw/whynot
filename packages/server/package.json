@@ -29,7 +29,8 @@
     "pg": "8.8.0",
     "prettier": "2.7.1",
     "reflect-metadata": "0.1.13",
-    "sequelize": "6.29.0"
+    "sequelize": "6.29.0",
+    "vite": "4.2.1"
   },
   "devDependencies": {
     "@babel/core": "7.21.0",
