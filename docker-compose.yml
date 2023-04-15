@@ -19,6 +19,8 @@ services:
     volumes:
       - client-dist:/app/dist
       - client-dist-ssr:/app/dist-ssr
+    depends_on:
+      - postgres
 
   server:
     container_name: prakticum-server
@@ -34,7 +36,6 @@ services:
       - '${SERVER_PORT}:${SERVER_PORT}'
     depends_on:
       - client
-      - postgres
     links:
       - client
     volumes:
