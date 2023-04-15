@@ -2,8 +2,9 @@ import * as dotenv from 'dotenv';
 import { Sequelize } from 'sequelize';
 import type { Options } from 'sequelize';
 import { logger } from '../utils/logger';
+import { findFile } from '../utils/findFile';
 
-dotenv.config({ path: '../../../.env' });
+dotenv.config({ path: findFile('.env') });
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, HOST } = process.env;
 

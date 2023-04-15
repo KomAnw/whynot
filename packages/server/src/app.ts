@@ -3,10 +3,11 @@ import * as dotenv from 'dotenv';
 import { cors, cookieParser, proxy, helmet, rateLimit, bodyParserMiddleware, errorCelebrate } from '../middlewares';
 import { routerApi } from '../routes';
 import { connectPostgresDB } from '../database/postgres';
+import { findFile } from '../utils/findFile';
 
 const middlewares = [cors, cookieParser, helmet, rateLimit];
 
-dotenv.config({ path: '../../../.env' });
+dotenv.config({ path: findFile('.env') });
 
 const { SERVER_PORT, IS_DOCKER_BUILD } = process.env;
 
