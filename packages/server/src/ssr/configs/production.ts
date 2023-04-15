@@ -11,8 +11,7 @@ const ssrClientPath = isDockerBuild
   ? join(__dirname, rootDir, 'dist-ssr', 'client.cjs')
   : join(clientPath, 'dist-ssr', 'client.cjs');
 
-isProductionMode && app.use(express.static(distPath));
-
+(isProductionMode || isDockerBuild) && app.use(express.static(distPath));
 export const productionConfig = async (originalUrl: string) => {
   const template = readFileSync(resolve(distPath, 'index.html'), 'utf-8');
   const { render } = await import(ssrClientPath);

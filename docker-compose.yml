@@ -34,6 +34,7 @@ services:
       - '${SERVER_PORT}:${SERVER_PORT}'
     depends_on:
       - client
+      - postgres
     links:
       - client
     volumes:
@@ -41,7 +42,7 @@ services:
       - client-dist-ssr:/app/dist-ssr
 
   postgres:
-    image: postgres:14
+    image: postgres:15
     ports:
       - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     environment:
