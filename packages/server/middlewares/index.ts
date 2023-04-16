@@ -41,7 +41,7 @@ const helmet = helmetMiddleware({
   contentSecurityPolicy: {
     directives: {
       scriptSrc: ["'self'", `'nonce-${nonce}'`],
-      connectSrc: ["'self'", 'ws://localhost:*', 'http://localhost:3000'],
+      connectSrc: ["'self'", 'ws://localhost:*', 'http://localhost:*'],
     },
   },
 });
