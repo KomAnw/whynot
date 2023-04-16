@@ -3,16 +3,17 @@ import { Sequelize } from 'sequelize';
 import type { Options } from 'sequelize';
 import { logger } from '../utils/logger';
 import { findFile } from '../utils/findFile';
+import { isDockerBuild } from '../src/app';
 
 dotenv.config({ path: findFile('.env') });
 
-const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, HOST } = process.env;
+const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } = process.env;
 
 const clientPostgresDB: Options = {
   database: POSTGRES_DB,
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
-  host: HOST,
+  host: isDockerBuild ? 'postgres' : 'localhost',
   port: Number(POSTGRES_PORT),
   dialect: 'postgres',
 };
