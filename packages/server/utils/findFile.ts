@@ -1,3 +1,3 @@
-import find from 'find-up';
+import findUpSync from 'findup-sync';
 
-export const findFile = (fileName: string) => find.sync(fileName);
+export const findFile = (fileName: string) => findUpSync(fileName) || undefined;
