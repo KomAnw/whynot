@@ -16,6 +16,7 @@ services:
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
       - ./tmp/pgdata:/var/lib/postgresql/data
+
   client:
     container_name: prakticum-client
     build:
