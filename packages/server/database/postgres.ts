@@ -17,6 +17,12 @@ const clientPostgresDB: Options = {
   host: isDockerBuild ? 'postgres' : 'localhost',
   port: Number(POSTGRES_PORT),
   dialect: 'postgres',
+  pool: {
+    max: 5,
+    min: 0,
+    acquire: 20000,
+    idle: 10000,
+  },
 };
 
 export const sequelize = new Sequelize(clientPostgresDB);
