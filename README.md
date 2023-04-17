@@ -4,25 +4,20 @@
 
 ####
 
-![Жанр](https://img.shields.io/badge/%D0%96%D0%B0%D0%BD%D1%80%20%D0%B8%D0%B3%D1%80%D1%8B-%D0%9F%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B5%D1%80-green?style=for-the-badge&logo=appveyor)
+![Жанр](https://img.shields.io/badge/%D0%96%D0%B0%D0%BD%D1%80%20%D0%B8%D0%B3%D1%80%D1%8B-%D0%9F%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B5%D1%80-green?style=for-the-badge&logo=appveyor) ![Игроки](https://img.shields.io/badge/%D0%9A%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D0%BE%D0%B2-%D0%9E%D0%B4%D0%B8%D0%BD-green?style=for-the-badge&logo=appveyor) ![Сложность](https://img.shields.io/badge/%D0%A1%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%A1%D1%80%D0%B5%D0%B4%D0%BD%D1%8F%D1%8F-orange?style=for-the-badge&logo=appveyor) ![Оффлайн](https://img.shields.io/badge/Offline-Да-blue?style=for-the-badge&logo=appveyor) ![Язык](https://img.shields.io/github/languages/top/KomAnw/whynot?style=for-the-badge&logo=appveyor) ![Пулреквесты](https://img.shields.io/github/issues-pr-closed-raw/KomAnw/whynot?style=for-the-badge&logo=appveyor) 
 
-![Игроки](https://img.shields.io/badge/%D0%9A%D0%BE%D0%BB%D0%B8%D1%87%D0%B5%D1%81%D1%82%D0%B2%D0%BE%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D0%BE%D0%B2-%D0%9E%D0%B4%D0%B8%D0%BD-green?style=for-the-badge&logo=appveyor)
+![Старс](https://img.shields.io/github/stars/KomAnw/whynot?style=social)
+------
+## Стэк технологий
+![React](https://img.shields.io/badge/-React-blue?style=for-the-badge)  ![Redux-toolkit](https://img.shields.io/badge/-Redux--toolkit-blueviolet?style=for-the-badge)  ![Typescript](https://img.shields.io/badge/-Typescript-yellow?style=for-the-badge)  ![Express](https://img.shields.io/badge/-Express-lightgrey?style=for-the-badge)  ![Styled components](https://img.shields.io/badge/-Styled--components-pink?style=for-the-badge)  ![Node](https://img.shields.io/badge/-Node-green?style=for-the-badge)  ![Sequelize](https://img.shields.io/badge/-Sequelize-blue?style=for-the-badge)  ![Postgres](https://img.shields.io/badge/-Postgres-blue?style=for-the-badge)  ![Vite](https://img.shields.io/badge/-Vite-violet?style=for-the-badge)
 
-![Сложность](https://img.shields.io/badge/%D0%A1%D0%BB%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%8C-%D0%A1%D1%80%D0%B5%D0%B4%D0%BD%D1%8F%D1%8F-orange?style=for-the-badge&logo=appveyor)
-
-## ![Оффлайн](https://img.shields.io/badge/Offline-Да-blue?style=for-the-badge&logo=appveyor)
-
-![Язык](https://img.shields.io/github/languages/top/KomAnw/whynot?style=for-the-badge&logo=appveyor)
-
-![Пулреквесты](https://img.shields.io/github/issues-pr-closed-raw/KomAnw/whynot?style=for-the-badge&logo=appveyor)
-
-## ![Старс](https://img.shields.io/github/stars/KomAnw/whynot?style=social)
+## Web Api
+![Service Worker](https://img.shields.io/badge/-Service%20Worker-violet?style=for-the-badge)  ![Gamepad Api](https://img.shields.io/badge/-Gamepad%20Api-lightgrey?style=for-the-badge) ![Local Storage](https://img.shields.io/badge/-Local%20Storage-blueviolet?style=for-the-badge)  ![Fullscreen Api](https://img.shields.io/badge/-Fullscreen%20Api-blue?style=for-the-badge)  ![Media Api](https://img.shields.io/badge/-Media%20Api-yellow?style=for-the-badge)
+-------
 
 ## Его история
-
-#### Наш герой — маленькое милое существо, живущее в мире, где все взаимодействуют с удивительными платформами.
-
-#### Он был обычным жителем своего мира, пока не узнал о таинственном гигантском замке, который находится на самом верху мира...
+> #### Наш герой — маленькое милое существо, живущее в мире, где все взаимодействуют с удивительными платформами.
+> #### Он был обычным жителем своего мира, пока не узнал о таинственном гигантском замке, который находится на самом верху мира...
 
 ## Скриншоты
 
@@ -36,30 +31,12 @@
 ### Как запускать?
 
 1. Убедитесь что у вас установлен `node` и `docker`
-2. Выполните команду `yarn bootstrap` - это обязательный шаг, без него ничего работать не будет :)
+2. Выполните команду `yarn bootstrap`
 3. Выполните команду `yarn dev`
-4. Выполните команду `yarn dev --scope=client` чтобы запустить только клиент
-5. Выполните команду `yarn dev --scope=server` чтобы запустить только server
-
-### Как добавить зависимости?
-
-В этом проекте используется `monorepo` на основе [`lerna`](https://github.com/lerna/lerna)
-
-Чтобы добавить зависимость для клиента
-`yarn lerna add {your_dep} --scope client`
-
-Для сервера
-`yarn lerna add {your_dep} --scope server`
-
-И для клиента и для сервера
-`yarn lerna add {your_dep}`
-
-Если вы хотите добавить dev зависимость, проделайте то же самое, но с флагом `dev`
-`yarn lerna add {your_dep} --dev --scope server`
+4. Выполните команду `yarn dev:client` чтобы запустить только клиент
+5. Выполните команду `yarn dev:server` чтобы запустить только server  
 
 ### Тесты
-
-Для клиента используется [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro/)
 
 `yarn test`
 
@@ -67,66 +44,17 @@
 
 `yarn lint`
 
-### Форматирование prettier
+### Форматирование кода
 
-`yarn format`
+`yarn lint:fix`
 
-### Production build
-
-`yarn build`
-
-И чтобы посмотреть что получилось
-
-`yarn preview --scope client`
-`yarn preview --scope server`
-
-### Чтобы добавить в зависимости один пакет от другого:
-
-в дирректории _packages/client_
-
-`yarn link`
-
-в дирректории _packages/server_
-
-`yarn link client`
-
-### Dev build with SSR
+### Сборка проекта в develop режиме с SSR
 
 `yarn dev:ssr`
 
-### Prod build with SSR
+### Сборка проекта в production режиме с SSR
 
 `yarn build:ssr`
-
-## Хуки
-
-В проекте используется [lefthook](https://github.com/evilmartians/lefthook)
-Если очень-очень нужно пропустить проверки, используйте `--no-verify` (но не злоупотребляйте :)
-
-## Ой, ничего не работает :(
-
-Откройте issue, я приду :)
-
-## Автодеплой статики на vercel
-
-Зарегистрируйте аккаунт на [vercel](https://vercel.com/)
-Следуйте [инструкции](https://vitejs.dev/guide/static-deploy.html#vercel-for-git)
-В качестве `root directory` укажите `packages/client`
-
-Все ваши PR будут автоматически деплоиться на vercel. URL вам предоставит деплоящий бот
-
-## Production окружение в докере
-
-Перед первым запуском выполните `node init.js`
-
-`docker compose up` - запустит три сервиса
-
-1. nginx, раздающий клиентскую статику (client)
-2. node, ваш сервер (server)
-3. postgres, вашу базу данных (postgres)
-
-Если вам понадобится только один сервис, просто уточните какой в команде
-`docker compose up {sevice_name}`, например `docker compose up server`
 
 ## Вспомогательные материалы
 
@@ -156,17 +84,14 @@
 ###### Написано chatGPT специально для команды "whynot?"
 
 ## Авторы
-
-- [@KomAnw](https://github.com/KomAnw)
-- [@efes2002](https://github.com/efes2002)
-- [@Kosurij](https://github.com/Kosurij)
-- [@m0000Amir](https://github.com/m0000Amir)
-- [@MikhailSamigullin](https://github.com/MikhailSamigullin)
+[![@KomAnw](https://img.shields.io/badge/-%40KomAnw-blue?style=for-the-badge)](https://github.com/KomAnw)
+[![@efes2002](https://img.shields.io/badge/-%40efes2002-blue?style=for-the-badge)](https://github.com/efes2002)
+[![@Kosurij](https://img.shields.io/badge/-%40Kosurij-blue?style=for-the-badge)](https://github.com/Kosurij)
+[![@m0000Amir](https://img.shields.io/badge/-%40m0000Amir-blue?style=for-the-badge)](https://github.com/m0000Amir)
+[![@MikhailSamigullin](https://img.shields.io/badge/-%40MikhailSamigullin-blue?style=for-the-badge)](https://github.com/MikhailSamigullin)
 
 ## Почему мы называемся "whynot?"
+#### So... Why not? 🤣
 
-#### А почему бы и нет? **:-D**
-
-## Понравился проект?
-
-### > [ Поставь звезду!](https://github.com/KomAnw/whynot) <
+### [![Поставь звезду!](https://img.shields.io/badge/-Поставь%20звезду!-yellow?style=for-the-badge)](https://github.com/KomAnw/whynot) 
+⭐⭐⭐⭐⭐
