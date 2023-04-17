@@ -15,8 +15,6 @@ RUN yarn --frozen-lockfile
 
 COPY . .
 
-RUN rm -rf /app/packages/server/dist/
-
 RUN yarn docker:client
 
 # production stage
