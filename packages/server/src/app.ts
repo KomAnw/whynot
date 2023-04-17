@@ -11,6 +11,11 @@ dotenv.config({ path: findFile('.env') });
 
 const { SERVER_PORT, IS_DOCKER_BUILD } = process.env;
 
+export const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
+export const isProductionMode = process.argv.includes('--NODE_ENV=production');
+export const isDockerBuild = Boolean(IS_DOCKER_BUILD);
+export const PORT = Number(SERVER_PORT) || 3000;
+
 const app = express();
 
 app.use(middlewares);
@@ -18,11 +23,6 @@ app.use(middlewares);
 app.use('/api/v2/*', proxy);
 
 connectPostgresDB();
-
-export const isDevelopmentMode = process.argv.includes('--NODE_ENV=development');
-export const isProductionMode = process.argv.includes('--NODE_ENV=production');
-export const isDockerBuild = Boolean(IS_DOCKER_BUILD);
-export const PORT = Number(SERVER_PORT) || 3000;
 
 app.use(bodyParserMiddleware);
 app.use('/api', routerApi);

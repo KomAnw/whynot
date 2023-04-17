@@ -2,12 +2,14 @@ import app, { PORT } from './app';
 import { startSSR } from './ssr/index';
 import { logger } from '../utils/logger';
 
-const isDockerBuild = process.env.IS_DOCKER_BUILD === 'true';
+const { IS_DOCKER_BUILD } = process.env;
+
+const isDockerBuild = Boolean(IS_DOCKER_BUILD);
 
 if (isDockerBuild) {
-  console.log('Собирается с помощью Docker');
+  logger('Собирается с помощью Docker');
 } else {
-  console.log('Не собирается с помощью Docker');
+  logger('Не собирается с помощью Docker');
 }
 
 app.listen(PORT, () => {
