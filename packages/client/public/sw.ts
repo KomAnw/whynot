@@ -1,4 +1,4 @@
-/* eslint-disable no-restricted-globals, no-return-await */
+/// <reference lib="webworker" />
 const VERSION = 'v1-225-127-01';
 const STATIC_CACHE_NAME = `s_app_${VERSION}`;
 const DYNAMIC_CACHE_NAME = `d_app_${VERSION}`;
@@ -22,25 +22,27 @@ self.addEventListener('activate', async () => {
   );
 });
 
-self.addEventListener('fetch', event => {
-  const { request } = event;
+self.addEventListener('fetch', (event: Event) => {
+  if (event instanceof FetchEvent) {
+    const { request } = event;
 
-  const url = new URL(request.url);
+    const url = new URL(request.url);
 
-  if (url.origin === location.origin) {
-    event.respondWith(cacheFirst(request));
-  } else {
-    event.respondWith(networkFirst(request));
+    if (url.origin === location.origin) {
+      event.respondWith(cacheFirst(request));
+    } else {
+      event.respondWith(networkFirst(request) as Promise<Response>);
+    }
   }
 });
 
-async function cacheFirst(request) {
+async function cacheFirst(request: Request) {
   const cached = await caches.match(request);
 
   return cached ?? (await fetch(request));
 }
 
-async function networkFirst(request) {
+async function networkFirst(request: Request) {
   const cache = await caches.open(DYNAMIC_CACHE_NAME);
 
   try {

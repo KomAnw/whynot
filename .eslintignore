@@ -6,3 +6,4 @@ dist/
 dist-srr/
 tmp
 client.d.ts
+public
