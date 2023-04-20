@@ -20,13 +20,7 @@
 > #### Он был обычным жителем своего мира, пока не узнал о таинственном гигантском замке, который находится на самом верху мира...
 
 ## Скриншоты
-
-![Start page](https://i.postimg.cc/LgZYnqBj/Screenshot-from-2023-02-27-13-40-27.png)
-![Game menu](https://i.postimg.cc/dk3TcNhH/Screenshot-from-2023-02-27-13-41-37.png)
-
-## Demo
-
-[![Watch the video](https://i.postimg.cc/SQWwss9X/Screenshot-from-2023-02-27-13-55-02.png)](https://youtu.be/3EKMsZVjtaA)
+![Start page](https://user-images.githubusercontent.com/109307026/233438466-b7d14a32-e253-4983-83de-aa68f1ff5a8a.png)
 
 ### Как запускать?
 
