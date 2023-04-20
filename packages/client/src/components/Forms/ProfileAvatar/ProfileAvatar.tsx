@@ -3,16 +3,18 @@ import { useChangeAvatarMutation } from 'src/api/user/user';
 import { H1 } from 'src/design/H1';
 import { LinkText } from 'src/design/LinkText';
 import { Button } from 'src/components/Button';
-import { InputHTMLAttributes, useContext, useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import Portal from 'components/Portal';
+import type { InputHTMLAttributes } from 'react';
+import { useState } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { breakpoints } from 'src/components/App/constants';
 import { useDispatch } from 'react-redux';
 import { authApi } from 'src/api/auth/auth';
-import { ProfilePopupContext } from '../ProfileForm/constants';
-import { AvatarData } from './types';
+import { logger } from 'src/utils/logger';
+import type { AvatarData, ProfileAvatarProps } from './types';
 
-const ProfileAvatar = () => {
-  const { changeState } = useContext(ProfilePopupContext);
+const ProfileAvatar = ({ setIsPopupOpen }: ProfileAvatarProps) => {
   const [avatar] = useChangeAvatarMutation();
   const dispatch = useDispatch();
   const [fileName, setFileName] = useState('');
@@ -20,6 +22,10 @@ const ProfileAvatar = () => {
 
   const onChangeFile = () => {
     setFileName(getValues().file[0].name);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
   };
 
   const submitForm: SubmitHandler<AvatarData> = async ({ file }) => {
@@ -30,32 +36,33 @@ const ProfileAvatar = () => {
       const response = await avatar(formData);
 
       dispatch(authApi.util.invalidateTags(['User']));
-      response && changeState();
+      response && closePopup();
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger(error, 'error');
     }
   };
 
   return (
-    <ModalStyle>
-      <PageStyle>
-        <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeFile}>
-          <TextH1>Edit Avatar</TextH1>
-          <InputWrapper>
-            <LabelForm>
-              <Input type="file" {...register('file')} />
-              choose file...
-            </LabelForm>
-            <FileName>{fileName}</FileName>
-          </InputWrapper>
-          <Button variant="primary" type="submit">
-            Apply
-          </Button>
-        </Form>
-        <ButtonX onClick={() => changeState()}>x</ButtonX>
-      </PageStyle>
-    </ModalStyle>
+    <Portal>
+      <ModalStyle>
+        <PageStyle>
+          <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeFile}>
+            <TextH1>Edit Avatar</TextH1>
+            <InputWrapper>
+              <LabelForm>
+                <Input type="file" {...register('file')} />
+                choose file...
+              </LabelForm>
+              <FileName>{fileName}</FileName>
+            </InputWrapper>
+            <Button variant="primary" type="submit">
+              Apply
+            </Button>
+          </Form>
+          <ButtonX onClick={closePopup}>x</ButtonX>
+        </PageStyle>
+      </ModalStyle>
+    </Portal>
   );
 };
 

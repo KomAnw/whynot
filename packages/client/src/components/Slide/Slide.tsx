@@ -4,10 +4,10 @@ import { useAppSelector } from 'src/hooks/redux';
 import { Link } from 'components/Link';
 import { paths } from 'components/App/constants';
 import { imageCases } from 'pages/Tutorial/slides/constants';
-import fairycastle from 'src/assets/images/tutorial/fairycastle.png';
-import { SlideDataRenderProps, StoryProp, TutorialProp } from './types';
+import type { SlideDataRenderProps, StoryProp, TutorialProp } from './types';
 
 const { settings } = paths;
+const fairyCastle = '/images/tutorial/fairyCastle.png';
 
 const slideDataRender = ({ imageCase, sprite, id }: SlideDataRenderProps) => {
   switch (imageCase) {
@@ -15,7 +15,7 @@ const slideDataRender = ({ imageCase, sprite, id }: SlideDataRenderProps) => {
       return <ImgHero src={sprite.sprite} elementId={id!} />;
 
     case imageCases.fairycastle:
-      return <Character src={fairycastle} elementId={id!} />;
+      return <Character src={fairyCastle} elementId={id!} />;
 
     case imageCases.platform1:
       return <ImgPlatform1 src={sprite.sprite} elementId={id!} />;

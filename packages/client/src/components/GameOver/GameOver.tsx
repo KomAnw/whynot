@@ -1,40 +1,24 @@
-import lose from 'assets/images/gomer-lose.png';
-import win from 'assets/images/gomer-win.png';
 import styled from 'styled-components';
 import { paths } from 'src/components/App/constants';
-import { GameOverProps, ImageProps } from 'components/GameOver/types';
+import type { GameOverProps, ImageProps } from 'components/GameOver/types';
 import { H1 } from 'src/design/H1';
 import { Text } from 'src/design/Text';
-import { ButtonComponent, ButtonVariants } from 'components/Button/types';
+import type { ButtonComponent } from 'components/Button/types';
 import { Link } from 'react-router-dom';
 import { Button } from 'components/Button';
+import { useAppSelector } from 'src/hooks/redux';
 
-const { menu, game } = paths;
-
-const buttons = [
-  {
-    variant: 'primary' as ButtonVariants,
-    to: menu,
-    text: 'Menu',
-  },
-  {
-    variant: 'secondary' as ButtonVariants,
-    to: game.index,
-    text: 'Play',
-    action: 'onClick',
-  },
-];
+const { menu } = paths;
 
 const Buttons = ({ onClick }: Pick<ButtonComponent, 'onClick'>) => {
   return (
     <ButtonsContainer>
-      {buttons.map(({ variant, text, to }) => (
-        <Link to={to} key={text}>
-          <Button variant={variant} onClick={onClick}>
-            {text}
-          </Button>
-        </Link>
-      ))}
+      <Link to={menu}>
+        <Button variant="primary">Menu</Button>
+      </Link>
+      <Button variant="secondary" onClick={onClick}>
+        Play
+      </Button>
     </ButtonsContainer>
   );
 };
@@ -42,10 +26,14 @@ const Buttons = ({ onClick }: Pick<ButtonComponent, 'onClick'>) => {
 export const GameOver = ({ isWon, gameScore, onClick }: GameOverProps) => {
   const title = isWon ? 'Congratulations!' : 'Wasted!';
 
+  const sprite = useAppSelector(state => state.mode.sprite);
+
+  const gameOverImage = isWon ? sprite.gameOverImage.win : sprite.gameOverImage.lose;
+
   return (
     <InnerContainer>
       <H1>{title}</H1>
-      <Image isWon={isWon} />
+      <Image img={gameOverImage} />
       <Text>
         Game score: <b> {gameScore} </b>{' '}
       </Text>
@@ -57,7 +45,7 @@ export const GameOver = ({ isWon, gameScore, onClick }: GameOverProps) => {
 const Image = styled.div<ImageProps>`
   width: 406px;
   height: 354px;
-  background-image: url(${props => (props.isWon ? win : lose)});
+  background-image: url('${props => props.img}');
   background-position: center;
   background-repeat: no-repeat;
 `;

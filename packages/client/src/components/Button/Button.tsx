@@ -1,13 +1,15 @@
 import styled from 'styled-components';
-import { ButtonComponent, ButtonProps } from './types';
+import type { ButtonComponent, ButtonProps } from './types';
 
-export const Button = ({ type, variant = 'primary', children, onSubmit, onClick }: ButtonComponent) => {
-  return (
-    <StyledButton type={type} variant={variant} onSubmit={onSubmit} onClick={onClick}>
-      {children}
-    </StyledButton>
-  );
-};
+export const Button = styled(
+  ({ type, variant = 'primary', children, onSubmit, onClick, className }: ButtonComponent) => {
+    return (
+      <StyledButton type={type} variant={variant} onSubmit={onSubmit} onClick={onClick} className={className}>
+        {children}
+      </StyledButton>
+    );
+  }
+)``;
 
 const StyledButton = styled.button<ButtonProps>`
   height: 48px;

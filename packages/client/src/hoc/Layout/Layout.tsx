@@ -1,9 +1,10 @@
 import { useCallback, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-import backgroundImg from 'assets/images/background.png';
 import { switchToFullScreen } from 'pages/Settings/fullscreenSlice';
 import { useAppDispatch } from 'src/hooks/redux';
+
+const backgroundImg = '/images/common/background.png';
 
 const Layout = () => {
   const dispatch = useAppDispatch();
@@ -34,4 +35,13 @@ export const BackgroundContainer = styled('div')`
   width: 100vw;
   background: url(${backgroundImg}) no-repeat;
   background-size: cover;
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+  *::-webkit-scrollbar {
+    background-color: ${({ theme }) => theme.colors.core.divider};
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.colors.core.text.primary};
+  }
 `;

@@ -1,22 +1,54 @@
 import styled from 'styled-components';
-import { breakpoints } from 'src/components/App/constants';
+import { breakpoints, paths } from 'src/components/App/constants';
 import { H1 } from 'src/design/H1';
 import LeaderboardRow from 'components/LeaderboardRow';
-import { leaderboardConsts } from 'components/LeaderboardRow/consts/leaderboardConsts';
-import { paths } from 'src/components/App/constants';
 import { Link } from 'components/Link';
+import { useGetTeamLeaderboardMutation } from 'src/api/leaderboard/leaderboard';
+import { useGetUserQuery } from 'src/api/auth/auth';
+import { useDidMount } from 'src/hooks/react';
+import { useState } from 'react';
+import type { Leader } from 'src/api/leaderboard/models';
+import { logger } from 'src/utils/logger';
 
 const { mobileM } = breakpoints;
 const { menu } = paths;
 
 const Leaderboard = () => {
+  const { data: user } = useGetUserQuery();
+  const [GetTeamLeaderboard] = useGetTeamLeaderboardMutation();
+  const [leaders, setLeaders] = useState<Array<Leader>>([]);
+
+  const GetTeamLeaderboardHandler = async () => {
+    try {
+      const data = await GetTeamLeaderboard({
+        ratingFieldName: 'score',
+        cursor: 0,
+        limit: 10,
+      }).unwrap();
+
+      setLeaders(data);
+    } catch (err) {
+      logger(err, 'error');
+    }
+  };
+
+  useDidMount(() => {
+    GetTeamLeaderboardHandler();
+  });
+
   return (
     <Wrapper>
       <LeaderboardComponent>
         <LeaderboardH1>Leaderboard</LeaderboardH1>
         <Column>
-          {leaderboardConsts.map(({ rank, nickname, score, isMine }) => (
-            <LeaderboardRow key={rank} rank={rank} nickname={nickname} score={score} isMine={isMine} />
+          {leaders?.map(({ data: leader }, index: number) => (
+            <LeaderboardRow
+              key={leader.user_id}
+              rank={index + 1}
+              nickname={leader.first_name}
+              score={leader.score}
+              isMine={leader.user_id === user!.id}
+            />
           ))}
         </Column>
         <Link variant="size30" to={menu}>
@@ -31,6 +63,7 @@ export default Leaderboard;
 
 const Wrapper = styled.div`
   height: 100vh;
+  width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,26 +73,32 @@ const LeaderboardComponent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 600px;
-  height: 720px;
-  padding: 12px 47px 12px 47px;
+  height: 636px;
+  padding: 0 20px 10px;
   box-shadow: 0 0 6px ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
   background-color: ${({ theme }) => theme.colors.core.background.primary};
+
   @media (max-width: ${mobileM}) {
     width: 354px;
-    height: 636px;
   }
 `;
 
-const LeaderboardH1 = styled(H1)`
-  font-size: 48px;
-  line-height: 54px;
+export const LeaderboardH1 = styled(H1)`
+  height: 45px;
+  margin: 14px 0 0 0;
+  display: grid;
+  text-align: center;
+  color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
 const Column = styled.ul`
-  width: 100%;
+  width: 380px;
   height: 100%;
   padding: 0;
   margin: 0;
+
+  @media (max-width: ${mobileM}) {
+    width: 300px;
+  }
 `;

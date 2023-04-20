@@ -8,12 +8,11 @@ import styled from 'styled-components';
 export const PageStyle = styled('div')`
   display: grid;
   justify-items: center;
-  margin: 0;
-  padding: 0;
   width: 402px;
   height: 636px;
   background: ${({ theme }) => theme.colors.core.background.primary};
   border-radius: 20px;
+
   @media (max-width: ${breakpoints.mobileM}) {
     width: 354px;
   }
@@ -21,24 +20,27 @@ export const PageStyle = styled('div')`
 
 export const TextH1 = styled(H1)`
   height: 45px;
-  margin: 14px 0 0 0;
+  margin-top: 14px;
   display: grid;
   text-align: center;
   color: ${({ theme }) => theme.colors.core.text.primary};
 `;
 
 export const Avatar = styled.img`
-  margin: 22px 0 0 0;
+  margin-top: 22px;
   height: 138px;
   width: 138px;
+  object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.7;
+  }
 `;
 
 export const Data = styled.div`
-  margin: 20px 0 19px 0;
   height: 242px;
-  padding: 0;
   display: grid;
   text-align: center;
   grid-row-gap: 10px;
@@ -52,6 +54,7 @@ export const DataRow = styled.div`
   align-items: center;
   justify-items: start;
   border-bottom: solid 1px ${({ theme }) => theme.colors.core.text.primary};
+
   @media (max-width: ${breakpoints.mobileM}) {
     width: 330px;
     grid-template-columns: 100px 230px;
@@ -71,15 +74,10 @@ export const DataValue = styled(LinkText)`
 `;
 
 export const TextLink = styled(LinkText)`
-  height: 27px;
-  margin: 12px 0 0 0;
-  padding: 0;
   display: grid;
 `;
 
 export const TextLinkBack = styled(H3)`
-  margin: 20px 0 0 0;
-  padding: 0;
-  height: 22px;
+  margin-top: 20px;
   display: grid;
 `;

@@ -1,10 +1,3 @@
-import doodleImage from 'src/assets/images/game/doodle/sprite.png';
-import doodleBackground from 'src/assets/images/game/doodle/background.png';
-import marioImage from 'src/assets/images/game/mario/sprite.png';
-import marioBackground from 'src/assets/images/game/mario/background.png';
-import homerImage from 'src/assets/images/game/homer/sprite.png';
-import homerBackground from 'src/assets/images/game/homer/background.png';
-
 export const paths = {
   welcome: '/',
   login: '/login',
@@ -21,9 +14,7 @@ export const paths = {
   },
   forum: {
     index: '/forum/posts',
-    newForum: 'new',
-    id: ':postId',
-    edit: 'edit',
+    id: '/forum/posts/:id',
   },
   menu: '/menu',
   settings: '/settings',
@@ -32,6 +23,7 @@ export const paths = {
     updateData: 'update/data',
     updatePassword: 'update/password',
   },
+  oauth: '/oauth',
 } as const;
 
 export const breakpoints = {
@@ -48,7 +40,7 @@ export const themes = {
     name: 'default',
     colors: {
       core: {
-        borderMenu: 'transpanent',
+        borderMenu: 'transparent',
         background: {
           primary: '#D9D9D9',
           secondary: '#5BCDC9',
@@ -61,19 +53,23 @@ export const themes = {
           tertiary: '#6B687D',
           quaternary: '#000000',
           quinary: '#000000',
+          sextuple: '#0E752B',
         },
         link: {
           link: '#6457B8',
           linkHover: '#6457b8b3',
         },
         spinner: '#F2CE0D',
+        divider: '#C8C8C8',
       },
       control: {
         input: {
           color: '#000000',
           background: '#ABCDCE',
+          backgroundSecondary: '#ABCDCE',
           label: '#6C5BC3',
           placeHolder: '#6B687D',
+          placeHolderSecondary: '#6B687D',
         },
         toggle: {
           control: '#FFFFFF',
@@ -115,19 +111,23 @@ export const themes = {
           tertiary: '#5BCDC9',
           quaternary: '#6BD35A',
           quinary: '#FFFFFF',
+          sextuple: '#FFD600',
         },
         link: {
           link: '#FFFFFF',
           linkHover: 'rgba(255, 255, 255, 0.8)',
         },
         spinner: '#F2CE0D',
+        divider: '#C8C8C8',
       },
       control: {
         input: {
           color: '#6C5BC3',
           background: '#FFFFFF',
+          backgroundSecondary: '#C1CDF7',
           label: '#6C5BC3',
           placeHolder: '#FFFFFF',
+          placeHolderSecondary: '#6C5BC3',
         },
         toggle: {
           control: '#FFFFFF',
@@ -157,17 +157,29 @@ export const themes = {
 export const sprites = [
   {
     name: 'Doodle',
-    sprite: doodleImage,
-    background: doodleBackground,
+    sprite: '/images/game/doodle/sprite.png',
+    background: '/images/game/doodle/background.png',
+    gameOverImage: {
+      win: '/images/game/doodle/doodle-win.png',
+      lose: '/images/game/doodle/doodle-lose.png',
+    },
   },
   {
     name: 'Mario',
-    sprite: marioImage,
-    background: marioBackground,
+    sprite: '/images/game/mario/sprite.png',
+    background: '/images/game/mario/background.png',
+    gameOverImage: {
+      win: '/images/game/mario/mario-win.png',
+      lose: '/images/game/mario/mario-lose.png',
+    },
   },
   {
     name: 'Homer',
-    sprite: homerImage,
-    background: homerBackground,
+    sprite: '/images/game/homer/sprite.png',
+    background: '/images/game/homer/background.png',
+    gameOverImage: {
+      win: '/images/game/homer/homer-win.png',
+      lose: '/images/game/homer/homer-lose.png',
+    },
   },
 ] as const;

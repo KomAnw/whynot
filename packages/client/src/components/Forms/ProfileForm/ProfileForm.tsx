@@ -1,27 +1,24 @@
 import { Link } from 'src/components/Link';
-import defaultAvatar from 'src/assets/defaultAvatar.svg';
-import Portal from 'components/Portal';
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useGetUserQuery } from 'src/api/auth/auth';
-import { apiSettings } from 'src/api';
+import { YANDEX_API_URL } from 'src/api/common/consts/apiConsts';
 import { Avatar, Data, DataLabel, DataRow, DataValue, PageStyle, TextH1 } from './styles';
-import { dataRowData, links, ProfilePopupContext } from './constants';
+import { dataRowData, links } from './constants';
 import ProfileAvatar from '../ProfileAvatar';
 
-const baseUrlAvatar = `${apiSettings.baseUrl}/resources`;
+const baseUrlAvatar = `${YANDEX_API_URL}/resources`;
+const defaultAvatar = '/images/common/defaultAvatar.svg';
 
 const Profile = () => {
   const { data: userData } = useGetUserQuery();
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
+  const [isPopupOpen, setIsPopupOpen] = useState<boolean>(false);
   const userAvatar = userData?.avatar && baseUrlAvatar + userData.avatar;
-  const openPopup = useCallback(() => setIsOpenPopup(!isOpenPopup), [isOpenPopup]);
-  const contextValue = useMemo(() => ({ changeState: openPopup }), [openPopup]);
 
   return (
     <>
       <PageStyle>
         <TextH1>Profile</TextH1>
-        <Avatar src={userAvatar || defaultAvatar} onClick={() => openPopup()} />
+        <Avatar src={userAvatar || defaultAvatar} onClick={() => setIsPopupOpen(true)} />
         <Data>
           {dataRowData.map(({ name, label }) => {
             const value = (userData && userData[name]) || '';
@@ -34,19 +31,15 @@ const Profile = () => {
             );
           })}
         </Data>
-        {links.map(({ Wrapper, id, ...props }) => (
+        {links.map(({ Wrapper, id, to, variant, children }) => (
           <Wrapper key={id}>
-            <Link {...props} />
+            <Link to={to} variant={variant}>
+              {children}
+            </Link>
           </Wrapper>
         ))}
       </PageStyle>
-      {isOpenPopup && (
-        <Portal>
-          <ProfilePopupContext.Provider value={contextValue}>
-            <ProfileAvatar />
-          </ProfilePopupContext.Provider>
-        </Portal>
-      )}
+      {isPopupOpen && <ProfileAvatar setIsPopupOpen={setIsPopupOpen} />}
     </>
   );
 };

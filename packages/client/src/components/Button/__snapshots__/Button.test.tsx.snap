@@ -2,7 +2,7 @@
 
 exports[`Button renders <Button /> correctly 1`] = `
 <button
-  className="sc-bcXHqe jipLhu"
+  className="sc-gswNZR juODTC sc-bcXHqe"
   onClick={[MockFunction]}
   onSubmit={[MockFunction]}
   type="submit"

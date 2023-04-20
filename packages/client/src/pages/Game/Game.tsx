@@ -4,10 +4,12 @@ import { useDidMount, useWillUnmount } from 'src/hooks/react';
 import { Text } from 'src/design/Text';
 import { Score } from 'pages/Game/controllers/Score/Score';
 import { useAppSelector } from 'src/hooks/redux';
-import { GameWindowProps } from 'pages/Game/types/types';
+import type { GameWindowProps } from 'pages/Game/types/types';
+import { Spring } from 'pages/Game/controllers/Spring/Spring';
 import GameResult from './components/GameResult';
-import { TSizes } from './types/types';
+import type { TSizes } from './types/types';
 import { Player } from './controllers/Player/Player';
+import { Gamepad, GamepadIndex } from './controllers/Gamepad/Gamepad';
 import { Platforms } from './controllers/Platforms/Platforms';
 import { Ground } from './controllers/Ground/Ground';
 
@@ -17,10 +19,17 @@ const Game = () => {
   const sizes = useMemo<TSizes>(() => ({ width: 500, height: 600 }), []);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const canvasContextRef = useRef<CanvasRenderingContext2D | null>(null);
+  const frameId = useRef<number | null>(null);
   const mode = useAppSelector(state => state.mode.sprite);
+  const gamepadState = useAppSelector(state => state.gamepad.gamepadOn);
+  const soundSwitchOn = useAppSelector(state => state.sound.soundOn);
+  const soundPath = '../../public/media/sound.mp3';
+
   let player: Player;
   let platforms: Platforms;
   let ground: Ground;
+  let gamepad: Gamepad;
+  let spring: Spring;
 
   const onKeyDownHandler = (e: KeyboardEvent) => {
     const { key } = e;
@@ -50,14 +59,20 @@ const Game = () => {
     }
   };
 
-  const addHandlers = () => {
-    document.addEventListener('keydown', onKeyDownHandler);
-    document.addEventListener('keyup', onKeyUpHandler);
+  const onGamepadConnectedHandler = (e: GamepadEvent) => {
+    GamepadIndex.init(e);
   };
 
   const removeHandlers = () => {
     document.removeEventListener('keydown', onKeyDownHandler);
     document.removeEventListener('keyup', onKeyUpHandler);
+    window.removeEventListener('gamepadconnected', onGamepadConnectedHandler);
+  };
+
+  const addHandlers = () => {
+    document.addEventListener('keydown', onKeyDownHandler);
+    document.addEventListener('keyup', onKeyUpHandler);
+    window.addEventListener('gamepadconnected', onGamepadConnectedHandler);
   };
 
   const canvasInit = () => {
@@ -80,7 +95,13 @@ const Game = () => {
     if (!player.isDead) {
       canvasClearFrame();
 
+      platforms.calculateHorizontalMovement();
+
+      player.calculateSpringActions();
+
       player.calculatePlayerActions();
+
+      setStateScore(Score.count);
 
       platforms.draw();
 
@@ -90,11 +111,18 @@ const Game = () => {
 
       player.playerMovement();
 
-      setStateScore(Score.count);
+      gamepad.control();
 
-      requestAnimationFrame(update);
+      frameId.current = requestAnimationFrame(update);
     } else {
       setIsPopupOpen(true);
+    }
+  };
+
+  const stopUpdate = () => {
+    if (frameId.current) {
+      cancelAnimationFrame(frameId.current);
+      frameId.current = null;
     }
   };
 
@@ -103,12 +131,13 @@ const Game = () => {
 
     Score.resetScore();
 
-    init();
-
-    update();
+    stopUpdate();
   };
 
   const init = () => {
+    const soundElement: HTMLMediaElement = document.getElementById('sound') as HTMLMediaElement;
+
+    soundSwitchOn ? soundElement.play() : soundElement.pause();
     const context = canvasContextRef.current;
 
     if (!context) {
@@ -125,9 +154,21 @@ const Game = () => {
 
     ground = new Ground(context, sizes, sprite);
 
-    player = new Player(context, sizes, platforms, ground, sprite);
+    spring = new Spring(context, sprite);
+
+    player = new Player(context, sizes, platforms, ground, sprite, spring);
+
+    gamepad = new Gamepad(gamepadState, player);
 
     platforms.init();
+  };
+
+  const startGameAgain = () => {
+    reset();
+
+    init();
+
+    frameId.current = requestAnimationFrame(update);
   };
 
   useDidMount(() => {
@@ -135,16 +176,12 @@ const Game = () => {
 
     init();
 
-    update();
+    frameId.current = requestAnimationFrame(update);
   });
 
   useWillUnmount(() => {
-    removeHandlers();
-  });
-
-  const startGameAgain = () => {
     reset();
-  };
+  });
 
   return (
     <>
@@ -157,6 +194,9 @@ const Game = () => {
         </TextScore>
         <canvas ref={canvasRef} width={sizes.width} height={sizes.height} />
       </GameWindow>
+      <audio id="sound">
+        <source src={soundPath} type="audio/mp3" />
+      </audio>
     </>
   );
 };

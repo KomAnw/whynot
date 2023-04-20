@@ -1,4 +1,4 @@
-import { TSizes } from 'pages/Game/types/types';
+import type { TSizes } from 'pages/Game/types/types';
 
 export class Ground {
   sizes: TSizes;
@@ -22,7 +22,7 @@ export class Ground {
     this.ctx = context;
     this.width = sizes.width;
     this.yPosition = sizes.height - this.height;
-    this.sprite = sprite
+    this.sprite = sprite;
   }
 
   draw() {

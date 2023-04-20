@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals, no-return-await */
-const VERSION = 'v1';
+const VERSION = 'v1-225-127-01';
 const STATIC_CACHE_NAME = `s_app_${VERSION}`;
 const DYNAMIC_CACHE_NAME = `d_app_${VERSION}`;
 
@@ -46,7 +46,9 @@ async function networkFirst(request) {
   try {
     const response = await fetch(request);
 
-    await cache.put(request, response.clone());
+    if (request.method === 'GET') {
+      await cache.put(request, response.clone());
+    }
 
     return response;
   } catch (e) {

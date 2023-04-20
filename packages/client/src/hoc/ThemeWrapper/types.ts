@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 
 export type ThemeWrapperProps = {
   children: ReactNode;
@@ -21,19 +21,23 @@ export type Theme = {
         tertiary: string;
         quaternary: string;
         quinary: string;
+        sextuple: string;
       };
       link: {
         link: string;
         linkHover: string;
       };
       spinner: string;
+      divider: string;
     };
     control: {
       input: {
         color: string;
         background: string;
+        backgroundSecondary: string;
         label: string;
         placeHolder: string;
+        placeHolderSecondary: string;
       };
       toggle: {
         control: string;

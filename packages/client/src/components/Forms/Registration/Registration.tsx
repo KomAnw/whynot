@@ -1,4 +1,6 @@
-import { SubmitHandler, useForm } from 'react-hook-form';
+import type { FormEvent } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
@@ -6,9 +8,11 @@ import { H1 } from 'src/design/H1';
 import { Link } from 'components/Link';
 import { breakpoints, paths } from 'src/components/App/constants';
 import { formsConsts } from 'src/components/Forms/consts/formsConsts';
-import { TSignUpRequest } from 'src/api/auth/models';
+import type { TSignUpRequest } from 'src/api/auth/models';
 import { useSingUpMutation } from 'src/api/auth/auth';
 import { useNavigate } from 'react-router-dom';
+import { getValuesFromLocalStorage, isPasswordField, saveToLocalStorage } from 'src/utils/storage';
+import { logger } from 'src/utils/logger';
 
 const registrationFields = [
   formsConsts.firstName,
@@ -31,21 +35,32 @@ const Registration = () => {
     formState: { errors },
   } = useForm<TSignUpRequest>({
     mode: 'all',
+    defaultValues: getValuesFromLocalStorage(registrationFields),
   });
+
+  const onChangeHandler = (e: FormEvent<HTMLFormElement>) => {
+    const { name, value } = e.target as HTMLInputElement;
+
+    if (!isPasswordField(name)) {
+      saveToLocalStorage(name, value);
+    }
+  };
 
   const submitForm: SubmitHandler<TSignUpRequest> = async data => {
     try {
       const response = await registration(data);
 
-      response && navigate(menu);
+      if (response) {
+        navigate(menu);
+        localStorage.clear();
+      }
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger(error, 'error');
     }
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitForm)}>
+    <Form onSubmit={handleSubmit(submitForm)} onChange={onChangeHandler}>
       <H1Style> Registration </H1Style>
       <FormBody>
         {registrationFields.map(({ type, name, placeholder, label, validationRules }) => (

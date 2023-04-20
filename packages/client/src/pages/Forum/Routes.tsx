@@ -3,14 +3,13 @@ import { Route } from 'react-router-dom';
 import { paths } from 'src/components/App/constants';
 import WithSuspense from 'src/hoc/WithSuspence';
 
-const { edit, id, newForum, index } = paths.forum;
-const Forum = WithSuspense(lazy(() => import('./Forum')));
+const { id, index } = paths.forum;
+const ForumPosts = WithSuspense(lazy(() => import('./pages/ForumPosts/ForumPosts')));
+const ForumPost = WithSuspense(lazy(() => import('./pages/ForumPost/ForumPost')));
 
 export const routes = [
-  <Route index element={<Forum />} key={index} />,
-  <Route path={newForum} element={<div>Страница создания новой темы</div>} key={newForum} />,
+  <Route index element={<ForumPosts />} key={index} />,
   <Route path={id} key={id}>
-    <Route index element={<div>Страница с обсуждениями темы1</div>} />
-    <Route path={edit} element={<div>Страница изменения темы</div>} key={edit} />
+    <Route index element={<ForumPost />} />
   </Route>,
 ];
