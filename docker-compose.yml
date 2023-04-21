@@ -28,7 +28,8 @@ services:
     environment:
       - CLIENT_PORT=${CLIENT_PORT}
     ports:
-      - '3000:80'
+      - '80:80'
+      - "443:443"
     volumes:
       - client-dist:/app/dist
       - client-dist-ssr:/app/dist-ssr
