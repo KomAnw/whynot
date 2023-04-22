@@ -41,7 +41,15 @@ const helmet = helmetMiddleware({
   contentSecurityPolicy: {
     directives: {
       scriptSrc: ["'self'", `'nonce-${nonce}'`],
-      connectSrc: ["'self'", 'ws://localhost:*', 'http://localhost:*', 'http://why-not.fun:*'],
+      connectSrc: [
+        "'self'",
+        'ws://localhost:*',
+        'http://localhost:*',
+        'http://why-not.fun:*',
+        'https://why-not.fun:*',
+        'http://www.why-not.fun:*',
+        'https://www.why-not.fun:*',
+      ],
     },
   },
 });
