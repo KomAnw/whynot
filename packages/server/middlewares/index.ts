@@ -18,7 +18,10 @@ const proxy = createProxyMiddleware({
   },
 });
 
-const cors = corsMiddleware();
+const cors = corsMiddleware({
+  origin: 'https://why-not.fun',
+  credentials: true,
+});
 
 const auth = ({ cookies }: Request, res: Response, next: NextFunction) => {
   const { authCookie, uuid } = cookies;
