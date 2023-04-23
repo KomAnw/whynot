@@ -1,6 +1,6 @@
-import express from 'express';
 import { readFileSync } from 'fs';
 import { join, resolve } from 'path';
+import serveStatic from 'serve-static';
 import app, { isProductionMode, isDockerBuild } from '../../app';
 
 const rootDir = isDockerBuild ? '../../../' : '../../../../';
@@ -11,7 +11,8 @@ const ssrClientPath = isDockerBuild
   ? join(__dirname, rootDir, 'dist-ssr', 'client.cjs')
   : join(clientPath, 'dist-ssr', 'client.cjs');
 
-(isProductionMode || isDockerBuild) && app.use(express.static(distPath));
+(isProductionMode || isDockerBuild) && app.use(serveStatic(distPath, { index: false }));
+
 export const productionConfig = async (originalUrl: string) => {
   const template = readFileSync(resolve(distPath, 'index.html'), 'utf-8');
   const { render } = await import(ssrClientPath);
