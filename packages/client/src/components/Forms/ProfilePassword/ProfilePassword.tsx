@@ -59,7 +59,7 @@ const ProfilePassword = () => {
           errorMessage={errors[password.name]?.message}
           name={password.name}
           type={password.type}
-          label={password.label}
+          label="New password"
           placeholder={password.placeholder}
           validationRules={password.validationRules}
         />

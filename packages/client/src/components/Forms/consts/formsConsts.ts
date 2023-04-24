@@ -98,7 +98,7 @@ export const formsConsts = {
   password: {
     type: 'password',
     placeholder: '*****',
-    label: 'New password',
+    label: 'Password',
     name: 'password' as const,
     value: '',
     validationRules: {
