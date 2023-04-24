@@ -125,7 +125,7 @@ export const themes = {
           color: '#6C5BC3',
           background: '#FFFFFF',
           backgroundSecondary: '#C1CDF7',
-          label: '#6C5BC3',
+          label: '#FFFFFF',
           placeHolder: '#FFFFFF',
           placeHolderSecondary: '#6C5BC3',
         },
