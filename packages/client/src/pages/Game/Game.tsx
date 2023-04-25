@@ -23,7 +23,7 @@ const Game = () => {
   const mode = useAppSelector(state => state.mode.sprite);
   const gamepadState = useAppSelector(state => state.gamepad.gamepadOn);
   const soundSwitchOn = useAppSelector(state => state.sound.soundOn);
-  const soundPath = '../../public/media/sound.mp3';
+  const soundPath = '/media/sound.mp3';
 
   let player: Player;
   let platforms: Platforms;
