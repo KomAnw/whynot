@@ -8,7 +8,7 @@ services:
   postgres:
     image: postgres:15
     ports:
-      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
+      - '5432:5432'
     restart: always
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -18,7 +18,7 @@ services:
       - ./tmp/pgdata:/var/lib/postgresql/data
 
   client:
-    container_name: prakticum-client
+    container_name: why-not-client
     build:
       context: .
       dockerfile: Dockerfile.client
@@ -29,12 +29,13 @@ services:
       - CLIENT_PORT=${CLIENT_PORT}
     ports:
       - '80:80'
+      - "443:443"
     volumes:
       - client-dist:/app/dist
       - client-dist-ssr:/app/dist-ssr
 
   server:
-    container_name: prakticum-server
+    container_name: why-not-server
     build:
       context: .
       dockerfile: Dockerfile.server
@@ -45,7 +46,7 @@ services:
       - IS_DOCKER_BUILD=true
       - SERVER_PORT=${SERVER_PORT}
     ports:
-      - '${SERVER_PORT}:${SERVER_PORT}'
+      - '3000:3000'
     depends_on:
       - client
       - postgres

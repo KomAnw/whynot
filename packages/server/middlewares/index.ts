@@ -18,7 +18,10 @@ const proxy = createProxyMiddleware({
   },
 });
 
-const cors = corsMiddleware();
+const cors = corsMiddleware({
+  origin: 'https://why-not.fun',
+  credentials: true,
+});
 
 const auth = ({ cookies }: Request, res: Response, next: NextFunction) => {
   const { authCookie, uuid } = cookies;
@@ -41,7 +44,15 @@ const helmet = helmetMiddleware({
   contentSecurityPolicy: {
     directives: {
       scriptSrc: ["'self'", `'nonce-${nonce}'`],
-      connectSrc: ["'self'", 'ws://localhost:*', 'http://localhost:*'],
+      connectSrc: [
+        "'self'",
+        'ws://localhost:*',
+        'http://localhost:*',
+        'http://why-not.fun:*',
+        'https://why-not.fun:*',
+        'http://www.why-not.fun:*',
+        'https://www.why-not.fun:*',
+      ],
     },
   },
 });
